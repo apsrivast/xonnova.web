@@ -1,0 +1,92 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li class="active">SIM #</li>
+        </ul>
+
+        <h1>SIM #</h1>
+    </div>
+
+   
+
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="SIM # List">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+                <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                    <div class="col-sm-6">
+                        <form name="searchForm"><br/>
+                            <div class="col-sm-5">
+                               <input type="text"  placeholder="From Date"  class="form-control" pickadate ng-model="dateRangeSearch.from_date" readonly/> 
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text"  placeholder="To Date"  class="form-control" pickadate ng-model="dateRangeSearch.to_date" readonly />
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn-primary btn" ng-click="update(dateRangeSearch);">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <!-- <th>User Name<a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                                <th>SIM #<a ng-click="sort_by('sim_no');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                              
+                               <!--  <th>Date<a ng-click="sort_by('ship_date');"><i class="glyphicon glyphicon-sort"></th> -->
+                                <th>Created Date<a ng-click="sort_by('sim_date');"><i class="glyphicon glyphicon-sort"></th>
+                                <th>Transfer </th>
+                                <!-- <th>Delete </th> -->
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (List | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <!-- <td align="left">{{data.user_name}}</td> -->
+                                <td>{{data.sim_no}}</td>
+                              
+                            
+                               <!--   <td>{{data.ship_date}}</td> -->
+                                <td>{{data.sim_date}}</td>
+
+                                <td>
+                                    <a href="#/transfer-sim-store-to-store/{{data.sim_id}}"  class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No SIM # found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

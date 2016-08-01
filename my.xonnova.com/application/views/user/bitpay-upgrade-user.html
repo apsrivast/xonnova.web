@@ -1,0 +1,122 @@
+
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Upgrade</li>
+            <li class="active">User Upgrade</li>
+        </ul>
+        <h1>User Upgrade</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Upgrade" ng-repeat="user in currentUserList">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+			<div class="col-sm-12" ng-show="user.package>4"><h4>You have already Purchased Total Encryption System</h4></div>
+            <div class="col-sm-12" ng-show="user.package<5">
+            	<form class="form-horizontal row-border" id="upgradeForm" name="upgradeForm">
+					<input type="hidden" id="user_id" ng-model="user.user_id" name="user_id" value="{{user.user_id}}">
+            		<!-- <input name="user.token" type="hidden" value="" /> -->
+					<div class="form-group">
+						<div id="message"></div>
+					</div>
+					<div class="form-group">
+						<label for="fieldname" class="col-md-3 control-label">User Name</label>
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="user_name" name="user_name" ng-model="user.user_name" ng-unique2="user_master.user_name" placeholder= "Enter User Name"  required readonly/>
+							<div ng-show="upgradeForm.user_name.$touched" >
+								<span style="color:#B4270F" ng-show="upgradeForm.user_name.$error.unique2">This User not exist!</span> 
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="fieldname" class="col-md-3 control-label">Incription System</label>
+						<div class="col-md-6">
+							<select class="form-control" id="incriptionList" name="incriptionList" ng-model="user.incriptionList" required ng-change="onchangepackage(user.incriptionList); onchangeupgradepackage(user.package,user.incriptionList)">
+								<option value="">Select Inscription System</option>
+								<option ng-repeat="ins in incriptionList" value="{{ins.package_id}}">{{ins.package_name}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group" ng-show="{{user.package == '1'}}">
+						<div class="col-md-6 col-md-offset-3" ng-repeat="discription in incriptionDiscription" style="color: red;">
+								{{discription.value}}
+						</div>
+					</div>
+
+					<div class="form-group" ng-show="{{user.package > '1'}}">
+						<div class="col-md-6 col-md-offset-3" ng-repeat="discription2 in incriptionDiscription2" style="color: red;">
+								{{discription2.value}}
+						</div>
+					</div>
+					<!-- <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label"></label>
+                        <div class="col-md-6">
+                            If You have Store Credit.? Yes/No : <input id="checked" type="checkbox" name="checked" ng-model="user.checked">     
+                        </div>
+                    </div>
+                    <div ng-show="user.checked" >
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-3">Required Store Credit {{packageCredit - userPackageCredit}}</div>
+						</div> 
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-3">Your Store Credit {{creditTotal - dedutTotal}}</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-3">Amount Deducted From Your Store Credit</div>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+								<div class="btn-toolbar">
+									<button ng-show="user.checked" type="submit" class="btn-primary btn" ng-disabled=" upgradeForm.$invalid" ng-click="upgradeUser(user);">submit</button>
+									<button ng-hide="user.checked" type="submit" class="btn-primary btn" ng-disabled=" upgradeForm.$invalid" ng-click="twoCheckoutUpgrade();">Pay Now</button>
+									 <button class="btn btn-primary">Reset</button> <button type="submit" class="btn-primary btn" ng-disabled=" upgradeForm.$invalid" ng-click="upgradeUser(user);">submit</button>
+								</div>
+							</div>
+						</div>
+					</div> -->
+            	</form>
+				<div class="col-sm-12" align="center">
+						<div ng-show="user.incriptionList == null" class="col-sm-12" align="center">
+							<strong>Please Select Package First</strong>
+						</div>
+						<form target="_blank" ng-show="user.incriptionList == '2'" align="center" action="https://bitpay.com/checkout" method="post">
+							  <input type="hidden" name="action" value="checkout" />
+							  <input type="hidden" name="posData" value="" />
+							  <input type="hidden" name="data" value="0/jHIpmRs6ac3EK/FksmksVFjuErfF0zcOJJoZMV8dKNxhqPxkSDqtaMEonBCMD7WhcZ17I9jejaMV9iiy0H9VtdN3U1otIRyrBa2uEM4/17FRSb2DAl78uER9hw8GvWefrsBAxpbPzeXQMYDWXC9+yvnL5UsY6eGpNyFgHJjbFgL3YpYgGzLIA3EMDmadWD7+geWVI+kIFgXok4TWHvze1W7CosmFnoonIVsruQdaC4L8eQQX5yFQcDN+tXzAVDGn4EOJ35s9TR6e6vryMKjM/ntQZWSyAxmjeabMOO2Hw8+Ct54Gt3Gu18DaZsfRry" />
+							  <input type="image" src="https://bitpay.com/img/button8.png" border="0" name="submit" alt="BitPay, the easy way to pay with bitcoins." >
+						</form>	
+						<form target="_blank" ng-show="user.incriptionList == '3'" align="center" action="https://bitpay.com/checkout" method="post" >
+							  <input type="hidden" name="action" value="checkout" />
+							  <input type="hidden" name="posData" value="" />
+							  <input type="hidden" name="data" value="0/jHIpmRs6ac3EK/FksmksVFjuErfF0zcOJJoZMV8dKNxhqPxkSDqtaMEonBCMD7WhcZ17I9jejaMV9iiy0H9W1cw6viuNthHt16VY6U0J1qC/1kdGNnmCQapS8ndLLSDaBlGq5ILhQO+xjD8ePJhbWTD2Nzs3EdbjR9+k4ksrr4+30/KG3OzgzO7RetoEFLlrH1o2baJoXT0Pcgb2U9nR7692+0sVwmfYXLFslGR1vj5Q5j80cxwaX7cxEfPZbI7birKZk/alWZUTPkEBF23EyAZis4p2Gm74LwVKJ9KWG+CpZVK9v7vJLPPfYQjyi5" />
+							  <input type="image" src="https://bitpay.com/img/button8.png" border="0" name="submit" alt="BitPay, the easy way to pay with bitcoins." >
+						</form>
+						<form target="_blank"  ng-show="user.incriptionList == '4'" align="center" action="https://bitpay.com/checkout" method="post" >
+							  <input type="hidden" name="action" value="checkout" />
+							  <input type="hidden" name="posData" value="" />
+							  <input type="hidden" name="data" value="0/jHIpmRs6ac3EK/FksmksVFjuErfF0zcOJJoZMV8dKNxhqPxkSDqtaMEonBCMD7PutBuiah13sT/AOTCmtkMY5fLSf2820sVZv9bLtdpCNp3AvfZjXN0bqC00JCvD58GKVObD/WRt/cecbyaHuaueTw2zhUFPvYikTnr3LYBHcw7TZ5Udtz9nFFOTEHSoPoJM3qMuJsqrbb8n8Q6B/GaaOdP6cErZ5GdBzLQGcKFe89zBl1r9MEjPf26/yb6VphZ7+/dpI1VgDqqMGjwASXKs+xhS0WBCCEhZaL4o6kXY2+QsnK0QCZ60qTw8k+W7fw" />
+							  <input type="image" src="https://bitpay.com/img/button8.png" border="0" name="submit" alt="BitPay, the easy way to pay with bitcoins." >
+						</form>
+					
+						<form target="_blank" ng-show="user.incriptionList == '5'" align="center" action="https://bitpay.com/checkout" method="post" >
+						  <input type="hidden" name="action" value="checkout" />
+						  <input type="hidden" name="posData" value="" />
+						   <input type="hidden" name="data" value="0/jHIpmRs6ac3EK/FksmksVFjuErfF0zcOJJoZMV8dKNxhqPxkSDqtaMEonBCMD7EiQeiCY1bJ78P+kXiUSnS88NogczZ65mhJ7Z9U9qSc8eam1T1uEI2ffVfUdROKeMfzvOEAyOXKxBg6qJatwQlwPR6OkyqqTVlsW8PLn+ldt5QOzfs/xM0BDC8eauwA/xyzkda7CpE5LN9GK7BEiPxsmi0SvF71GpTl+mpiNrt0qLZQSh5fmppjFBrj7CKIPabSKd+uPDLE9EmnB6A5NKH/CzwQSga40GIr4UQ7MCEWpRQFpVnZT51Fh6aPuDXifX" />
+						  <input type="image" src="https://bitpay.com/img/button8.png" border="0" name="submit" alt="BitPay, the easy way to pay with bitcoins." >
+						</form>
+				</div>					
+			</div>
+        </panel>
+    </div> <!-- container-fluid -->
+<script>
+  // Called when token created successfully.action="pay.php" method="post"
+
+</script>

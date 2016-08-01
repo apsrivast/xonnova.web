@@ -1,0 +1,230 @@
+<style>
+.form-control {
+    border: 1px solid #cccccc !important;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+.form-control:focus {
+    border-color: #66afe9 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6) !important;
+    outline: 0 none !important;
+}
+
+.btn-main {
+    background: #07aecf linear-gradient(to bottom, #07aecf, #07a6cb) repeat scroll 0 0 !important;
+    border-color: #ffffff !important;
+    border-radius: 5px !important;
+    color: #ffffff !important;
+    font-family: Arial !important;
+    font-size: 20px !important;
+    padding: 10px 20px !important;
+    text-decoration: none !important;
+    width: 100% !important;
+}
+.btn-main:hover {
+    background: #337ab7 !important;
+    background-image: -webkit-linear-gradient(top, #337ab7, #07a7cb) !important;
+    background-image: -moz-linear-gradient(top, #337ab7, #07a7cb) !important;
+    background-image: -ms-linear-gradient(top, #337ab7, #07a7cb) !important;
+    background-image: -o-linear-gradient(top, #337ab7, #07a7cb) !important;
+    background-image: linear-gradient(to bottom, #337ab7, #07a7cb) !important;
+    text-decoration: none !important;
+    color:#fff !important;
+     border-color: #ffffff !important;
+}
+body{
+    background: #444444 url("irongrip.png") repeat scroll 0 0 !important;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+
+.application {
+    background-color: #fff;
+    border-radius: 3px;
+    margin: 0 auto;
+    max-width: 330px;
+    padding: 20px;
+}
+</style>
+
+<div class="content application">
+    <div class="application_content">
+        <div class="text-center">
+            <!-- <h1 style=" color: rgb(136, 136, 136);">Xonnova</h1> -->
+             <img alt="Logo" src="/images/site/logo.png" class="img-square" style="width: 60%;"> 
+        </div><br/>
+        <div class="inner_content">
+
+            <ul id="nav-login" class="nav nav-tabs" role="tablist">
+                <li style="width:50%" class="text-center no-padding"><a href="#" rel="login"><?php echo $this->_("Log in"); ?></a></li>
+                <?php if(!$this->getRequest()->isWhiteLabelEditor()) : ?>
+                <li style="width:50%" class="text-center no-padding"><a href="#sign-up" rel="signup"><?php echo $this->_("Sign up"); ?></a></li>
+                <?php endif; ?>
+            </ul>
+
+            <div>
+                <br />
+                <form action="<?php echo $this->getUrl('admin/account/loginpost') ?>" method="post" id="loginForm" class="none">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="email"><?php echo $this->_("Email"); ?></label>
+                            <input type="text" id="email" class="form-control required email" name="email" placeholder="<?php echo $this->_("Email"); ?>" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="password"><?php echo $this->_("Password"); ?></label>
+                            <input type="password" id="password" class="form-control required" name="password" placeholder="<?php echo $this->_("Password"); ?>" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <a href="javascript:void(0);" id="btnForgotPassword"><?php echo $this->_('Forgot your password ?'); ?></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-main reverse"><?php echo $this->_('Log in'); ?></button>
+                        </div>
+                    </div>
+
+                </form>
+
+                <?php if(!$this->getRequest()->isWhiteLabelEditor()) : ?>
+                <form action="<?php echo $this->getUrl('admin/account/signuppost') ?>" method="post" id="signupForm" class="none">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="email"><?php echo $this->_("Email"); ?></label>
+                            <input type="text" id="email" class="form-control required email" name="email" placeholder="<?php echo $this->_("Email"); ?>" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="password"><?php echo $this->_("Password"); ?></label>
+                            <input type="password" id="password" class="form-control required" name="password" placeholder="<?php echo $this->_("Password"); ?>" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="confirm_password"><?php echo $this->_("Confirm your password"); ?></label>
+                            <input type="password" id="confirm_password" class="form-control required" name="confirm_password" placeholder="<?php echo $this->_("Confirm your password"); ?>" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="submit" class="signin signin_content btn btn-primary btn-main"><?php echo $this->_('Sign up'); ?></button>
+                        </div>
+                    </div>
+
+                </form>
+                <?php endif; ?>
+
+                <div class="clear"></div>
+
+                <form action="<?php echo $this->getUrl('admin/account/forgotpasswordpost') ?>" method="post" id="forgotpasswordForm" class="none">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <p><?php echo $this->_('Forgot your password? Don\'t worry! Simply enter your email address and we\'ll send you a new one right now.'); ?></p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="email"><?php echo $this->_("Email"); ?></label>
+                            <input type="text" id="email" class="form-control required email" name="email" placeholder="<?php echo $this->_("Email"); ?>" />
+                        </div>
+                    </div>
+
+                            <div class="col-md-6">
+                                <button type="button" id="btnBackForgotPassword" class="btn btn-primary btn-main reverse"><?php echo $this->_("Back"); ?></button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="forgot_password_content btn-primary btn btn-main  reverse"><?php echo $this->_('Send'); ?></button>
+                            </div>
+                        
+                    </div>
+                </form>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $('#loginForm').submit(function() {
+            if(!$(this).valid()) return false;
+        });
+
+        $('#forgotpasswordForm').submit(function() {
+            if(!$(this).valid()) return false;
+
+        });
+
+        $('#btnForgotPassword').click(function() {
+            $('#loginForm').hide();
+            $('#forgotpasswordForm').fadeIn();
+        });
+
+        $('#btnBackForgotPassword').click(function() {
+            $('#forgotpasswordForm').hide();
+            $('#loginForm').fadeIn();
+        });
+    </script>
+    <style>
+
+        .content.application {
+            width: 500px;
+        }
+        .content.application .application_content {
+            width: auto;
+        }
+        /*.content.application .application_content .area {
+            background: transparent !important;
+            color: #404040 !important;
+        }*/
+    </style>
+</div>
+
+<script type="text/javascript">
+    login_urls = {
+        checklogin_post: '<?php echo $this->getUrl('admin/account/check'); ?>',
+        signin_post: '<?php echo $this->getUrl('admin/account/loginpost'); ?>',
+        signup_post: '<?php echo $this->getUrl('admin/account/signuppost'); ?>',
+        forgotpassword_post: '<?php echo $this->getUrl('admin/account/forgotpasswordpost'); ?>',
+    }
+
+    $('#nav-login a').click(function() {
+        if($(this).hasClass("active")) return false;
+        if($(this).attr("rel") == "login") {
+            $('#signupForm').hide();
+            $('#loginForm').fadeIn();
+        } else {
+            $('#loginForm').hide();
+            $('#signupForm').fadeIn();
+        }
+
+        $("#nav-login li").removeClass("active");
+        $(this).parent("li").addClass("active");
+    });
+
+    <?php if(!$this->getRequest()->isWhiteLabelEditor()) : ?>
+    selector = window.location.href.indexOf("#sign-up") > 0 ? '[rel="signup"]' : '[rel="login"]';
+    $('#nav-login a'+selector).click();
+    <?php else : ?>
+    $('#nav-login a[rel="login"]').click();
+    <?php endif; ?>
+    
+</script>

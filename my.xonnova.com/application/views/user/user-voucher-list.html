@@ -1,0 +1,56 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Business</li>
+            <li class="active">Voucher List</li>
+        </ul>
+
+        <h1>Voucher List</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Voucher List">
+          
+                <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Voucher #<a ng-click="sort_by('sim_no');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Status<a ng-click="sort_by('status');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (htmlUserAllVoucher | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td>{{data.sim_no}}</td>
+                                <td>{{data.status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Voucher found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+           
+        </panel>
+    </div> <!-- container-fluid -->

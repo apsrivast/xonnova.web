@@ -1,0 +1,96 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Referrals</li>
+        <li class="active">Personal Referrals</li>
+    </ol>
+
+    <h1>Personal Referrals</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Export as <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Personal Referrals Information">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+				<div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID <a ng-click="sort_by('user_id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Image <a ng-click="sort_by('image');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>First Name <a ng-click="sort_by('first_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Last Name <a ng-click="sort_by('last_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>User Name <a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Email ID <a ng-click="sort_by('user_email');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Join Date <a ng-click="sort_by('created_at');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <!-- <th></th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (referralsList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_id}}</td>
+                                <td><img class="img-circle" alt="Dangerfield" src="uploads/{{data.image}}" style="height: 70px; width: 70px;"></td>
+                                 <td>{{data.first_name}}</td>
+                                <td>{{data.last_name}}</td>
+                                <td>{{data.user_name}}</td>
+                                <td>{{data.user_email}}</td>
+                                <!-- <td>{{data.contact_no}}</td> -->
+                                <td>{{data.created_at}}</td>
+                               <!--  <td>
+                                    <a href="#/edit-person-referrals/{{data.user_id}}"  class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Referrals found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

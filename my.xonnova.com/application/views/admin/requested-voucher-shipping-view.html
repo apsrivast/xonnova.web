@@ -1,0 +1,301 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		
+		<li class="active">Requested Voucher Shipping View</li>
+	</ol>
+
+	<h1>Requested Voucher Shipping View</h1>
+	<div class="options">
+            <div class="btn-toolbar">
+                <div class="btn-group hidden-xs" data-dropdown>
+                    <button class="btn btn-default dropdown-toggle" data-toggle='dropdown'><span class="hidden-sm"> Export as  </span><span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Text File (*.txt)</a></li>
+                        <li><a href="#">Excel File (*.xlsx)</a></li>
+                        <li><a href="#">PDF File (*.pdf)</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i></a>
+            </div>
+        </div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="data in requestedViewList"><br/>
+					
+					<div class="user-detail">
+						
+						<div class="table-responsive">
+							<h6 class="user-info">Requested Voucher Shipping View</h6>
+							
+							
+							<div>
+								<table  class="table table-condensed m0">
+									<tbody>
+										
+										<tr>
+											<td >Question #1</td>
+											<td >{{data.q2}}</td>
+										</tr>
+										
+										<tr>
+											<td>Question #2</td>
+											<td>${{data.q3}}</td>
+										</tr>
+										<tr>
+											<td>Question #3</td>
+											<td>${{data.q4}}</td>
+										</tr>
+										<tr>
+											<td>voucher#</td>
+											<td>{{data.ol_voucher}}</td>
+										</tr>
+
+
+										<tr>
+											<td>By Admin User Name</td>
+											<td>{{data.sim_user_name}}</td>
+										</tr>
+										<tr>
+											<td>Area Code </td>
+											<td>{{data.area_code}}</td>
+										</tr>
+										
+										<tr>
+											<td>Name </td>
+											<td>{{data.first_name}} {{data.middle_name}} {{data.last_name}}</td>
+										</tr>
+										<tr>
+												<td>Phone Number</td>
+												<td>{{data.phone_number}}</td>
+										</tr>
+										<tr>
+												<td>Email </td>
+												<td>{{data.email}}</td>
+										</tr>
+										<tr>
+												<td>Date of Birth </td>
+												<td>{{data.dob}}</td>
+										</tr>
+										<tr>
+											<td>Address </td>
+											<td>{{data.address1}} {{data.address2}}</td>
+										</tr>
+										<tr>
+											<td>City</td>
+											<td>{{data.city}}</td>
+										</tr>
+										<tr>
+											<td>State</td>
+											<td>{{data.state}}</td>
+										</tr>
+										<tr>
+											<td>Zip</td>
+											<td>{{data.zip}}</td>
+										</tr>
+
+										<tr>
+											<td>Race </td>
+											<td>{{data.race}}</td>
+										</tr>
+										<tr>
+											<td>Gender </td>
+											<td>{{data.gender}}</td>
+										</tr>
+										<tr>
+											<td>Preferred language? </td>
+											<td>{{data.pref_lang}}</td>
+										</tr>
+										<tr>
+											<td>Home owner?</td>
+											<td>{{data.home_owner}}</td>
+										</tr>
+										<tr>
+											<td>Business  owner?</td>
+											<td>{{data.bus_owner}}</td>
+										</tr>
+										<tr>
+											<td>Industry</td>
+											<td>{{data.industry}}</td>
+										</tr>
+										
+										<tr>
+											<td>Shipping Address </td>
+											<td>{{data.s_address1}} {{data.s_address2}}</td>
+										</tr>
+										<tr>
+											<td>Shipping City</td>
+											<td>{{data.s_city}}</td>
+										</tr>
+										<tr>
+											<td>Shipping State</td>
+											<td>{{data.s_state}}</td>
+										</tr>
+										<tr>
+											<td>Shipping Zip</td>
+											<td>{{data.s_zip}}</td>
+										</tr>
+									
+									
+									</tbody>
+								</table>
+							</div>	
+						</div>
+
+
+						
+						
+					
+					<form role="form" name="myForm"  class="form-horizontal" >
+							<div class="form-group">
+								<div id="message"></div>
+							</div>
+					
+							<div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-6 col-sm-offset-3">
+			                        	<button type="button" class="finish btn-success btn-sm pull-left "  ng-click="uspsid(data)">Generate USPS  Label</button>
+			                                <button type="submit" class="finish btn-success btn-sm " ng-disabled=" myForm.$invalid" ng-click="orderStatus(data)">Update Status</button>
+			                        </div>
+			                    </div>
+			                </div>
+			                 <div ng-show="pdflavel == 'y'">
+		                        <object data="data:application/pdf;base64,{{imageaa}}" type="application/pdf" width="100%" height="100%"></object>
+		                    </div>
+	                      	                        
+	                        <div class="form-group" ng-show="errorrer != checkerror">
+	                            <label for="fieldname" class="col-md-3 control-label">ERROR</label>
+	                            <div class="col-md-6">
+	                                {{errorrer | limitTo : 200}}
+	                            </div>
+	                        </div>
+			   <div class="form-group">
+					<label>Enter Activation Sim number:</label>
+						<input type="text" name="sim" class="form-control" ng-model="data.sim" placeholder="#Sim-code" ng-pattern="/^[0-9]+$/" style="width:55%"required >
+						<span ng-show="myForm.sim.$error.required">Enter Sim number to update</span>
+						<span ng-show="myForm.sim.$error.pattern">Enter Valid sim number to update</span>
+				</div>
+							<div class="form-group">
+			                   	<input type="hidden" name="id" ng-model="data.id" value="{{data.id}}"/>
+			                </div>
+			                <div class="form-group">
+	                            <label for="fieldpass" class="col-md-3 control-label">Status</label>
+	                            <div class="col-md-6">
+	                                <select class="form-control"  name="shipping_status"type="text" ng-model="data.shipping_status" required>
+	                                    <option value="">Select Status</option>
+	                                    <option value="shipped">Shipped</option>
+	                                     <option value="not shipped"> Not Shipped</option>
+	                                </select>
+	                            </div>
+	                        </div>
+
+	                        <div class="form-group">
+	                            <label for="fieldname" class="col-md-3 control-label">Shipped Via</label>
+	                            <div class="col-md-6">
+	                                <input  class="form-control" ng-model="data.shipping_via"  type="text" required>
+	                            </div>
+	                        </div>
+	                        
+	                        <div class="form-group">
+	                            <label for="fieldname" class="col-md-3 control-label">Tracking Id</label>
+	                            <div class="col-md-6">
+	                                <input  class="form-control" ng-model="data.shipping_id"  type="text" required>
+	                            </div>
+	                        </div>
+			                <div class="form-group">
+			                    <label for="fieldname" class="col-md-3 control-label">Shipping Date</label>
+			                    <div class="col-md-6" ng-controller="orderdateCtr">
+                                	<div id="container1" style="width: 100%; margin: 0px; padding: 0px;">
+		                                <input
+		                                        id="input_011"
+		                                        class="datepicker1 form-control"
+		                                        name="shipping_date"
+		                                        ng-model="data.shipping_date"
+		                                        type="text"
+												placeholder="yyyy-mm-dd"
+		                                        autofocuss required/>
+		                            </div>   
+		                        </div>
+			                </div>
+							<br/>			                 
+						</form>   
+					</div>
+			
+			</div>
+			
+					
+				
+				<!--<button type="button" class="btn btn-success btn-sm " ng-click="approve(data)" ng-disabled="Form.$invalid">Approve </button>-->
+			  	
+		    
+		</div>
+							
+	                        
+	           </div>
+       </div>
+</div>
+
+<!-- container-fluid -->
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Edit">
+                <form role="form" name="addressForm"   class="form-horizontal" enctype="multipart/form-data"  ng-repeat="adduser in requestedViewList" >
+                    <!-- <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">First Name</label>
+                        <div class="col-md-6">
+                            <input  class="form-control" ng-model="adduser.first_name"  type="text"  ng-pattern="/[a-zA-Z]/" minlength="2" >
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Last Name</label>
+                        <div class="col-md-6">
+                            <input  class="form-control" ng-model="adduser.last_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text"  >
+                        </div>
+                    </div> -->
+                               
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Address 1 </label>
+                        <div class="col-md-6"><input  class="form-control"  type="text" ng-model="adduser.s_address1"  ></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Address 2 </label>
+                        <div class="col-md-6"><input  class="form-control"  type="text" ng-model="adduser.s_address2"  ></div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">City</label>
+                        <div class="col-md-6"><input  class="form-control"  type="text" ng-model="adduser.s_city"  ></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">State</label>
+                        <div class="col-md-6"><input  class="form-control"  type="text" ng-model="adduser.s_state"  ></div>
+                    </div>
+                              
+                              
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Zip</label>
+                        <div class="col-md-6"><input  class="form-control"  type="text"ng-model="adduser.s_zip"  minlength="2" ng-pattern="/[0-9]/"></div>
+                    </div>
+
+                  
+                    <div class="form-group">
+                        <div class="col-sm-6 col-sm-offset-3">
+                                <button type="submit" class="finish btn-success btn pull-right"   ng-click="addsubmit(adduser);">Edit </button>
+                        </div>
+                    </div>
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>
+
+
+
+

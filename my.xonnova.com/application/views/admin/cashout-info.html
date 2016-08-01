@@ -1,0 +1,319 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Cashout Info</li>
+	</ol>
+
+	<h1>Cashout Info</h1>
+	
+</div>
+
+
+<div class="container-fluid">
+	 <div class="row">
+        <div class="col-sm-6" align="center" style="float: none; margin: auto;">
+            <panel panel-class="panel-sky" heading="User Info">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                
+                </panel-controls>
+                
+							<div class="panel-body user-profile" ng-repeat="user in cashoutInfoData">
+								<!-- ID Proof Image
+								<img src="assets/cashout/{{user.id_image}}" alt="" class="img-responsive user-avatar" height="400" width="400">
+								<br>
+								<br>
+								W 9 Form Image
+								<img src="assets/cashout/{{user.w_form_image}}" alt="" class="img-responsive user-avatar" height="400" width="400"> -->
+								
+								<div class="user-detail">
+									<!-- <h2 class="user-name">{{user.first_name}}  {{user.last_name}}</h2> -->
+									
+									
+									<div class="table-responsive">
+										
+										<table  class="table table-condensed m0">
+											<tbody>
+												<tr>
+													<td style="border-top: 0">User Name</td>
+													<td style="border-top: 0">{{user.first_name}}  {{user.last_name}}</td>
+												</tr>
+												<tr>
+													<td>Address</td>
+													<td>{{user.address}}</td>
+												</tr>
+												
+												<tr>
+													<td>City</td>
+													<td>{{user.city}}</td>
+												</tr>
+												<tr>
+													<td>State</td>
+													<td>{{user.state}}</td>
+												</tr>
+												<tr>
+													<td>Zip</td>
+													<td>{{user.zip}}</td>
+												</tr>
+												<tr>
+													<td>Phone</td>
+													<td>{{user.phone}}</td>
+												</tr>
+												
+											</tbody>
+										</table>
+									</div>
+									
+								</div>
+							</div>
+			     
+
+            
+              
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+
+
+<div class="container-fluid">
+	 <div class="row">
+        <div class="col-sm-6" align="center" style="float: none; margin: auto;">
+            <panel panel-class="panel-sky" heading="Bank Info">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                
+                </panel-controls>
+                
+							<div class="panel-body user-profile" ng-repeat="user in cashoutInfoData">
+								
+								<div class="user-detail">
+									<div class="table-responsive">
+									
+										<table  class="table table-condensed m0">
+											<tbody>
+												<tr>
+													<td style="border-top: 0">Bank Name</td>
+													<td style="border-top: 0">{{user.bank_name}}</td>
+												</tr>
+												<tr>
+													<td>Bnak Routing</td>
+													<td>{{user.bank_routing}}</td>
+												</tr>
+												
+												<tr>
+													<td>Bank Account</td>
+													<td>{{user.bank_account}}</td>
+												</tr>
+												<tr>
+													<td>Bank Address</td>
+													<td>{{user.bank_address}}</td>
+												</tr>
+												<tr>
+													<td>SSN</td>
+													<td>{{user.ssn}}</td>
+												</tr>
+												<tr>
+													<td>Method</td>
+													<td>{{user.method}}</td>
+												</tr>
+												
+											</tbody>
+										</table>
+									</div>
+									
+								</div>
+							</div>
+			     
+
+            
+              
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+
+<div class="container-fluid">
+	 <div class="row">
+        <div class="col-sm-6" align="center" style="float: none; margin: auto;">
+            <panel panel-class="panel-sky" heading="Amount Info">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                
+                </panel-controls>
+                
+							<!-- <div class="panel-body user-profile" ng-repeat="user in cashoutInfoData"><br/>
+								
+								<div class="user-detail">
+									<div class="table-responsive">
+										<h6 class="user-info">Details</h6>
+										<table  class="table table-condensed m0">
+											<tbody>
+												<tr>
+													<td>Amount</td>
+													<td>{{user.amount}}</td>
+												</tr>
+												<tr>
+													<td>Subject</td>
+													<td>{{user.bank_routing}}</td>
+												</tr>
+												
+												<tr>
+													<td>Message</td>
+													<td>{{user.message}}</td>
+												</tr>
+												<tr>
+													<td>Time</td>
+													<td>{{user.time}}</td>
+												</tr>
+												
+											</tbody>
+										</table>
+									</div>
+									
+								</div>
+							</div> -->
+
+				<div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Amount</th>
+                                <!-- <th>Subject</th>
+                                <th>Message</th> -->
+                                <th>Time</th>
+                               <!--  <th>Contact No.</th>
+                                <th>Join Date</th> -->
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (cashoutAmountList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.cashout_ammount}}</td>
+                               
+                               
+                                <td>{{data.cashout_entry_date}}</td>
+                                <td>
+                                    <form role="form" name="myForm"  class="form-horizontal" >
+										<input type="hidden" name="id" ng-model="data.cashout_id" value="{{data.cashout_id}}"/>
+										
+						               
+						                    
+						                        <div >
+						                                <button type="submit" class="finish btn-success btn-sm"  ng-click="update(data)">Approve</button>
+						                        </div>
+						                   
+						              
+									</form>  
+                                </td>
+
+                                <td>
+									<div  class="col-sm-6">
+				                        <button class="btn btn-success btn-sm pull-left" data-toggle="modal" data-target="#reject-model" ng-click="rejectId(data.cashout_id)">Reject</button>
+				                    </div>
+                                </td>
+                            </tr>
+
+                         
+                        </tbody>
+                      
+                    </table>
+                </div>
+                 <div class="col-md-6" ng-show="filteredItems == 0">
+                    <div class="col-md-6">
+                        <h4>No cashout found</h4>
+                    </div>
+                </div>
+                <div class="col-md-6" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+			     
+
+            
+              
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+
+
+
+
+<!-- <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Rank List">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                
+                </panel-controls>
+
+            
+              
+            </panel>
+        </div>
+    </div>
+</div>  container-fluid -->
+
+
+<div class="container-fluid">
+	 <div class="row">
+        <div class="col-sm-12"  align="center" style="float: none; margin: auto;">
+            <panel panel-class="panel-sky" heading="Image">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+                
+							<div class=" col-sm-6" ng-repeat="user in cashoutInfoData"><br/>
+								ID Proof Image
+								<img src="assets/cashout/{{user.id_image}}" alt="" class="img-responsive user-avatar" height="400" width="400">
+								<a href="http://my.xonnova.com/assets/cashout/{{user.id_image}}" target="__blank" class="btn btn-pirmary">View</a>
+							</div>	
+							<div class=" col-sm-6" ng-repeat="user in cashoutInfoData"><br/>
+								W 9 Form Image
+								<img src="assets/cashout/{{user.w_form_image}}" alt="" class="img-responsive user-avatar" height="400" width="400">
+								<!-- <a href="assets/cashout/{{user.w_form_image}}" target="__blank" class="btn btn-pirmary">View</a> -->
+								<a href="http://my.xonnova.com/assets/cashout/{{user.w_form_image}}" target="__blank" class="btn btn-pirmary">View</a>
+							</div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="reject-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Reject</h4>
+      </div>
+      <div class="modal-body" >
+      	<form role="form" name="myForm2"  class="form-horizontal" ng-repeat="rejectuser in rejCashList">
+      		<input type="hidden" name="id" ng-model="rejectuser.cashout_id" value="{{rejectuser.cashout_id}}"/>
+			
+			<div class="form-group">
+                <label for="fieldname" class="col-md-3 control-label">Comment </label>
+                <div class="col-md-6">
+                	
+                    <textarea class="form-control" name="comment" ng-model="rejectuser.comment" required></textarea>
+                </div>
+            </div>
+		
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                        <button type="submit" class="finish btn-success btn-sm"  ng-disabled=" myForm2.$invalid" data-dismiss="modal" ng-click="reject(rejectuser)">Reject</button>
+                </div>
+            </div>
+            
+		</form> 
+		           
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 

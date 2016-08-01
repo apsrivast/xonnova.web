@@ -1,0 +1,670 @@
+<style>
+    .circle { cursor: pointer;    }
+    text {  font-size: 13px; stroke-width: 1px; }
+
+    path.link { fill: none; stroke: #ccc; stroke-width: 1.5px;}
+</style>
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Team</li>
+        <li class="active">Unilevel View</li>
+    </ol>
+
+    <h1>Unilevel View</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="col-sm-6">
+            <button type="button" class="btn btn-default update-tree">Update Tree</button>
+          </div>
+          <div class="col-sm-6">
+            <form>
+              <div class="form-group">
+                  <label for="fieldpass" class="col-md-3 control-label">User Name</label>
+                  <div class="col-md-6">
+                      <input type="text" class="form-control" placeholder="Enter User Name" name="unilevel_user" ng-model="unilevel.unilevel_user">
+                  </div>
+                  <div class="col-md-3">
+                      <input type="submit" class="btn btn-primary" name="submit"  value="Search" ng-click="unilevelSearch(unilevel);"/>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-12"> 
+          <div class="chart">
+
+          </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+ 
+  $(document).ready(function (){
+	  $('.update-tree').click(function(){
+		location.reload();
+	  });
+      var max = 30, min = 10, dec = 0;
+
+    var w = $(window).width()*0.7,
+        h = $(window).height()*0.9,
+        i = 0,
+        duration = 600,
+        roo;
+
+    var tree = d3.layout.tree()
+        .size([h, w - 160]);
+
+    var diagonal = d3.svg.diagonal()
+        .projection(function(d) { return [d.y, d.x]; });
+
+    var vis = d3.select(".chart").append("svg:svg")
+        .attr("width", "100%")
+        .attr("height", $(window).height()*0.9)
+        .append("svg:g")
+        .attr("transform", "translate(40,0)");
+
+    if(UNILEVEL_USER == CUR_USER){
+      root = UnileveltreeData;
+	  myFunction = 1;
+    }else{
+      root = UnileveltreeDatasearch;
+	  myFunction = null;
+    }
+
+    update(root);
+
+    $(window).resize(function(){
+      $(".chart").html("");
+      //.size([ $(window).width()*0.7*0.9 , $(window).height()*0.7/2 - 160 ]);
+      tree = d3.layout.tree()
+        .size([$(window).height()*0.9, $(window).width()*0.7*0.8]);
+      vis = d3.select(".chart").append("svg:svg")
+        .attr("width",  $(window).width()*0.7)
+        .attr("height", $(window).height()*0.9)
+        .append("svg:g")
+        .attr("transform", "translate(40,0)");
+      update(root);
+    });
+
+    function update(source) {
+
+      // Compute the new tree layout.
+      var nodes = tree.nodes(root).reverse();
+      //console.log(nodes)
+      // Update the nodes…
+      var node = vis.selectAll("g.node")
+          .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+      var nodeEnter = node.enter().append("svg:g")
+          .attr("class", "node")
+          .on("mouseover", function(d) {
+            var g = d3.select(this); // The node
+            // The class is used to remove the additional text later
+            var info = g.append('text')
+
+              .attr('stroke','black')
+
+              .classed('info', true)
+              .attr('x', 15)
+              .attr('y', function(d){
+                return  ( ( max - ( d.level * dec)) > min ) ? ( max - ( d.level * dec))/2 + 10 + "px" : "-5px";
+              })
+              .text(function(d) {
+                var userName = d.name;
+                $.ajax({
+                     type: "post",
+                     url: BASE_URL+"admin/unilevelQVDetails",
+                     data: {
+                        user_name:userName,
+                     },
+                     success: function(data){
+                        $('text').html(data);
+                     }
+                });
+              });
+          })
+          .on("mouseout", function() {
+            // Remove the info text on mouse out.
+            d3.select(this).select('text.info').remove();
+          })
+          .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+        .style("opacity", 0);
+
+      // Enter any new nodes at the parent's previous position.
+      node.append("svg:image")
+          .attr("class", "circle")
+          .attr("xlink:href", function(d){
+            if(d.image == 0){
+              //return "/images/users/avatars/circle_avatar_default.png"
+              return "assets/images/UserAdd.png"
+            }else{
+              return "assets/images/users/avatars/circle_"+ d.image
+            }
+          })
+          .attr("preserveAspectRatio","xMidYMid slice")
+          .attr("x", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ?  "-" + ( max - ( d.level * dec))/2 + "px" : "-5px";
+          })
+          .attr("y", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ?  "-" + ( max - ( d.level * dec))/2 + "px" : "-5px";
+          })
+          .attr("width", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ? max - ( d.level * dec) + "px" : "10px";
+          })
+          .attr("height", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ? max - ( d.level * dec) + "px" : "10px";
+          })
+          .on("click", click);
+
+      /*nodeEnter.append("svg:text")
+          .attr("x", function(d) { return d._children ? -15 : -15; })
+          .attr("y", 20)
+          .text(function(d) { return d.name; });*/
+
+      // Transition nodes to their new position.
+      nodeEnter.transition()
+          .duration(duration)
+          .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+          .style("opacity", 1)
+          .select("circle")
+          .style("fill", "lightsteelblue");
+
+      node.transition()
+          .duration(duration)
+          .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+          .style("opacity", 1);
+
+
+      node.exit().transition()
+          .duration(duration)
+          .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+          .style("opacity", 0)
+          .remove();
+
+      // Update the links…
+      var link = vis.selectAll("path.link")
+          .data(tree.links(nodes), function(d) { return d.target.id; });
+
+      // Enter any new links at the parent's previous position.
+      link.enter().insert("svg:path", "g")
+          .attr("class", "link")
+          .attr("d", function(d) {
+            var o = {x: source.x0, y: source.y0};
+            return diagonal({source: o, target: o});
+          })
+          .transition()
+          .duration(duration)
+          .attr("d", diagonal);
+
+      // Transition links to their new position.
+      link.transition()
+          .duration(duration)
+          .attr("d", diagonal);
+
+      // Transition exiting nodes to the parent's new position.
+      link.exit().transition()
+          .duration(duration)
+          .attr("d", function(d) {
+            var o = {x: source.x, y: source.y};
+            return diagonal({source: o, target: o});
+          })
+          .remove();
+
+      var maxLevel = 0;
+      // Stash the old positions for transition.
+      nodes.forEach(function(d) {
+        d.x0 = d.x;
+        d.y0 = d.y;
+        maxLevel++;
+      });
+      //alert(maxLevel);
+    }
+
+    // Toggle children on click.
+    function click(d) {
+
+      // Contrae
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+        // n.parent(d);
+      } //Expande
+      else {
+            if(d.image == 0){
+              $('#myModal1 .parent-id').val(d.parent_id);
+              $('#myModal1 .user-name').val(d.parent.name);
+              $('#myModal1 .user-child').val(d.position_tree);
+              $('#myModal1').modal();      
+            }else{
+				$.ajax({
+					'async': false,
+					'global': false,
+					'url': BASE_URL + "level/myUnilevelLevel/" + d.id,
+					'dataType': "json",
+					'success': function (data) {
+					  for (var i in data) {
+						data[i].level = d.level + 1;
+					  }
+					  d._children = data;
+					  d.children = d._children;
+					  d._children = null;
+					}
+				});
+            }
+      }
+      update(d);
+      /*$("svg").find("image").attr("width",  max - maxLevel*dec);
+      $("svg").find("image").attr("height", max - maxLevel*dec);*/
+    }
+
+    d3.select(self.frameElement).style("height", "2000px");
+
+    //Collapse All nodes
+    function toggleAll(d) {
+      if (d.children) {
+        d.children.forEach(toggleAll);
+        toggle(d);
+      }
+    }
+
+  });
+</script>
+
+	<div class="modal fade" id="myModal" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body" align="center">
+				  <strong> Thank you for Registering with MLM Network.</strong><br/><br/>
+				  <span id="thankyou-message"></span>
+				</div>
+				<div class="modal-footer">
+					<div class="col-sm-12" align="center">
+					  <button type="button" class="btn btn-default" id="reload-current-page" data-dismiss="modal">Close</button>       
+					</div>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+  <div class="modal fade" id="myModal1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         
+        </div>
+        <div class="modal-body">
+			<input type="hidden" value="" id="parent-id" class="form-control parent-id" name="parent_id" required="true"/>
+			<input type="hidden" value="" id="user-name" class="form-control user-name" name="user_name" required="true"/>
+			<input type="hidden" value="" id="user-child" class="form-control user-child" name="user_child" required="true"/>
+
+          <form role="form" name="myForm"  data-wizard="{finishButton: true, titleClick: true, block: true, validate: true}" class="form-horizontal">
+                    <fieldset title="Step 1">
+                        <legend></legend>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Country</label>
+                            <div class="col-md-6">
+                                <select id="country" class="form-control"  type="text" ng-model="user.country" >
+                                    <option value="">Select Country</option>
+                                    <option ng-selected="selected" value="us">USA</option>
+                                    <option value="mc">Mexico</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">First Name</label>
+                            <div class="col-md-6">
+                                <input id="f-name" class="form-control"ng-model="user.first_name"  type="text" placeholder= "Enter First Name" ng-pattern="/[a-zA-Z]/" minlength="2" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Middle Name</label>
+                            <div class="col-md-6">
+                                <input id="m-name" class="form-control" ng-model="user.middle_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Middle Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Last Name</label>
+                            <div class="col-md-6">
+                                <input id="l-name" class="form-control" ng-model="user.last_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Last Name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">SSN, Itin, Ein</label>
+                            <div class="col-md-6">
+                                <input id="ssn" class="form-control" ng-model="user.ssn" type="text" placeholder= "Enter SSN, Itin, Ein ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">User Name</label>
+                            <div class="col-md-6">
+                                <input id="u-name" name="user_name" class="form-control" ng-model="user.user_name"  ng-pattern="/[a-zA-Z]/" minlength="2" type="text" placeholder= "Enter User Name" required ng-unique="user_master.user_name" ><div ng-show="myForm.user_name.$touched" >
+                                <span style="color:#B4270F" ng-show=" myForm.user_name.$error.unique">Username is already taken.</span> </div> <!--pk -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldemail" class="col-md-3 control-label">Email</label>
+                            <div class="col-md-6">
+                                <input id="fieldemail" name="user_email" class="form-control" type="email"  ng-model="user.user_email" placeholder= "Enter Email-ID" minlength="5"  required ng-unique1="user_master.user_email">
+                                <div ng-show="myForm.user_email.$touched" >
+                                    <span style="color:#B4270F" ng-show=" myForm.user_email.$error.unique1">Email is already taken.</span> 
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Password</label>
+                            <div class="col-md-6"><input id="password" class="form-control"  type="password" ng-model="user.user_password" placeholder= "Enter Password" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Confirm Password</label>
+                            <div class="col-md-6">
+                                <input id="cpassword" name="cpassword" class="form-control"  type="password" ng-model="user.cpassword" ng-pattern="user.user_password" placeholder= "Enter Confirm Password" required >
+                                <div ng-show="myForm.cpassword.$touched" >
+                                    <span style="color:#B4270F" ng-show=" myForm.cpassword.$error.pattern">Password not match.</span> 
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Birth Date</label>
+                            <div class="col-md-6" ng-controller="dateCtr">
+                                <!-- <input type="text" placeholder="yyyy-mm-dd" name="dob" class="form-control" pickadate ng-model="user.dob" format="yyyy-mm-dd"/> 
+
+                                  <input type="text" id="dob" placeholder="yyyy-mm-dd" name="dob" class="form-control" pickadate ng-model="user.dob" format="yyyy-mm-dd" min-date="minDate" max-date="maxDate" default-date="presetDate" required/>
+                                 <div ng-show="myForm.dob.$touched" >
+                                    <span style="color:#B4270F" ng-show="myForm.dob.$error.wizValDateOfBirth">do not allow anyone under 18</span> 
+                                </div>-->
+								<div class="container" style="width: 100%; margin: 0px; padding: 0px;">
+                                   <input
+                                        id="dob"
+                                        class="datepicker form-control"
+                                        name="dob"
+                                        ng-model="user.dob"
+                                        type="text"
+										placeholder="yyyy-mm-dd"
+                                        autofocuss required>
+                                </div>  
+								
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset title="Step 2">
+                        <legend></legend>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Address 1</label>
+                            <div class="col-md-6"><input id="address1" class="form-control"  type="text" ng-model="user.address1" placeholder= "Enter Address" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Address 2</label>
+                            <div class="col-md-6"><input id="address2" class="form-control"  type="text" ng-model="user.address2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">City</label>
+                            <div class="col-md-6"><input id="city" class="form-control"  type="text" ng-model="user.city" placeholder= "Enter City" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">State</label>
+                            <div class="col-md-6"><input id="state" class="form-control"  type="text" ng-model="user.state" placeholder= "Enter State" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Zip</label>
+                            <div class="col-md-6"><input id="zip" class="form-control"  type="text"ng-model="user.zip" placeholder="Enter ZIP Code" minlength="2" ng-pattern="/[0-9]/" required></div>
+                        </div>
+						
+						  <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Phone</label>
+                            <div class="col-md-6"><input  id="phone" class="form-control"  type="text" ng-pattern="/[0-9]/" ng-model="user.phone" placeholder= "Enter Phone" required></div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label"></label>
+                            <div class="col-md-6">
+                                Do you want to activate you platforms right away? YES NO : <input type="checkbox" ng-model="checked1">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="checked1">
+                            <label for="fieldpass" class="col-md-3 control-label"></label>
+                            <div class="col-md-6">
+                                Take a picture of your ID Front :<input type="file" file-model="user.id_front"/><br/>
+                                Take a picture of your ID Back :<input type="file" file-model="user.id_back"/><br/>
+                                Take a picture of your Credit/Debit Card Front :<input type="file" file-model="user.card_front"/><br/>
+                                Take a picture of your Credit/Debit Card Back :<input type="file" file-model="user.card_back"/><br/>
+                                Take a picture of your proof of address :<input type="file" file-model="user.address_proof"/>
+                            </div>
+                        </div> -->
+                    </fieldset>
+                    <fieldset title="Step 3">
+                        <legend></legend>
+						<div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label"></label>
+                            <div class="col-md-6">
+                                <div ng-show="myForm.user_name.$touched" >
+                                    <span style="color:#B4270F" ng-show=" myForm.user_name.$error.unique">Username is already taken.</span> 
+                                </div>
+                                <div ng-show="myForm.user_email.$touched" >
+                                        <span style="color:#B4270F" ng-show=" myForm.user_email.$error.unique1">Email is already taken.</span> 
+                                </div>
+                                <div ng-show="myForm.cpassword.$touched" >
+                                        <span style="color:#B4270F" ng-show=" myForm.cpassword.$error.pattern">Password not match.</span> 
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Sponsor</label>
+                            <div class="col-md-6">
+                                <input id="sponsor-id" name="sponsor" class="form-control"  type="text" ng-model="user.sponsor_id" placeholder= "Enter Sponsor Name" required ng-unique2="user_master.user_name">
+                                <div ng-show="myForm.sponsor.$touched" >
+                                    <span style="color:#B4270F" ng-show=" myForm.sponsor.$error.unique2">Sponsor not exist.</span> 
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Package</label>
+                            <div class="col-md-6">
+                                <select name="package" ng-model="user.package" id="packag" class="form-control" required>
+                                    <option value="">Select Package</option>
+                                    <option ng-repeat="data in packages" value="{{data.package_id}}" ng-selected="selected">{{data.package_name}} (${{data.entry_ammout}})</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label"></label>
+                            <div class="col-md-6">
+                                If You have Voucher.? Yes/No : <input id="check" type="checkbox" name="checked" ng-model="checked">     
+                            </div>
+                        </div>
+                        <div ng-show="checked">
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Voucher Code</label>
+                                <div class="col-md-6">
+                                   <input type="text" id="voucher" name="voucher_code" ng-model="user.voucher_code" class="form-control" ng-vouchercode ng-required="checked"> 
+                                        <div ng-show="myForm.voucher_code.$dirty" >
+                                            <span style="color:#B4270F" ng-show=" myForm.voucher_code.$error.vouchercode">Voucher Code not exist.</span> 
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-hide="checked">
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Name on Card</label>
+                                <div class="col-md-6"><input id="name-on-card" class="form-control"  type="text" ng-model="user.name_on_card" placeholder= "Enter name on card" ng-required="!checked"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Card No.</label>
+                                <div class="col-md-6"><input id="card-no" class="form-control"  type="text" ng-model="user.card_no" placeholder= "Enter card no." ng-pattern="/[0-9]/" ng-required="!checked"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Expiry Date</label>
+                                <div class="col-md-6">
+                                    <select id="month" ng-model="user.expiry_month" ng-required="!checked">
+                                        <option value="">mm</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    
+                                    <select id="year" ng-model="user.expiry_year" ng-required="!checked">
+                                        <option value="">yyyy</option>
+                                        <option value="2015">2015</option>
+										<option value="2016">2016</option>
+										<option value="2017">2017</option>
+										<option value="2018">2018</option>
+										<option value="2019">2019</option>
+										<option value="2020">2020</option>
+										<option value="2021">2021</option>
+										<option value="2022">2022</option>
+										<option value="2023">2023</option>
+										<option value="2024">2024</option>
+										<option value="2025">2025</option>
+										<option value="2026">2026</option>
+										<option value="2027">2027</option>
+										<option value="2028">2028</option>
+										<option value="2029">2029</option>
+										<option value="2030">2030</option>
+										<option value="2031">2031</option>
+										<option value="2032">2032</option>
+										<option value="2033">2033</option>
+										<option value="2034">2034</option>
+										<option value="2035">2035</option>
+										<option value="2036">2036</option>
+										<option value="2037">2037</option>
+										<option value="2038">2038</option>
+										<option value="2039">2039</option>
+										<option value="2040">2040</option>
+										<option value="2041">2041</option>
+										<option value="2042">2042</option>
+										<option value="2043">2043</option>
+										<option value="2044">2044</option>
+										<option value="2045">2045</option>
+										<option value="2046">2046</option>
+										<option value="2047">2047</option>
+										<option value="2048">2048</option>
+										<option value="2049">2049</option>
+										<option value="2050">2050</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">CVV No.</label>
+                                <div class="col-md-6"><input id="cvv-no" class="form-control"  type="text" ng-model="user.cvv_no" placeholder= "Enter CVV No." ng-pattern="/[0-9]/" ng-required="!checked"></div>
+                            </div>
+							<div class="form-group">
+								<label for="fieldpass" class="col-md-3 control-label">Billing ZIP</label>
+								<div class="col-md-6"><input id="billing-zip" class="form-control"  type="text"ng-model="user.billing_zip" placeholder= "Enter Billing ZIP Code" minlength="2" ng-pattern="/[0-9]/" ng-required="!checked"></div>
+							</div>
+                        </div>
+                    </fieldset>
+                    <input type="submit" id="submit"class="finish btn-success btn" value="Submit" ng-disabled="myForm.$invalid" />
+                </form>
+          
+        </div>
+        <div class="modal-footer">
+         
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#submit').click(function(){
+
+         // var parent = $('#parent-id').val();   
+          var userName = $('#user-name').val();    
+          var userchild=$('#user-child').val();   
+         
+          var country = $('#country').val();
+          var fname = $('#f-name').val();
+          var mname=$('#m-name').val();
+          var lname = $('#l-name').val();
+          var ssn = $('#ssn').val();
+          var uname=$('#u-name').val();
+          var fieldemail = $('#fieldemail').val();
+          var password = $('#password').val();
+          var cpassword = $('#cpassword').val();
+          var dob = $('#dob').val();
+          var address1 = $('#address1').val();
+          var address2 = $('#address2').val();
+          var city = $('#city').val();
+          var state = $('#state').val();
+          var zip = $('#zip').val();
+		  var phone = $('#phone').val();
+          var sponsorid = $('#sponsor-id').val();
+          var packag = $('#packag').val();
+          var check = $('#check').val();
+          var voucher = $('#voucher').val();
+          var nameoncard = $('#name-on-card').val();
+          var cardno = $('#card-no').val();
+          var month = $('#month').val();
+          var year = $('#year').val();
+          var cvvno = $('#cvv-no').val();
+          var billingzip = $('#billing-zip').val();
+          
+            $.ajax({
+                 type: "post",
+                 url: BASE_URL+"admin/addNewUniLeble",
+                 data: {
+                    userName:userName,
+                    userchild:userchild,
+                    country:country,
+                    fname:fname,
+                    mname:mname,
+                    lname:lname,
+                    ssn:ssn,
+                    uname:uname,
+                    fieldemail:fieldemail,
+                    password:password,
+                    cpassword:cpassword,
+                    dob:dob,
+                    address1:address1,
+                    address2:address2,
+                    city:city,
+                    state:state,
+                    zip:zip,
+					phone:phone,
+                    sponsorid:sponsorid,
+                    packag:packag,
+                    check:check,
+                    voucher:voucher,
+                    nameoncard:nameoncard,
+                    cardno:cardno,
+                    month:month,
+                    year:year,
+                    cvvno:cvvno,
+                    billingzip:billingzip
+                  
+                 },
+                 success: function(data){
+                    $('#myModal1').css('display','none');
+					$('#myModal').modal();  
+					$('#thankyou-message').html(data);
+                 }
+            });
+      });  
+
+		$('#reload-current-page').click(function(){
+			location.reload();
+		});
+    });
+  </script>

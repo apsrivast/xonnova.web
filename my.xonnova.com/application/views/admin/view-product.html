@@ -1,0 +1,124 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Product Settings</li>
+        <li class="active">View Product</li>
+    </ol>
+
+    <h1>View Product</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Export as <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="View Product">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+				<div class="row">
+                    <div class="col-sm-6">
+                        <div class="col-md-3">PageSize:
+                            <select ng-model="entryLimit" class="form-control">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                        </div>
+                        <div class="col-md-9">Filter:
+                            <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <form name="searchForm"><br/>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="product_category" ng-model="sproduct.product_category">
+                                    <option value="">Search By Category</option>
+                                    <option value="">All Product</option>
+                                    <option ng-repeat="category in categoryList" value="{{category.category_id}}">{{category.category_name}}</option>
+                                </select> 
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn-primary btn" ng-click="update(sproduct);">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID <a ng-click="sort_by('p_id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Image <a ng-click="sort_by('product_image');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Name <a ng-click="sort_by('product_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>USA Price <a ng-click="sort_by('us_product_price');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Mexican Price <a ng-click="sort_by('mexico_product_price');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Quantity <a ng-click="sort_by('product_qty');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Binary Point <a ng-click="sort_by('product_binary_point');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (productList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.p_id}}</td>
+                                <td><img class="img-circle" alt="Dangerfield" src="assets/uploads/{{data.product_image}}" style="height: 70px; width: 70px;"></td>
+                                <td style="width: 300px;">{{data.product_name}}</td>
+                                <td>${{data.us_product_price}}</td>
+                                <td>${{data.mexico_product_price}}</td>
+                                <td>{{data.product_qty}}</td>
+                                <td>{{data.product_binary_point}}</td>
+                                <td>
+                                    <a href="#/edit-product/{{data.p_id}}"  class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </td>
+                            </tr>
+
+                            <!-- <tr>
+                                <td align="left">
+                                    <span class="flagicon"><img alt="" src="//upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/23px-Flag_of_the_United_States.svg.png" width="23" height="12" srcset="//upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/35px-Flag_of_the_United_States.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/46px-Flag_of_the_United_States.svg.png 2x">&nbsp;</span>United States
+                                    </td>
+                                <td>284154</td>
+                                <td>202865</td>
+                                <td>4.67</td>
+                                <td>143727</td>
+                                <td>25.40</td>
+                                <td>35619</td>
+                                <td>21.67</td>
+                                <td>0.801</td>
+                            </tr> -->
+                        </tbody>
+                        <!-- <caption>List of countries by distribution wealth</caption> -->
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Product found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

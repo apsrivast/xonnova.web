@@ -1,0 +1,189 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Ticket</li>
+	</ol>
+
+	<h1>Ticket</h1>
+	
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<panel panel-class="panel-warning" heading="Ticket Info">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="user in htmlTicket"><br/>
+					<img src="./assets/cashout/{{user.bug_image}}" alt="NoImage" class="img-responsive user-avatar" height="400" width="400">
+					<a href="https://my.onlegacynetwork.com/assets/cashout/{{user.bug_image}}" target="__blank" class="btn btn-pirmary">View Image</a>
+
+					<div class="user-detail">
+						
+						<div class="table-responsive">
+					
+							<table  class="table table-condensed m0">
+								<tbody>
+									
+									<tr>
+										<td>Ticket #</td>
+										<td>{{user.ticket_id}}</a></td>
+									</tr>
+									<tr>
+										<td>User Name</td>
+										<td>{{user.user_name}}</a></td>
+									</tr>
+									<!-- <tr>
+										<td>Bug Title</td>
+										<td>{{user.bug_title}}</a></td>
+									</tr> -->
+									<tr>
+										<td>Description </td>
+										<td>{{user.bug_text}}</td>
+									</tr>
+									<tr>
+										<td>Date</td>
+										<td>{{user.ticket_time}}</td>
+									</tr>
+									<!-- <tr>
+										<td>Reward Points</td>
+										<td>{{user.bug_reward_point}}</td>
+									</tr> -->
+									
+									
+								</tbody>
+							</table>
+						</div>
+
+						<!-- <div class="row" >
+							<form role="form" name="myForm2"  class="form-horizontal" >
+			
+								<div class="form-group">
+					                <label for="fieldname" class="col-md-3 control-label">Reward Points </label>
+					                <div class="col-md-6">
+					                	 <input  class="form-control" ng-model="user.bug_reward_point"  type="text"  required ng-pattern="/[0-9]/" >
+					                	
+					                    
+					                </div>
+					            </div>
+							
+					            <div class="row">
+					                <div class="col-sm-6 col-sm-offset-3">
+					                        <button type="submit" class="finish btn-success btn-sm"  ng-disabled=" myForm2.$invalid"  ng-click="approve(user)">Approve</button>
+					                </div>
+					            </div>
+					            
+							</form> 
+							<br><br>
+	                    
+	                        
+	                    </div>
+						<div class="row" >
+							<div align="center">
+								<button type="button" class="finish btn-primary btn-sm "  ng-click="reject()">reject</button>
+								<a href="#/bug-pending"  class="btn btn-success btn-sm">Back</a>
+							</div>
+						</div>
+						<br>
+					 -->
+						
+					</div>
+				</div>
+        	</div>
+        	</panel>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+		<panel panel-class="panel-danger" heading="Comment">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+			<div class="panel panel-default panel-profile">
+				 <br>
+	                <br>
+				<div class="row" >
+					<div class="col-sm-3 ">
+	                      Commented By
+	                </div>
+	                <div class="col-sm-6 ">
+	                       Comment
+	                </div>
+	                <div class="col-sm-3 ">
+	                      DateTime
+	                </div>
+	            </div>
+	             <hr>
+	               
+				<div class="row" ng-repeat="comment in htmlTicketComment">
+					<br>
+					<div class="col-sm-3 ">
+	                       {{comment.user_name}}
+	                </div>
+	                <div class="col-sm-6 ">
+	                       {{comment.comment}}
+	                </div>
+	                <div class="col-sm-3 ">
+	                       {{comment.comment_time}}
+	                </div>
+	                <br>
+	                <br>
+	            </div>
+	            <hr>
+	            <div class="row" >
+							<form role="form" name="myForm2"  class="form-horizontal" >
+
+								<div class="form-group">
+					               
+					                <div id="message">
+					                	 
+					                </div>
+					            </div>
+					            <div class="form-group">
+				                    <label for="fieldname" class="col-md-3 control-label">Status</label>
+				                    <div class="col-md-6">
+				                    	
+				                        <select class="form-control" ng-model="commentadd.ticket_status" >
+				                            <option value="">Select Status</option>
+				                            <option value="Waiting">Waiting</option>
+				                            <option value="Closed">Closed</option>
+				                        </select>
+				                    </div>
+				                </div>
+			
+								<div class="form-group">
+					                <label for="fieldname" class="col-md-3 control-label">Comment </label>
+					                <div class="col-md-6">
+					                	 <input  class="form-control" ng-model="commentadd.comment"  type="text"  required >
+					                </div>
+					            </div>
+							
+					            <div class="row">
+					                <div class="col-sm-6 col-sm-offset-3">
+					                        <button type="submit" class="finish btn-success btn-sm"  ng-disabled=" myForm2.$invalid"  ng-click="addcomment(commentadd)">Add Comment</button>
+					                </div>
+					            </div>
+					            
+							</form> 
+							<br><br>
+	            </div>
+        	</div>
+        </panel>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->
+
+
+
+
+

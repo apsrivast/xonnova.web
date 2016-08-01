@@ -1,0 +1,241 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        
+        <li class="active"> Entrepreneurial  Report</li>
+    </ol>
+
+    <h1>Entrepreneurial Report</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Export as <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Entrepreneurial Report</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-8" style="margin:auto; float:none;">
+                            <h3 style="background: #2685ee; padding: 5px 10px; color: #fff; text-transform: uppercase; border-radius: 1px; margin: 20px 0 20px; text-align:center">Entrepreneurial Report {{user_name}}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8" style="margin:auto; float:none;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Current Module</td>
+                                            <td>{{current_module}}</td>
+                                        </tr>
+										<!-- <tr>
+                                            <td>Total Paid Bonus</td>
+                                            <td>{{total_paid_bonus}}</td>
+                                        </tr> -->
+                                        <tr>
+                                            <td>Direct qualified members</td>
+                                            <td>{{total_direct_sponsor}}</td>
+                                        </tr>
+                                       <!--  <tr>
+                                            <td>Total Team Member</td>
+                                            <td>{{total_team_member}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Next Module</td>
+                                            <td>{{next_module}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Required Direct Sponsor's</td>
+                                            <td>{{required_sponsor}}</td>
+                                        </tr> -->
+                                         <tr>
+                                            <td>Total team qualified members 40% rule</td>
+                                            <td>{{total_qualified_member}}</td>
+                                        </tr>
+                                        <tr >
+                                            <td>Missing direct members to next module</td>
+                                            <td ng-hide="missing_direct_sponsor < 1">{{missing_direct_sponsor}}</td>
+                                            <td ng-show="missing_direct_sponsor < 1">0</td>
+                                        </tr>
+                                        
+                                        <tr  >
+                                            <td>Missing team members to next module</td>
+                                            <td ng-hide="missing_qualified_member < 1">{{missing_qualified_member}}</td>
+                                            <td ng-show="missing_qualified_member < 1">0</td>
+                                        </tr>
+                                       <!--  <tr>
+                                            <td>Rule % applied</td>
+                                            <td>{{rule_percent}}%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bonus Amount for Next Module</td>
+                                            <td>${{module_amount}}</td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <!-- <div  class="col-sm-4" data-toggle="modal" data-target="#BV-Details-model"><button class="btn btn-primary">View</button></div> -->
+                            <div class="col-sm-6">
+                                <form name="searchForm"><br/>
+                                    <div class="col-sm-5">
+                                       <input type="text"  placeholder="From Date"  class="form-control" pickadate ng-model="dateRangeSearch.from_date" readonly/> 
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <input type="text"  placeholder="To Date"  class="form-control" pickadate ng-model="dateRangeSearch.to_date" readonly />
+                                    </div>
+                                    <div class="col-sm-2" data-toggle="modal" data-target="#BV-Details-model">
+                                        <button type="submit" class="btn-primary btn" ng-click="update(dateRangeSearch);">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="BV-Details-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Entrepreneurial Report</h4>
+      </div>
+      <div class="modal-body">
+            <!-- <div class="row">
+                <div class="col-md-6">
+                    <span>PageSize</span> :
+                    <select ng-model="entryLimit" class="form-control">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+              
+                <div class="col-md-6">Filter:
+                    <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                </div>               
+            </div>
+            <br/> -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr> 
+                            <th>Module #</th> 
+                            <th>Total Sponsor</th>
+                            <th>Total Member</th>
+                           <!--  <th>Produt Sale BV</th>
+                            <th>Date</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in filtered = (moduleList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                            <td align="left">Module {{data.module_id}}</td> 
+                            <td>{{data.total_sponsor}}</td>
+                            <td>{{data.total_member}}</td>
+                          <!--   <td>{{data.salebv}}</td>
+                            <td>{{data.rdate}}</td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems == 0">
+                <div class="col-md-12">
+                    <h4>Not found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems > 0">    
+                <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+            </div>
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="TOTAL DIRECT MEMBER">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                 <div class="row">
+                    <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit2" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search2" ng-change="filter2()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID <a ng-click="sort_by('user_id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>User Name <a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Subscription Status <a ng-click="sort_by('subscription_status');"><i class="glyphicon glyphicon-sort"></i></a></th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (memberReportList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage2-1)*entryLimit2 | limitTo:entryLimit2">
+                                <td align="left">{{data.user_id}}</td>
+                                <td>{{data.user_name}}</td>
+                                <td>{{data.subscription_status}}</td>
+                            </tr>
+
+                           
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems2 == 0">
+                    <div class="col-md-12">
+                        <h4>No Member found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems2 > 0">    
+                    <div pagination="" page="currentPage2" on-select-page="setPage2(page)" boundary-links="true" total-items="filteredItems2" items-per-page="entryLimit2" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> --> <!-- container-fluid -->

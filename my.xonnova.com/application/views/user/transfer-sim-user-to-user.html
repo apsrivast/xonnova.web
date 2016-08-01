@@ -1,0 +1,53 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li class="active">SIM #</li>
+        </ul>
+
+        <h1>SIM #</h1>
+    </div>
+
+    <div class="container-fluid">
+        <panel panel-class="panel-midnightblue" heading="SIM #">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+
+           <form role="form" name="myForm"  class="form-horizontal" ng-repeat="user in htmlTransferSim" >
+
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">SIM #</label>
+                    <div class="col-md-6">
+                        <input name="news_title" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="user.sim_no" 
+                        placeholder= "Enter SIM #" 
+                        readonly>
+                    </div>
+                </div>
+                     
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">User Name</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="to_user_id"  type="text" ng-model="user.to_user_id" required>          
+                            <option value="">Select User</option>
+                            <option ng-repeat="total in sponserUser" value="{{total.user_id}}">{{total.user_name}}</option>
+                           <option ng-repeat="totaltop in sponserUserTop" value="{{totaltop.user_id}}">{{totaltop.user_name}}</option>
+                        </select>
+                    </div>
+                </div> 
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <button type="submit" class="finish btn-primary btn-sm pull-right" ng-disabled=" myForm.$invalid" ng-click="add(user)">Transfer</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div>
+
+
+

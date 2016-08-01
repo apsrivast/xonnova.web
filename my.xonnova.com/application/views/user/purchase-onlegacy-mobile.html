@@ -1,0 +1,151 @@
+<style>
+	.label {
+		border-radius: 5px;
+		font-family: "Roboto","Segoe UI","Droid Sans",Tahoma,Arial,sans-serif;
+		font-size: 1em !important;
+		font-weight: 400;
+		padding: 0.09em 0.45em 0.15em;
+		text-transform: uppercase;
+	}
+</style>
+
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Team</li>
+        <li class="active">Purchase ATT Mobile</li>
+    </ol>
+    <h1>Purchase ATT Mobile</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+
+           <!--  <div panel-tabs="true" panel-class="panel-orange" heading=" ATT Mobile Plan" > -->
+            <div class="panel panel-default panel-profile">
+
+            	<h1 class="text-center"> Select Service </h1>
+            	<div class="table-responsive text-center">
+					<div class="col-md-4">
+						<button type="button" class="btn btn-info" ng-click="changePlan(21)">Wireless (S-CDMA)</button>
+					</div>
+					<div class="col-md-4">
+						<button type="button" class="btn btn-info" ng-click="changePlan(22)">Wireless (GSM)</button>
+					</div>
+					<div class="col-md-4">
+						<button type="button" class="btn btn-info" ng-click="changePlan(30)">Wireless (CDMA)</button>
+					</div>
+				</div>
+				<br>
+				<br>
+
+              <!--   <tab heading="Wireless (S-CDMA)" ng-click="changePlan(21)"> -->
+                    <div class="col-md-12" ng-repeat="planLists in onlegacyMobilePlanList">   
+						<accordion close-others="oneAtATime" class="panel-orange">
+							
+							
+							<accordion-group heading="{{planLists.vname}}" >
+								<div class="table-responsive">
+									<!-- <div class="col-md-12" ng-show="planLists.group_id =='22'"> -->
+										<div class="col-md-12"><a href="#/buy-onlegacy-gsm-sim/{{planLists.group_id}}" class="btn-primary btn pull-right">I Don't Have  SIM </a></div>
+									<!-- </div> -->
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Name : </label><div class="col-md-8">{{planLists.vname}}</div>
+									</div>
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Description : </label><div class="col-md-8">{{planLists.vdesc}}</div>
+									</div>
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Price : </label><div class="col-md-8">${{planLists.vprice}}</div>
+									</div>
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Setup Price : </label><div class="col-md-8">${{planLists.varSetupPrice}}</div>
+									</div>
+									<div class="col-md-12">
+										<div class="col-md-12"><a href="#/add-customer-to-telekloud/{{planLists.varProID}}" class="btn-primary btn pull-right"><span ng-show="planLists.group_id =='22'">I Have GSM SIM</span><span ng-hide="planLists.group_id =='22'">Buy</span></a></div>
+									</div>
+								</div>
+							</accordion-group>
+						</accordion>									
+                    </div>
+                <!-- </tab>
+                <tab heading="Wireless (GSM)" ng-click="changePlan(22)">
+                    <div class="col-md-12" ng-repeat="planLists in onlegacyMobilePlanList">                        
+						<accordion close-others="oneAtATime" class="panel-default">
+							<accordion-group heading="{{planLists.vname}}" >
+								<div class="table-responsive">
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Name : </label><div class="col-md-8">{{planLists.vname}}</div>
+									</div>
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Description : </label><div class="col-md-8">{{planLists.vdesc}}</div>
+									</div>
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Price : </label><div class="col-md-8">${{planLists.vprice}}</div>
+									</div>
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Setup Price : </label><div class="col-md-8">${{planLists.varSetupPrice}}</div>
+									</div>
+									<div class="col-md-12">
+										<div class="col-md-12"><a href="#/buy-onlegacy-sim" class="btn-primary btn pull-right">Buy</a></div>
+									</div>
+								</div>
+							</accordion-group>
+						</accordion>									
+                    </div>
+                </tab>
+                <tab heading="Wireless (CDMA)" ng-click="changePlan(30)">
+                    <div class="col-md-12" ng-repeat="planLists in onlegacyMobilePlanList">                        
+						<accordion close-others="oneAtATime" class="panel-default">
+							<accordion-group heading="{{planLists.vname}}" >
+								<div class="table-responsive">
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Name : </label><div class="col-md-8">{{planLists.vname}}</div>
+									</div>
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Description : </label><div class="col-md-8">{{planLists.vdesc}}</div>
+									</div>
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Price : </label><div class="col-md-8">${{planLists.vprice}}</div>
+									</div>
+									<div class="col-md-12">
+										<label class="col-md-4 label label-primary">Setup Price : </label><div class="col-md-8">${{planLists.varSetupPrice}}</div>
+									</div>
+									<div class="col-md-12">
+										<div class="col-md-12"><a href="#/buy-onlegacy-sim" class="btn-primary btn pull-right">Buy</a></div>
+									</div>
+								</div>
+							</accordion-group>
+						</accordion>									
+                    </div>
+                </tab> -->
+            </div>
+        </div>
+    </div>
+   <!-- <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Purchase Onlegacy Mobile">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Wealth Gini</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="onlegacyMobilePlanList in planlist">
+                                <td>{{planlist.var_pro_name}}</td>
+                            </tr>
+                        </tbody>
+                        <caption>List of countries by distribution wealth</caption>
+                    </table>
+                </div>
+            </panel>
+        </div>
+    </div> -->
+</div>

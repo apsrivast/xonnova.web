@@ -1,0 +1,109 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+    </ol>
+</div>
+
+
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-md-12">
+                <div class="col-md-6" ng-repeat="TVList in TrainingVideosCatgeryViewList">
+                    <a ng-href="#/view-training-videos-list/{{TVList.v_c_id}}" class="info-tiles tiles-indigo" href="#/view-training-videos-list/{{TVList.v_c_id}}">
+                        <div class="tiles-heading">
+                            <div class="text-center">Training Videos</div>
+                          
+                        </div>
+                        <div class="tiles-body">
+                           
+                            <div class="text-center" >{{TVList.category_name}}</div>
+                        </div>
+                    </a>
+                </div>
+        </div>
+    </div>
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+<!--     <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">{{lng_dashboard}}</a></li>
+            <li>{{lng_tools}}</li>
+            <li class="active">Training Videos</li>
+        </ul>
+
+        <h1>Training Videos Tutorials</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Training Videos Tutorials">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+            <div class="row">
+                 <div class="col-md-2">PageSize:
+                    <select ng-model="entryLimit" class="form-control">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+              
+                <div class="col-md-3">Filter:
+                    <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                </div>
+               
+            </div>
+            <br/>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Videos</th>
+                            <th></th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in filtered = (TrainingVideosViewList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                            <td align="left">{{data.v_c_id}}</td>
+                            <td>{{data.category_name}}</td>
+                            <td align="left">{{data.message}}</td>
+                            <td >                               
+                                <video src="{{data.url}}" controls ngf-src="files[0]" ngf-accept="'video/*'"></video> 
+                            </td>
+                            <td>
+                                <a href="{{data.url}}" target="__blank" class="btn btn-pirmary">View Tutorial</a>
+                            </td>
+                           
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems == 0">
+                <div class="col-md-12">
+                    <h4>{{lng_no_found}}</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems > 0">    
+                <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+            </div>           
+        </panel>
+    </div>  -->

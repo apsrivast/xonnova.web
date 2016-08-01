@@ -1,0 +1,123 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Money</li>
+            <li class="active">Buy Store Credit</li>
+        </ul>
+
+        <h1>Buy Store Credit</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Buy Store Credit">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+               
+            </panel-controls>
+<div ng-hide="hold">
+<h4>On Hold</h4>
+</div>
+<div ng-show="hold">
+            <form class="form-horizontal row-border" name="buy_credit"  >
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Earning Amount</label>
+                    <div class="col-md-6">
+                        <div class="form-control" ng-repeat="total in totalEarning">${{total.total}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Your Total Store Credit </label>
+                    <div class="col-md-6">
+                        <div class="form-control" >{{creditTotal - dedutTotal}}</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Buy Store Credit</label>
+                    <div class="col-md-6">
+                        <input name="credit" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="user.credit" 
+                        placeholder= "Enter Credit Amount" 
+                        required>
+                    </div>
+                </div>
+   
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled=" buy_credit.$invalid " ng-click="buy(user);">Buy</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+</div>            
+        </panel>
+    </div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Credit History">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+
+                 <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr> 
+                                <th>ID <a ng-click="sort_by('credit_v_id');"><i class="glyphicon glyphicon-sort"></i></a></th> 
+                                <!-- <th>User Name</th> -->
+                                <th>Credit Amount <a ng-click="sort_by('credit');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Message <a ng-click="sort_by('message');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Date <a ng-click="sort_by('wallet_credited_at');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (buyStoreCreditList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.credit_v_id}}</td> 
+                                <!-- <td>{{data.user_name}}</td> -->
+                                <td>${{data.credit}}</td>
+                                <td>{{data.message}}</td>
+                                <td>{{data.wallet_credited_at}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Credit found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,46 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Upgrade</li>
+           
+        </ul>
+
+        <h1> Upgrade</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Upgrade">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+              
+            </panel-controls>
+
+            <form class="form-horizontal row-border" enctype="multipart/form-data" name="upgradeForm">
+               
+               
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Upgrade Method</label>
+                    <div class="col-md-6">
+                        <select class="form-control"  ng-model="method" required>
+                            <option value="">Select Upgrade Method</option>
+                            <option value="SC">Upgrade BY Store Credit</option>
+                            <option value="CC">Upgrade BY Credit Card</option>
+                            <!-- <option value="BP">Upgrade BY Bit Pay</option> -->
+                        </select>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <div ng-show="method == 'SC'"><a href="#/user-upgrade"  class="btn btn-primary btn-sm">Proceed</a></div>
+                                <div ng-show="method == 'CC'"><a href="#/upgrade-by-credit-card"  class="btn btn-primary btn-sm">Proceed</a></div>
+                                <div ng-show="method == 'BP'"><a href="#/user-upgrade-by-bitpay"  class="btn btn-primary btn-sm">Proceed</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

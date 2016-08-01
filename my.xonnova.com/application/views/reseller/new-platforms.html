@@ -1,0 +1,114 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">{{lng_dashboard}}</a></li>
+        
+        <li class="active">New Platforms</li>
+    </ol>
+    <h1>New Platforms</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="New Platforms Form">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+				
+				<div class="col-sm-12" ng-show="submited == 'yes'"><h4>You have already Submited</h4></div>
+                <div class="col-sm-12" ng-show="submited == 'no'">
+
+                <form role="form" name="myForm"  enctype="multipart/form-data"  ng-controller="MyCtrlPlat"  class="form-horizontal" ng-repeat="user in profileList">                   
+					<legend>New Platforms</legend>	
+					<div class="form-group">
+	                    <label  class="col-md-3 control-label">Platforms Name</label>
+	                    <div class="col-md-6">
+	                        <select class="form-control" name="platforms_name"  type="text" ng-model="user.platforms_name" required>
+	                                    <option ng-repeat="total in List" value="{{total.platforms_name}}">{{total.platforms_name}}</option>
+	                        </select>
+	                        <div ng-repeat="total in List" ng-show="user.platforms_name == '{{total.platforms_name}}'">{{total.platforms_comment}}</div>
+	                    </div>
+	                </div>				
+					<div class="form-group">
+						<label for="fieldname" class="col-md-3 control-label">{{ 	lng_first_name}}</label>
+						<div class="col-md-6">
+							<input id="f-name" class="form-control" ng-model="user.first_name"  type="text" ng-pattern="/[a-zA-Z]/" minlength="2" >
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="fieldname" class="col-md-3 control-label">{{lng_last_name}}</label>
+						<div class="col-md-6">
+							<input id="l-name" class="form-control" ng-model="user.last_name" ng-pattern="/[a-zA-Z]/" minlength="2" type="text"  >
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="fieldname" class="col-md-3 control-label">{{lng_user_name 	}}</label>
+						<div class="col-md-6">
+							<input id="u-name" name="user_name" class="form-control" ng-model="user.user_name"  ng-pattern="/[a-zA-Z]/" minlength="2" type="text" >
+
+						   <!--  <div ng-show="myForm.user_name.$touched" > ng-unique="user_master.user_name"
+							<span style="color:#B4270F" ng-show=" myForm.user_name.$error.unique">Username is already taken.</span> </div> --> <!--pk -->
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fieldemail" class="col-md-3 control-label">{{lng_email}}</label>
+						<div class="col-md-6">
+							<input id="fieldemail" name="user_email" class="form-control" type="email"  ng-model="user.user_email"  minlength="5"   >
+						   <!--  <div ng-show="myForm.user_email.$touched" >ng-unique1="user_master.user_email"
+								<span style="color:#B4270F" ng-show=" myForm.user_email.$error.unique1">Email is already taken.</span> 
+							</div> -->
+						
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="fieldpass" class="col-md-3 control-label">{{lng_phone}}</label>
+						<div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.mobile_no" placeholder= "Enter Phone" ng-pattern="/[0-9]/" required></div>
+					</div>
+
+					 <div class="form-group">
+						<label for="fieldpass" class="col-md-3 control-label"></label>
+						<div class="col-md-6">
+							{{lng_take_a_picture_of_your_id_front}} :<input type="file" ngf-select ng-model="id_proof" ngf-accept="'image/*'" ngf-change="uploadIdProof($files)" required/>
+						   <input  class="form-control"  name="picID" type="hidden" ng-model="user.picID" required>
+						   <span style="color:#B4270F" ng-show=" myForm.picID.$error.required">this field required</span> 
+						   <br/>
+
+							{{ 	lng_take_a_picture_of_your_id_back}} :<input type="file" ngf-select ng-model="id_proof_back" ngf-accept="'image/*'" ngf-change="uploadIdProofBack($files)" required/>
+						   <input  class="form-control"  name="picIDBack" type="hidden" ng-model="user.picIDBack" required>
+							<span style="color:#B4270F" ng-show=" myForm.picIDBack.$error.required">this field required</span> 
+							<br/>
+
+							{{lng_take_a_picture_of_your_credit_debit_card_front}} :<input type="file" ngf-select ng-model="card_proof" ngf-accept="'image/*'" ngf-change="uploadCardProof($files)" required/>
+						   <input  class="form-control"  name="picCard" type="hidden" ng-model="user.picCard" required>
+						   <span style="color:#B4270F" ng-show=" myForm.picCard.$error.required">this field required</span> 
+						   <br/>
+
+							{{lng_take_a_picture_of_your_credit_debit_card_back}} :<input type="file" ngf-select ng-model="card_proof_back" ngf-accept="'image/*'" ngf-change="uploadCardProofBack($files)" required/>
+						   <input  class="form-control"  name="picCardBack" type="hidden" ng-model="user.picCardBack" required>
+						   <span style="color:#B4270F" ng-show=" myForm.picCardBack.$error.required">this field required</span> 
+						   <br/>
+
+							{{lng_take_a_picture_of_your_proof_of_address}} :<input type="file" ngf-select ng-model="add_proof" ngf-accept="'image/*'" ngf-change="uploadAddressProof($files)" required/>
+						   <input  class="form-control"  name="picAddress" type="hidden" ng-model="user.picAddress" required>
+						   <span style="color:#B4270F" ng-show=" myForm.picAddress.$error.required">this field required</span> 
+						</div>
+					</div>
+
+					 <div class="panel-footer">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+									<button type="submit" class="finish btn-success btn"  ng-disabled=" myForm.$invalid" ng-click="newplatformtwo(user)">{{lng_submit}}</button>
+							</div>
+						</div>
+					</div>  
+                </form>
+            
+			
+				</div>
+			</panel>
+        </div>
+    </div>
+</div>

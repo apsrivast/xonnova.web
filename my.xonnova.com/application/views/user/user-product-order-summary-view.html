@@ -1,0 +1,101 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Order</li>
+	</ol>
+
+	<h1>Order</h1>
+	
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="user in list"><br/>
+					<img src="assets/uploads/{{user.product_image}}" alt="" class="img-responsive user-avatar" height="400" width="400">
+					
+					<div class="user-detail">
+						
+						<div class="table-responsive">
+					
+							<table  class="table table-condensed m0">
+								<tbody>
+									<tr>
+										<th >Product Info</th>
+										<td ></td>
+									</tr>
+									
+									<tr>
+										<td >Product Name</td>
+										<td >{{user.product_name}}</td>
+									</tr>
+									
+									<tr>
+										<td>Quantity</td>
+										<td>{{user.p_qty}}</td>
+									</tr>
+									<tr>
+										<td>Purchase At</td>
+										<td>{{user.purchase_at}}</td>
+									</tr>
+									
+									
+									<tr>
+										<th >User Info</th>
+										<td ></td>
+									</tr>
+									<tr>
+										<td>First Name</td>
+										<td>{{user.first_name}}</td>
+									</tr>
+									<tr>
+										<td>Last Name</td>
+										<td>{{user.last_name}}</td>
+									</tr>
+									<tr>
+										<td>User Email</td>
+										<td>{{user.user_email}}</td>
+									</tr>
+									<tr>
+										<td>Address</td>
+										<td>{{user.address1}},{{user.address2}}</td>
+									</tr>
+									<tr>
+										<td>City</td>
+										<td>{{user.city}}</td>
+									</tr>
+									<tr>
+										<td>Country</td>
+										<td>{{user.country}}</td>
+									</tr>
+									
+									<tr>
+										<td>Zip</td>
+										<td>{{user.zip}}</td>
+									</tr>
+									<tr>
+										<td>Contact No.</td>
+										<td>{{user.contact_no}}</td>
+									</tr>
+									
+									<tr>
+										<th >Payment Info</th>
+										<td ></td>
+									</tr>
+									<tr>
+										<td>Total Payment</td>
+										<td>{{user.subtotal}}</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+						<!-- <div align="center"><a href="#/user-product-order-summary"  class="btn btn-success btn-sm">Back</a></div> -->
+					</div>
+				</div>
+        	</div>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->

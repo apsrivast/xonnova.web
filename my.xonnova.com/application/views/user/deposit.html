@@ -1,0 +1,224 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Money</li>
+        <li class="active">Upload Deposit</li>
+    </ol>
+    <h1>Upload Deposit</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Upload Deposit">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+
+                <form name="deposit_form" enctype="multipart/form-data" class="form-horizontal row-border" ng-controller="MyCtrlDeposit">
+                	<div id="message"></div>
+
+
+                	<div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">File to upload:</label>
+                        <div class="col-md-6">
+                            <select  class="form-control"  type="text" ng-model="file_to_upload" required>
+                                <option value="">Select</option>
+                                <option value="Check">Check</option>
+                                <option value="Deposit">Deposit</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <fieldset ng-show="file_to_upload == 'Check'">
+
+                    	<div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Check number</label>
+		                    <div class="col-md-6">
+		                        <input id="transaction-id" class="form-control" ng-model="transaction_id"  type="text" placeholder= "Enter Check number" minlength="2" ng-required="file_to_upload == 'Check'">
+		                    </div>
+		                </div>
+
+		                <div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Routing Number</label>
+		                    <div class="col-md-6">
+		                        <input  name="routing_no" class="form-control" ng-model="routing_no"  type="text" placeholder= "Enter Routing Number"  ng-pattern="/[0-9]/" ng-required="file_to_upload == 'Check'">
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Account Number</label>
+		                    <div class="col-md-6">
+		                        <input  name="account_no" class="form-control" ng-model="account_no"  type="text" placeholder= "Enter Account Number"  ng-pattern="/[0-9]/" ng-required="file_to_upload == 'Check'">
+		                    </div>
+		                </div>
+						<div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Amount on check</label>
+		                    <div class="col-md-6">
+		                        <input id="bank-amount" name="bank_amount" class="form-control" ng-model="bank_amount"  type="text" placeholder= "Enter Amount Deposited"  ng-pattern="/^(\d+|\d+\.\d{1,2})$/" ng-required="file_to_upload == 'Check'">
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Date Deposited</label>
+		                    <div class="col-md-6">
+		                        <input id="date-deposit" class="form-control" pickadate ng-model="date_deposit"  type="text" placeholder="yyyy-mm-dd" min="1950-01-01" max="2099-12-31" required readonly/>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Bank Deposited</label>
+		                    <div class="col-md-6">
+		                        <input id="bank-deposit" name="bank_deposit" class="form-control" ng-model="bank_deposit"  type="text" placeholder= "Enter Bank Deposited" ng-pattern="/[a-zA-Z]/" minlength="2" required>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Upload check image</label>
+		                    <div class="col-md-6">
+		                    	<!-- <input type="file" file-model="deposit_image" ng-model="deposit_image"/> -->
+		                    	 <input type="file" name="picFile" ngf-select="" accept="*" ng-model="picFile" ng-required="file_to_upload == 'Check'"/>
+		                    </div>
+		                </div>
+
+		                <div class="form-group">
+						  <label for="fieldpass" class="col-md-3 control-label">Signature</label>
+						    <div class="col-md-6">
+						      <canvas id="myCanvasid" ng-signature-pad="signature" style="border:1px solid black;" ng-required="file_to_upload == 'Check'"></canvas>
+						         <input  class="form-control"  type="hidden" ng-model="esign"  >
+						         <button id="clear" type="button" class="btn-primary btn btn-sm" >clear</button>
+						    </div>
+						</div>
+						                          
+						<script>
+						 $(document).ready(function(){
+							 ctx = document.getElementById('myCanvasid').getContext("2d");
+							 ctx.setTransform(1, 0, 0, 1, 0, 0);
+							 ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+							 $("#clear").click(function(){
+									 ctx = document.getElementById('myCanvasid').getContext("2d");
+									 ctx.setTransform(1, 0, 0, 1, 0, 0);
+									 ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+							});
+						 });
+
+						</script>
+
+
+						<div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">I accept the terms and conditions</label>
+		                    <div class="col-md-6">
+		                    	<input type="checkbox" name="terms_cond" value="yes"  ng-model="terms_cond" ng-required="file_to_upload == 'Check'">
+		                        
+		                    </div>
+		                </div>
+
+
+
+
+
+	                	<div class="panel-footer">
+		                    <div class="row">
+		                        <div class="col-sm-6 col-sm-offset-3">
+		                            <div class="btn-toolbar">
+		                                <button type="submit" class="btn-primary btn" ng-disabled=" deposit_form.$invalid " ng-click="uploadFilgfde(picFile)">submit</button>
+		                                <!-- <button class="btn btn-primary">Reset</button> -->
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+
+                        
+                    </fieldset>
+
+
+                    <fieldset ng-show="file_to_upload == 'Deposit'">
+
+                    	<div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label"></label>
+		                    <div class="col-md-6">
+		                        Please make a deposit into a Bank of America Account:<br>
+								Name: Xonnova<br>
+								Routing: 121000358<br>
+								<b>Account: 325036816053</b><br>
+		                    </div>
+		                </div>
+
+
+		                <div class="form-group">
+	                        <label for="fieldpass" class="col-md-3 control-label">Bank Deposited</label>
+	                        <div class="col-md-6">
+	                            <select  class="form-control"  type="text" ng-model="bank_deposit" ng-required="file_to_upload == 'Deposit'">
+	                                <option value="">Select</option>
+	                                <option value="Bank of America">Bank of America</option>
+	                                <option value="Citibank">Citibank</option>
+	                                <option value="Bank of the West">Bank of the West</option>
+	                            </select>
+	                        </div>
+	                    </div>
+
+	                    <div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Transaction ID</label>
+		                    <div class="col-md-6">
+		                        <input id="transaction-id" class="form-control" ng-model="transaction_id"  type="text" placeholder= "Enter Transaction ID" minlength="2" ng-required="file_to_upload == 'Deposit'">
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Amount</label>
+		                    <div class="col-md-6">
+		                        <input id="bank-amount" name="bank_amount" class="form-control" ng-model="bank_amount"  type="text" placeholder= "Enter Amount Deposited"  ng-pattern="/^(\d+|\d+\.\d{1,2})$/" ng-required="file_to_upload == 'Deposit'">
+		                    </div>
+		                </div>
+
+
+		                <div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Date Deposited</label>
+		                    <div class="col-md-6">
+		                        <input id="date-deposit" class="form-control" pickadate ng-model="date_deposit"  type="text" placeholder="yyyy-MM-dd" value="2016-05-01" ng-required="file_to_upload == 'Deposit'" readonly/>
+		                    </div>
+		                </div>
+
+		                <div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Upload Receipt</label>
+		                    <div class="col-md-6">
+		                    	<!-- <input type="file" file-model="deposit_image" ng-model="deposit_image"/> -->
+		                    	 <input type="file" name="picFile" ngf-select="" accept="*" ng-model="picFile" ng-required="file_to_upload == 'Deposit'"/>
+		                    </div>
+		                </div>
+
+		                <div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">I accept the terms and conditions</label>
+		                    <div class="col-md-6">
+		                    	<input type="checkbox" name="terms_cond" value="yes"  ng-model="terms_cond" ng-required="file_to_upload == 'Deposit'"/>
+		                        
+		                    </div>
+		                </div>
+
+		                <div class="panel-footer">
+		                    <div class="row">
+		                        <div class="col-sm-6 col-sm-offset-3">
+		                            <div class="btn-toolbar">
+		                                <button type="submit" class="btn-primary btn" ng-disabled=" deposit_form.$invalid " ng-click="uploadDeposit(picFile)">submit</button>
+		                                <!-- <button class="btn btn-primary">Reset</button> -->
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+                    	
+                        
+                    </fieldset>
+                	<!-- <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Package</label>
+                            <div class="col-md-6">
+                                <select name="package_id" ng-model="package_id" id="package_id" class="form-control" required>
+                                    <option value="">Select Package</option>
+                                    <option ng-repeat="ins in incriptionList" value="{{ins.package_id}}">{{ins.package_name}}</option>
+                                    <option  value="2" >Beginner  System</option>
+                                    <option  value="3" > Basic System</option>
+                                    <option  value="4" >Advanced System</option>
+                                    <option  value="5" >Total System</option>
+                                </select>
+                            </div>
+                        </div> -->
+                	
+                </form>                
+            </panel>
+        </div>
+    </div>
+</div>

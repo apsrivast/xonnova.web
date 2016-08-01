@@ -1,0 +1,184 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Upgrade</li>
+            <li class="active">User Upgrade</li>
+        </ul>
+
+        <h1>User Upgrade</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Upgrade">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+            <form class="form-horizontal row-border" enctype="multipart/form-data" name="upgradeForm" ng-repeat="user in currentUserList">
+				<div class="col-sm-12" ng-show="user.package>4"><h4>You have already Purchased Total Encryption System</h4></div>
+                <div class="col-sm-12" ng-show="user.package<5">
+					<input type="hidden" ng-model="user.user_id" name="user_id" value="{{user.user_id}}">
+					<div class="form-group">
+						<label for="fieldname" class="col-md-3 control-label">User Name</label>
+						<div class="col-md-6">
+							<input type="text" readonly class="form-control" name="user_name" ng-model="user.user_name" ng-unique2="user_master.user_name" placeholder= "Enter User Name"  required />
+							<div ng-show="upgradeForm.user_name.$touched" >
+								<span style="color:#B4270F" ng-show="upgradeForm.user_name.$error.unique2">This User not exist!</span> 
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="fieldname" class="col-md-3 control-label">Incription System</label>
+						<div class="col-md-6">
+							<select class="form-control" name="incriptionList" ng-model="user.incriptionList" required ng-change="onchangepackage(user.incriptionList); onchangeupgradepackage(user.package,user.incriptionList)">
+								<option value="">Select Incription System</option>
+								<option ng-repeat="ins in incriptionList" value="{{ins.package_id}}">{{ins.package_name}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group" ng-show="{{user.package == '1'}}">
+						<div class="col-md-6 col-md-offset-3" ng-repeat="discription in incriptionDiscription" style="color: red;">
+								{{discription.value}}
+						</div>
+					</div>
+
+					<div class="form-group" ng-show="{{user.package > '1'}}">
+						<div class="col-md-6 col-md-offset-3" ng-repeat="discription2 in incriptionDiscription2" style="color: red;">
+								{{discription2.value}}
+						</div>
+					</div>
+					<div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label"></label>
+                        <div class="col-md-6">
+                            If You have Voucher.? Yes/No : <input type="checkbox" name="checked" ng-model="user.checked">     
+                        </div>
+                    </div>
+					<div ng-show="user.checked">
+						<div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Voucher Code</label>
+                            <div class="col-md-6">
+                               <input type="text" name="voucher_code" ng-model="user.voucher_code" class="form-control" ng-vouchercode ng-required="user.checked"> 
+                                    <div ng-show="upgradeForm.voucher_code.$dirty">
+                                        <span style="color:#B4270F" ng-show=" upgradeForm.voucher_code.$error.vouchercode">Voucher Code not exist.</span> 
+                                    </div>
+                            </div>
+                        </div>
+					</div>
+					<div ng-hide="user.checked" >
+						<div class="form-group">
+						<div class="col-md-6 col-md-offset-3">Required Store Credit {{packageCredit - userPackageCredit}}</div>
+						</div> 
+						<div class="form-group">
+						<div class="col-md-6 col-md-offset-3">Your Store Credit {{creditTotal - dedutTotal}}</div>
+						</div>
+						<div class="form-group">
+						<div class="col-md-6 col-md-offset-3">Amount Deducted From Your Store Credit</div>
+						</div>
+						<!--<div class="form-group">
+							<label for="fieldpass" class="col-md-3 control-label">Name on Card</label>
+							<div class="col-md-6"><input id="name-on-card" class="form-control"  type="text" ng-model="user.name_on_card" placeholder= "Enter name on card" ng-required="!user.checked"></div>
+						</div>
+						<div class="form-group">
+							<label for="fieldpass" class="col-md-3 control-label">Card No.</label>
+							<div class="col-md-6"><input id="card-no" class="form-control"  type="text" ng-model="user.card_no" ng-pattern="/[0-9]/" placeholder= "Enter card no." ng-required="!user.checked"></div>
+						</div>
+						<div class="form-group">
+							<label for="fieldpass" class="col-md-3 control-label">Expiry Date</label>
+							<div class="col-md-6">
+								<select ng-model="user.expiry_month" style="padding: 5px; border-color:none;" ng-required="!user.checked">
+									<option value="">mm</option>
+									<option value="01">01</option>
+									<option value="02">02</option>
+									<option value="03">03</option>
+									<option value="04">04</option>
+									<option value="05">05</option>
+									<option value="06">06</option>
+									<option value="07">07</option>
+									<option value="08">08</option>
+									<option value="09">09</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+								
+								<select ng-model="user.expiry_year" style="padding: 5px; border-color:none;" ng-required="!user.checked">
+									<option value="">yyyy</option>
+									<option value="2015">2015</option>
+									<option value="2016">2016</option>
+									<option value="2017">2017</option>
+									<option value="2018">2018</option>
+									<option value="2019">2019</option>
+									<option value="2020">2020</option>
+									<option value="2021">2021</option>
+									<option value="2022">2022</option>
+									<option value="2023">2023</option>
+									<option value="2024">2024</option>
+									<option value="2025">2025</option>
+									<option value="2026">2026</option>
+									<option value="2027">2027</option>
+									<option value="2028">2028</option>
+									<option value="2029">2029</option>
+									<option value="2030">2030</option>
+									<option value="2031">2031</option>
+									<option value="2032">2032</option>
+									<option value="2033">2033</option>
+									<option value="2034">2034</option>
+									<option value="2035">2035</option>
+									<option value="2036">2036</option>
+									<option value="2037">2037</option>
+									<option value="2038">2038</option>
+									<option value="2039">2039</option>
+									<option value="2040">2040</option>
+									<option value="2041">2041</option>
+									<option value="2042">2042</option>
+									<option value="2043">2043</option>
+									<option value="2044">2044</option>
+									<option value="2045">2045</option>
+									<option value="2046">2046</option>
+									<option value="2047">2047</option>
+									<option value="2048">2048</option>
+									<option value="2049">2049</option>
+									<option value="2050">2050</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="fieldpass" class="col-md-3 control-label">CVV No.</label>
+							<div class="col-md-6"><input id="cvv-no" class="form-control"  type="text" ng-model="user.cvv_no" placeholder="Enter CVV No." ng-pattern="/[0-9]/" ng-required="!user.checked"></div>
+						</div>
+						<div class="form-group">
+							<label for="fieldpass" class="col-md-3 control-label">Billing ZIP</label>
+							<div class="col-md-6"><input id="billing_zip" class="form-control"  type="text"ng-model="user.billing_zip" placeholder= "Enter Billing ZIP Code" ng-pattern="/[0-9]/" minlength="2" ng-required="!user.checked"></div>
+						</div>-->
+					</div>
+					<div class="panel-footer">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+								<div class="btn-toolbar">
+									<button type="submit" class="btn-primary btn" ng-disabled=" upgradeForm.$invalid" ng-click="upgradeUser(user);">submit</button>
+									<!-- <button class="btn btn-primary">Reset</button> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+    <script type="text/javascript">
+         $(document).ready(function () {
+            var date = new Date();
+            date.setDate(date.getDate() - 1);
+
+            $("#date-picker" ).datepicker({
+              changeMonth: true,
+              changeYear: true,
+              yearRange: "1950:2050",
+            });
+          }
+
+        );
+    </script>

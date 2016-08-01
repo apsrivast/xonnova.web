@@ -1,0 +1,91 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Product Settings</li>
+            <li class="active">Add Category</li>
+        </ul>
+
+        <h1>Add Category</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Category">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="add-category-form">
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Category Name</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="category_name" ng-model="category.category_name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Category Type</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="category_type" ng-model="category.category_type" required>
+                            <option value="">Select Root-Category</option>
+                            <option value="1">Root-Category</option>
+                            <option value="2">Sub-Category</option>
+                        </select>
+                    </div>
+                </div>
+                <div ng-show="category.category_type == 2">
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Root Category</label>
+                        <div class="col-md-6">
+                            <select class="form-control" name="cat_parent_id" ng-model="category.cat_parent_id">
+                                <option value="">Select Category Type</option>
+                                <option ng-repeat="list in rootCategoryList" value="{{list.category_id}}">{{list.category_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Category Status</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="category_status" ng-model="category.category_status">
+                            <option value="">Select Category Status</option>
+                            <option value="active">Enable</option>
+                            <option value="inactive">Disable</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Description</label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" name="category_desc" ng-model="category.category_desc" /></textarea>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button type="submit" class="btn-primary btn" ng-click="addCategory(category);">submit</button>
+                                <button class="btn btn-primary">Reset</button>
+                                <a href="#/view-category" class="btn btn-primary">View Category</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+    <script type="text/javascript">
+         $(document).ready(function () {
+            var date = new Date();
+            date.setDate(date.getDate() - 1);
+
+            $("#date-picker" ).datepicker({
+              changeMonth: true,
+              changeYear: true,
+              yearRange: "1950:2050",
+            });
+          }
+
+        );
+    </script>

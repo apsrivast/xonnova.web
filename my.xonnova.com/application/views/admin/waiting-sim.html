@@ -1,0 +1,94 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+       <li class="active">Activation  Report</li>
+    </ol>
+
+    <h1>Activation  Report</h1>
+   
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" >
+                
+                <div class="row">
+                    <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+
+                     <div class="col-sm-6">
+                        <form name="searchForm"><br/>
+                            <div class="col-sm-5">
+                               <input type="text"  placeholder="From Date"  class="form-control" pickadate ng-model="dateRangeSearch.from_date" readonly/> 
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text"  placeholder="To Date"  class="form-control" pickadate ng-model="dateRangeSearch.to_date" readonly />
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn-primary btn" ng-click="update(dateRangeSearch);">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Activation ID<a ng-click="sort_by('id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                               
+                                <th>User Name<a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+								<th>Dealer Code<a ng-click="sort_by('dealer_code');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>SIM #<a ng-click="sort_by('sim');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                               <!--  <th>By Admin SIM #<a ng-click="sort_by('sim_no');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                                <th>Request Date<a ng-click="sort_by('created');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th></th>
+                               
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (List | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.id}}</td>
+                                
+                                
+                                <td align="left"><span ng-show="{{data.user_id | limitTo: 5}} == '11111'"> Store_</span>
+                                    <span ng-show="{{data.user_id }} == '0'"> Site_</span>
+                                    {{data.user_name}}</td>
+								<td align="left" style="color: red;">{{data.dealer_code}}</td>
+                                 <td align="left">{{data.sim}}</td>
+                                <!--  <td align="left">{{data.sim_no}}</td> -->
+                               
+                                <td align="left">{{data.created}}</td>
+                                <td>
+                                    <a href="#/waiting-sim-by-user/{{data.id}}"  class="btn btn-primary btn-sm">View</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Activation  found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+

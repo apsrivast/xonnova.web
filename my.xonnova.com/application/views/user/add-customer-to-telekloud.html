@@ -1,0 +1,259 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+        </ul>
+        <h1>INFO</h1>
+    </div>
+
+    <div class="container-fluid">
+         <panel panel-class="panel-midnightblue" heading="INFO">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+
+           <!--  <form class="form-horizontal row-border" name="edit_user"  ng-repeat="user in profileList" > -->
+            <form class="form-horizontal row-border" name="edit_user"  >
+                
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Company Name</label>
+                    <div class="col-sm-6">
+                        <input 
+                            type="text"
+                            placeholder="Enter Company Name (Optional)"
+                            ng-model="user.company"
+                            class="form-control"
+                            >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">First Name</label>
+                    <div class="col-sm-6">
+                        <input name="first_name"
+                            type="text"
+                            placeholder="Enter First Name"
+                            required
+                            ng-pattern="/[a-zA-Z]/" minlength="2"
+                            ng-model="user.first_name"
+                            class="form-control"
+							>
+                    </div>
+                </div>
+               
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Last Name</label>
+                    <div class="col-sm-6">
+                        <input name="last_name"
+                            type="text"
+                            placeholder="Enter Last Name"
+                            required
+                            ng-pattern="/[a-zA-Z]/" minlength="2"
+                            ng-model="user.last_name"
+                            class="form-control"
+							>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">SSN</label>
+                    <div class="col-sm-6">
+                        <input 
+                            type="text"
+                            placeholder="Enter SSN (Optional)"
+                            ng-model="user.ssn"
+                            class="form-control"
+                            >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Drivers License</label>
+                    <div class="col-sm-6">
+                        <input 
+                            type="text"
+                            placeholder="Enter Drivers License (Optional)"
+                            ng-model="user.driver_license"
+                            class="form-control"
+                            >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Address</label>
+                    <div class="col-sm-6">
+                        <input name="address"
+                            type="text"
+                            placeholder="Enter Address"
+                            required
+                            ng-model="user.address"
+                            class="form-control">
+                    </div> 
+                </div>  
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">City</label>
+                    <div class="col-sm-6">
+                        <input name="city"
+                            type="text"
+                            placeholder="Enter City"
+                            required
+                            ng-model="user.city"
+                            class="form-control">
+                    </div>
+                </div>   
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">State</label>
+                    <div class="col-sm-6">
+                        <select  class="form-control"  ng-model="user.state" required>
+                                            <option value="">Select State</option>
+                                            <option value="AL">AL - ALABAMA</option>
+                                            <option value="AK">AK - ALASKA</option>
+                                            <option value="AS">AS - AMERICAN SAMOA</option>
+                                            <option value="AZ">AZ - ARIZONA</option>
+                                            <option value="AR">AR - ARKANSAS</option>
+                                            <option value="AA">AA - Armed Forces Americas (Except Canada)</option>
+                                            <option value="AE">AE - Armed Forces Europe</option>
+                                            <option value="AP">AP - Armed Forces Pacific</option>
+                                            <option value="CA">CA - CALIFORNIA</option>
+                                            <option value="CO">CO - COLORADO</option>
+                                            <option value="CT">CT - CONNECTICUT</option>
+                                            <option value="DE">DE - DELAWARE</option>
+                                            <option value="DC">DC - DISTRICT OF COLUMBIA</option>
+                                            <option value="FM">FM - FEDERATED STATES OF MICRONESIA</option>
+                                            <option value="FL">FL - FLORIDA</option>
+                                            <option value="GA">GA - GEORGIA</option>
+                                            <option value="GU">GU - GUAM</option>
+                                            <option value="HI">HI - HAWAII</option>
+                                            <option value="ID">ID - IDAHO</option>
+                                            <option value="IL">IL - ILLINOIS</option>
+                                            <option value="IN">IN - INDIANA</option>
+                                            <option value="IA">IA - IOWA</option>
+                                            <option value="KS">KS - KANSAS</option>
+                                            <option value="KY">KY - KENTUCKY</option>
+                                            <option value="LA">LA - LOUISIANA</option>
+                                            <option value="ME">ME - MAINE</option>
+                                            <option value="MH">MH - MARSHALL ISLANDS</option>
+                                            <option value="MD">MD - MARYLAND</option>
+                                            <option value="MA">MA - MASSACHUSETTS</option>
+                                            <option value="MI">MI - MICHIGAN</option>
+                                            <option value="MN">MN - MINNESOTA</option>
+                                            <option value="MS">MS - MISSISSIPPI</option>
+                                            <option value="MO">MO - MISSOURI</option>
+                                            <option value="MT">MT - MONTANA</option>
+                                            <option value="NE">NE - NEBRASKA</option>
+                                            <option value="NV">NV - NEVADA</option>
+                                            <option value="NH">NH - NEW HAMPSHIRE</option>
+                                            <option value="NJ">NJ - NEW JERSEY</option>
+                                            <option value="NM">NM - NEW MEXICO</option>
+                                            <option value="NY">NY - NEW YORK</option>
+                                            <option value="NC">NC - NORTH CAROLINA</option>
+                                            <option value="ND">ND - NORTH DAKOTA</option>
+                                            <option value="MP">MP - NORTHERN MARIANA ISLANDS</option>
+                                            <option value="OH">OH - OHIO</option>
+                                            <option value="OK">OK - OKLAHOMA</option>
+                                            <option value="OR">OR - OREGON</option>
+                                            <option value="PW">PW - PALAU</option>
+                                            <option value="PA">PA - PENNSYLVANIA</option>
+                                            <option value="PR">PR - PUERTO RICO</option>
+                                            <option value="RI">RI - RHODE ISLAND</option>
+                                            <option value="SC">SC - SOUTH CAROLINA</option>
+                                            <option value="SD">SD - SOUTH DAKOTA</option>
+                                            <option value="TN">TN - TENNESSEE</option>
+                                            <option value="TX">TX - TEXAS</option>
+                                            <option value="UT">UT - UTAH</option>
+                                            <option value="VT">VT - VERMONT</option>
+                                            <option value="VA">VA - VIRGINIA</option>
+                                            <option value="VI">VI - VIRGIN ISLANDS</option>
+                                            <option value="WA">WA - WASHINGTON</option>
+                                            <option value="WV">WV - WEST VIRGINIA</option>
+                                            <option value="WI">WI - WISCONSIN</option>
+                                            <option value="WY">WY - WYOMING</option>
+
+                                      </select>
+                    </div>
+                </div> 
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Country</label>
+                    <div class="col-sm-6">
+                            <select class="form-control" ng-model="user.country" required>
+                                <option value="">Select Country</option>
+                                <option value="US">USA</option>
+                                <!-- <option value="MEX">Mexico</option> -->
+                            </select>
+                    </div>
+                </div> 
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">ZIP</label>
+                    <div class="col-sm-6">
+                        <input name="zip"
+                            type="text"
+                            placeholder="Enter area code"
+                            required
+                            ng-pattern="/^[0-9]{5}$/" minlength="5" maxlength="5"
+                            ng-model="user.zip"
+                            class="form-control">
+                    </div>
+                </div> 
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-6">
+                        <input name="user_email"
+                            type="email"
+                            required
+                            ng-model="user.user_email"
+                            class="form-control"
+                            >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Contact #</label>
+                    <div class="col-sm-6">
+                        <input name="text"
+                            type="text"
+                            placeholder="Enter Contact # 10 digit only"
+                            required
+                            ng-pattern="/^[0-9]{10}$/" minlength="10" maxlength="10"
+                            ng-model="user.contact_no"
+                            class="form-control">
+                    </div>
+                </div>   
+                
+                
+
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">Password (only numbers)</label>
+                    <div class="col-md-6"><input  class="form-control"  type="password" ng-model="user.user_password" placeholder= "Enter Password 8 digit only" required ng-pattern="/^[0-9]{8}$/" minlength="8" maxlength="8"></div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">Confirm Password</label>
+                    <div class="col-md-6">
+                        <input  name="cpassword" class="form-control"  type="password" ng-model="user.cpassword" ng-pattern="user.user_password" placeholder= "Enter Confirm Password" required >
+                        <div ng-show="edit_user.cpassword.$touched" >
+                            <span style="color:#B4270F" ng-show=" edit_user.cpassword.$error.pattern">Password not match.</span> 
+                        </div>
+                    
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div  id="message"></div>
+                </div>
+            
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled=" edit_user.$invalid || isdisabled " ng-click="buy(user);">Submit</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

@@ -1,0 +1,55 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Settings</li>
+        <li class="active">Upgrade Package Description</li>
+    </ol>
+    <h1>Upgrade Package Description</h1>
+   
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Upgrade Package Description">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <!-- <th>ID</th> -->
+                                <th>Package Name</th>
+                                 <th>To Package Name</th>
+                               <!--  <th>Created At</th> -->
+                            
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (htmlUpgradePackage | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                               <!--  <td align="left">{{data.package_id}}</td> -->
+                                <td>{{data.old}}</td>
+                                 <td>{{data.package_name}}</td>
+                                <!-- <td>{{data.package_created}}</td> -->
+                              
+                                <td>
+                                    <a href="#/upgrade-package-description-edit/{{data.old_package_id}}/{{data.new_package_id}}"  class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>Not  found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

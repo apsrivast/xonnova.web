@@ -1,0 +1,67 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Platforms</li>
+            <li class="active">Add Platforms</li>
+        </ul>
+
+        <h1>Add Platforms</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Add Platforms">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border"  name="add_platforms" ng-controller="addplatform">
+               
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Platforms Name</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control"  ng-model="platforms_name" ng-pattern="/[a-zA-Z]/" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Platforms Url</label>
+                    <div class="col-md-6">
+                        <input type="url" class="form-control"  name="platforms_url" ng-model="platforms_url" ng-pattern=" /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/" required/>
+                                <div ng-show="add_platforms.platforms_url.$touched" >
+                                    <span style="color:#B4270F" ng-show=" add_platforms.platforms_url.$error.pattern">not correct. (http://www.abc.com) </span> 
+                                </div>
+
+                    </div>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Platforms Image</label>
+                    <div class="col-md-6">
+                        
+                        <input type="file" ngf-select=""  ng-model="picFile" required/>
+                    </div>
+                </div>
+				
+				<div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Platforms Comment </label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" name="platforms_comment" ng-model="platforms_comment" required></textarea>
+                    </div>
+                </div>
+                
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button type="submit" class="btn-primary btn" ng-disabled="add_platforms.$invalid" ng-click="addPlatforms(picFile)">submit</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+  

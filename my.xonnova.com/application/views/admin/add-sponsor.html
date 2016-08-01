@@ -1,0 +1,58 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+           <li class="active">Add Sponsor</li>
+        </ul>
+
+        <h1>Add Sponsor</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Add Sponsor">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+           <form role="form" name="myForm"  class="form-horizontal" >
+                <div class="form-group">
+                    <div id="message"></div>
+                </div>
+               
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">Sponsor Name</label>
+                    <div class="col-md-6">
+                        <input  name="sponsor_id" class="form-control"  type="text" ng-model="user.sponsor" placeholder= "Enter Sponsor Name" required ng-unique2="user_master.user_name"/>
+                        <div ng-show="myForm.sponsor_id.$touched" >
+                            <span style="color:#B4270F" ng-show=" myForm.sponsor_id.$error.required">Sponsor required.</span> 
+                            <span style="color:#B4270F" ng-show=" myForm.sponsor_id.$error.unique2">Sponsor not exist.</span> 
+                        </div>
+                    
+                    </div>
+                </div>
+                
+               
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">User Name</label>
+                    <div class="col-md-6">
+                        
+                        <select class="form-control" name="user_id" ng-model="user.user_id" required>
+                            <option value="">Select User</option>
+                             <option ng-repeat="total in List" value="{{total.user_id}}">{{total.user_name}}</option>
+                          
+                        </select>
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <button type="submit" class="finish btn-primary btn-sm pull-right" ng-disabled=" myForm.$invalid" ng-click="update(user)">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div>

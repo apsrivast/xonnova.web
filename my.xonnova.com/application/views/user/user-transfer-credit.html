@@ -1,0 +1,55 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Transfer credit to a another user</li>
+	</ol>
+
+	<h1>Transfer credit</h1>
+	
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<form role="form" name="myForm"  class="form-horizontal">
+					
+					<h5>Please fill next info</h5>
+				
+					<div class="form-group">
+                         <label for="fieldid" class="col-md-3 control-label">User name</label>
+                         <div class="col-md-6">
+                             <input name="fieldid" ng-disabled="disab" class="form-control" ng-model="targetUser.userid"  type="text" required>
+                             <span id="helpBlock" class="help-block">Target user name to transfer credit, for example: admin3, joseperez</span>
+                         </div>
+					</div>
+                     
+                    <div class="form-group">
+                         <label for="fieldamount" class="col-md-3 control-label">Amount to transfer</label>
+                         <div class="col-md-6">
+                             <input name="fieldamount" ng-disabled="disab" class="form-control" ng-model="targetUser.amount"  type="number" required>
+                             <span id="helpBlock" class="help-block">Must be number, greather than 0</span>
+                         </div>
+					</div>
+					
+					<div class="form-group">
+						<label>&nbsp;</label>
+                         <div class="col-md-6" id="msg" style="min-height: 50px;">
+                           {{msg}}
+                         </div>
+                     </div>	
+			
+	                <div class="panel-footer">
+	                    <div class="row">
+	                        <div class="col-sm-6 col-sm-offset-3">
+	                        	<input type="hidden" id="ID" ng-model="phone.ID" />
+								<button type="submit" class="finish btn-success btn-sm pull-right" ng-disabled=" myForm.$invalid" ng-click="transferUserCredit()">Do transfer</button>
+								<br/><br/>
+	                        </div>
+	                    </div>
+	                </div>
+	                 
+				</form>						
+			</div>
+		</div>
+	</div>
+</div>			

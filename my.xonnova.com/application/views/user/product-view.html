@@ -1,0 +1,199 @@
+<style type="text/css">
+    .glyphicon { margin-right:5px; }
+    .thumbnail
+    {
+        margin-bottom: 20px;
+        padding: 0px;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+    }
+
+    .item.list-group-item
+    {
+        float: none;
+        width: 100%;
+        background-color: #fff;
+        margin-bottom: 10px;
+    }
+    .item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
+    {
+        background: #428bca;
+    }
+
+    .item.list-group-item .list-group-image
+    {
+        margin-right: 10px;
+    }
+    .item.list-group-item .thumbnail
+    {
+        margin-bottom: 0px;
+    }
+    .item.list-group-item .caption
+    {
+        padding: 9px 9px 0px 9px;
+    }
+    .item.list-group-item:nth-of-type(odd)
+    {
+        background: #eeeeee;
+    }
+
+    .item.list-group-item:before, .item.list-group-item:after
+    {
+        display: table;
+        content: " ";
+    }
+
+    .item.list-group-item img
+    {
+        float: left;
+    }
+    .item.list-group-item:after
+    {
+        clear: both;
+    }
+    .list-group-item-text
+    {
+        margin: 0 0 11px;
+    }
+</style>
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Store</li>
+        <li class="active">View Store</li>
+    </ol>
+
+    <h1>Store</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Export as <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Product List">
+                <panel-controls>
+                   <!--  <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button>  -->
+                    <div class="btn-group">
+                        <button ng-click="listView();" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+                        </span>List</button> 
+                        <button ng-click="gridView();" class="btn btn-default btn-sm"><span
+                            class="glyphicon glyphicon-th"></span>Grid</button>
+                    </div>
+                </panel-controls>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-md-3">PageSize:
+                            <select ng-model="entryLimit" class="form-control">
+                                <option selected>9</option>
+                                <option>15</option>
+                                <option>21</option>
+                                <option>50</option>
+                                <option>100</option>
+                                <option>200</option>
+                                <option>300</option>
+                                <option>400</option>
+                                <option>500</option>
+                                <option>600</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">Filter:
+                            <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                        </div>
+                    </div><br/>
+                </div>
+                <br/>
+                <!-- <div class="col-sm-12">
+                    <div class="row" ng-repeat="user in currentUserList">
+                       <a href="http://onlegacynetwork.com/user/{{user.user_name}}/?type=1" target="_blank" > <img src="assets/img/store.png"></a>
+                        <div class="row">
+                            <a href="http://onlegacynetwork.com/user/{{user.user_name}}/?type=1" target="_blank" >Click here go to store</a>
+                        </div>
+                    </div>
+                </div> -->
+                <div id="products" class="row list-group" >
+                    <div class="item  col-xs-4 col-lg-4" ng-repeat="data in filtered = (productList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                        <div class="thumbnail">
+                            <img class="group list-group-image" src="assets/uploads/{{data.product_image}}" alt="Image not found" style="max-width: 400px; width : 100%;"/>
+                            <div class="caption">
+                                <h4 class="group inner list-group-item-heading">{{data.product_name}}</h4>
+                                <p class="group inner list-group-item-text">
+                                    {{data.product_desc}}
+                                </p>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <p class="lead">
+                                            ${{data.level_price}}</p>
+                                    </div>
+                                    <!-- <div class="col-xs-12 col-md-6">
+                                        <p class="lead">
+                                            ${{data.product_price}}</p>
+                                    </div> -->
+                                    <div class="col-xs-12 col-md-6">
+                                        <!-- <button class="btn btn-primary" ng-click="buyProduct();">Buy</button> -->
+                                         <a href="#/purchase-product/{{data.p_id}}"  class="btn btn-primary pull-right">Buy</i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               <!--  <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Binary Point</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (productList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.p_id}}</td>
+                                <td><img class="img-circle" alt="Dangerfield" src="assets/uploads/{{data.product_image}}" style="height: 70px; width: 70px;"></td>
+                                <td>{{data.product_name}}</td>
+                                <td>{{data.product_price}}</td>
+                                <td>{{data.product_qty}}</td>
+                                <td>{{data.product_binary_point}}</td>
+                                <td>
+                                    <a href="#/purchase-product/{{data.p_id}}"  class="btn btn-primary btn-sm">Buy</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> -->
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Product found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

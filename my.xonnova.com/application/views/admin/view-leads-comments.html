@@ -1,0 +1,231 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Leads</li>
+	</ol>
+
+	<h1>Leads</h1>
+				
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="user in leadsData"><br/>
+					<!-- <img src="uploads/{{user.business_image}}" alt="" class="img-responsive user-avatar" height="400" width="400"> -->
+					 Electricity Bill Image:
+								<img src="assets/cashout/{{user.q_electricity_bill}}" alt="NO Image" class="img-responsive user-avatar" height="400" width="400">
+								<a href="https://my.onlegacynetwork.com/assets/cashout/{{user.q_electricity_bill}}" target="__blank" class="btn btn-pirmary">View</a> 
+					
+					<div class="user-detail">
+						<div class="table-responsive">
+							<table  class="table table-condensed m0">
+								<tbody>
+								<tr>
+										<td >Preferred Language</td>
+										<td >{{user.user_language}}</td>
+									</tr>
+									<tr>
+										<td >User Name</td>
+										<td >{{user.user_name}}</td>
+									</tr>
+									<tr>
+										<td >Industry</td>
+										<td >{{user.industry}}</td>
+									</tr>
+									<tr>
+										<td >Other Industry</td>
+										<td >{{user.other_industry}}</td>
+									</tr>
+
+									<tr>
+										<td >Business Name</td>
+										<td >{{user.business_name}}</td>
+									</tr>
+									<tr>
+										<td>Owner Name</td>
+										<td>{{user.owner_name}}</a></td>
+									</tr>
+									<tr>
+										<td>Business Type</td>
+										<td>{{user.type_business}}</td>
+									</tr>
+									<tr>
+										<td>Email</td>
+										<td>{{user.business_email}}</td>
+									</tr>
+									<tr>
+										<td>Phone number</td>
+										<td>{{user.contect_no}}</td>
+									</tr>
+									<tr>
+										<td>Day/Time To Call</td>
+										<td>{{user.day}} {{user.time}}:{{user.time_m}} {{user.zone}}</td>
+									</tr>
+									
+									<tr>
+										<td>Equipment</td>
+										<td>{{user.equipment}}</td>
+									</tr>
+									<tr>
+										<td>Type of location</td>
+										<td>{{user.type_location}}</td>
+									</tr>
+									
+									<tr>
+										<td>Type of lead</td>
+										<td>{{user.type_lead}}</td>
+									</tr>
+									<tr>
+										<td>Prospect</td>
+										<td>{{user.get_prospect}}</td>
+									</tr>
+									<!-- <tr>
+										<td>Comment</td>
+										<td>{{user.comments}}</td>
+									</tr>
+									<tr>
+										<td>Status</td>
+										<td>{{user.leads_status}}</td> 
+									</tr> -->
+
+
+										<tr>
+										<td><h1>Prequalifying Questionnaire</h1></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>REFERRING AGENT:</td>
+										<td>{{user.q_agent}}</td>
+									</tr>
+									<tr>
+										<td>INITIAL CONTACT DATE:</td>
+										<td>{{user.q_date}}</td>
+									</tr>
+									<tr>
+										<td>Do you own your home ?</td>
+										<td>{{user.q_home}}</td>
+									</tr>
+									<tr>
+										<td>Is your electricity cost and average of over $100.00?</td>
+										<td>{{user.q_electricity}}</td>
+									</tr>
+									<tr>
+										<td>Whats your average Electricity bill?</td>
+										<td>{{user.q_avg_electricity}}</td>
+									</tr>
+									<tr>
+										<td>Have you done a mortgage modification in the last two years?</td>
+										<td>{{user.q_mortgage}}</td>
+									</tr>
+									<tr>
+										<td>If yes, is it resolved?</td>
+										<td>{{user.q_mortgage_resolved}}</td>
+									</tr>
+									<tr>
+										<td>Have you file for bankruptcy in the last 7 years?</td>
+										<td>{{user.q_bankruptcy}}</td>
+									</tr>
+									<tr>
+										<td>If yes, is it resolved</td>
+										<td>{{user.q_bankruptcy_resolved}}</td>
+									</tr>
+									<tr>
+										<td>Have you made any late payments to your mortgage?</td>
+										<td>{{user.q_late_payments}}</td>
+									</tr>
+
+									<tr>
+										<td>If yes, How long ago?</td>
+										<td>{{user.q_late_payments_long}}</td>
+									</tr>
+									<tr>
+										<td>Are you up to date on your property taxes?</td>
+										<td>{{user.q_property_taxes}}</td>
+									</tr>
+									<tr>
+										<td>Have you ever fallen behind on your property taxes?</td>
+										<td>{{user.q_property_taxes_fallen}}</td>
+									</tr>
+									<tr>
+										<td>Are they included in your Mortgage payment?</td>
+										<td>{{user.q_property_taxes_mortgage}}</td>
+									</tr>
+									<tr>
+										<td>Is your credit FICO score over 650?</td>
+										<td>{{user.q_credit}}</td>
+									</tr>
+									<tr>
+										<td>What type of roof do you have?</td>
+										<td>{{user.q_roof}}</td>
+									</tr>
+									<tr>
+										<td>Name</td>
+										<td>{{user.q_name}}</td>
+									</tr>
+
+									<tr>
+										<td>Home Phone #</td>
+										<td>{{user.q_home_phone}}</td>
+									</tr>
+									<tr>
+										<td>Cell #</td>
+										<td>{{user.q_cell}}</td>
+									</tr>
+									<tr>
+										<td>Address</td>
+										<td>{{user.q_address}}</td>
+									</tr>
+									<tr>
+										<td>City</td>
+										<td>{{user.q_city}}</td>
+									</tr>
+									<tr>
+										<td>State</td>
+										<td>{{user.q_state}}</td>
+									</tr>
+									<tr>
+										<td>ZIP Code</td>
+										<td>{{user.q_zip}}</td>
+									</tr>
+
+								</tbody>
+							</table>
+							
+							<br>
+							<br>
+							
+							<div class="form-group">
+			                    <label for="fieldname" class="col-md-3 control-label"> </label>
+			                    <div class="col-md-6">
+			                    		<strong>Location</strong><p>{{user.location}}</p>
+			                    		<strong>User Comment</strong><p>{{user.comments}}</p><strong>Status</strong><p>{{user.leads_status}}</p>
+			                    </div>
+			                </div>
+						</div>
+						<form role="form" name="myForm"  class="form-horizontal" >
+							<div class="form-group">
+			                    <label for="fieldname" class="col-md-3 control-label">Status </label>
+			                    <div class="col-md-6">
+			                    	<input type="hidden" name="id" ng-model="user.user_id" value="{{user.id}}"/>
+			                        <textarea class="form-control" name="status" ng-model="user.status" required></textarea>
+			                    </div>
+			                </div>
+			                <div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-6 col-sm-offset-3">
+			                                <button type="submit" class="finish btn-success btn-sm"  ng-disabled=" myForm.$invalid" ng-click="leadsStatus(user)">Update Status</button>
+			                        </div>
+			                    </div>
+			                </div> 
+						</form>     
+					</div>
+
+							
+				</div>
+        	</div>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->

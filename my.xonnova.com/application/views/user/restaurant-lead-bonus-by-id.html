@@ -1,0 +1,142 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+        <li class="active"> LEAD</li>
+    </ol>
+    <h1> LEAD</h1>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="user in htmlRestaurantLeadsListById"><br/>
+					<!-- Menu  Image:
+					<div class="row" ng-hide="user.leadimageone == ''">
+						<div class="col-sm-9">
+								<img src="assets/cashout/{{user.leadimageone}}" alt="NO Image" class="img-responsive user-avatar" height="400" width="400">
+						</div>
+						<div class="col-sm-3">
+								<a href="https://my.onlegacynetwork.com/assets/cashout/{{user.leadimageone}}" target="__blank" class="btn btn-pirmary pull-left">View</a>
+						</div>
+					</div>
+					<div class="row" ng-hide="user.leadimagetwo == ''">
+						<div class="col-sm-9">
+								<img src="assets/cashout/{{user.leadimagetwo}}" alt="NO Image" class="img-responsive user-avatar" height="400" width="400">
+						</div>
+						<div class="col-sm-3">
+								<a href="https://my.onlegacynetwork.com/assets/cashout/{{user.leadimagetwo}}" target="__blank" class="btn btn-pirmary pull-left">View</a>
+						</div>
+					</div>
+					<div class="row" ng-hide="user.leadimagethree == ''">
+						<div class="col-sm-9">
+								<img src="assets/cashout/{{user.leadimagethree}}" alt="NO Image" class="img-responsive user-avatar" height="400" width="400">
+						</div>
+						<div class="col-sm-3">
+								<a href="https://my.onlegacynetwork.com/assets/cashout/{{user.leadimagethree}}" target="__blank" class="btn btn-pirmary pull-left">View</a>
+						</div>
+					</div>
+					<div class="row" ng-hide="user.leadimagefour == ''">
+						<div class="col-sm-9">
+								<img src="assets/cashout/{{user.leadimagefour}}" alt="NO Image" class="img-responsive user-avatar" height="400" width="400">
+						</div>
+						<div class="col-sm-3">
+								<a href="https://my.onlegacynetwork.com/assets/cashout/{{user.leadimagefour}}" target="__blank" class="btn btn-pirmary pull-left">View</a>
+						</div>
+					</div>
+					<div class="row" ng-hide="user.leadimagefive == ''">
+						<div class="col-sm-9">
+								<img src="assets/cashout/{{user.leadimagefive}}" alt="NO Image" class="img-responsive user-avatar" height="400" width="400">
+						</div>
+						<div class="col-sm-3">
+								<a href="https://my.onlegacynetwork.com/assets/cashout/{{user.leadimagefive}}" target="__blank" class="btn btn-pirmary pull-left">View</a>
+						</div>
+					</div> -->
+					<div class="user-detail">
+						<!-- <div class="table-responsive">
+							<table  class="table table-condensed m0">
+								<tbody>
+									<tr>
+										<td >User Name</td>
+										<td >{{user.username}}</td>
+									</tr>
+									<tr>
+										<td >Restaurant Name</td>
+										<td >{{user.business_name}}</td>
+									</tr>
+									<tr>
+										<td >Owner First Name</td>
+										<td >{{user.first_name}}</td>
+									</tr>
+									<tr>
+										<td >Owner Last Name</td>
+										<td >{{user.last_name}}</td>
+									</tr>
+									<tr>
+										<td>video of how the system works</td>
+										<td>{{user.system_work}}</a></td>
+									</tr>
+									<tr>
+										<td>Address</td>
+										<td>{{user.address1}} {{user.address2}}</td>
+									</tr>
+									<tr>
+										<td>City</td>
+										<td>{{user.city}}</td>
+									</tr>
+									<tr>
+										<td>State</td>
+										<td>{{user.state}}</td>
+									</tr>
+									<tr>
+										<td>Zip</td>
+										<td>{{user.zip}}</td>
+									</tr>
+									
+									<tr>
+										<td>Phone #</td>
+										<td>{{user.phone_no}}</td>
+									</tr>
+									<tr>
+										<td>Email</td>
+										<td>{{user.business_email}}</td>
+									</tr>
+									
+									<tr>
+										<td>DateTime to reach</td>
+										<td>{{user.call_time}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div> -->
+						
+							
+			            <form ng-show="user.restaurant_lead_status == 'Approved'" role="form" name="myForm"  class="form-horizontal" >
+							<div class="form-group">
+								<div id="message"></div>
+							</div>
+	                        <div class="form-group">
+	                            <label for="fieldname" class="col-md-3 control-label">Redeem option</label>
+	                            <div class="col-md-6">
+		                            <select  class="form-control" ng-model="user.redeem_option" required>
+	                                    <option value="">Select</option>
+	                                    <option value="Reward points">Reward points</option>
+	                                    <option value="Money">Money</option>
+	                                </select>
+	                            </div>
+	                        </div>
+	                        <div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-6 col-sm-offset-3">
+			                                <button type="submit" class="finish btn-primary btn-sm pull-right"  ng-click="approve(user)">Redeem</button>
+			                        </div>
+			                    </div>
+			                </div>
+
+							<br/>			                 
+						</form>  
+					</div>
+				</div>
+        	</div>
+		</div>
+	</div>
+</div> <!-- container-fluid -->

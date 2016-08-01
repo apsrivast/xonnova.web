@@ -1,0 +1,113 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Money</li>
+        <li class="active">Deposit Information</li>
+    </ol>
+
+    <h1>Deposit information</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Export as <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Deposit information">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <a class="button-icon"><i class="glyphicon glyphicon-cog"></i></a>
+                    <a class="button-icon"><i class="glyphicon glyphicon-wrench"></i></a>
+                     
+                </panel-controls>
+                  <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                     <div class="col-sm-6">
+                        <form name="searchForm"><br/>
+                            <div class="col-sm-5">
+                               <input type="text"  placeholder="From Date"  class="form-control" pickadate ng-model="dateRangeSearch.from_date" readonly/> 
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text"  placeholder="To Date"  class="form-control" pickadate ng-model="dateRangeSearch.to_date" readonly />
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn-primary btn" ng-click="update(dateRangeSearch);">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID<a ng-click="sort_by('deposit_id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+								
+                                <th>Image proof<a ng-click="sort_by('deposit_image');"><i class="glyphicon glyphicon-sort"></i></a></th>
+								<th>Amount<a ng-click="sort_by('bank_amount');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Transaction Id<a ng-click="sort_by('transaction_id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Date of deposit<a ng-click="sort_by('date_of_deposit');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Bank deposit<a ng-click="sort_by('bank_deposit');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Deposit Status<a ng-click="sort_by('deposit_status');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Cheque Status<a ng-click="sort_by('bank_cheque_status');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (List | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.deposit_id}}</td>
+								
+                                <td><img class="img-circle" alt="Dangerfield" src="uploads/{{data.deposit_image}}" style="height: 70px; width: 70px;"></td>
+                                <td>{{data.bank_amount}}</td>
+								<td>{{data.transaction_id}}</td>
+                                <td>{{data.date_of_deposit}}</td>
+                                <td>{{data.bank_deposit}}</td>
+                                <td>{{data.deposit_status}}</td>
+                                <td>{{data.bank_cheque_status}}</td>
+                                <td>
+                                    <a href="#/view-rapprove-cheque-deposit-view/{{data.deposit_id}}"  class="btn btn-success btn-sm">View</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Cheque Deposit found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

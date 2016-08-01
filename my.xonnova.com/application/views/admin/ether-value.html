@@ -1,0 +1,44 @@
+<div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Money</li>
+            <li class="active">Ether Value</li>
+        </ul>
+
+        <h1>Ether Value</h1>
+    </div>
+
+    <div class="container-fluid">
+        <form class="form-horizontal row-border" name="add_ethervalue"  >
+        <panel panel-class="panel-midnightblue" heading="Add Ether Value" ng-repeat="user in etherValueList">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Ether Value</label>
+                    <div class="col-md-6">
+                        <input name="user.e_value" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="user.e_value" 
+                        placeholder= "Enter Value" 
+                        required>
+                    </div>
+                </div>
+                
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled=" add_ethervalue.$invalid " ng-click="addEtherValue(user);">Add</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

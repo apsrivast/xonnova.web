@@ -1,0 +1,136 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Platforms</li>
+	</ol>
+
+	<h1>Platforms</h1>
+	
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12" align="center" >
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="user in depositData">
+					<div class="user-detail">
+						
+						<div class="table-responsive col-sm-8" style="float: none; margin: auto;">
+					
+							<table  class="table table-condensed m0">
+								<tbody>
+									<tr>
+										<td >ID</td>
+										<td >{{user.user_id}}</td>
+									</tr>
+									<tr>
+										<td>Platforms Name</td>
+										<td>{{user.platforms_name}}</a></td>
+									</tr>
+									<tr>
+										<td>User Name</td>
+										<td>{{user.user_name}}</a></td>
+									</tr>
+									<tr>
+										<td>First Name</td>
+										<td>{{user.first_name}}</td>
+									</tr>
+									<tr>
+										<td>Last Name</td>
+										<td>{{user.last_name}}</td>
+									</tr>
+									<tr>
+										<td>User Email</td>
+										<td>{{user.user_email}}</td>
+									</tr>
+									<tr>
+										<td>Phone</td>
+										<td>{{user.phone}}</td>
+									</tr>
+									<tr ng-show="user.platform_status == 1">
+										<td>Status</td>
+										<td><label class="default">Approved</label></td>
+									</tr>
+									<tr ng-show="user.platform_status == 2">
+										<td>Status</td>
+										<td><label class="lbl-primary">Not Approved</label></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div align="center"><a href="#/new-platforms-view"  class="btn btn-success btn-sm">Back</a></div>
+					</div>
+				</div>
+        	</div>
+		</div>
+	</div>
+</div> <!-- container-fluid -->
+<div class="container-fluid">
+	 <div class="row">
+        <div class="col-sm-12"  align="center" style="float: none; margin: auto;">
+            <panel panel-class="panel-sky" heading="Update Platform Status">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>                
+				<form  class="form-horizontal row-border" name="approvePlatform" ng-repeat="plat in depositData">
+					<input type="hidden" ng-model="plat.id" value="{{plat.id}}" />
+					<div class="form-group">
+						<div class="plat-message"></div>
+					</div>
+					<div class="form-group">
+	                    <label for="fieldname" class="col-md-3 control-label">Platforms Image</label>
+	                    <div class="col-md-6">
+	                        <select name="platform_status" class="form-control" ng-model="plat.platform_status" required>
+	                        	<option selected="selected" value="">Select Status</option>
+	                        	<option value="1">Approved</option>
+	                        	<option value="2">Not Approved</option>
+	                        </select>
+	                    </div>
+	                </div>
+	                
+	                <div class="panel-footer">
+	                    <div class="row">
+	                        <div class="col-sm-6 col-sm-offset-3">
+	                            <div class="btn-toolbar">
+	                                <button type="submit" class="btn-primary btn" ng-disabled="approvePlatform.$invalid" ng-click="update(plat)">submit</button>    
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+				</form>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+<div class="container-fluid">
+	 <div class="row">
+        <div class="col-sm-12"  align="center" style="float: none; margin: auto;">
+            <panel panel-class="panel-sky" heading="Image">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>                
+				<div  ng-repeat="user in depositData">					
+					<div class="row">
+					<div class=" col-sm-4">ID Front Image
+						<img src="uploads/{{user.platform_image}}" alt="" class="img-responsive user-avatar"/>						
+					</div>
+					<div class=" col-sm-4">ID Back Image
+						<img src="uploads/{{user.platform_image2}}" alt="" class="img-responsive user-avatar"/>						
+					</div>
+					<div class=" col-sm-4">Card Front Image
+						<img src="uploads/{{user.platform_image3}}" alt="" class="img-responsive user-avatar"/>						
+					</div>
+					</div>
+					<div class="row">
+					<div class=" col-sm-4">Card Back Image
+						<img src="uploads/{{user.platform_image4}}" alt="" class="img-responsive user-avatar" height="400" width="400">						
+					</div>
+					<div class=" col-sm-4">Address Image
+						<img src="uploads/{{user.platform_image5}}" alt="" class="img-responsive user-avatar"/>						
+					</div>
+					</div>
+				</div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+

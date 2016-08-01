@@ -1,0 +1,113 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Member managament</li>
+        <li class="active">Founders List</li>
+    </ol>
+
+    <h1>Founders List</h1>
+    
+</div>
+
+
+ <div class="container-fluid">
+        <panel panel-class="panel-midnightblue" heading="Upgrade To Founder">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+
+           <form role="form" name="myForm"  class="form-horizontal" >
+
+                 <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">User Name</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="user_name" ng-model="user.user_name" ng-unique2="user_master.user_name" placeholder= "Enter User Name"  required />
+                        <div ng-show="myForm.user_name.$touched" >
+                            <span style="color:#B4270F" ng-show="myForm.user_name.$error.unique2">This User not exist!</span> 
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <button type="submit" class="finish btn-primary btn-sm pull-right" ng-disabled=" myForm.$invalid" ng-click="add(user)">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Founders List">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                  
+                </panel-controls>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="col-md-3">PageSize:
+                            <select ng-model="entryLimit" class="form-control">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                        </div>
+                        <div class="col-md-9">Filter:
+                            <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <form name="searchForm"><br/>
+                            <div class="col-sm-5">
+                               <input type="text"  placeholder="From Date"  class="form-control" pickadate ng-model="dateRangeSearch.from_date" readonly/> 
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text"  placeholder="To Date"  class="form-control" pickadate ng-model="dateRangeSearch.to_date" readonly />
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn-primary btn" ng-click="update(dateRangeSearch);">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID<a ng-click="sort_by('user_id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>User Name<a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                              
+                                <th>Join Date<a ng-click="sort_by('f_m_date');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (List | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_id}}</td>
+                                <td>{{data.user_name}}</td>
+                                <td>{{data.f_m_date}}</td>
+                                <td>
+                                   <button type="submit" class="btn btn-danger btn-sm" ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Founders found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

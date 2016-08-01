@@ -1,0 +1,122 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>MemberManagement</li>
+            <li class="active">New Upgrade Member</li>
+        </ul>
+
+        <h1>New Upgrade Member</h1>
+    </div>
+
+    <div class="container-fluid">
+         <panel panel-class="panel-midnightblue" heading="New Upgrade Member">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+            <div class="table-responsive" align="center">
+                <table class="table"  ng-repeat="data in approveNewMemberReportList" style="width:70%">
+                    <thead>
+                        <tr>
+                            <th>Label</th>
+                            <th>Content</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+						<tr>
+                            <td><strong>First Name :</strong></td>
+                            <td>{{data.first_name}}</td>                            
+                        </tr>
+						<tr>
+                            <td><strong>Last Name :</strong></td>
+                            <td>{{data.last_name}}</td>                            
+                        </tr>
+                        <tr>
+                            <td><strong>User Name :</strong></td>
+                            <td>{{data.user_name}}</td>                            
+                        </tr>
+						<tr>
+                            <td><strong>Email ID :</strong></td>
+                            <td>{{data.user_email}}</td>                            
+                        </tr>
+                        <tr>
+                            <td><strong>Package :</strong></td>
+                            <td>{{data.package_name}}</td>                            
+                        </tr>
+                        <tr>
+                            <td><strong>Address :</strong></td>                           
+                            <td>
+                                <div class="col-sm-12">{{data.address1}}&nbsp;&nbsp;{{data.address2}}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zip Code :</strong></td>                           
+                            <td>{{data.zip}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Country :</strong></td>                           
+                            <td>{{data.country_name}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>State :</strong></td>                           
+                            <td>{{data.state}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>City :</strong></td>                           
+                            <td>{{data.city}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shipping Status :</strong></td>                           
+                            <td>{{data.shipping_status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><hr><br/>
+            <form class="form-horizontal row-border" name="new_member_info" ng-repeat="user in approveNewMemberReportList">
+                <input type="hidden" ng-model="user.user_id" value="{{user.user_id}}">
+                <input type="hidden" ng-model="user.upgrade_id" value="{{user.upgrade_id}}">
+                <input type="hidden" ng-model="user.address1" value="{{user.address1}}">
+                <input type="hidden" ng-model="user.address2" value="{{user.address2}}">
+                <input type="hidden" ng-model="user.country_name" value="{{user.country_name}}">
+                <input type="hidden" ng-model="user.state" value="{{user.state}}">
+                <input type="hidden" ng-model="user.city" value="{{user.city}}">
+                <input type="hidden" ng-model="user.zip" value="{{user.zip}}">
+                <input type="hidden" ng-model="user.contact_no" value="{{user.contact_no}}">
+                <div id="suc-message"></div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Shipping ID :</label>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Enter Shipping ID" class="form-control" name="shipping_id" ng-model="user.shipping_id" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Shipping By</label>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Enter Shipping By" class="form-control" name="shipping_by" ng-model="user.shipping_by" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Shipping Date</label>
+                    <div class="col-md-6">
+                        <input type="text"  placeholder="yyyy-mm-dd"  class="form-control" pickadate ng-model="user.shipping_date" format="yyyy-mm-dd" required/> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Comments</label>
+                    <div class="col-md-6">
+                        <textarea name="shipping_comments" class="form-control" ng-model="user.shipping_comments">Message...</textarea> 
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled="new_member_info.$invalid" ng-click="update(user);">Submit</button>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

@@ -1,0 +1,271 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<style type="text/css">
+a {
+   outline: none !important;
+}
+/*a{
+cursor: url(images/mousepointer.png), auto ;
+}*/
+.iconorder{
+	background-image: url('http://localhost/LiveOnlegacy/images/orders.svg');
+	background-repeat:no-repeat;
+	height: 13px;
+}
+.iconbusiness{
+	background-image: url('http://localhost/LiveOnlegacy/images/business.svg');
+	background-repeat:no-repeat;
+	height: 13px;
+}
+.icontool{
+	background-image: url('http://localhost/LiveOnlegacy/images/tools.svg');
+	background-repeat:no-repeat;
+	height: 13px;
+}
+.iconentreperneal{
+	background-image: url('http://localhost/LiveOnlegacy/images/entrepreneurial.svg');
+	background-repeat:no-repeat;
+	height: 13px;
+}
+.signout_green{
+	background-image: url('http://localhost/LiveOnlegacy/images/signout_green.svg');
+	background-repeat:no-repeat;
+	height: 13px;
+}
+.changehovercolor:hover{ background-color: #2D708A !important; }
+.red-tooltip + .tooltip > .tooltip-inner {background-color: #2D708A !important; max-width:none !important; white-space:nowrap !important;}
+.red-tooltip + .tooltip > .tooltip-arrow { border-bottom-color:#2D708A !important; }
+</style>
+<script type="text/javascript">
+$("[data-toggle=tooltip]").tooltip();
+</script>
+
+<div ng-controller="MainController"
+	id="headerbar"
+	ng-class="{headerbarHide: getLayoutOption('headerBarHidden'), headerbarShow: !getLayoutOption('headerBarHidden')}"
+	ng-show="!getLayoutOption('fullscreen')"
+	ng-cloak>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-6 col-sm-2">
+				<a href="#" class="shortcut-tiles tiles-brown">
+					<div class="tiles-body">
+						<div class="pull-left"><i class="glyphicon glyphicon-star"></i></div>
+					</div>
+					<div class="tiles-footer">
+						Create Post
+					</div>
+				</a>
+			</div>
+			<div class="col-xs-6 col-sm-2">
+				<a href="#" class="shortcut-tiles tiles-grape">
+					<div class="tiles-body">
+						<div class="pull-left"><i class="glyphicon glyphicon-user"></i></div>
+						<div class="pull-right"><span class="badge">2</span></div>
+					</div>
+					<div class="tiles-footer">
+						Contacts
+					</div>
+				</a>
+			</div>
+			<div class="col-xs-6 col-sm-2">
+				<a href="#" class="shortcut-tiles tiles-primary">
+					<div class="tiles-body">
+						<div class="pull-left"><i class="glyphicon glyphicon-envelope"></i></div>
+						<div class="pull-right"><span class="badge">10</span></div>
+					</div>
+					<div class="tiles-footer">
+						Messages
+					</div>
+				</a>
+			</div>
+			<div class="col-xs-6 col-sm-2">
+				<a href="#" class="shortcut-tiles tiles-inverse">
+					<div class="tiles-body">
+						<div class="pull-left"><i class="glyphicon glyphicon-camera"></i></div>
+						<div class="pull-right"><span class="badge">3</span></div>
+					</div>
+					<div class="tiles-footer">
+						Gallery
+					</div>
+				</a>
+			</div>
+
+			<div class="col-xs-6 col-sm-2">
+				<a href="#" class="shortcut-tiles tiles-midnightblue">
+					<div class="tiles-body">
+						<div class="pull-left"><i class="glyphicon glyphicon-cog"></i></div>
+					</div>
+					<div class="tiles-footer">
+						Settings
+					</div>
+				</a>
+			</div>
+			<div class="col-xs-6 col-sm-2">
+				<a href="#" class="shortcut-tiles tiles-orange">
+					<div class="tiles-body">
+						<div class="pull-left"><i class="glyphicon glyphicon-wrench"></i></div>
+					</div>
+					<div class="tiles-footer">
+						Plugins
+					</div>
+				</a>
+			</div>
+						
+		</div>
+	</div>
+</div>
+
+<header
+	id="topnav"
+	class="navbar ng-hide"
+	ng-class="{'navbar-fixed-top': getLayoutOption('fixedHeader'), 'navbar-static-top': !getLayoutOption('fixedHeader')}"
+	ng-controller="MainController"
+	role="banner"
+	ng-show="!layoutLoading" 
+	ng-cloak>
+	<a id="leftmenu-trigger" ng-click="toggleLeftBar()"></a>
+	 <div class=" navbar-unheader text-center">
+		  <!-- <img  src="images/logo_white_mobile.svg" 
+			style=" padding: 5px 50px 5px 5px; height: 50px;" > -->
+			<h1 style="color: rgb(255, 255, 255); margin: 6px;">SoftwareForMLM</h1>
+	  </div>
+	<!-- <a id="rightmenu-trigger" ng-click="toggleLeftBar()"></a> -->
+
+
+	<!-- <div class="navbar-header pull-left">
+		<a class="navbar-brand" href="#/">Onlegacy Network</a>
+	</div> -->
+	 
+
+	<ul class="nav navbar-nav pull-right toolbar">
+	  <li>
+		  <a href="signing/logout" style="padding-right: 15px;">&nbsp;&nbsp;<!-- <img  src="images/i6.jpg" > -->
+		  <!-- <img  src="images/signout_white.svg" 
+			style="border-radius: 3px; padding: 5px; height: 25px; background-color: #B9322F;" > -->
+			<i class="fa fa-power-off" style="border-radius: 3px; padding: 5px;  background-color: #B9322F;"></i>
+
+			</a>
+	  </li>
+	  <li>
+		  <a  target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/softwareformlm">&nbsp;&nbsp;
+		  	<!-- <img  src="images/facebook.svg" 
+		  	onmouseover="this.src='images/facebook_white.svg'"
+			onmouseout="this.src='images/facebook.svg'"
+			style="border-radius: 3px; padding: 5px; height: 25px; background-color: rgb(227, 228, 222);" class="changehovercolor"> -->
+			<i class="fa fa-facebook" style="border-radius: 3px; padding: 5px;  background-color: #2D708A;" ></i>
+		</a>
+	  </li>
+	  <li>
+		  <a   href="#/add-new-member">&nbsp;&nbsp;
+		  	<!-- <img  src="images/add.svg" 
+		  	onmouseover="this.src='images/add_white.svg'"
+			onmouseout="this.src='images/add.svg'"
+			style="border-radius: 3px; padding: 5px; height: 25px; background-color: rgb(227, 228, 222);" class="changehovercolor"> -->
+
+				<i class="fa fa-plus" style="border-radius: 3px; padding: 5px;  background-color: #2D708A;"></i>
+			</a>
+	  </li>
+	  <li>
+		  <a   href="#" data-toggle="modal" data-target="#link-model">&nbsp;&nbsp;
+		  	<!-- <img  src="images/attached.svg" 
+		  	onmouseover="this.src='images/attached_white.svg'"
+			onmouseout="this.src='images/attached.svg'"
+			style="border-radius: 3px; padding: 5px; height: 25px; background-color: rgb(227, 228, 222);" class="changehovercolor"> -->
+
+			<i class="fa fa-exchange" style="border-radius: 3px; padding: 5px;  background-color: #2D708A;"></i>
+		</a>
+	  </li>
+	  <li>
+		  <a   href="#/board-view">&nbsp;&nbsp;
+		  	<!-- <img  data-toggle="tooltip" data-placement="bottom" title="You are currently a founder member"  class="red-tooltip changehovercolor"  -->
+		  	<!-- <img    class=" changehovercolor"
+		  	src="images/community.svg" 
+		  	onmouseover="this.src='images/community_white.svg'"
+			onmouseout="this.src='images/community.svg'"
+			style="border-radius: 3px; padding: 5px; height: 25px; background-color: rgb(227, 228, 222);" > -->
+
+				<i class="fa fa-users" style="border-radius: 3px; padding: 5px;  background-color: #2D708A;"></i>
+			</a>
+	  </li>
+	  <li>
+		  <a   href="#/profile">&nbsp;&nbsp;
+		  	<!-- <img  data-toggle="tooltip" data-placement="bottom" title="{{user_rank_name}}"  class="red-tooltip changehovercolor" 
+		  	src="images/acount.svg" 
+		  	onmouseover="this.src='images/acount_white.svg'"
+			onmouseout="this.src='images/acount.svg'"
+			style="border-radius: 3px; padding: 5px; height: 25px; background-color: rgb(227, 228, 222);" > -->
+
+				<i class="fa fa-user red-tooltip" data-toggle="tooltip" data-placement="bottom" title="{{user_rank_name}}"   style="border-radius: 3px; padding: 5px;  background-color: #2D708A;"></i>
+			</a>
+	  </li>
+	  
+	  <!--  <li>
+		  <a href="#/profile">&nbsp;&nbsp;<!-- <strong>{{user_rank_name}} </strong>  
+		  	<img class="img-circle red-tooltip" alt="Dangerfield" src="./assets/img/rating.png" style="margin: 0px; height: 20px; width: 20px;" data-toggle="tooltip" data-placement="bottom" title="You are currently a founder member"  ></a>
+		  
+	  </li> -->
+	   <!-- <li>
+		  <a style="margin: 0px; " class="fa fa-facebook-official" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/onlegacy"></a>
+		  
+	  </li> -->
+	   
+	   <!-- <div ng-hide="user_package_name == 'Total System'" class="navbar-header pull-right" >
+	  	<img class="img-circle" alt="Dangerfield" src="./assets/img/rating2.png" style="margin: 15px; height: 30px; width: 30px;" data-toggle="tooltip" data-placement="bottom" title="You are currently not a founding member">
+	  </div> -->
+	  <!-- <li  ng-repeat="data in list">
+		  <a href="#/profile"><img class="img-circle" alt="Dangerfield" src="./uploads/{{data.image}}" style="height: 20px; width: 20px;">&nbsp;&nbsp;<strong>{{data.user_name }} </strong> </a>
+		  
+	  </li>
+
+	  <li > -->
+	  	<!-- ng-repeat="data in list" <a target="_blank" href="http://onlegacynetwork.com/user/{{data.user_name}}">
+			My replicated site link
+		</a> -->
+
+	<!-- 	<a  href="#" data-toggle="modal" data-target="#link-model">
+			My replicated site link
+		</a> -->
+		<!-- <button class="btn  " data-toggle="modal" data-target="#reject-model" >My replicated site link</button>
+	   --><!-- </li> -->
+
+	 <!--  <li class="dropdown" >
+	  	<a href class="dropdown-toggle " data-toggle="dropdown">Language</a>
+		  <ul class="dropdown-menu " style=" min-width: 90px;">
+			  <li ng-repeat="data2 in listCuntry"><a href="admin/changeLanguage/{{data2.language_code}}" class="text-center" >{{data2.language_name}}</a></li>
+		</ul>
+	  </li> -->
+	</ul>
+	<ul class="nav navbar-nav pull-left toolbar"> 
+	  <div class="navbar-header">
+		  <h4 style="margin: 15px; color: #fff;"><b>Beta  Version</b></h4>
+	  </div>
+	</ul>
+	
+</header>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="link-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-body" >
+      	<div  ng-repeat="data in list">
+	  	<h1 class=" text-center">http://onlegacynetwork.com/user/{{data.user_name}}</h1>
+	  </div>
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

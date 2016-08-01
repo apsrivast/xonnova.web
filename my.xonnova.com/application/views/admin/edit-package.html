@@ -1,0 +1,275 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Settings</li>
+            <li class="active">Edit Package</li>
+        </ul>
+
+        <h1>Pacakge Information </h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Update Package">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="EditPackageForm" novalidate  ng-repeat="pkg in packageData">
+                <input type="hidden" ng-model="pkg.package_id" value="{{pkg.package_id}}">
+                <!-- <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label"></label>
+                    <div class="col-md-6">
+                        View MEX Voucher Details : <input type="checkbox" name="checked" ng-model="user.checked">     
+                    </div>
+                </div> -->
+                <!-- <div ng-show="user.checked">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Package Name</label>
+                        <div class="col-sm-6">
+                            <input name="mex_package_name"
+                                type="text"
+                                value="{{pkg.mex_package_name}}" 
+                                
+                                placeholder="Enter Package Name"
+                                required
+                                ng-model="pkg.mex_package_name"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Mexico Package price</label>
+                        <div class="col-sm-6">
+                            <input name="mex_package_cost"
+                                type="text"
+                                value="{{pkg.mex_package_cost}}" 
+                                
+                                placeholder="Enter Discount(%)"
+                                required
+                                ng-model="pkg.mex_package_cost"
+                                class="form-control">
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Mexico Package price in USD</label>
+                        <div class="col-sm-6">
+                            <input name="mex_entry_amount"
+                                type="text"
+                                value="{{pkg.mex_entry_amount}}" 
+                                
+                                placeholder="Enter Package price"
+                                required
+                                ng-model="pkg.mex_entry_amount"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Store Credit Package price</label>
+                        <div class="col-sm-6">
+                            <input name="mex_st_package_amount"
+                                type="text"
+                                value="{{pkg.mex_st_package_amount}}" 
+                                
+                                placeholder="Enter Package price"
+                                required
+                                ng-model="pkg.mex_st_package_amount"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">QV Point</label>
+                        <div class="col-sm-6">
+                            <input name="mx_qv_point"
+                                type="text"
+                                value="{{pkg.mx_qv_point}}" 
+                                placeholder= "Enter QV Point"
+                                required
+                                ng-model="pkg.mx_qv_point"
+                                class="form-control"
+                                ng-pattern="/[0-9]/"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Referral Amount</label>
+                        <div class="col-sm-6">
+                            <input name="mex_referral_amount"
+                                type="text"
+                                value="{{pkg.mex_referral_amount}}" 
+                                
+                                placeholder="Enter Referral Amount"
+                                required
+                                ng-model="pkg.mex_referral_amount"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Binary Point</label>
+                        <div class="col-sm-6">
+                            <input name="mx_bv_point"
+                                type="text"
+                                value="{{pkg.mx_bv_point}}" 
+                                
+                                placeholder="Enter Binary point"
+                                required
+                                ng-model="pkg.mx_bv_point"
+                                class="form-control">
+                        </div>
+                    </div>                 
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <div class="btn-toolbar">
+                                    <button class="btn-primary btn" ng-click="updateMexPkg(pkg);">Update</button>
+                                    <button class="btn btn-danger" ng-click="deleteMex(pkg)">Delete <span class="glyphicon glyphicon-trash"></span></button>
+                                    <button class="btn btn-primary">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div> -->
+                <div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Package Name</label>
+                        <div class="col-sm-6">
+                            <input name="package_name"
+                                type="text"
+                                value="{{pkg.package_name}}" 
+                                
+                                placeholder="Enter Package Name"
+                                required
+                                ng-model="pkg.package_name"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Package price</label>
+                        <div class="col-sm-6">
+                            <input name="entry_ammout"
+                                type="text"
+                                value="{{pkg.entry_ammout}}" 
+                                
+                                placeholder="Enter Package price"
+                                required
+                                ng-model="pkg.entry_ammout"
+                                class="form-control">
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <label class="col-sm-3 control-label">Store Credit Package price</label>
+                        <div class="col-sm-6">
+                            <input name="st_package_amount"
+                                type="text"
+                                value="{{pkg.st_package_amount}}" 
+                                
+                                placeholder="Enter Store Credit price"
+                                required
+                                ng-model="pkg.st_package_amount"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Rule(%)</label>
+                        <div class="col-sm-6">
+                            <input name="descount_percent"
+                                type="text"
+                                value="{{pkg.descount_percent}}" 
+                                
+                                placeholder="Enter Discount(%)"
+                                required
+                                ng-model="pkg.descount_percent"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Referral Amount</label>
+                        <div class="col-sm-6">
+                            <input name="referrals_amount"
+                                type="text"
+                                value="{{pkg.referrals_amount}}" 
+                                
+                                placeholder="Enter Referral Amount"
+                                required
+                                ng-model="pkg.referrals_amount"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Matrix Bonus Amount</label>
+                        <div class="col-sm-6">
+                            <input name="matrix_bonus_amount"
+                                type="text"
+                                value="{{pkg.matrix_bonus_amount}}" 
+                                
+                                placeholder="Enter matrix bonus amount"
+                                required
+                                ng-model="pkg.matrix_bonus_amount"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Matrix Bonus Level</label>
+                        <div class="col-sm-6">
+                            <input name="matrix_bonus_level"
+                                type="text"
+                                value="{{pkg.matrix_bonus_level}}"
+                                placeholder="Enter matrix bonus level"
+                                required
+                                ng-model="pkg.matrix_bonus_level"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Leadership Bonus Amount</label>
+                        <div class="col-sm-6">
+                            <input name="leadership_amount"
+                                type="text"
+                                value="{{pkg.leadership_amount}}"
+                                placeholder="Enter leadership bonus amount"
+                                required
+                                ng-model="pkg.leadership_amount"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">QV Point</label>
+                        <div class="col-sm-6">
+                            <input name="qv"
+                                type="text"
+                                value="{{pkg.qv_point}}" 
+                                placeholder= "Enter QV Point"
+                                required
+                                ng-model="pkg.qv_point"
+                                class="form-control"
+                                ng-pattern="/[0-9]/"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Binary Point</label>
+                        <div class="col-sm-6">
+                            <input name="Binary_point"
+                                type="text"
+                                value="{{pkg.Binary_point}}" 
+                                
+                                placeholder="Enter Binary point"
+                                required
+                                ng-model="pkg.Binary_point"
+                                class="form-control">
+                        </div>
+                    </div>                 
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <div class="btn-toolbar">
+                                    <button class="btn-primary btn" ng-click="update(pkg);">Update</button>
+                                    <button class="btn btn-danger" ng-click="delete(pkg)">Delete <span class="glyphicon glyphicon-trash"></span></button>
+                                    <button class="btn btn-primary">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>  
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

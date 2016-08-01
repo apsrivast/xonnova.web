@@ -1,0 +1,87 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Settings</li>
+            <li class="active">MxTopUp  Settings</li>
+        </ul>
+
+        <h1>MxTopUp  Settings</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="MxTopUp  Settings">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="cronJobSettings" novalidate  ng-repeat="cron in cronData">
+                <div id="message"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Telcel</label>
+                    <div class="col-sm-6">
+                        <input type="text" value="{{cron.telcel}}" ng-pattern="/[0-9]/" ng-model="cron.telcel" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Movistar</label>
+                    <div class="col-sm-6">
+                        <input type="text" value="{{cron.movistar}}" ng-pattern="/[0-9]/" ng-model="cron.movistar" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Iusacell</label>
+                    <div class="col-sm-6">
+                        <input type="text" value="{{cron.iusacell}}" ng-pattern="/[0-9]/" ng-model="cron.iusacell" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Unefon</label>
+                    <div class="col-sm-6">
+                        <input type="text" value="{{cron.unefon}}" ng-pattern="/[0-9]/" ng-model="cron.unefon" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Nextel</label>
+                    <div class="col-sm-6">
+                        <input type="text" value="{{cron.nextel}}" ng-pattern="/[0-9]/" ng-model="cron.nextel" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Virgin Mobile</label>
+                    <div class="col-sm-6">
+                        <input type="text" value="{{cron.virgin}}" ng-pattern="/[0-9]/" ng-model="cron.virgin" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Cierto</label>
+                    <div class="col-sm-6">
+                        <input type="text" value="{{cron.cierto}}" ng-pattern="/[0-9]/" ng-model="cron.cierto" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Maz Tiempo</label>
+                    <div class="col-sm-6">
+                        <input type="text" value="{{cron.maztiempo}}" ng-pattern="/[0-9]/" ng-model="cron.maztiempo" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Tuenti</label>
+                    <div class="col-sm-6">
+                        <input type="text" value="{{cron.tuenti}}" ng-pattern="/[0-9]/" ng-model="cron.tuenti" class="form-control">
+                    </div>
+                </div>
+                         
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-click="update(cron);">Update</button>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

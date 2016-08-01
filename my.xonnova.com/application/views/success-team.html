@@ -1,0 +1,360 @@
+
+<style>
+    .circle { cursor: pointer;    }
+    text {  font-size: 13px; stroke-width: 1px; }
+
+    path.link { fill: none; stroke: #ccc; stroke-width: 1.5px;}
+</style>
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Team</li>
+        <li class="active">Success Team</li>
+    </ol>
+
+    <h1>Success Team</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="col-sm-6">
+            <button type="button" class="btn btn-default update-tree">Update Tree</button>
+          </div>
+          <div class="col-sm-6">
+            <form> 
+              <div class="form-group">
+                  <label for="fieldpass" class="col-md-3 control-label">User Name</label>
+                  <div class="col-md-6">
+                      <input type="text" class="form-control" placeholder="Enter User Name" name="boardlevel_user" ng-model="boardlevel.boardlevel_user">
+                  </div>
+                  <div class="col-md-3">
+                      <input type="submit" class="btn btn-primary" name="submit"  value="Search" ng-click="boardlevelSearch(boardlevel);"/>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-12"> 
+           <div class="chart">
+
+           </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+  $(document).ready(function (){
+    $('.update-tree').click(function(){
+    location.reload();
+    });
+      var max = 30, min = 10, dec = 0;
+
+    var w = $(window).width()*0.7,
+        h = $(window).height()*0.9,
+        i = 0,
+        duration = 600,
+        roo;
+
+    var tree = d3.layout.tree()
+        .size([h, w - 160]);
+
+    var diagonal = d3.svg.diagonal()
+        .projection(function(d) { return [d.y, d.x]; });
+
+    var vis = d3.select(".chart").append("svg:svg")
+        .attr("width", "100%")
+        .attr("height", $(window).height()*0.9)
+        .append("svg:g")
+        .attr("transform", "translate(40,0)");
+
+
+    root = SBtreeData;
+
+    update(root);
+
+    $(window).resize(function(){
+      $(".chart").html("");
+      //.size([ $(window).width()*0.7*0.9 , $(window).height()*0.7/2 - 160 ]);
+      tree = d3.layout.tree()
+        .size([$(window).height()*0.9, $(window).width()*0.7*0.8]);
+      vis = d3.select(".chart").append("svg:svg")
+        .attr("width",  $(window).width()*0.7)
+        .attr("height", $(window).height()*0.9)
+        .append("svg:g")
+        .attr("transform", "translate(40,0)");
+      update(root);
+    });
+
+    function update(source) {
+
+      // Compute the new tree layout.
+      var nodes = tree.nodes(root).reverse();
+      //console.log(nodes)
+      // Update the nodes…
+      var node = vis.selectAll("g.node")
+          .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+      var nodeEnter = node.enter().append("svg:g")
+          .attr("class", "node")
+          .on("mouseover", function(d) {
+            var g = d3.select(this); // The node
+            // The class is used to remove the additional text later
+            var info = g.append('text')
+
+              .attr('stroke','black')
+
+              .classed('info', true)
+              .attr('x', 15)
+              .attr('y', function(d){
+                return  ( ( max - ( d.level * dec)) > min ) ? ( max - ( d.level * dec))/2 + 10 + "px" : "-5px";
+              })
+              .text(function(d) {
+                //return d.name;
+        var userName = d.name;
+                $.ajax({
+                     type: "post",
+                     url: BASE_URL+"user/userChildBinaryDetailsSB",
+                     data: {
+                        user_name:userName,
+                     },
+                     success: function(data){
+                        $('text').html(data);
+                     }
+                });
+              });
+          })
+          .on("mouseout", function() {
+            // Remove the info text on mouse out.
+            d3.select(this).select('text.info').remove();
+          })
+          .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+        .style("opacity", 0);
+
+      // Enter any new nodes at the parent's previous position.
+      node.append("svg:image")
+          .attr("class", "circle")
+          .attr("xlink:href", function(d){
+            if(d.image == 0){
+              //return "/images/users/avatars/circle_avatar_default.png"
+              return "assets/images/UserAdd.png"
+            }else{
+              return "assets/images/users/avatars/circle_avatar_default.png"
+            }
+          })
+          .attr("preserveAspectRatio","xMidYMid slice")
+          .attr("x", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ?  "-" + ( max - ( d.level * dec))/2 + "px" : "-15px";
+          })
+          .attr("y", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ?  "-" + ( max - ( d.level * dec))/2 + "px" : "-15px";
+          })
+          .attr("width", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ? max - ( d.level * dec) + "px" : "30px";
+          })
+          .attr("height", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ? max - ( d.level * dec) + "px" : "30px";
+          })
+          .on("click", click);
+
+      /*nodeEnter.append("svg:text")
+          .attr("x", function(d) { return d._children ? -15 : -15; })
+          .attr("y", 20)
+          .text(function(d) { return d.name; });*/
+
+      // Transition nodes to their new position.
+      nodeEnter.transition()
+          .duration(duration)
+          .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+          .style("opacity", 1)
+          .select("circle")
+          .style("fill", "lightsteelblue");
+
+      node.transition()
+          .duration(duration)
+          .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+          .style("opacity", 1);
+
+
+      node.exit().transition()
+          .duration(duration)
+          .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+          .style("opacity", 0)
+          .remove();
+
+      // Update the links…
+      var link = vis.selectAll("path.link")
+          .data(tree.links(nodes), function(d) { return d.target.id; });
+
+      // Enter any new links at the parent's previous position.
+      link.enter().insert("svg:path", "g")
+          .attr("class", "link")
+          .attr("d", function(d) {
+            var o = {x: source.x0, y: source.y0};
+            return diagonal({source: o, target: o});
+          })
+          .transition()
+          .duration(duration)
+          .attr("d", diagonal);
+
+      // Transition links to their new position.
+      link.transition()
+          .duration(duration)
+          .attr("d", diagonal);
+
+      // Transition exiting nodes to the parent's new position.
+      link.exit().transition()
+          .duration(duration)
+          .attr("d", function(d) {
+            var o = {x: source.x, y: source.y};
+            return diagonal({source: o, target: o});
+          })
+          .remove();
+
+      var maxLevel = 0;
+      // Stash the old positions for transition.
+      nodes.forEach(function(d) {
+        d.x0 = d.x;
+        d.y0 = d.y;
+        maxLevel++;
+      });
+      //alert(maxLevel);
+    }
+
+    // Toggle children on click.
+    function click(d) {
+
+      // Contrae
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+        // n.parent(d);
+      } //Expande
+      else {
+            if(d.image == 0){
+              $('#myModal1 .parent-id').val(d.parent_id);
+              $('#myModal1 .user-name').val(d.parent.name);
+              $('#myModal1 .user-child').val(d.position_tree);
+              $('#myModal1').modal();    
+              $('#holding-Tank-div #holding-parent-id').val(d.parent_id); 
+              $('#holding-Tank-div #holding-user-name').val(d.parent.name);
+              $('#holding-Tank-div #holding-user-child').val(d.position_tree);  
+              $('#holding-Tank-div #holding-user-name-label').html(d.parent.name);
+              //$('#holding-Tank-model').modal(); */
+            }else{
+              $.ajax({
+                'async': false,
+                'global': false,
+                'url': BASE_URL + "user/myLevel/" + d.id,
+                'dataType': "json",
+                'success': function (data) {
+                  for (var i in data) {
+                    data[i].level = d.level + 1;
+                  }
+                  d._children = data;
+                  d.children = d._children;
+                  d._children = null;
+                }
+              });
+            }
+      }
+      update(d);
+    }
+
+    d3.select(self.frameElement).style("height", "2000px");
+
+    //Collapse All nodes
+    function toggleAll(d) {
+      if (d.children) {
+        d.children.forEach(toggleAll);
+        toggle(d);
+      }
+    }
+
+  });
+</script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+      $('#add-holding').click(function(){
+          var parentUser = $('#holding-user-name').val();
+          var parentUserId = $('#holding-parent-id').val();       
+          var userchildP=$('#holding-user-child').val();  
+          var notPositionUser = $('#not-position-user').val();           
+          $.ajax({
+             type: "post",
+             url: BASE_URL+"user/addHoldingSB",
+             dataType: "json",
+             data: {
+                parent_user_id:parentUserId,
+                user_position:parentUser,
+                child_position:userchildP,
+                user_name:notPositionUser,
+             },
+             success: function(data){ 
+              if(data.sucess != null){
+                var message = '<div class="alert alert-info fade in"><button onclick="reditect()" data-dismiss="alert" class="close" type="button">×</button><strong>'+data.sucess+'</strong></div>';
+                  $('#thankyou-message1').html(message);
+                  location.reload();
+              }else{
+                 var message = '<div class="alert alert-info fade in"><button onclick="reditect()" data-dismiss="alert" class="close" type="button">×</button><strong>'+data.error+'</strong></div>';
+                  $('#thankyou-message1').html(message);
+              }
+             },error: function() {
+                  alert('Error..... Page Not Found!');
+              }
+          });
+      }); 
+    });
+  </script>
+
+
+  <div class="modal fade" id="myModal1" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       
+        </div>
+        <div class="modal-body">
+          <div  class="sm-col-10 row" id="holding-Tank-div" style="margin:auto; float:none;">
+              <form name="holdingTankForm">
+                  <span id="thankyou-message1" class="col-sm-12"></span>
+                  <div class="form-group col-sm-12">
+                    <label for="fieldpass" class="col-md-3 control-label">Parent User</label>
+                    <div class="col-md-6">
+                      <input type="hidden" value="" id="holding-parent-id" class="form-control" name="parentId" required="true"/>
+                      <input type="text" class="form-control" id="holding-user-name" class="form-control" name="userName" required="true" readonly/>
+                      <input type="hidden" value="" id="holding-user-child" class="form-control" name="position" required="true"/>                       
+                    </div>                  
+                  </div>
+                  <div class="form-group col-sm-12">
+                    <label for="fieldpass" class="col-md-3 control-label">Child User</label>
+                    <div class="col-md-6">
+                      <select class="form-control" id="not-position-user" name="user_name" required>
+                            <option value="">Select user(child)</option>
+                            <option ng-repeat="userList in userList" value="{{userList.user_id}}">{{userList.user_name}}</option>
+                        </select>                      
+                    </div>                  
+                  </div>
+                  <div class="form-group col-sm-12">
+                    <div class="col-md-3" style="margin: auto; float: none;">
+                        <button type="submit" class="btn-primary btn" id="add-holding" style="width:100%;"><b>ADD</b></button>
+                    </div>                  
+                  </div>   
+              </form>            
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+     
+
+    $('#reload-current-page').click(function(){
+      location.reload();
+    });
+    });
+  </script>

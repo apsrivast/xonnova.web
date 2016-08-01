@@ -1,0 +1,535 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Money</li>
+        <li class="active">Earning Details</li>
+    </ol>
+
+    <h1>Earning Details</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Export as <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Binary Details">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div class="row" >
+                    <div  class="col-sm-8">
+                        <div  class="col-sm-12" ng-repeat="data in referralBonus">
+                            <div  class="col-sm-6"><strong>UP BV</strong></div>
+                            <div  class="col-sm-6">{{leftBinary}}</div>
+                        </div><br>
+                        <div  class="col-sm-12" ng-repeat="data in referralBonus">
+                            <div  class="col-sm-6"><strong>Down BV</strong></div>
+                            <div  class="col-sm-6">{{rightBinary}}</div>
+                        </div>
+                    </div>
+                    <div  class="col-sm-4" ng-repeat="data in referralBonus">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#BV-Details-model">View Details</button>
+                    </div>
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Referral Bonus">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                 <div class="row" >
+                    <div  class="col-sm-12">
+                            <div  class="col-sm-12" ng-repeat="data in referralBonus">
+                                <div  class="col-sm-4"><strong>Referral Bonus</strong></div>
+                                <div  class="col-sm-4">${{data.total}}</div>
+                                <div  class="col-sm-4" data-toggle="modal" data-target="#RB-Details-model"><button class="btn btn-primary">View Details</button></div>
+                            </div>
+                    </div>
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Product Sale Bonus">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div class="row" >
+                    <div  class="col-sm-12">
+                            <div  class="col-sm-12" ng-repeat="data2 in productBonus">
+                                <div  class="col-sm-4"><strong>Product Sale Bonus</strong></div>
+                                <div  class="col-sm-4">${{data2.total}}</div>
+                                <div  class="col-sm-4" data-toggle="modal" data-target="#PB-Details-model"><button class="btn btn-primary">View Details</button></div>
+                            </div>
+                    </div>
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Reward Bonus">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div class="row" >
+                    <div  class="col-sm-12">
+                            <div  class="col-sm-12">
+                                <div  class="col-sm-4"><strong>Reward Bonus</strong></div>
+                                <div  class="col-sm-4">${{rewardBonus}}</div>
+                                <div  class="col-sm-4" data-toggle="modal" data-target="#RewardB-Details-model"><button class="btn btn-primary" >View Details</button></div>
+                            </div>
+                    </div>
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Credit Bonus">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div class="row" >
+                    <div  class="col-sm-12">
+                            <div  class="col-sm-12">
+                                <div  class="col-sm-4"><strong>Credit Bonus</strong></div>
+                                <div  class="col-sm-4" ng-repeat="credit in creditBonus">${{credit.total}}</div>
+                                <div  class="col-sm-4" data-toggle="modal" data-target="#ReB-Details-model"><button class="btn btn-primary" >View Details</button></div>
+                            </div>
+                    </div>
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Deduct Bonus">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div class="row" >
+                    <div  class="col-sm-12">
+                            <div  class="col-sm-12">
+                                <div  class="col-sm-4"><strong>Deduct Bonus</strong></div>
+                                <div  class="col-sm-4">${{deductBonus}}</div>
+                                <div  class="col-sm-4" data-toggle="modal" data-target="#ReD-Details-model"><button class="btn btn-primary" >View Details</button></div>
+                            </div>
+                    </div>
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> 
+<div class="modal fade" tabindex="-1" role="dialog" id="BV-Details-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Total Binary</h4>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <span>PageSize</span> :
+                    <select ng-model="entryLimit" class="form-control">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+              
+                <div class="col-md-6">Filter:
+                    <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                </div>               
+            </div>
+            <br/>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr> 
+                            <th>ID</th> 
+                            <th>User Name</th>
+                            <th>Referral BV</th>
+                            <th>Produt Sale BV</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in filtered = (userBinaryList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                            <td align="left">{{data.user_id}}</td> 
+                            <td>{{data.user_name}}</td>
+                            <td>{{data.rbv}}</td>
+                            <td>{{data.salebv}}</td>
+                            <td>{{data.rdate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems == 0">
+                <div class="col-md-12">
+                    <h4>Not found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems > 0">    
+                <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+            </div>
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="RB-Details-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Referral Bonus</h4>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <span>PageSize</span> :
+                    <select ng-model="entryLimit1" class="form-control">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+              
+                <div class="col-md-6">Filter:
+                    <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                </div>               
+            </div>
+            <br/>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr> 
+                            <th>ID</th> 
+                            <th>User Name</th>
+                            <th>Bonus</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in filtered = (referralBonusList | filter:search | orderBy : predicate1 :reverse1) | startFrom:(currentPage1-1)*entryLimit1 | limitTo:entryLimit1">
+                            <td align="left">{{data.user_id}}</td> 
+                            <td>{{data.user_name}}</td>
+                            <td>{{data.referral_bonus}}</td>
+                            <td>{{data.created_at}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems1 == 0">
+                <div class="col-md-12">
+                    <h4>Not  found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems1 > 0">    
+                <div pagination="" page="currentPage1" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems1" items-per-page="entryLimit1" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+            </div>
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="PB-Details-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Product Sale Bonus</h4>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <span>PageSize</span> :
+                    <select ng-model="entryLimit2" class="form-control">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+              
+                <div class="col-md-6">Filter:
+                    <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                </div>               
+            </div>
+            <br/>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr> 
+                            <th>ID</th> 
+                            <th>User Name</th>
+                            <th>Bonus</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in filtered = (productSaleBonusList | filter:search | orderBy : predicate2 :reverse2) | startFrom:(currentPage2-1)*entryLimit2 | limitTo:entryLimit2">
+                            <td align="left">{{data.user_id}}</td> 
+                            <td>{{data.user_name}}</td>
+                            <td>{{data.sale_bonus}}</td>
+                            <td>{{data.created_at}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems2 == 0">
+                <div class="col-md-12">
+                    <h4>Not found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems2 > 0">    
+                <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems2" items-per-page="entryLimit2" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+            </div>
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ReB-Details-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Credit Bonus</h4>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-md-2">PageSize:
+                    <select ng-model="entryLimit3" class="form-control">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+              
+                <div class="col-md-3">Filter:
+                    <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                </div>
+               
+            </div>
+            <br/>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr> 
+                            <th>ID</th> 
+                            <th>User Name</th>
+                            <th>Credit</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in filtered = (creditBonusList | filter:search | orderBy : predicate3 :reverse3) | startFrom:(currentPage3-1)*entryLimit3 | limitTo:entryLimit3">
+                            <td align="left">{{data.user_id}}</td> 
+                            <td>{{data.user_name}}</td>
+                            <td>${{data.credit}}</td>
+                            <td>{{data.created_at}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems3 == 0">
+                <div class="col-md-12">
+                    <h4>Not found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems3 > 0">    
+                <div pagination="" page="currentPage3" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems3" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+            </div>
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="ReD-Details-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Deduct Bonus</h4>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-md-2">PageSize:
+                    <select ng-model="entryLimit4" class="form-control">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+              
+                <div class="col-md-3">Filter:
+                    <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                </div>
+               
+            </div>
+            <br/>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr> 
+                            <th>ID</th> 
+                            <th>User Name</th>
+                            <th>Deduct</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in filtered = (deductBonusList | filter:search | orderBy : predicate4 :reverse4) | startFrom:(currentPage4-1)*entryLimit4 | limitTo:entryLimit4">
+                            <td align="left">{{data.user_id}}</td> 
+                            <td>{{data.user_name}}</td>
+                            <td>${{data.credit}}</td>
+                            <td>{{data.created_at}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems4 == 0">
+                <div class="col-md-12">
+                    <h4>Not  found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems4 > 0">    
+                <div pagination="" page="currentPage4" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems4" items-per-page="entryLimit4" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+            </div>
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="RewardB-Details-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Reward Bonus</h4>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-md-2">PageSize:
+                    <select ng-model="entryLimit5" class="form-control">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+              
+                <div class="col-md-3">Filter:
+                    <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                </div>
+               
+            </div>
+            <br/>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr> 
+                            <th>ID</th> 
+                            <th>User Name</th>
+                            <th>VB Point</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in filtered = (rewardBonusList | filter:search | orderBy : predicate5 :reverse5) | startFrom:(currentPage5-1)*entryLimit5 | limitTo:entryLimit5">
+                            <td align="left">{{data.user_id}}</td> 
+                            <td>{{data.user_name}}</td>
+                            <td>{{data.binary_point}}</td>
+                            <td>${{data.ammount}}</td>
+                            <td>{{data.deducted_at}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems5 == 0">
+                <div class="col-md-12">
+                    <h4>Not  found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems5 > 0">    
+                <div pagination="" page="currentPage5" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems5" items-per-page="entryLimit5" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+            </div>
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

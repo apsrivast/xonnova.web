@@ -1,0 +1,87 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+       
+        <li class="active"> Bug</li>
+    </ol>
+
+    <h1>Bug </h1>
+  
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Bug ">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+                <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                     <div class="col-sm-6">
+                        <form name="searchForm"><br/>
+                            <div class="col-sm-5">
+                               <input type="text"  placeholder="From Date"  class="form-control" pickadate ng-model="dateRangeSearch.from_date" readonly/> 
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text"  placeholder="To Date"  class="form-control" pickadate ng-model="dateRangeSearch.to_date" readonly />
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn-primary btn" ng-click="update(dateRangeSearch);">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <!-- <th>ID <a ng-click="sort_by('id');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                                <th>User Name <a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Bug Title<a ng-click="sort_by('bug_title');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Send Date <a ng-click="sort_by('bug_time');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th></th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (rejectedBugList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                               <!--  <td align="left">{{data.id}}</td> -->
+                                <td>{{data.user_name}}</td>
+                                <td>{{data.bug_title}}</td>
+                                <td>{{data.bug_time}}</td>
+                                <!-- //<td>{{data.followup_status}}</td> -->
+                                <td>
+                                    <a href="#/bug-rejected-by-user/{{data.bug_id}}"  class="btn btn-primary btn-sm">View</a>
+                                </td>
+                               
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Bug found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

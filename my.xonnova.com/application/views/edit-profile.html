@@ -1,0 +1,242 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Profile</li>
+            <li class="active">Edit User</li>
+        </ul>
+
+        <h1>Profile</h1>
+    </div>
+
+    <div class="container-fluid">
+         <panel panel-class="panel-midnightblue" heading="Edit User">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="edit_user"  ng-repeat="user in profileList" >
+                <input type="hidden" ng-model="user.user_id" value="{{user.user_id}}">
+                
+				<div class="form-group">
+                    <label class="col-sm-3 control-label">User Name</label>
+                    <div class="col-sm-6">
+                        <input name="user_name"
+                            type="text"
+                            value="{{user.user_name}}" 
+                            ng-model="user.user_name"
+                            class="form-control"
+                            disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-6">
+                        <input name="user_email"
+                            type="text"
+                            value="{{user.user_email}}"
+                            ng-model="user.user_email"
+                            class="form-control"
+                            disabled>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">First Name</label>
+                    <div class="col-sm-6">
+                        <input name="first_name"
+                            type="text"
+                            value="{{user.first_name}}" 
+                            placeholder="Enter First Name"
+                         
+                            ng-model="user.first_name"
+                            class="form-control"
+							disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Middle Name</label>
+                    <div class="col-sm-6">
+                        <input name="middle_name"
+                            type="text"
+                            value="{{user.middle_name}}" 
+                            placeholder="Enter middle name"
+                           
+                            ng-model="user.middle_name"
+                            class="form-control"
+							disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Last Name</label>
+                    <div class="col-sm-6">
+                        <input name="last_name"
+                            type="text"
+                            value="{{user.last_name}}" 
+                            placeholder="Enter Last Name"
+                            
+                         
+                            ng-model="user.last_name"
+                            class="form-control"
+							disabled>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Birth Date</label>
+                    <div class="col-sm-6">
+                        <input name="dob"
+                            type="text"
+                            value="{{user.dob}}" 
+                            placeholder="Enter DOB"
+                            required
+                            ng-model="user.dob"
+                            class="form-control">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Contact No.</label>
+                    <div class="col-sm-6">
+                        <input name="text"
+                            type="text"
+                            value="{{user.contact_no}}"
+                            placeholder="Enter Contact no"
+                            required
+                            
+                            ng-model="user.contact_no"
+                            class="form-control">
+                    </div>
+                </div> 
+                <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Phone Carrier </label>
+                            <div class="col-md-6">
+                                <select ng-model="user.phone_carrier" class="form-control" required>
+                                    <option value="ATT">AT&T</option>
+                                    <option value="AmazonWireless">AmazonWireless</option>
+                                    <option value="Boost Mobile">Boost Mobile</option>
+                                    <option value="Cricket">Cricket</option>
+                                    <option value="CREDO Mobile">CREDO Mobile</option>
+                                    <option value="Freedom Pop">Freedom Pop</option>
+                                    <option value="GIVmobile">GIVmobile</option>
+                                    <option value="GreatCall">GreatCall</option>
+                                    <option value="H2O Wireless">H2O Wireless</option>
+                                    <option value="MetroPCS">MetroPCS</option>
+                                    <option value="Net10">Net10</option>
+                                    <option value="Page Plus">Page Plus</option>
+                                    <option value="RingPlus Mobile">RingPlus Mobile</option>
+                                    <option value="Republic Wireless">Republic Wireless</option>
+                                    <option value="ROK Mobile">ROK Mobile</option>
+                                    <option value="Sprint">Sprint</option>
+                                    <option value="Simple Mobile">Simple Mobile</option>
+                                    <option value="Straight Talk">Straight Talk</option>
+                                    <option value="The People's Operator">The People's Operator</option>
+                                    <option value="T Mobile">T Mobile</option>
+                                    <option value="TextNow">TextNow</option>
+                                    <option value="Ting">Ting</option>
+                                    <option value="Total Wireless">Total Wireless</option>
+                                    <option value="TracFone">TracFone</option>
+                                    <option value="US Mobile">US Mobile</option>
+                                    <option value="U S Cellular">U S Cellular</option>
+                                    <option value="Virgin Mobile">Virgin Mobile</option>
+                                    <option value="Verizon Wireless">Verizon Wireless</option>
+                                </select>
+                            </div>
+                        </div>                 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Address</label>
+                    <div class="col-sm-6">
+                        <input name="address1"
+                            type="text"
+                            value="{{user.address1}}" 
+                            placeholder="Enter Address Line 1"
+                            required
+                            ng-model="user.address1"
+                            class="form-control">
+                    </div> 
+                </div>                
+                <div class="form-group">
+
+                    <label class="col-sm-3 control-label">Address 2</label>
+                    <div class="col-sm-6">        
+                            <input name="address2"
+                            type="text"
+                            value="{{user.address2}}" 
+                            placeholder="Enter Address Line 2"
+                            
+                            ng-model="user.address2"
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">City</label>
+                    <div class="col-sm-6">
+                        <input name="city"
+                            type="text"
+                            value="{{user.city}}"
+                            placeholder="Enter City"
+                            required
+                            ng-model="user.city"
+                            class="form-control">
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">State</label>
+                    <div class="col-sm-6">
+                        <input name="state"
+                            type="text"
+                            value="{{user.state}}"
+                            placeholder="Enter State"
+                            required
+                            ng-model="user.state"
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">ZIP</label>
+                    <div class="col-sm-6">
+                        <input name="zip"
+                            type="text"
+                            value="{{user.zip}}"
+                            placeholder="Enter area code"
+                            required
+                            ng-model="user.zip"
+                            class="form-control">
+                    </div>
+                </div>  
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Country</label>
+                    <div class="col-sm-6">
+                        <input name="country"
+                            type="text"
+                            value="{{user.country}}"
+                            placeholder="Enter Country"
+                            
+                            ng-model="user.country"
+                            class="form-control"
+                            readonly>
+							<!-- <select id="country" class="form-control" ng-model="user.country" required>
+								
+								<option value="US">USA</option>
+								<option value="MEX">Mexico</option>
+								 <option value="PRI">Puerto Rico</option>
+							</select> -->
+                    </div>
+                </div> 
+             
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled=" edit_user.$invalid " ng-click="update(user);">Save</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

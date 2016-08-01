@@ -1,0 +1,164 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li class="active">Voucher #</li>
+        </ul>
+
+        <h1>Voucher #</h1>
+    </div>
+
+    <div class="container-fluid">
+        <panel panel-class="panel-midnightblue" heading="Voucher #">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+
+           <form role="form" name="myForm"  class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">User Type</label>
+                            <div class="col-md-6">
+                                <select  class="form-control"  type="text" ng-model="user.type" >
+                                    <option value="">Select Type</option>
+                                    <option  value="BO">Onlegacy Member</option>
+                                    <option  value="RS">Store</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                 <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">User Name</label>
+                    <div class="col-md-6">
+                       <!--  <input type="text" class="form-control" name="user_name" ng-model="user.user_name" ng-unique2="user_master.user_name" placeholder= "Enter User Name"  required /> -->
+                        <input type="text" class="form-control" name="user_name" ng-model="user.user_name"  placeholder= "Enter User Name"  required />
+                      <!--   <div ng-show="myForm.user_name.$touched" >
+                            <span style="color:#B4270F" ng-show="myForm.user_name.$error.unique2">This User not exist!</span> 
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Voucher #</label>
+                    <div class="col-md-6">
+                        <input 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="user.sim_no" 
+                        placeholder= "Enter Voucher #" 
+                        required>
+                    </div>
+                </div>
+
+               <!--  <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Date</label>
+                    <div class="col-md-6">
+                      
+                        
+                        <input type="text"  placeholder="yyyy-mm-dd"  class="form-control" pickadate ng-model="user.ship_date" format="yyyy-mm-dd"/>
+                    </div>
+                </div> -->
+                
+                
+                
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <button type="submit" class="finish btn-primary btn-sm pull-right" ng-disabled=" myForm.$invalid" ng-click="add(user)">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div>
+
+
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Voucher # List">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+                <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                    <div class="col-sm-6">
+                        <form name="searchForm"><br/>
+                            <div class="col-sm-5">
+                               <input type="text"  placeholder="From Date"  class="form-control" pickadate ng-model="dateRangeSearch.from_date" readonly/> 
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text"  placeholder="To Date"  class="form-control" pickadate ng-model="dateRangeSearch.to_date" readonly />
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn-primary btn" ng-click="update(dateRangeSearch);">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User Name<a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Voucher #<a ng-click="sort_by('sim_no');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                              
+                               <!--  <th>Date<a ng-click="sort_by('ship_date');"><i class="glyphicon glyphicon-sort"></th> -->
+                                <th>Created Date<a ng-click="sort_by('sim_date');"><i class="glyphicon glyphicon-sort"></th>
+                                <th>Edit </th>
+                                <th>Delete </th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (List | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left"><span ng-show="{{data.user_id | limitTo: 5}} == '11111'"> Store_</span>{{data.user_name}}</td>
+                                <td>{{data.sim_no}}</td>
+                              
+                            
+                               <!--   <td>{{data.ship_date}}</td> -->
+                                  <td>{{data.sim_date}}</td>
+
+                                  <td>
+                                    <a href="#/edit-voucher-number/{{data.sim_id}}"  class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+
+                                  
+                                <td>
+                                   
+                                    
+
+                                   <button type="submit" class="btn btn-danger btn-sm" ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></button>
+                                  
+                                </td>
+                               
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Voucher # found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

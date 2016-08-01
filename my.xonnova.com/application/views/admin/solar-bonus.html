@@ -1,0 +1,47 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li class="active">Settings</li>
+    </ol>
+
+    <h1>Solar bonus</h1>
+   
+</div>
+
+<div class="container-fluid" enctype="multipart/form-data" >
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Solar bonus">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+
+                <form name="uploadCsvForm" enctype="multipart/form-data" class="form-horizontal row-border" ng-controller="solarBonusCtr">
+                    <div id="csv-msg"></div> 
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Upload CSV : </label>
+                        <div class="col-md-6">
+                            <input type="file" ngf-select=""  ng-model="csvFile" required/>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <div class="btn-toolbar">
+                                   <button class="btn btn-primary" ng-click="csvUpload(csvFile)">upload</button> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>  
+                <div class="col-sm-12">
+                    <h3>Note: to create CSV FILE please click on below Link</h3>
+                    <div class="col-sm-12">
+                        <a class="btn" href="assets/csv/csv_solar_bonus.csv">Click here to Download/Veiw</a>
+                    </div>
+                </div>              
+            </panel>
+        </div>
+    </div>
+</div>

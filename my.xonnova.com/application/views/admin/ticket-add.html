@@ -1,0 +1,93 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li class="active"> Ticket</li>
+    </ol>
+    <h1>Ticket </h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Ticket  ">
+                <form role="form" name="myForm"  class="form-horizontal" >
+                   
+
+                        <div class="form-group" >
+                            <label for="fieldpass" class="col-md-3 control-label"> Upload  Image</label>
+                            <div class="col-md-6">
+                                <input type="file" ngf-select ng-model="bug_image_file" ngf-accept="'*'" ngf-change="uploadBug($files)" />
+                                <input  class="form-control" name="bug_image"  type="hidden" ng-model="user.bug_image"  >
+                                <!-- <span style="color:#B4270F" ng-show=" myForm.q_electricity_bill.$error.required">this field required</span>  -->
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label"> Department </label>
+                            <div class="col-md-6">
+                                <select  class="form-control"  ng-model="user.department_id" required  >
+                                    <option  value="">Select Department</option>
+                                    <option ng-repeat="total in getDepartmentList" value="{{total.department_id}}">{{total.department_name}}</option>
+                                </select>
+                               
+                            </div>
+                           
+                        </div>
+
+                        <!-- <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label"> Employee</label>
+                            <div class="col-md-6">
+                                <select  class="form-control"  ng-model="user.employee" required  >
+                                    <option  value="">Select Employee</option>
+                                    <option ng-repeat="total in getEmployeeList" value="{{total.user_id}}">{{total.user_name}}</option>
+                                </select>
+                               
+                            </div>
+                           
+                        </div> -->
+
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">User Name</label>
+                            <div class="col-md-6">
+                              
+                                <input  name="user_name" class="form-control"  type="text" ng-model="user.user_name" placeholder= "Enter User Name" required ng-unique2="user_master.user_name"/>
+                                <div ng-show="myForm.user_name.$touched" >
+                                    <span style="color:#B4270F" ng-show=" myForm.user_name.$error.unique2">User not exist.</span> 
+                                </div>
+                            
+                            </div>
+                        </div>
+                   
+                        <!-- <div class="form-group" >
+                            <label for="fieldpass" class="col-md-3 control-label">Title</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" ng-model="user.bug_title"  type="text"  required>
+                            </div>
+                        </div> -->
+ 
+						<div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Description </label>
+                            <div class="col-md-6">
+                                <textarea class="form-control"  ng-model="user.bug_text" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          
+                            <div id="message">
+                              
+                            </div>
+                        </div>
+
+                  
+                         <div class="panel-footer">
+		                    <div class="row">
+		                        <div class="col-sm-6 col-sm-offset-3">
+		                                <button type="submit" class="finish btn-success btn"  ng-disabled=" myForm.$invalid" ng-click="addTicket(user)">Submit</button>
+		                        </div>
+		                    </div>
+		                </div>              
+                    
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>

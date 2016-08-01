@@ -1,0 +1,406 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+       
+        <li class="active">Daily Report</li>
+    </ol>
+
+    <h1>Daily Report {{date}}</h1>
+    <br>
+    <button class="btn-info btn btn-sm " ng-click="exportData()">Export</button>
+  
+</div>
+<div class="container-fluid">
+    <div class="row"> 
+        <div class="col-sm-6">
+            <panel panel-class="panel-sky" heading="Product">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+                 <!-- <div class="row">
+                    <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                    
+                   
+                </div> 
+                <br/>-->
+                <div class="table-responsive">
+                    <div id="product"> 
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User Name <a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                
+                                <th>Amount <a ng-click="sort_by('subtotal');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                               <!--  <th>Date <a ng-click="sort_by('purchase_at');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                               
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (ListP | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_name}}</td>
+                              
+                                <td>{{data.subtotal}}</td>
+                               <!--  <td>{{data.purchase_at}}</td> -->
+                              
+                            
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    </div>
+                    <div ng-if="!ListP">
+                                no Product
+                            </div>
+                </div>
+              <!--   <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Product found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div> -->
+            </panel>
+        </div>
+<!--     </div>
+</div>  --><!-- container-fluid -->
+<!-- <div class="container-fluid">
+    <div class="row"> -->
+        <div class="col-sm-6">
+            <panel panel-class="panel-sky" heading="Registration">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+                <!-- <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                    
+                   
+                </div>
+                <br/> -->
+                <div class="table-responsive">
+                    <div id="registration"> 
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User Name <a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                
+                                <th>Amount <a ng-click="sort_by('entry_ammout');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <!-- <th>Date <a ng-click="sort_by('eaning_created');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                               
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (ListR | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_name}}</td>
+                              
+                                <td>{{data.entry_ammout}}</td>
+                              <!--   <td>{{data.eaning_created}}</td> -->
+                              
+                            
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                    </div>
+                    <div ng-if="!ListR">
+                                no Registration
+                        </div>
+                </div>
+                <!-- <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Registration found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div> -->
+            </panel>
+        </div>
+    <!-- </div>
+</div> --> <!-- container-fluid -->
+
+<!-- <div class="container-fluid">
+    <div class="row"> -->
+        <div class="col-sm-6">
+            <panel panel-class="panel-sky" heading="Upgrade">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+               <!--  <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                    
+                   
+                </div>
+                <br/> -->
+                <div class="table-responsive">
+                    <div id="upgrade"> 
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User Name <a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                
+                                <th>Amount <a ng-click="sort_by('amount');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                             <!--    <th>Date <a ng-click="sort_by('upgrade_at');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                               
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (ListU | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_name}}</td>
+                              
+                                <td>{{data.amount}}</td>
+                               <!--  <td>{{data.upgrade_at}}</td> -->
+                              
+                            
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    </div>
+                    <div ng-if="!ListU">
+                                no Upgrade
+                            </div>
+                </div>
+               <!--  <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Upgrade found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div> -->
+            </panel>
+        </div>
+   <!--  </div>
+</div> --> <!-- container-fluid -->
+
+<!-- <div class="container-fluid">
+    <div class="row"> -->
+        <div class="col-sm-6">
+            <panel panel-class="panel-sky" heading="FastStart">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+               <!--  <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                    
+                   
+                </div>
+                <br/> -->
+                <div class="table-responsive">
+                    <div id="faststart">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User Name <a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                
+                                <th>Amount <a ng-click="sort_by('referral_bonus');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                             <!--    <th>Date <a ng-click="sort_by('created_at');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                               
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (ListFS | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left" ng-show="data.referral_bonus > '0'">{{data.user_name}}</td>
+                              
+                                <td ng-show="data.referral_bonus > '0'">{{data.referral_bonus}}</td>
+                              <!--   <td>{{data.created_at}}</td> -->
+                              
+                            
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    </div>
+                    <div ng-if="!ListFS">
+                                no FastStart
+                            </div>
+                </div>
+              <!--   <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No FastStart found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div> -->
+            </panel>
+        </div>
+    <!-- </div>
+</div> --> <!-- container-fluid -->
+
+<!-- <div class="container-fluid">
+    <div class="row"> -->
+        <div class="col-sm-6">
+            <panel panel-class="panel-sky" heading="Binary">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+                <!-- <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                    
+                   
+                </div>
+                <br/> -->
+                <div class="table-responsive">
+                    <div id="binary">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User Name <a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                
+                                <th>Amount <a ng-click="sort_by('ammount');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                              <!--   <th>Date <a ng-click="sort_by('deducted_at');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                               
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (ListB | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left" ng-show="data.ammount > '0'">{{data.user_name}}</td>
+                              
+                                <td ng-show="data.ammount > '0'">{{data.ammount}}</td>
+                              <!--   <td>{{data.deducted_at}}</td> -->
+                              
+                            
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    </div>
+                    <div ng-if="!ListB">
+                                no Binary
+                            </div>
+                </div>
+            <!--     <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Binary found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div> -->
+            </panel>
+        </div>
+    <!-- </div>
+</div>  --><!-- container-fluid -->
+
+<!-- <div class="container-fluid">
+    <div class="row"> -->
+        <div class="col-sm-6">
+            <panel panel-class="panel-sky" heading="Entrepreneurial">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+               <!--  <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                    
+                   
+                </div>
+                <br/> -->
+                <div class="table-responsive">
+                    <div id="entrepreneurial"> 
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User Name <a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                
+                                <th>Amount <a ng-click="sort_by('module_bonus');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                             <!--    <th>Date <a ng-click="sort_by('molude_created_at');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                               
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (ListE | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_name}}</td>
+                              
+                                <td>{{data.module_bonus}}</td>
+                               <!--  <td>{{data.molude_created_at}}</td> -->
+                              
+                            
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    </div>
+                    <div ng-if="!ListE">
+                                no Entrepreneurial
+                            </div>
+                </div>
+                <!-- <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Entrepreneurial found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div> -->
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

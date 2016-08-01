@@ -1,0 +1,101 @@
+
+<div id="page-heading">
+    <ul class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Orders</li>
+        <!-- <li class="active">Orders</li> -->
+    </ul>
+    <h1>Orders</h1>
+</div>
+<div class="container-fluid">
+        <div class="row">
+        <div class="col-sm-12">
+            <tabset panel-tabs="true" panel-class="panel-sky" heading="Orders">
+                <tab>
+                    <!-- <tab-heading><i class="fa fa-desktop"></i></tab-heading> -->
+                    <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                    <div class="table-vertical">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Order ID<a ng-click="sort_by('id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                    <th>Order<a ng-click="sort_by('package_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                    <th>Shipping via<a ng-click="sort_by('shipe_via');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                    <th>Tracking ID<a ng-click="sort_by('shipping_code');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                    <th>Shipping Date<a ng-click="sort_by('updated_at');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                    <th>Status<a ng-click="sort_by('archive_member_status');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in filtered = (orderStatusList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                    <td data-title="Order ID">{{data.id}}</td>
+                                    <td data-title="Order">{{data.package_name}}</td>
+                                    <td data-title="Shipping via">{{data.shipe_via}}</td>
+                                    <td data-title="Tracking ID">{{data.shipping_code}}</td>
+                                    <td data-title="Shipping Date">{{data.updated_at}}</td>
+                                    <td data-title="Status">{{data.archive_member_status}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12" ng-show="filteredItems == 0">
+                        <div class="col-md-12">
+                            <h4>Not Found</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-12" ng-show="filteredItems > 0">    
+                        <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                    </div>
+                </tab>
+                <!-- <tab heading="Tab 2">
+                    <tab-heading><i class="fa fa-code"></i></tab-heading>
+                        <pre class="prettyprint linenums">
+                        &lt;div class=&quot;table-vertical&quot;&gt;
+                          &lt;table class=&quot;table table-striped&quot;&gt;
+                            &lt;thead&gt;
+                              &lt;tr&gt;
+                                &lt;th style=&quot;padding-right:100px&quot;&gt;Order ID&lt;/th&gt;
+                                &lt;th&gt;Order&lt;/th&gt;
+                                &lt;th&gt;Shipping via&lt;/th&gt;
+                                &lt;th&gt;Tracking ID&lt;/th&gt;
+                                &lt;th&gt;Shipping Date&lt;/th&gt;
+                              &lt;/tr&gt;
+                            &lt;/thead&gt;
+                            &lt;tbody&gt;
+                              &lt;tr&gt;
+                                &lt;td align=&quot;left&quot; data-title=&quot;Order ID&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;/td&gt;
+                                &lt;td data-title=&quot;Order&quot;&gt;&lt;/td&gt;
+                                &lt;td data-title=&quot;Shipping via&quot;&gt;&lt;/td&gt;
+                                &lt;td data-title=&quot;Tracking ID&quot;&gt;&lt;/td&gt;
+                                &lt;td data-title=&quot;Shipping Date&quot;&gt;&lt;/td&gt;
+                              &lt;/tr&gt;
+                              ....
+                            &lt;/tbody&gt;
+                          &lt;/table&gt;
+                        &lt;/div&gt;
+                        </pre>
+                </tab> -->
+            </tabset>
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->
+
+
+

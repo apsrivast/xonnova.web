@@ -1,0 +1,102 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Settings</li>
+        <li class="active">Packate Information</li>
+    </ol>
+
+    <h1>Package Details</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Export as <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Package Information">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <a class="button-icon"><i class="glyphicon glyphicon-cog"></i></a>
+                    <a class="button-icon"><i class="glyphicon glyphicon-wrench"></i></a>
+                     
+                </panel-controls>
+                <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID<a ng-click="sort_by('package_id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Package Name<a ng-click="sort_by('package_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Price<a ng-click="sort_by('entry_ammout');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Rule(%)<a ng-click="sort_by('descount_percent');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Referral Amount<a ng-click="sort_by('referrals_amount');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>BV point<a ng-click="sort_by('Binary_point');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <!-- <th>QV point</th> -->
+                                <th>QV point<a ng-click="sort_by('qv_point');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Status<a ng-click="sort_by('package_status');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Created At<a ng-click="sort_by('package_created');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (pkgList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.package_id}}</td>
+                                <td>{{data.package_name}}</td>
+                                <td>{{data.entry_ammout}}</td>
+                                <td>{{data.descount_percent}}</td>
+                                <td>{{data.referrals_amount}}</td>
+                                <td>{{data.Binary_point}}</td>
+                                <td>{{data.qv_point}}</td>
+                                <!-- <td>{{data.exit_price}}</td> -->
+                                <td>{{data.package_status}}</td>
+                                <td>{{data.package_created}}</td>
+                                <td>
+                                    <a href="#/edit-package/{{data.package_id}}"  class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No customers found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

@@ -1,0 +1,526 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">{{lng_dashboard}}</a></li>
+        <li class="active">Activate Platform</li>
+    </ol>
+    <h1>Activate Platform</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Activate Platform Form">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+
+                <form role="form" name="myForm"   class="form-horizontal" enctype="multipart/form-data"  >
+                        <fieldset  ng-repeat="data in profileList">
+                            <legend>Member</legend>
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Member ID</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" ng-model="data.user_id"  type="text" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Member Name</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control" ng-model="data.user_name"  type="text" readonly>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Member Phone</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" ng-model="data.contact_no"  type="text" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Member Email</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control" ng-model="data.user_email"  type="text" readonly>
+                                </div>
+                            </div>
+                            
+                           
+                        </fieldset>
+                        <fieldset  >
+                            <legend>Question #1</legend>
+                            
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Select your company!</label>
+                                <div class="col-md-6">
+                                    <select id="q2" class="form-control"  type="text" name="q2" ng-model="user.q2" required>
+                                         <option value="">Select</option>
+                                        <option value="1">ATT</option>
+                                        <option value="2">Simple Mobile</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div ng-show="user.q2 == '1'">
+                            <fieldset >
+                                <legend>Question #2</legend>
+                                
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">ATT Plan</label>
+                                    <div class="col-md-6">
+                                        <select id="attq3" class="form-control" name="attq3" type="text" ng-model="user.attq3" ng-required="user.q2 == '1'">
+                                            <option value="">Select</option>
+                                           <option value="100">$100 activation (subsidized plan $0/month)</option>
+                                        </select> 
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset ng-show="user.attq3 == '100'" >
+                                <legend>Question #3</legend>
+                                
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Total due today</label>
+                                    <div class="col-md-6">
+                                        $ 15.00
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">SIM # </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.attpin"  type="text" placeholder= "Enter SIM #" ng-pattern="/^[0-9]+$/" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">What area code would you like</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.area_code"  type="text" placeholder= "Enter area code .. only 3 characteres" ng-pattern="/^[a-zA-Z]+$/" minlength="3" maxlength="3" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Name on Card</label>
+                                    <div class="col-md-6"><input id="name-on-card" class="form-control"  type="text" ng-model="user.name_on_card" placeholder= "Enter name on card" ng-required="user.attq3 == '100'"></div>
+                                </div> -->
+                                 <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">{{lng_first_name}}</label>
+                                    <div class="col-md-6">
+                                        <input id="f-name" class="form-control"ng-model="user.first_name"  type="text" placeholder= "Enter First Name" ng-pattern="/^[a-zA-Z]+$/" minlength="2" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">{{lng_middle_name}}</label>
+                                    <div class="col-md-6">
+                                        <input id="m-name" class="form-control" ng-model="user.middle_name" ng-pattern="/^[a-zA-Z]+$/" minlength="1" type="text" placeholder= "Enter Middle Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">{{lng_last_name}}</label>
+                                    <div class="col-md-6">
+                                        <input id="l-name" class="form-control" ng-model="user.last_name" ng-pattern="/^[a-zA-Z]+$/" minlength="1" type="text" placeholder= "Enter Last Name" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                    </div>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">{{lng_address_1}}</label>
+                                    <div class="col-md-6"><input id="address1" class="form-control"  type="text" ng-model="user.address1" placeholder= "Enter Address" ng-required="user.attq3 == '100' && user.q2 == '1'"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">{{lng_address_2}}</label>
+                                    <div class="col-md-6"><input id="address2" class="form-control"  type="text" ng-model="user.address2" placeholder= "Enter Address" ></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">{{lng_city}}</label>
+                                    <div class="col-md-6"><input id="city" class="form-control"  type="text" ng-model="user.city" placeholder= "Enter City" ng-required="user.attq3 == '100' && user.q2 == '1'"></div>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">{{lng_state}}</label>
+                                    <div class="col-md-6"><input id="state" class="form-control"  type="text" ng-model="user.state" placeholder= "Enter State" ng-required="user.attq3 == '100' && user.q2 == '1'"></div>
+                                </div> -->
+                                 <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">{{lng_state}}</label>
+                                    <div class="col-md-6">
+                                        <select id="state" class="form-control"  type="text" ng-model="user.state" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">Select State</option>
+                                            <option value="CA">CA</option>
+                                      </select>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Country</label>
+                                    <div class="col-md-6">
+                                        USA
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">{{lng_zip}}</label>
+                                    <div class="col-md-6"><input id="zip" class="form-control"  type="text"ng-model="user.zip" placeholder= "Enter ZIP Code" minlength="2" ng-pattern="/^[0-9]+$/" ng-required="user.attq3 == '100' && user.q2 == '1'"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">{{    lng_card_no}}</label>
+                                    <div class="col-md-6"><input id="card-no" class="form-control"  type="text" ng-model="user.card_no" placeholder= "Enter card no." ng-pattern="/^[0-9]+$/" ng-required="user.attq3 == '100' && user.q2 == '1'"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">{{lng_expiry_date}}</label>
+                                    <div class="col-md-6">
+                                        <select ng-model="user.expiry_month" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">{{lng_mm}}</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                        
+                                        <select ng-model="user.expiry_year" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">{{lng_yyyy}}</option>
+                                            <option value="2015">2015</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                            <option value="2029">2029</option>
+                                            <option value="2030">2030</option>
+                                            <option value="2031">2031</option>
+                                            <option value="2032">2032</option>
+                                            <option value="2033">2033</option>
+                                            <option value="2034">2034</option>
+                                            <option value="2035">2035</option>
+                                            <option value="2036">2036</option>
+                                            <option value="2037">2037</option>
+                                            <option value="2038">2038</option>
+                                            <option value="2039">2039</option>
+                                            <option value="2040">2040</option>
+                                            <option value="2041">2041</option>
+                                            <option value="2042">2042</option>
+                                            <option value="2043">2043</option>
+                                            <option value="2044">2044</option>
+                                            <option value="2045">2045</option>
+                                            <option value="2046">2046</option>
+                                            <option value="2047">2047</option>
+                                            <option value="2048">2048</option>
+                                            <option value="2049">2049</option>
+                                            <option value="2050">2050</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">{{lng_cvv_no}}</label>
+                                    <div class="col-md-6"><input id="cvv-no" class="form-control"  type="text" ng-model="user.cvv_no" placeholder= "Enter CVV No." ng-pattern="/^[0-9]+$/" ng-required="user.attq3 == '100' && user.q2 == '1'"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldemail" class="col-md-3 control-label">{{lng_email}}</label>
+                                    <div class="col-md-6">
+                                        <input id="fieldemail" name="user_email" class="form-control" type="email"  ng-model="user.user_emailATTSim" placeholder= "Enter Email-ID" minlength="5"  ng-required="user.attq3 == '100' && user.q2 == '1'" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">{{lng_phone}}</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.attphone"  type="text" placeholder= "Enter Phone Number" ng-pattern="/^[0-9]+$/" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">{{lng_birth_date}}</label>
+                                    <div class="col-md-6" ng-controller="dateATTSimCtr">
+                                        <div class="containerATTSim" style="width: 100%; margin: 0px; padding: 0px;">
+                                           <input
+                                                id="input_01ATTSim"
+                                                class="datepickerATTSim form-control"
+                                                name="dobATTSim"
+                                                ng-model="user.dobATTSim"
+                                                type="text"
+                                                placeholder="yyyy-mm-dd"
+                                                autofocuss ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        </div>  
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>  
+                        <div ng-show="user.q2 == '2'">
+                            <fieldset >
+                                <legend>Question #2</legend>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Is this a Port?</label>
+                                    <div class="col-md-6">
+                                        <select id="q1" class="form-control"  type="text" ng-model="user.q1" ng-required="user.q2 == '2'">
+                                            <option value="">Select</option>
+                                            <option value="NO">NO</option>
+                                            <option value="YES">YES</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset ng-show="user.q1 == 'YES'" >
+                                <legend>Port-in Service</legend>
+                                
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Client Name</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.client_name"  type="text" placeholder= "Enter Client Name" ng-pattern="/^[a-zA-Z ]+$/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Current Company</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.current_company "  type="text" placeholder= "Enter Current Company" ng-pattern="/[a-zA-Z]/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">{{lng_phone}} </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.phone_number  "  type="text" placeholder= "Enter Phone Number" ng-pattern="/^[0-9]+$/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Account #</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.account  "  type="text" placeholder= "Enter Account #" ng-pattern="/^[0-9]+$/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">PIN </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.pin"  type="text" placeholder= "Enter PIN" ng-pattern="/^[0-9]+$/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Zip Code  </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.zip_code "  type="text" placeholder= "Enter Zip Code" ng-pattern="/^[0-9]+$/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                    </div>
+                                </div>
+
+                                 <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label"></label>
+                                    <div class="col-md-6">
+                                        * Note: If you input the wrong information, chances are high you will lose your number. Also you will be charged full price and when port is ready we will give you a rebate.
+                                    </div>
+                                </div>
+                                 
+                            </fieldset>
+                            <div ng-show="user.q1 == 'NO'">
+
+                                <fieldset >
+                                    <legend>Question #3</legend>
+                                    
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">Simple Mobile Plan</label>
+                                        <div class="col-md-6">
+                                            <select id="smq3" class="form-control"  type="text" ng-model="user.smq3" ng-required="user.q1 == 'NO'&& user.q2 == '2'">
+                                                <option value="">Select</option>
+                                                <option value="40">$40</option>
+                                                <option value="55">$55</option>
+                                                <option value="65">$65</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </fieldset>  
+                                <fieldset ng-show="user.smq3 != null" >
+                                    <legend>Question #4</legend>
+                                    
+                                    <div class="form-group" >
+                                        <label for="fieldpass" class="col-md-3 control-label">Total due today</label>
+                                        <div class="col-md-6">
+                                            <div ng-show="user.smq3 == '40'"> $ 10.00</div>
+                                            <div ng-show="user.smq3 == '55'"> $ 25.00</div>
+                                            <div ng-show="user.smq3 == '65'"> $ 35.00</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">SIM # </label>
+                                        <div class="col-md-6">
+                                            <input  class="form-control" ng-model="user.smpin"  type="text" placeholder= "Enter SIM #" ng-pattern="/^[0-9]+$/" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">What area code would you like</label>
+                                        <div class="col-md-6">
+                                            <input  class="form-control" ng-model="user.area_code2"  type="text" placeholder= "Enter area code .. only 3 characteres" ng-pattern="/^[a-zA-Z]+$/" minlength="3" maxlength="3" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                        </div>
+                                    </div>
+                                   <!--  <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">Name on Card</label>
+                                        <div class="col-md-6"><input id="name-on-card2" class="form-control"  type="text" ng-model="user.name_on_card2" placeholder= "Enter name on card" ng-required="user.smq3 != null"></div>
+                                    </div> -->
+                                    <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">{{lng_first_name}}</label>
+                                        <div class="col-md-6">
+                                            <input id="f-name" class="form-control"ng-model="user.first_name2"  type="text" placeholder= "Enter First Name" ng-pattern="/^[a-zA-Z]+$/" minlength="2" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">{{lng_middle_name}}</label>
+                                        <div class="col-md-6">
+                                            <input id="m-name" class="form-control" ng-model="user.middle_name2" ng-pattern="/^[a-zA-Z]+$/" minlength="1" type="text" placeholder= "Enter Middle Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">{{lng_last_name}}</label>
+                                        <div class="col-md-6">
+                                            <input id="l-name" class="form-control" ng-model="user.last_name2" ng-pattern="/^[a-zA-Z]+$/" minlength="1" type="text" placeholder= "Enter Last Name" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">{{lng_address_1}}</label>
+                                        <div class="col-md-6"><input id="address1" class="form-control"  type="text" ng-model="user.address12" placeholder= "Enter Address" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">{{lng_address_2}}</label>
+                                        <div class="col-md-6"><input id="address2" class="form-control"  type="text" ng-model="user.address22" placeholder= "Enter Address" ></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">{{lng_city}}</label>
+                                        <div class="col-md-6"><input id="city" class="form-control"  type="text" ng-model="user.city2" placeholder= "Enter City" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'"></div>
+                                    </div>
+                                  <!--   <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">{{lng_state}}</label>
+                                        <div class="col-md-6"><input id="state" class="form-control"  type="text" ng-model="user.state2" placeholder= "Enter State" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'"></div>
+                                    </div> -->
+
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">{{lng_state}}</label>
+                                        <div class="col-md-6">
+                                            <select id="state" class="form-control"  type="text" ng-model="user.state2" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                                <option value="">Select State</option>
+                                                <option value="CA">CA</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">Country</label>
+                                        <div class="col-md-6">
+                                            USA
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">{{lng_zip}}</label>
+                                        <div class="col-md-6"><input id="zip" class="form-control"  type="text"ng-model="user.zip2" placeholder= "Enter ZIP Code" minlength="2" ng-pattern="/^[0-9]+$/" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">{{    lng_card_no}}</label>
+                                        <div class="col-md-6"><input id="card-no2" class="form-control"  type="text" ng-model="user.card_no2" placeholder= "Enter card no." ng-pattern="/^[0-9]+$/" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">{{lng_expiry_date}}</label>
+                                        <div class="col-md-6">
+                                            <select ng-model="user.expiry_month2" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                                <option value="">{{lng_mm}}</option>
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                            
+                                            <select ng-model="user.expiry_year2" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                                <option value="">{{lng_yyyy}}</option>
+                                                <option value="2015">2015</option>
+                                                <option value="2016">2016</option>
+                                                <option value="2017">2017</option>
+                                                <option value="2018">2018</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2025">2025</option>
+                                                <option value="2026">2026</option>
+                                                <option value="2027">2027</option>
+                                                <option value="2028">2028</option>
+                                                <option value="2029">2029</option>
+                                                <option value="2030">2030</option>
+                                                <option value="2031">2031</option>
+                                                <option value="2032">2032</option>
+                                                <option value="2033">2033</option>
+                                                <option value="2034">2034</option>
+                                                <option value="2035">2035</option>
+                                                <option value="2036">2036</option>
+                                                <option value="2037">2037</option>
+                                                <option value="2038">2038</option>
+                                                <option value="2039">2039</option>
+                                                <option value="2040">2040</option>
+                                                <option value="2041">2041</option>
+                                                <option value="2042">2042</option>
+                                                <option value="2043">2043</option>
+                                                <option value="2044">2044</option>
+                                                <option value="2045">2045</option>
+                                                <option value="2046">2046</option>
+                                                <option value="2047">2047</option>
+                                                <option value="2048">2048</option>
+                                                <option value="2049">2049</option>
+                                                <option value="2050">2050</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">{{lng_cvv_no}}</label>
+                                        <div class="col-md-6"><input id="cvv-no2" class="form-control"  type="text" ng-model="user.cvv_no2" placeholder= "Enter CVV No." ng-pattern="/^[0-9]+$/" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'"></div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="fieldemail" class="col-md-3 control-label">{{lng_email}}</label>
+                                        <div class="col-md-6">
+                                            <input id="fieldemail" name="user_email2" class="form-control" type="email"  ng-model="user.user_emailSmSim" placeholder= "Enter Email-ID" minlength="5"  ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">{{lng_phone}}</label>
+                                        <div class="col-md-6">
+                                            <input  class="form-control" ng-model="user.smphone"  type="text" placeholder= "Enter Phone Number" ng-pattern="/^[0-9]+$/" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                        </div>
+                                    </div>
+                                      <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">{{lng_birth_date}}</label>
+                                        <div class="col-md-6" ng-controller="dateSmSimCtr">
+                                            <div class="containerSmSim" style="width: 100%; margin: 0px; padding: 0px;">
+                                               <input
+                                                    id="input_01SmSim"
+                                                    class="datepickerSmSim form-control"
+                                                    name="dobSmSim"
+                                                    ng-model="user.dobSmSim"
+                                                    type="text"
+                                                    placeholder="yyyy-mm-dd"
+                                                    autofocuss ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                   
+					<div class="panel-footer">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+									<!-- <button type="submit" class="finish btn-success btn pull-right"  ng-disabled=" myForm.$invalid" ng-click="submit(user);">Pay Now</button> -->
+                                    <input type="submit" value="submit" class="finish btn-success btn pull-right"  ng-disabled=" myForm.$invalid" ng-click="submit(user);">
+							</div>
+						</div>
+					</div>                     
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>

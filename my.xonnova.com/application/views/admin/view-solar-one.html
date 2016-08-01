@@ -1,0 +1,101 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Leads</li>
+	</ol>
+
+	<h1>Leads </h1>
+	
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="data in SolarFormListView"><br/>
+					
+				
+					<div class="user-detail">
+						
+						<div class="table-responsive">
+					
+							<table  class="table table-condensed m0">
+								<h1>Details</h1>
+								<tbody>
+									<tr>
+										<td >ID</td>
+										<td >{{data.s_f_id}}</td>
+									</tr>
+									
+									<tr>
+										<td>First Name</td>
+										<td>{{data.first_name}}</a></td>
+									</tr>
+									<tr>
+										<td>Last Name</td>
+										<td>{{data.last_name}}</a></td>
+									</tr>
+									<tr>
+										<td> Address</td>
+										<td>{{data.address1}},{{data.address2}}</td>
+									</tr>
+								
+								<tr>
+										<td>City</td>
+										<td>{{data.city}}</td>
+									</tr>
+									<tr>
+										<td>State</td>
+										<td>{{data.state}}</td>
+									</tr>
+									<tr>
+										<td>Zip</td>
+										<td>{{data.zip}}</td>
+									</tr>
+
+									<tr>
+										<td>Country</td>
+										<td>{{data.country}}</td>
+									</tr>
+									<tr>
+										<td>Phone Number</td>
+										<td>{{data.phone_no}}</td>
+									</tr>
+																		
+									<tr>
+										<td>Time</td>
+										<td>{{data.s_f_time}}</td>
+									</tr>
+																		
+									<tr>
+										<td>preferred language</td>
+										<td>{{data.prefer_lang}}</td>
+									</tr>
+
+									<tr>
+										<td>Owner house</td>
+										<td>{{data.owner_house}}</td>
+									</tr>
+
+									<tr>
+										<td>Business Email</td>
+										<td>{{data.business_email}}</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+						<div class="row" >
+							<div align="center"><a href="#/solar-view"  class="btn btn-success btn-sm">Back</a>
+							</div>
+						</div>
+						<br>
+					
+						
+					</div>
+				</div>
+        	</div>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->

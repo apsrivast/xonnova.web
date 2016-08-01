@@ -1,0 +1,82 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">{{lng_dashboard}}</a></li>
+        <li>{{lng_store}}</li>
+        <li class="active">{{lng_store_view}}</li>
+    </ol>
+
+    <h1>{{lng_store}}</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">{{lng_action}}</a></li>
+                  <li><a href="#">{{lng_another_action}}</a></li>
+                  <li><a href="#">{{lng_something_else_here}}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">{{lng_separated_link}}</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="{{lng_store}}">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div class="col-sm-12">
+                    <div class="row" ng-repeat="user in currentUserList">
+                       <a href="http://onlegacynetwork.com/user/{{user.user_name}}/?type=1" target="_blank" > <img src="assets/img/store.png"></a>
+                        <div class="row">
+                            <a href="http://onlegacynetwork.com/user/{{user.user_name}}/?type=1" target="_blank" >{{lng_click_here_go_to_store}}</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-responsive ng-hide" style="display:none;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Binary Point</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (productList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.p_id}}</td>
+                                <td><img class="img-circle" alt="Dangerfield" src="assets/uploads/{{data.product_image}}" style="height: 70px; width: 70px;"></td>
+                                <td>{{data.product_name}}</td>
+                                <td>{{data.product_price}}</td>
+                                <td>{{data.product_qty}}</td>
+                                <td>{{data.product_binary_point}}</td>
+                                <td>
+                                    <a href="#/purchase-product/{{data.p_id}}"  class="btn btn-primary btn-sm">Buy</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0" style="display:none;">
+                    <div class="col-md-12">
+                        <h4>No customers found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0" style="display:none;">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

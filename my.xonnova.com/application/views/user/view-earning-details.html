@@ -1,0 +1,157 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Money</li>
+        <li class="active">Earning Details</li>
+    </ol>
+
+    <h1>Earning Details</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Export as <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Binary Details">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div class="row" >
+                    <div  class="col-sm-12">
+                        <div  class="col-sm-12" ng-repeat="data in referralBonus">
+                            <div  class="col-sm-6"><strong>UP BV</strong></div>
+                            <div  class="col-sm-6">{{leftBinary}}</div>
+                        </div><br>
+                        <div  class="col-sm-12" ng-repeat="data in referralBonus">
+                            <div  class="col-sm-6"><strong>Down BV</strong></div>
+                            <div  class="col-sm-6">{{rightBinary}}</div>
+                        </div>
+                    </div>
+                </div>
+                        <!-- <div class="table-responsive" >
+                          
+                            <table  class="table table-condensed m0">
+                                <tbody>
+                                 
+                                    <tr>
+                                        <td>UP BV</td>
+                                        <td>{{leftBinary}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Down BV</td>
+                                        <td>{{rightBinary}}</td>
+                                    </tr>
+                                   
+                                    
+                                </tbody>
+                            </table>
+                        </div> -->
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Referral Bonus">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                 <div class="row" >
+                    <div  class="col-sm-12">
+                            <div  class="col-sm-12" ng-repeat="data in referralBonus">
+                                <div  class="col-sm-6"><strong>Referral Bonus</strong></div>
+                                <div  class="col-sm-6">${{data.total}}</div>
+                            </div>
+                    </div>
+                </div>
+                        <!-- <div class="table-responsive" >
+                          
+                            <table  class="table table-condensed m0">
+                                <tbody>
+                                    <tr ng-repeat="data in referralBonus">
+                                        <td>Referral Bonus</td>
+                                        <td>${{data.total}}</td>
+                                    </tr>
+                                   
+                                    
+                                </tbody>
+                            </table>
+                        </div> -->
+            </panel>
+        </div>
+    </div>
+</div> 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Product Sale Bonus">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div class="row" >
+                    <div  class="col-sm-12">
+                            <div  class="col-sm-12" ng-repeat="data2 in productBonus">
+                                <div  class="col-sm-6"><strong>Product Sale Bonus</strong></div>
+                                <div  class="col-sm-6">${{data2.total}}</div>
+                            </div>
+                    </div>
+                </div>
+                        <!-- <div class="table-responsive" >
+                            <table  class="table table-condensed m0">
+                                <tbody>
+                                    <tr ng-repeat="data2 in productBonus">
+                                        <td>Product Sale Bonus</td>
+                                        <td>${{data2.total}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> -->
+            </panel>
+        </div>
+    </div>
+</div> 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Reward Bonus">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div class="row" >
+                    <div  class="col-sm-12">
+                            <div  class="col-sm-12" ng-repeat="reward in rewardBonus">
+                                <div  class="col-sm-6"><strong>Reward Bonus</strong></div>
+                                <div  class="col-sm-6">${{reward.total - deductBonus}}</div>
+                            </div>
+                    </div>
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> 

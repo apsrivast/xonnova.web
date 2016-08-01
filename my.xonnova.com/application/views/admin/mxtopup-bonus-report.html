@@ -1,0 +1,151 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li class="active">MXTOPUP Bonus Report</li>
+    </ol>
+
+    <h1>MXTOPUP Bonus Report</h1>
+   
+</div>
+
+ <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="MXTOPUP Bonus (Reseller)">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+               
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="add_credit"  >
+               <div class="form-group" id="message">
+               
+               </div>
+
+               <!--  <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">User Type</label>
+                    <div class="col-md-6">
+                        <select  class="form-control"  type="text" ng-model="user.type" >
+                            <option value="">Select Type</option>
+                            <option  value="DT">Distributor</option>
+                            <option  value="RS">Reseller</option>
+                        </select>
+                    </div>
+                </div> -->
+
+
+               <div class="form-group">
+                    <label  class="col-md-3 control-label">User Name</label>
+                    <div class="col-md-6">
+                        <input name="user_name" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="user.user_name" 
+                        placeholder= "User Name" 
+                        required
+                         > 
+                         
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Amount</label>
+                    <div class="col-md-6">
+                        <input name="credit" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="user.credit" 
+                        placeholder= "Enter Credit Amount" 
+                        required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Message</label>
+                    <div class="col-md-6">
+                        <textarea name="message" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="user.message" 
+                        placeholder= "Enter Messages" 
+                        required></textarea> 
+                    </div>
+                </div>
+                
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled=" add_credit.$invalid " ng-click="creditChange(user);">Credit</button>
+                                <button class="btn-primary btn" ng-disabled=" add_credit.$invalid " ng-click="deleteEarnings(user);">Deduct</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="MXTOPUP Bonus Report">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                  
+                </panel-controls>
+                <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                               
+                                <th>Name</th>
+                              
+                                <th>Wallet Total</th>
+                               
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (walletReportList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                               <!--  <td align="left">{{data.user_id}}</td> -->
+                                <td align="left">{{data.user_name}}</td>
+                               <!--  <td align="left">{{data.user_email}}</td> -->
+                              <!--   <td>${{data.total_wallet - data.total_deduct}}</td> -->
+                                <td>{{data.total}}</td>
+                                <td>
+                                    <a href="#/mxtopup-bonus-report-by-user/{{data.user_id}}"  class="btn btn-primary btn-sm">View<!-- <i class="glyphicon glyphicon-pencil"></i> --></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>Not  found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

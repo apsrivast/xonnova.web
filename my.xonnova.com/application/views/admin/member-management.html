@@ -1,0 +1,76 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Profile</li>
+            <li class="active">Member Management</li>
+        </ul>
+
+        <h1>Profile</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Member Management">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="member_management"  >
+               <div class="form-group">
+                    <label  class="col-md-3 control-label">User Name</label>
+                    <div class="col-md-6">
+                    	<input name="user_name" 
+                    	class="form-control"  
+                    	type="text" 
+                    	ng-model="user.user_name" 
+                    	placeholder= "User Name" 
+                    	required
+                    	ng-managementpassword > 
+                            <div ng-show="member_management.user_name.$touched" >
+								<span style="color:#B4270F" ng-show=" member_management.user_name.$error.managementpassword">Username Not Exist.</span> 
+							</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">New Password</label>
+                    <div class="col-md-6">
+                    	<input name="password" 
+                    	class="form-control"  
+                    	type="password" 
+                    	ng-model="user.user_password" 
+                    	placeholder= "Enter New Password" 
+                    	required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Confirm New Password</label>
+                    <div class="col-md-6">
+						<input  name="cpassword" 
+						class="form-control"  
+						type="password" 
+						ng-model="user.cpassword" 
+						ng-pattern="user.user_password" 
+						placeholder= "Enter Confirm New Password" 
+						required >
+						<div ng-show="member_management.cpassword.$touched" >
+							<span style="color:#B4270F" ng-show=" member_management.cpassword.$error.pattern">Password not match.</span> 
+						</div>
+					
+					</div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled=" member_management.$invalid " ng-click="managementchange(user);">Update</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

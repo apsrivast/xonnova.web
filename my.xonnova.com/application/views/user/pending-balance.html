@@ -1,0 +1,55 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Money </li>
+        <li class="active">Earning Details </li>
+    </ol>
+
+    <h1>Earning Details </h1>
+   
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Earning Details  ">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                               <!--  <th>ID</th>
+                                <th>Name</th>
+                                <th>Binary Point</th> -->
+                                <th>Pending Balance</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <tr ng-repeat="data in filtered = (earningDataList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit"> -->
+                            <tr>    
+                                <!-- <td align="left">{{data.user_id}}</td>
+                                <td>{{data.user_name}}</td>
+                                <td>{{data.referral_binary_point}}</td> -->
+                                <td>${{earningReportListByUser || 0}}</td>
+                                <td>
+									<a href="#/pending-report-by-user"  class="btn btn-primary btn-sm">View</a>
+                                    <!-- <a href="#/view-earning-details/{{data.user_id}}"  class="btn btn-primary btn-sm">View</a> -->
+                                </td>
+								<!-- <td>
+									<a href="https://attapay.net/user/onlegacy/?user_id={{data.user_name}}" target="__blank" class="btn btn-primary btn-sm">REQUEST CARD</a>
+                                   
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+               
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

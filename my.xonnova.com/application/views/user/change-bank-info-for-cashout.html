@@ -1,0 +1,52 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Money</li>
+        <li class="active">Cashout Bank Information</li>
+    </ol>
+    <h1>Cashout Bank Information</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Cashout Bank Information">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                <div ng-hide="exist">
+                    <form role="form" name="myForm"   class="form-horizontal" ng-repeat="user in List">
+                        <input type="hidden" ng-model="user.user_id" value="{{user.user_id}}">
+                            <legend> Bank Information</legend>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Bank Name</label>
+                                <div class="col-md-6"><input  class="form-control"  type="text" value="{{user.bank_name}}" ng-model="user.bank_name" placeholder= "Enter Bank Name" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Bank Routing</label>
+                                <div class="col-md-6"><input  class="form-control"  type="text"  value="{{user.bank_routing}}" ng-model="user.bank_routing" placeholder= "Enter Bank Routing" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Bank Account</label>
+                                <div class="col-md-6"><input  class="form-control"  type="text" value="{{user.bank_account}}" ng-model="user.bank_account" placeholder="Enter Bank Account"  ng-pattern="/[0-9]/" required></div>
+                            </div>
+                             <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Bank Address</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control" ng-model="user.bank_address"  value="{{user.bank_address}}" minlength="2" type="text" placeholder= "Enter Bank Address" required>
+                                </div>
+                            </div>    
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                   <input type="submit" class="finish btn-success btn pull-right" value="Update" ng-disabled=" myForm.$invalid" ng-click="update(user);"/>
+                                </div>
+                            </div> 
+                    </form>
+                </div>
+                <div ng-show="exist">
+                    <h1>No Cashout Bank Info</h1>
+                </div>
+            </panel>
+        </div>
+    </div>
+</div>

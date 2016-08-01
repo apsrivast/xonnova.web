@@ -1,0 +1,143 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Tools</li>
+            <li class="active">Training Videos</li>
+        </ul>
+
+        <h1>Add Training Videos</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Add Training Videos">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+            <div>
+                If you have training videos url? : Yes/No <input type="checkbox" ng-model="checked" value="1">
+            </div>
+            <div class="form-group" id="message"></div>
+            <form class="form-horizontal row-border" ng-show="checked" enctype="multipart/form-data" name="addVideoFormUrl" ng-controller="trainingVideosCtr">
+               
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">Country</label>
+                    <div class="col-md-6">
+                        <select id="country2" class="form-control" name="country2" type="text" ng-model="url.country2" >
+                            <option value="">Select Country</option>
+                            <option ng-selected="selected" value="US">USA</option>
+                            <option value="MEX">Mexico</option>
+                        </select>
+                        <div ng-show="addVideoFormUrl.country2.$touched" >
+                            <span style="color:#B4270F" ng-show=" addVideoFormUrl.country2.$error.required">This field is required.</span> 
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Category</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="category_name2" ng-model="url.category_name2" required>
+                            <option value="">Select Category</option>
+                            <option ng-repeat="cat in vediosCategoryList" value="{{cat.v_c_id}}">{{cat.category_name}}</option>
+                        </select>
+                        <div ng-show="addVideoFormUrl.category_name2.$touched" >
+                            <span style="color:#B4270F" ng-show="addVideoFormUrl.category_name2.$error.required">this field is required.</span> 
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Description</label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" name="video_message2" ng-model="url.video_message2" /></textarea>
+                    </div>
+                </div> 
+
+              
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Video url</label>
+                    <div class="col-md-6">
+                        <input type="text" placeholder= "http://www.Enter Video Url.com"  class="form-control" ng-model="url.path2" required/>
+                        <div ng-show="addVideoFormUrl.path.$touched" >
+                            <span style="color:#B4270F" ng-show="addVideoFormUrl.path2.$error.required">this field is required.</span> 
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button type="submit" class="btn-primary btn" ng-disabled=" addVideoFormUrl.$invalid" ng-click="uploadUrl(url)">Save</button>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+           
+            <form class="form-horizontal row-border" ng-hide="checked" enctype="multipart/form-data" name="addVideoForm" ng-controller="trainingVideosCtr">
+               <!--  <div class="form-group" id="message"></div> -->
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">Country</label>
+                    <div class="col-md-6">
+                        <select id="country" class="form-control" name="country" type="text" ng-model="user.country" >
+                            <option value="">Select Country</option>
+                            <option ng-selected="selected" value="US">USA</option>
+                            <option value="MEX">Mexico</option>
+                        </select>
+                        <div ng-show="addVideoForm.country.$touched" >
+                            <span style="color:#B4270F" ng-show=" addVideoForm.country.$error.required">This field is required.</span> 
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Category</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="category_name" ng-model="user.category_name" required>
+                            <option value="">Select Category</option>
+                            <option ng-repeat="cat in vediosCategoryList" value="{{cat.v_c_id}}">{{cat.category_name}}</option>
+                        </select>
+                        <div ng-show="addVideoForm.category_name.$touched" >
+                            <span style="color:#B4270F" ng-show=" addVideoForm.category_name.$error.required">this field is required.</span> 
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Description</label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" name="video_message" ng-model="user.video_message" /></textarea>
+                    </div>
+                </div> 
+
+              
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Video</label>
+                    <div class="col-md-6">
+                     <!-- <input type="file" ngf-select="" name="picFile"  accept="*" ng-model="picFile" required/> -->
+                      <input type="text" class="form-control" name="filefield"  ng-model="user.filefield" required/>
+                     file name with extension, no space, like example.mp4 
+                    </div>
+                </div>
+
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button type="submit" class="btn-primary btn" ng-disabled=" addVideoForm.$invalid" ng-click="uploadVideofield(user)">Save</button>
+                               <!--  <button class="btn btn-primary">Reset</button>
+                                <a href="#/view-product" class="btn btn-primary">View Product</a> --> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

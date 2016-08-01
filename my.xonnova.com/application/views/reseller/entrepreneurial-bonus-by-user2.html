@@ -1,0 +1,170 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">{{lng_dashboard}}</a></li>
+        
+        <li class="active"> Entrepreneurial Bonus  Report</li>
+    </ol>
+
+    <h1>Entrepreneurial Bonus Report</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    {{lng_export_as}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">{{lng_action}}</a></li>
+                  <li><a href="#">{{lng_another_action}}</a></li>
+                  <li><a href="#">{{lng_something_else_here}}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">{{lng_separated_link}}</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Entrepreneurial Bonus Information by Card">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+				 <div class="row">
+					<div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                          
+                                <th>{{lng_user_name}}</th>
+                         
+                                <th>{{  lng_card_no}} </th>
+                                 <th>Subscription  ID</th>
+                                <th>{{lng_status}}</th>
+                            
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (memberReportList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_id}}</td>
+                            
+                                <td>{{data.user_name}}</td>
+                             
+                                <td >{{data.card_no | limitTo: -4 }}</td>
+                               
+                                <td>{{data.transaction_arb_id }}</td>
+                                <td>{{data.user_status}}</td>
+                              
+                            </tr>
+
+                           
+                        </tbody>
+                      
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Member found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Entrepreneurial Bonus Information by Voucher">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+                 <div class="row">
+                    <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit2" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search2" ng-change="filter2()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                              <!--   <th>Image</th> -->
+                                <th>{{lng_user_name}}</th>
+                              <!--   <th>Email ID</th>
+                                <th>Contact No.</th> -->
+                                <th>{{lng_voucher_code}}</th>
+                                <th>{{lng_status}}</th>
+                               <!--  <th></th>  -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (memberReportList2 | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage2-1)*entryLimit2 | limitTo:entryLimit2">
+                                <td align="left">{{data.user_id}}</td>
+                              <!--   <td><img class="img-circle" alt="Dangerfield" src="uploads/{{data.image}}" style="height: 70px; width: 70px;"></td> -->
+                                <td>{{data.user_name}}</td>
+                               <!--  <td>{{data.user_email}}</td>
+                                <td>{{data.contact_no}}</td> -->
+                               <td>{{data.voucher_code}}</td>
+                                <td>{{data.user_status}}</td>
+
+                                <!-- <td>
+                                    <a href="#/entrepreneurial-bonus-by-user/{{data.user_id}}"  class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </td>  -->
+                            </tr>
+
+                           
+                        </tbody>
+                        <!-- <caption>List of countries by distribution wealth</caption> -->
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems2 == 0">
+                    <div class="col-md-12">
+                        <h4>No Member found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems2 > 0">    
+                    <div pagination="" page="currentPage2" on-select-page="setPage2(page)" boundary-links="true" total-items="filteredItems2" items-per-page="entryLimit2" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

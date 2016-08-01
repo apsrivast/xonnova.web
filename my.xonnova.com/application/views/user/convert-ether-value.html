@@ -1,0 +1,61 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Money</li>
+            <li class="active">Ether Conversion Rate</li>
+        </ul>
+
+        <h1>Ether Conversion Rate</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Ether Conversion Rate">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="etherConversionRate" novalidate >
+                <div id="message"></div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Your current Ether Wallet Balance : {{creditTotal - deductTotal}}</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Enter Amount to Convert :</label>
+                    <div class="col-sm-4">
+                        <input name="amount_to_convert"
+                            type="text"
+                            value="{{user.amount_to_convert}}" 
+                            ng-pattern="/[0-9]/"
+                            placeholder=""
+                            required
+                            ng-model="user.amount_to_convert"
+                            class="form-control">
+                    </div>
+                </div>                 
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-click="Submit(user);">Submit</button>
+                                <!-- <button class="btn btn-danger" ng-click="delete(cron)">Delete <span class="glyphicon glyphicon-trash"></span></button> -->
+                                <!-- <button class="btn btn-primary">Reset</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Current Exchange Rate : ${{ether_rate}}</label>
+                    <!-- <div class="col-sm-6">
+                        <div class="form-control" >${{ether_rate}}</div>
+                    </div> -->
+                </div>   
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Conversion Charge : ${{conversion_charge}}</label>
+                    <!-- <div class="col-sm-6">
+                        <div class="form-control" >${{conversion_charge}}</div>
+                    </div> -->
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

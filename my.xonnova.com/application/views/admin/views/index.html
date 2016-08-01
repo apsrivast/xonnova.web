@@ -1,0 +1,453 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li class="active">Dashboard</li>
+    </ol>
+
+    <h1>Dashboard</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" ng-controller="DashboardController">
+    <div class="col-sm-4 text-center" style=" padding: 5px;">
+        <div style="background-color: #fff;">
+            <a  href="#/new-product-order-summary" >
+                    <h3>New Orders</h3>
+                    <br>
+                    <div style="color: black;">
+                        {{newOrderTabList}}
+                    </div>
+                    <br>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style=" padding: 5px;">
+        <div style="background-color: rgb(98, 84, 178);">
+        <a  href="#/member-report" >
+                <h3>Total Member</h3>
+                <br>
+                <div style="color: black;">
+                    {{totalMember}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style=" padding: 5px;">
+        <div style="background-color: #19A9D5;">
+        <a  href="#/earnings" >
+                <h3>Total Earning</h3>
+                <br>
+                <div style="color: black;" ng-repeat="total in totalEarning">
+                    ${{total.total}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: #dbe1e3;">
+        <a  href="#/earnings" >
+                <h3>Total Rewards</h3>
+                <br>
+                <div style="color: black;">
+                    NA
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: #fff;">
+        <a  href="#/cashout" >
+                <h3>Pending Cashout</h3>
+                <br>
+                <div style="color: black;" ng-repeat="totalPending in totalPendingList">
+                    ${{totalPending.cashout_ammount}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: rgb(98, 84, 178);">
+        <a  href="#/approve-cashout-view" >
+                <h3> Cashed Out</h3>
+                <br>
+                <div style="color: black;" ng-repeat="totalApprove in totalApproveList">
+                     ${{totalApprove.cashout_ammount}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: #19A9D5;">
+        <a  href="#/deposit-view" >
+                <h3>New Deposits</h3>
+                <br>
+                <div style="color: black;">
+                    {{newDeposits}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: #dbe1e3;">
+        <a  href="#/new-platforms-view" >
+                <h3>New Platform Request</h3>
+                <br>
+                <div style="color: black;">
+                    {{newPlatformRequest}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+
+    <div class="col-sm-4 text-center" style=" padding: 5px;">
+        <div style="background-color: #fff;">
+            <a  href="#/new-member-report" >
+                    <h3>Daily Signups</h3>
+                    <br>
+                    <div style="color: black;">
+                       {{newUserSignups}}
+                    </div>
+                    <br>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style=" padding: 5px;">
+        <div style="background-color: rgb(98, 84, 178);">
+        <a  href="#/rank-members-new" >
+                <h3>New Rank</h3>
+                <br>
+                <div style="color: black;">
+                    {{newRank}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style=" padding: 5px;">
+        <div style="background-color: #19A9D5;">
+        <a  href="#/personal-referrals" >
+                <h3>New Referral</h3>
+                <br>
+                <div style="color: black;" >
+                   {{newReferral}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: #dbe1e3;">
+        <a  href="#/new-upgrade-user-list" >
+                <h3>New Upgraded User</h3>
+                <br>
+                <div style="color: black;">
+                    {{newUpgradeUserTotal}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: #fff;">
+        <a  href="#/event-reg-list" >
+                <h3>New Event Registration</h3>
+                <br>
+                <div style="color: black;" >
+                    {{newEventReg}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: rgb(98, 84, 178);">
+        <a  href="#/activation-platform-report" >
+                <h3>New Activation</h3>
+                <br>
+                <div style="color: black;" >
+                    {{newActivationTotal}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: #19A9D5;">
+        <a  href="#/refer-a-store-list" >
+                <h3>New Store</h3>
+                <br>
+                <div style="color: black;">
+                   {{newStoreTotal}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: #19A9D5;">
+        <a  href="#/success-team" >
+                <h3>Success Team</h3>
+                <br>
+                <div style="color: black;">
+                    {{totalHoldingTankSB}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: #FFFFFF;">
+        <a  href="#/pending-balance-report-list">
+                <h3>Total Pending Balance</h3>
+                <br>
+                <div style="color: black;">
+                    ${{totalPendingBlance}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+    <div class="col-sm-4 text-center" style="padding: 5px;">
+        <div style="background-color: rgb(98, 84, 178);">
+        <a  href="#/ether-wallet-report-list">
+                <h3>Ether Wallet</h3>
+                <br>
+                <div style="color: black;">
+                    $ {{totalEtherWallet}}
+                </div>
+                <br>
+        </a>
+        </div>
+    </div>
+
+   <!--  <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-xs-4">
+                    <a ng-href="#/new-product-order-summary" class="info-tiles tiles-danger" href="#/new-product-order-summary">
+                        <div class="tiles-heading">
+                            <div class="text-center ng-binding">New Orders</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{newOrderTabList}}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a ng-href="#/member-report" class="info-tiles tiles-midnightblue" href="#/member-report">
+                        <div class="tiles-heading">
+                            <div class="text-center">Total Member</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center">{{totalMember}}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a ng-href="#/earnings" class="info-tiles tiles-success" href="#/earnings">
+                        <div class="tiles-heading">
+                            <div class="text-center">Total Earning</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" ng-repeat="total in totalEarning">${{total.total}}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <a ng-href="#/earnings" class="info-tiles tiles-indigo" href="#/earnings">
+                        <div class="tiles-heading">
+                            <div class="text-center">Total Rewards </div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" ng-repeat="total in totalEarning">NA</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a class="info-tiles tiles-facebook" href>
+                        <div class="tiles-heading">
+                            <span class="text-center">Facebook</span>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="pull-left">
+                                <i class="fa fa-thumbs-o-up"></i>
+                            </div>
+                            <div class="pull-right">NA</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a  class="info-tiles tiles-twitter">
+                        <div class="tiles-heading"><span class="text-center">Twitter</span></div>
+                        <div class="tiles-body">
+                            <div class="pull-left"><i class="fa fa-twitter"></i></div>
+                            <div class="pull-right">NA</div>
+                        </div>
+                    </a>
+                </div>
+            </div> 
+			<div class="row">
+                <div class="col-xs-4">
+                    <a ng-href="#/cashout" class="info-tiles tiles-midnightblue" href="#/cashout">
+                        <div class="tiles-heading">
+                            <div class="text-center">Pending Cashout</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" ng-repeat="totalPending in totalPendingList">${{totalPending.cashout_ammount}}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a ng-href="#/approve-cashout-view" class="info-tiles tiles-success" href="#/cashout">
+                        <div class="tiles-heading">
+                            <div class="text-center">Cashed Out</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" ng-repeat="totalApprove in totalApproveList">${{totalApprove.cashout_ammount}}</div>
+                        </div>
+                    </a>
+                </div>
+				
+				<div class="col-xs-4">
+                    <a ng-href="#/deposit-view" class="info-tiles tiles-danger" href="#/deposit-view">
+                        <div class="tiles-heading">
+                            <div class="text-center">New Deposits</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center">{{newDeposits}}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+			
+			<div class="row">
+                <div class="col-xs-4">
+                    <a ng-href="#/new-platforms-view" class="info-tiles tiles-success" href="#/new-platforms-view">
+                        <div class="tiles-heading">
+                            <div class="text-center">New Platform Request</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center">{{newPlatformRequest}}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a ng-href="#/new-member-report" class="info-tiles tiles-midnightblue" href="#/member-report">
+                        <div class="tiles-heading">
+                            <div class="text-center">Daily Signups</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{newUserSignups}}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a ng-href="#/rank-members-new" class="info-tiles tiles-indigo" href="#/rank-members-new">
+                        <div class="tiles-heading">
+                            <div class="text-center">New Rank</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{newRank}}</div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <a ng-href="#/personal-referrals" class="info-tiles tiles-midnightblue" href="#/personal-referrals">
+                        <div class="tiles-heading">
+                            <div class="text-center">New Referral</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{newReferral}}</div>
+                        </div>
+                    </a>
+                </div>
+				<div class="col-xs-4">
+                    <a ng-href="#/new-upgrade-user-list" class="info-tiles tiles-indigo" href="#">
+                        <div class="tiles-heading">
+                            <div class="text-center">New Upgraded User</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{newUpgradeUserTotal}}</div>
+                        </div>
+                    </a>
+                </div>
+				<div class="col-xs-4">
+                    <a ng-href="#/event-reg-list" class="info-tiles tiles-indigo" href="#">
+                        <div class="tiles-heading">
+                            <div class="text-center">New Event Registration</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{newEventReg}}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+			<div class="row">
+                <div class="col-xs-4">
+                    <a ng-href="#/activation-platform-report" class="info-tiles tiles-midnightblue" href="#/activation-platform-report">
+                        <div class="tiles-heading">
+                            <div class="text-center">New Activation</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{newActivationTotal}}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a ng-href="#/refer-a-store-list" class="info-tiles tiles-indigo" href="#/refer-a-store-list">
+                        <div class="tiles-heading">
+                            <div class="text-center">New Store</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{newStoreTotal}}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+</div> <!-- container-fluid -->

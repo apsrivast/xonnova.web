@@ -1,0 +1,87 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Tools</li>
+            <li class="active">Training Videos</li>
+        </ul>
+
+        <h1>Training Videos Tutorials</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Training Videos Tutorials">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+            <div class="row">
+                 <div class="col-md-2">PageSize:
+                    <select ng-model="entryLimit" class="form-control">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+              
+                <div class="col-md-3">Filter:
+                    <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                </div>
+               
+            </div>
+            <br/>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID<a ng-click="sort_by('v_c_id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                            <th>Category<a ng-click="sort_by('category_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                            <th>Description<a ng-click="sort_by('message');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                            <th>Videos<a ng-click="sort_by('url');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                           <th>View<a ng-click="sort_by('url');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                            <!-- <th>Date</th> -->
+                            <th>Delete </th>
+                            <th>Edit </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in filtered = (TrainingVideosViewList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                            <td align="left">{{data.v_c_id}}</td>
+                            <td>{{data.category_name}}</td>
+                            <td align="left">{{data.message}}</td>
+                            <td >                               
+                                <video src="{{data.url}}" controls ngf-src="files[0]" ngf-accept="'video/*'"></video> 
+                            </td>
+                            <td>
+                                <a href="{{data.url}}" target="__blank" class="btn btn-pirmary">View Tutorial</a>
+                            </td>
+                            <!-- <td>{{data.v_t_created_at}}</td> -->
+
+                            <td>
+                                <form name="deleteForm"><br/>
+                                <input type="hidden"  ng-model="data.v_t_id" value="{{data.v_t_id}}"> 
+                                
+
+                               <button type="submit" class="btn btn-danger btn-sm" ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></button>
+                               </form>
+                            </td>
+                            <td>
+                                    <a href="#/edit-traning-video/{{data.v_t_id}}"  class="btn btn-primary btn-sm">Edit</a>
+                                </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems == 0">
+                <div class="col-md-12">
+                    <h4>Not  found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems > 0">    
+                <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+            </div>           
+        </panel>
+    </div> <!-- container-fluid -->

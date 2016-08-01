@@ -1,0 +1,129 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Money</li>
+            <li class="active">Transfer US Store Credit To MEX Wallet</li>
+        </ul>
+
+        <h1>Transfer US Store Credit To MEX Wallet</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Transfer US Store Credit To MEX Wallet">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="add_credit"  >
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Your Total US Store Credit </label>
+                    <div class="col-md-6">
+                        <div class="form-control" >${{usCreditTotal - usDedutTotal}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Your Total MEX Store Credit </label>
+                    <div class="col-md-6">
+                        <div class="form-control" >${{mexCreditTotal - mexDedutTotal}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Transfer Store Credit</label>
+                    <div class="col-md-6">
+                        <input name="credit" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="user.credit" 
+                        placeholder= "Enter Credit Amount" 
+                        required>
+                    </div>
+                </div>
+                
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled="add_credit.$invalid" ng-click="creditChange(user);">Purchase MEX Credit</button>          
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div>
+
+
+<!-- <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Transfer Store Credit List">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+
+                 <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr> 
+                               <th>ID <a ng-click="sort_by('credit_v_id');"><i class="glyphicon glyphicon-sort"></i></a></th> 
+                                <th>Credit Amount <a ng-click="sort_by('credit');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Maessage <a ng-click="sort_by('message');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Date <a ng-click="sort_by('wallet_credited_at');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (transferStoreCreditList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.credit_v_id}}</td> 
+                                <td>${{data.credit}}</td>
+                                <td>{{data.message}}</td>
+                                <td>{{data.wallet_credited_at}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Credit found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div>
+ -->
+<script type="text/ng-template" id="firstDialogId">
+    <div class="ngdialog-message">
+        <h3>Thank you !</h3>
+        <p><code>{{ngDialogData.foo}}</code></p>
+       
+     </div>
+</script>
+
+<script type="text/ng-template" id="customTemplate.html">
+  <a>
+      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+  </a>
+</script>

@@ -1,0 +1,85 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		 <li>Money</li>
+        <li class="active">Buy Store Credit User Information</li>
+	</ol>
+	 <h1>Buy Store Credit User Information</h1>
+</div>
+<div class="container-fluid">
+	 <div class="row">
+        <div class="col-sm-6" align="center" style="float: none; margin: auto;">
+            <panel panel-class="panel-sky" heading="User Info">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+							<div class="panel-body user-profile" ng-repeat="user in List">
+								<div class="user-detail">
+									<div class="table-responsive">
+										<table  class="table table-condensed m0">
+											<tbody>
+												<tr>
+													<td style="border-top: 0">User Name</td>
+													<td style="border-top: 0">{{user.first_name}}  {{user.last_name}}</td>
+												</tr>
+												<tr>
+													<td>Address</td>
+													<td>{{user.address}}</td>
+												</tr>
+												<tr>
+													<td>City</td>
+													<td>{{user.city}}</td>
+												</tr>
+												<tr>
+													<td>State</td>
+													<td>{{user.state}}</td>
+												</tr>
+												<tr>
+													<td>Zip</td>
+													<td>{{user.zip}}</td>
+												</tr>
+												<tr>
+													<td>Phone</td>
+													<td>{{user.phone}}</td>
+												</tr>
+												<tr>
+													<td>SSN</td>
+													<td>{{user.ssn}}</td>
+												</tr>
+											</tbody>
+										</table>
+
+									</div>
+								</div>
+							</div>
+            </panel>
+        </div>
+    </div>
+    <div class="row" >
+		<div align="center">
+			<a href="#/buy-store-credit-user-info"  class="btn btn-success btn-sm">Back</a>
+		</div>
+	</div>
+	<br>
+</div> <!-- container-fluid -->
+<div class="container-fluid">
+	 <div class="row">
+        <div class="col-sm-12"  align="center" style="float: none; margin: auto;">
+            <panel panel-class="panel-sky" heading="Image">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+							<div class=" col-sm-6" ng-repeat="user in List"><br/>
+								ID Proof Image
+								<img src="assets/cashout/{{user.id_image}}" alt="" class="img-responsive user-avatar" height="400" width="400">
+								<a href="https://my.onlegacynetwork.com/assets/cashout/{{user.id_image}}" target="__blank" class="btn btn-pirmary">View</a>
+							</div>	
+							<div class=" col-sm-6" ng-repeat="user in List"><br/>
+								W 9 Form Image
+								<img src="assets/cashout/{{user.w_form_image}}" alt="" class="img-responsive user-avatar" height="400" width="400">
+								<a href="https://my.onlegacynetwork.com/assets/cashout/{{user.w_form_image}}" target="__blank" class="btn btn-pirmary">View</a>
+							</div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

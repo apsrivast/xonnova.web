@@ -1,0 +1,43 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+          
+            <li class="active">Our Top Performers </li>
+        </ul>
+
+        <h1>Our Top Performers </h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Our Top Performers ">
+           
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+								<th>Position</th>
+                                <th>User</th>
+                                <th>Username</th>
+                                <th>City</th>
+                                <th>State</th>
+								<th>No. Of activations</th>
+                                
+                            </tr>
+                        </thead>
+                        <hr>
+                        <tbody>
+                            <tr ng-repeat="data in htmlTopUserList" ng-init="rowIndex = $index">
+								<td >{{rowIndex + 1}}</td>
+                                <td ><img class="img-circle" alt="NA" src="uploads/{{data.image}}" style="height: 60px; width: 60px;"></td>
+                                <td >{{data.user_name}}</td>
+								<td>{{data.city}}</td>
+                                <td>{{data.state}}</td>
+                                <td>{{data.no}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </panel>
+    </div> 

@@ -1,0 +1,71 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Bug</li>
+	</ol>
+
+	<h1>Bug</h1>
+	
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="user in approvedUser"><br/>
+					<img src="./assets/cashout/{{user.bug_image}}" alt="NoImage" class="img-responsive user-avatar" height="400" width="400">
+					<a href="https://my.onlegacynetwork.com/assets/cashout/{{user.bug_image}}" target="__blank" class="btn btn-pirmary">View Image</a>
+					<div class="user-detail">
+						
+						<div class="table-responsive">
+					
+							<table  class="table table-condensed m0">
+								<tbody>
+									
+									
+									<tr>
+										<td>User Name</td>
+										<td>{{user.user_name}}</a></td>
+									</tr>
+									<tr>
+										<td>Bug Title</td>
+										<td>{{user.bug_title}}</a></td>
+									</tr>
+									<tr>
+										<td>Description </td>
+										<td>{{user.bug_description}}</td>
+									</tr>
+									<tr>
+										<td>Send Date</td>
+										<td>{{user.bug_time}}</td>
+									</tr>
+									<tr>
+										<td>Reward Points</td>
+										<td>{{user.bug_reward_point}}</td>
+									</tr>
+									
+									
+								</tbody>
+							</table>
+						</div>
+						<div class="row" >
+							<div align="center">
+								<!-- <button type="button" class="finish btn-primary btn-sm "  ng-click="release(user)">Deposited</button> -->
+								<a href="#/bug-approved"  class="btn btn-success btn-sm">Back</a>
+							</div>
+						</div>
+						<br>
+					
+						
+					</div>
+				</div>
+        	</div>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->
+
+
+
+
+

@@ -1,0 +1,106 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li class="active">Leads</li>
+    </ol>
+
+    <h1>Leads View</h1>
+  
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="LEADS">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+                <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  <form>
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                      <div class="col-sm-6">
+                        <form name="searchForm"><br/>
+                            <div class="col-sm-5">
+                               <input type="text"  placeholder="From Date"  class="form-control" pickadate ng-model="dateRangeSearch.from_date" readonly/> 
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text"  placeholder="To Date"  class="form-control" pickadate ng-model="dateRangeSearch.to_date" readonly />
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn-primary btn" ng-click="updateResult(dateRangeSearch);">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                        </form>
+                    </div>
+                   
+            
+                <br/>
+      <div class="table-responsive">
+       <table class="table">
+         <thead>
+           <tr>
+              <th>User Id<a ng-click="sort_by('s_f_id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+              <th>firstname<a ng-click="sort_by('first_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+              <th>lastname <a ng-click="sort_by('last_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+             <!--  <th>Address <a ng-click="sort_by('address1 ');"><i class="glyphicon glyphicon-sort"></i></a></th>
+              <th>City <a ng-click="sort_by('city');"><i class="glyphicon glyphicon-sort"></i></a></th>
+              <th>state <a ng-click="sort_by('state');"><i class="glyphicon glyphicon-sort"></i></a></th>
+              <th>Zip <a ng-click="sort_by('zip');"><i class="glyphicon glyphicon-sort"></i></a></th>
+              <th>Country <a ng-click="sort_by('country');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+              <th>Phone number<a ng-click="sort_by('phone_no');"><i class="glyphicon glyphicon-sort"></i></a></th>
+              <th>Time<a ng-click="sort_by('s_f_time');"><i class="glyphicon glyphicon-sort"></i></a></th>
+              <th>Prefer-Language<a ng-click="sort_by('prefer_lang');"><i class="glyphicon glyphicon-sort"></i></a></th>
+            <!--   <th>Owner house<a ng-click="sort_by('owner_house');"><i class="glyphicon glyphicon-sort"></i></a></th>
+              <th>Business Email<a ng-click="sort_by('business_email');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+              <th>view</th>
+           </tr>
+        </thead>
+      <tbody>
+      <tr ng-repeat="data in filtered = (solarList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+       <td align="left">{{data.s_f_id}}</td>
+       <td>{{data.first_name}}</td>
+       <td>{{data.last_name}}</td>
+      <!--  <td>{{data.address1}},{{data.address2}}</td>
+       <td>{{data.city}}</td>
+       <td>{{data.state}}</td>
+       <td>{{data.zip}}</td>
+       <td>{{data.country}}</td> -->
+       <td>{{data.phone_no}}</td>
+       <td>{{data.s_f_time}}</td>
+        <td>{{data.prefer_lang}}</td>
+      <!-- <td>{{data.owner_house}}</td>
+       <td>{{data.business_email}}</td> -->
+     <td>
+    <a href="#/view-solar-one/{{data.s_f_id}}"  class="btn btn-success btn-sm">View</a>
+    </td>
+         </tr>
+        </tbody>
+      </table>
+   </div>
+               
+   <div class="col-md-12" ng-show="filteredItems == 0">
+     <div class="col-md-12">
+        <h4>No Lead found</h4>
+          </div>
+      </div>
+      <div class="col-md-12" ng-show="filteredItems > 0">    
+        <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+         </div>
+      </panel>
+     </div>
+   </div>
+    
+</div> <!-- container-fluid -->

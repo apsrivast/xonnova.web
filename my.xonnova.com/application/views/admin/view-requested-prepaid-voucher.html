@@ -1,0 +1,73 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Prepaid Voucher</li>
+	</ol>
+	<h1>Prepaid Voucher</h1>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="data in htmlPrepaidVoucher"><br/>
+					<div class="user-detail">
+						<div class="table-responsive">
+							<h6 class="user-info">Prepaid Voucher</h6>
+							<div>
+								<table  class="table table-condensed m0">
+									<tbody>
+										<tr>
+											<td >ORDER ID</td>
+											<td >{{data.order_id}}</td>
+										</tr>
+										<tr>
+											<td>User Name</td>
+											<td>{{data.user_name}}</td>
+										</tr>
+										<tr>
+											<td>Voucher #</td>
+											<td>{{data.voucher_no}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>	
+						</div>
+
+						<form role="form" name="myForm"  class="form-horizontal" >
+							<div class="form-group">
+								<div id="message"></div>
+							</div>
+					
+							
+					   	<div class="form-group">
+					   		<label for="fieldpass" class="col-md-3 control-label">SIM #</label>
+							<div class="col-md-6">
+	                               <input type="text" name="sim" class="form-control" ng-model="data.sim_no"  ng-pattern="/^[0-9]+$/"  required >
+	                            </div>
+						</div>
+
+						<div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-6 col-sm-offset-3">
+			                        	<button type="submit" class="finish btn-success btn-sm " ng-disabled=" myForm.$invalid" ng-click="updatesim(data)">Update </button>
+			                        </div>
+			                    </div>
+			                </div>
+							
+
+	                       
+							<br/>			                 
+						</form>   
+					</div>
+			
+				</div>
+			</div>
+	    </div>
+    </div>
+</div>
+
+<!-- container-fluid -->
+
+
+
+

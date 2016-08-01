@@ -1,0 +1,770 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li class="active">Lead</li>
+    </ol>
+    <h1>Lead</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Lead">
+                <form role="form" name="myForm"  class="form-horizontal" >
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Industry</label>
+                        <div class="col-md-6">
+                            <select  class="form-control"  type="text" ng-model="user.industry" required>
+                                <option value="">Select</option>
+                                <option value="Solar">Solar</option>
+                                <option value="Merchant">Merchant Services</option>
+                                <option value="Restaurant">Restaurant Referral</option>
+                                <!-- <option value="Health">Health</option> -->
+                                <option value="Printing">Printing</option>
+                               <!--  <option value="Gas">Gas and Electric Bill</option> -->
+                            </select>
+                        </div>
+                    </div>
+                    <fieldset ng-show="user.industry == 'Merchant'">
+
+                        <div class="form-group" >
+                            <label for="fieldpass" class="col-md-3 control-label">Business owner ? * </label>
+                            <div class="col-md-6">
+                                <select  class="form-control" ng-model="user.owner_business" ng-required="user.industry == 'Merchant'">
+                                    <option value="">Select</option>
+                                    <option value="YES">YES</option>
+                                    <option value="NO">NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div ng-show="user.owner_business == 'NO'">
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    We are sorry, at this time we can only work with Business owner 
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="user.owner_business == 'YES'">
+                            <div class="form-group" >
+                                <label for="fieldpass" class="col-md-3 control-label">Currently processes credit cards ? * </label>
+                                <div class="col-md-6">
+                                    <select  class="form-control" ng-model="user.processes_cc" ng-required="user.industry == 'Merchant'">
+                                        <option value="">Select</option>
+                                        <option value="YES">YES</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div ng-show="user.processes_cc == 'YES'">
+                                <div class="form-group" >
+                                    <label for="fieldpass" class="col-md-3 control-label">Does the client have contract ? </label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.client_contract">
+                                            <option value="">Select</option>
+                                            <option value="YES">YES</option>
+                                            <option value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                    <label for="fieldpass" class="col-md-3 control-label">How long does the client still has on the contract ? </label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.client_contract_long">
+                                            <option value="">Select</option>
+                                            <option value="1-3 months">1-3 months left</option>
+                                            <option value="3-6 months">3-6 months left</option>
+                                            <option value="6-12 months">6-12 months left</option>
+                                            <option value="1-2 years">1-2 years left</option>
+                                            <option value="Over 2 years">Over 2 years left</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                    <label for="fieldpass" class="col-md-3 control-label">Do you want to offer the client a sign up today bonus ? </label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.client_signup_today">
+                                            <option value="">Select</option>
+                                            <option value="YES">YES</option>
+                                            <option value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div ng-show="user.client_signup_today == 'YES'">
+                                    <div class="form-group" >
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            Sign up today bonus is a bonus that we give to the client for signing up with us immediately, such bonus is credited to the clients account on the first billing cycle. Such bonus gets divided between 3 parts. 1 is paid by the sales rep deducted from his/her commissions and the other 2 by MLM and the processor respectively.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">How much maximum would you like to offer the client ?</label>
+                                        <div class="col-md-6">
+                                            <input  class="form-control"  type="number" ng-model="user.client_mex_offer"  max="300">
+                                            do not allow numbers above $300
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           <!--  <div ng-show="user.processes_cc == 'YES'"> -->
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Business Name *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.business_name"  ng-required="user.industry == 'Merchant'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Business Type *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.business_type"  ng-required="user.industry == 'Merchant'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Average annual sales </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.average_sales"  >
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                    <label for="fieldpass" class="col-md-3 control-label">Does the client want to get a contract to guarantee his/her rate for 3 years ? </label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.contract_guarantee">
+                                            <option value="">Select</option>
+                                            <option value="YES">YES</option>
+                                            <option value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Terminal type *</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.terminal_type" ng-required="user.industry == 'Merchant'">
+                                            <option value="">Select</option>
+                                            <option value="Regular">Regular terminal</option>
+                                            <option value="Wireless">Wireless terminal</option>
+                                            <option value="Swiper">Swiper (not upfront commission)</option>
+                                            <option value="POS">POS</option>
+                                            <option value="Don’t know">I don’t know</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">First Name *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.first_name"  ng-required="user.industry == 'Merchant'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Last Name *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.last_name"  ng-required="user.industry == 'Merchant'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Phone Number *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.phone_no"  ng-pattern="/[0-9]/" ng-required="user.industry == 'Merchant'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldemail" class="col-md-3 control-label">Email *</label>
+                                    <div class="col-md-6">
+                                        <input   class="form-control" type="email"  ng-model="user.business_email"  ng-required="user.industry == 'Merchant'" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldemail" class="col-md-3 control-label">Date and time to reach *</label>
+                                    <div class="col-md-2">
+                                         <input  class="form-control"  pickadate ng-model="user.day"  type="text" placeholder="yyyy-MM-dd" min="1950-01-01" max="2099-12-31" ng-required="user.industry == 'Merchant'" readonly/>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select  class="form-control"    ng-model="user.time" ng-required="user.industry == 'Merchant'">
+                                            <option value=""> Hour</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select  class="form-control"  ng-model="user.zone" ng-required="user.industry == 'Merchant'">
+                                            <option value="">Time Zone</option>
+                                            <option value="PST">PST </option>
+                                            <option value="CST">CST </option>
+                                            <option value="EST">EST </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-3">
+                                       <!--  <input   class="form-control" type="text"  ng-model="user.call_time"  ng-required="user.industry == 'Printing'" > -->
+                                        <div>Please let the customer know we might experience high volume of calls at such time, allows us up to 2 hours off time</div>
+                                    </div>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Address 1 *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.address1"  ng-required="user.industry == 'Merchant'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Address 2</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.address2"  >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">City *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.city"  ng-required="user.industry == 'Merchant'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">State *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.state"  ng-required="user.industry == 'Merchant'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Zip *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.zip"  ng-pattern="/[0-9]/" ng-required="user.industry == 'Merchant'">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Prefer language *</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.prefer_lang" ng-required="user.industry == 'Merchant'">
+                                            <option value="">Select</option>
+                                            <option value="English">English</option>
+                                            <option value="Español">Español</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-show="user.prefer_lang == 'Other'">
+                                    <label for="fieldpass" class="col-md-3 control-label">Other language *</label>
+                                    <div class="col-md-6">
+                                        <input   class="form-control"   ng-model="user.other_lang"  ng-required="user.industry == 'Merchant'  && user.prefer_lang == 'Other'" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Have you talked to the client about Merchant services ? *</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.merchant_talk" ng-required="user.industry == 'Merchant'">
+                                            <option value="">Select</option>
+                                            <option value="YES">YES</option>
+                                            <option value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Is the client interested in getting Merchant Services ? *</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.merchant_interested" ng-required="user.industry == 'Merchant'">
+                                            <option value="">Select</option>
+                                            <option value="YES">Yes. Client will get it right away</option>
+                                            <option value="NO">No. Client has no idea about merchant, I didn’t tell him anything</option>
+                                            <option value="So-so">So-so, MLM needs to convince the client to get an account with us</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group" >
+                                    <label for="fieldpass" class="col-md-3 control-label">Please upload a statement from the client</label>
+                                    <div class="col-md-6">
+                                        <input type="file" ngf-select ng-model="imageone" ngf-accept="'*'" ngf-change="uploadimageone($files)" />
+                                        <input  class="form-control"  type="hidden" ng-model="user.leadimageone"  >
+                                        <!-- <span style="color:#B4270F" ng-show=" myForm.q_electricity_bill.$error.required">this field required</span>  -->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6 col-sm-offset-3 outmessage">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                            <button type="submit" class="finish btn-success btn pull-right"  ng-disabled=" myForm.$invalid || isdisabled" ng-click="submitMerchant(user)">Submit</button>
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                    </fieldset>
+                        <fieldset ng-show="user.industry == 'Health'">
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    We are sorry, at this time we can only work with Solar,  Merchant Services, Restaurant Referral and Printing.
+                                </div>
+                            </div>
+                        </fieldset >
+                        <fieldset ng-show="user.industry == 'Gas'">
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    We are sorry, at this time we can only work with Solar,  Merchant Services, Restaurant Referral and Printing.
+                                </div>
+                            </div>
+                        </fieldset >
+                    <fieldset ng-show="user.industry == 'Solar'">
+
+                        <div class="form-group" >
+                            <label for="fieldpass" class="col-md-3 control-label">Homeowner ? * </label>
+                            <div class="col-md-6">
+                                <select  class="form-control" ng-model="user.owner_house" ng-required="user.industry == 'Solar'">
+                                    <option value="">Select</option>
+                                    <option value="YES">YES</option>
+                                    <option value="NO">NO</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div ng-show="user.owner_house == 'NO'">
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    We are sorry, at this time we can only work with homeowners 
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="user.owner_house == 'YES'">
+                            <div class="form-group" >
+                                <label for="fieldpass" class="col-md-3 control-label">Electric bill over $125 per month ? * </label>
+                                <div class="col-md-6">
+                                    <select  class="form-control" ng-model="user.electric_bill" ng-required="user.industry == 'Solar'">
+                                        <option value="">Select</option>
+                                        <option value="YES">YES</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div ng-show="user.electric_bill == 'NO'">
+                                <div class="form-group">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        We are sorry, at this time we can only work with bills over $125 per month 
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="user.electric_bill == 'YES'">
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">State *</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.state" ng-required="user.industry == 'Solar'">
+                                            <option value="">Select</option>
+                                            <option value="California">California</option>
+                                           <!--  <option value="New York">New York</option>
+                                            <option value="Puerto Rico">Puerto Rico</option> -->
+                                        </select>
+                                    </div>
+                                </div>
+
+                                
+                               
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Address 1 *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.address1"  ng-required="user.industry == 'Solar'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Address 2</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.address2"  >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">City *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.city"  ng-required="user.industry == 'Solar'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Zip *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.zip"  ng-pattern="/[0-9]/" ng-required="user.industry == 'Solar'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">First Name *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.first_name"  ng-required="user.industry == 'Solar'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Last Name *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.last_name"  ng-required="user.industry == 'Solar'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Phone Number *</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.phone_no"  ng-pattern="/[0-9]/" ng-required="user.industry == 'Solar'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldemail" class="col-md-3 control-label">Email *</label>
+                                    <div class="col-md-6">
+                                        <input   class="form-control" type="email"  ng-model="user.business_email"  ng-required="user.industry == 'Solar'" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldemail" class="col-md-3 control-label">Date and time to reach *</label>
+                                    <div class="col-md-2">
+                                         <input  class="form-control"  pickadate ng-model="user.day"  type="text" placeholder="yyyy-MM-dd" min="1950-01-01" max="2099-12-31" ng-required="user.industry == 'Solar'" readonly/>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select  class="form-control"    ng-model="user.time" ng-required="user.industry == 'Solar'">
+                                            <option value=""> Hour</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <select  class="form-control"  ng-model="user.zone" ng-required="user.industry == 'Solar'">
+                                            <option value="">Time Zone</option>
+                                            <option value="PST">PST </option>
+                                            <option value="CST">CST </option>
+                                            <option value="EST">EST </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-3">
+                                       <!--  <input   class="form-control" type="text"  ng-model="user.call_time"  ng-required="user.industry == 'Printing'" > -->
+                                        <div>Please let the customer know we might experience high volume of calls at such time, allows us up to 2 hours off time</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Prefer language *</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.prefer_lang" ng-required="user.industry == 'Solar'">
+                                            <option value="">Select</option>
+                                            <option value="English">English</option>
+                                            <option value="Español">Español</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-show="user.prefer_lang == 'Other'">
+                                    <label for="fieldpass" class="col-md-3 control-label">Other language *</label>
+                                    <div class="col-md-6">
+                                        <input   class="form-control"   ng-model="user.other_lang"  ng-required="user.industry == 'Solar'  && user.prefer_lang == 'Other'" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Have you talked to the client about solar ? *</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.solar_talk" ng-required="user.industry == 'Solar'">
+                                            <option value="">Select</option>
+                                            <option value="YES">YES</option>
+                                            <option value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Is the client interested in getting solar at his/her home ? *</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" ng-model="user.solar_interested" ng-required="user.industry == 'Solar'">
+                                            <option value="">Select</option>
+                                            <option value="YES">Yes. Client will get it right away</option>
+                                            <option value="NO">No. Client has no idea about solar, I didn’t tell him anything</option>
+                                            <option value="Unsure">Unsure, MLM needs to convince the client to get solar</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group" >
+                                    <label for="fieldpass" class="col-md-3 control-label">Upload electric bill *</label>
+                                    <div class="col-md-6">
+                                        <input type="file" ngf-select ng-model="imageone" ngf-accept="'*'" ngf-change="uploadimageone($files)" />
+                                        <input  class="form-control"  type="hidden" ng-model="user.leadimageone"  ng-required="user.industry == 'Solar'">
+                                        <!-- <span style="color:#B4270F" ng-show=" myForm.q_electricity_bill.$error.required">this field required</span>  -->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6 col-sm-offset-3 outmessage">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                            <button type="submit" class="finish btn-success btn pull-right"  ng-disabled=" myForm.$invalid || isdisabled" ng-click="submitSolar(user)">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+                    <fieldset ng-show="user.industry == 'Printing'">
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">First Name *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.first_name"  ng-required="user.industry == 'Printing'">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Last Name *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.last_name"  ng-required="user.industry == 'Printing'">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Business Name *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.business_name"  ng-required="user.industry == 'Printing'">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Phone Number *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.phone_no"  ng-pattern="/[0-9]/" ng-required="user.industry == 'Printing'">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldemail" class="col-md-3 control-label">Email *</label>
+                                <div class="col-md-6">
+                                    <input   class="form-control" type="email"  ng-model="user.business_email"  ng-required="user.industry == 'Printing'" >
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="fieldemail" class="col-md-3 control-label">Date and time to reach *</label>
+                                <div class="col-md-2">
+                                     <input  class="form-control"  pickadate ng-model="user.day"  type="text" placeholder="yyyy-MM-dd" min="1950-01-01" max="2099-12-31" ng-required="user.industry == 'Printing'" readonly/>
+                                </div>
+                                <div class="col-md-2">
+                                    <select  class="form-control"    ng-model="user.time" ng-required="user.industry == 'Printing'">
+                                        <option value=""> Hour</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <select  class="form-control"  ng-model="user.zone" ng-required="user.industry == 'Printing'">
+                                        <option value="">Time Zone</option>
+                                        <option value="PST">PST </option>
+                                        <option value="CST">CST </option>
+                                        <option value="EST">EST </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-md-offset-3">
+                                   <!--  <input   class="form-control" type="text"  ng-model="user.call_time"  ng-required="user.industry == 'Printing'" > -->
+                                    <div>Please let the customer know we might experience high volume of calls at such time, allows us up to 2 hours off time</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-3 outmessage">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                        <button type="submit" class="finish btn-success btn pull-right"  ng-disabled=" myForm.$invalid || isdisabled" ng-click="submitPrinting(user)">Submit</button>
+                                </div>
+                            </div>
+                    </fieldset>
+
+                     <fieldset ng-show="user.industry == 'Restaurant'">
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Restaurant Name *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.business_name"  ng-required="user.industry == 'Restaurant'">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Owner First Name *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.first_name"  ng-required="user.industry == 'Restaurant'">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Owner Last Name *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.last_name"  ng-required="user.industry == 'Restaurant'">
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label for="fieldpass" class="col-md-3 control-label">Has the restaurant owner seen our video of how the system works ? * </label>
+                                <div class="col-md-6">
+                                    <select  class="form-control" ng-model="user.system_work" ng-required="user.industry == 'Restaurant'">
+                                        <option value="">Select</option>
+                                        <option value="YES">YES</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Address 1 *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.address1"  ng-required="user.industry == 'Restaurant'">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Address 2</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.address2"  >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">City *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.city"  ng-required="user.industry == 'Restaurant'">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">State *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.state"  ng-required="user.industry == 'Restaurant'">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Zip *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.zip"  ng-pattern="/[0-9]/" ng-required="user.industry == 'Restaurant'">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Phone Number *</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.phone_no"  ng-pattern="/[0-9]/" ng-required="user.industry == 'Restaurant'">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldemail" class="col-md-3 control-label">Email *</label>
+                                <div class="col-md-6">
+                                    <input   class="form-control" type="email"  ng-model="user.business_email"  ng-required="user.industry == 'Restaurant'" >
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="fieldemail" class="col-md-3 control-label">Date and time to reach *</label>
+                                <div class="col-md-2">
+                                     <input  class="form-control"  pickadate ng-model="user.day"  type="text" placeholder="yyyy-MM-dd" min="1950-01-01" max="2099-12-31" ng-required="user.industry == 'Restaurant'" readonly/>
+                                </div>
+                                <div class="col-md-2">
+                                    <select  class="form-control"    ng-model="user.time" ng-required="user.industry == 'Restaurant'">
+                                        <option value=""> Hour</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <select  class="form-control"  ng-model="user.zone" ng-required="user.industry == 'Restaurant'">
+                                        <option value="">Time Zone</option>
+                                        <option value="PST">PST </option>
+                                        <option value="CST">CST </option>
+                                        <option value="EST">EST </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-md-offset-3">
+                                   <!--  <input   class="form-control" type="text"  ng-model="user.call_time"  ng-required="user.industry == 'Printing'" > -->
+                                    <div>Please let the customer know we might experience high volume of calls at such time, allows us up to 2 hours off time</div>
+                                </div>
+                            </div>
+                           
+                            <div class="form-group" >
+                                <label for="fieldpass" class="col-md-3 control-label">Upload pictures of the menu *</label>
+                                <div class="col-md-6">
+                                    <input type="file" ngf-select ng-model="imageone" ngf-accept="'*'" ngf-change="uploadimageone($files)" />
+                                    <input  class="form-control"  type="hidden" ng-model="user.leadimageone"  ng-required="user.industry == 'Restaurant'">
+                                    <!-- <span style="color:#B4270F" ng-show=" myForm.q_electricity_bill.$error.required">this field required</span>  -->
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label for="fieldpass" class="col-md-3 control-label">Pictures 2</label>
+                                <div class="col-md-6">
+                                    <input type="file" ngf-select ng-model="imagetwo" ngf-accept="'*'" ngf-change="uploadimagetwo($files)" />
+                                    <input  class="form-control"  type="hidden" ng-model="user.leadimagetwo"  >
+                                    <!-- <span style="color:#B4270F" ng-show=" myForm.q_electricity_bill.$error.required">this field required</span>  -->
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label for="fieldpass" class="col-md-3 control-label">Pictures 3</label>
+                                <div class="col-md-6">
+                                    <input type="file" ngf-select ng-model="imagethree" ngf-accept="'*'" ngf-change="uploadimagethree($files)" />
+                                    <input  class="form-control"  type="hidden" ng-model="user.leadimagethree"  >
+                                    <!-- <span style="color:#B4270F" ng-show=" myForm.q_electricity_bill.$error.required">this field required</span>  -->
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label for="fieldpass" class="col-md-3 control-label">Pictures 4</label>
+                                <div class="col-md-6">
+                                    <input type="file" ngf-select ng-model="imagefour" ngf-accept="'*'" ngf-change="uploadimagefour($files)" />
+                                    <input  class="form-control"  type="hidden" ng-model="user.leadimagefour"  >
+                                    <!-- <span style="color:#B4270F" ng-show=" myForm.q_electricity_bill.$error.required">this field required</span>  -->
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label for="fieldpass" class="col-md-3 control-label">Pictures 5</label>
+                                <div class="col-md-6">
+                                    <input type="file" ngf-select ng-model="imagefive" ngf-accept="'*'" ngf-change="uploadimagefive($files)" />
+                                    <input  class="form-control"  type="hidden" ng-model="user.leadimagefive"  >
+                                    <!-- <span style="color:#B4270F" ng-show=" myForm.q_electricity_bill.$error.required">this field required</span>  -->
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-3 outmessage">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                        <button type="submit" class="finish btn-success btn pull-right"   ng-click="submitRestaurant(user)">Submit</button>
+                                </div>
+                            </div>
+                    </fieldset>
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Money</li>
+            <li class="active">Redeem Coupon</li>
+        </ul>
+        <h1>Redeem Coupon</h1>
+    </div>
+    <div class="container-fluid"  ng-controller="buyStoreCreditCtr">
+
+        <panel panel-class="panel-midnightblue" heading="Redeem Coupon">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+                <form class="form-horizontal row-border" name="myForm"  >
+                    <div class="form-group">
+                        <label  class="col-md-3 control-label">Coupon Code</label>
+                        <div class="col-md-6">
+                            <input name="coupon_code" 
+                            class="form-control"  
+                            type="text" 
+                            ng-model="coupon.coupon_code" 
+                            placeholder= "Enter Coupon Code" 
+                            required>
+                        </div>
+                    </div>
+       
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <div class="btn-toolbar">
+                                    <button class="btn-primary btn" ng-disabled=" myForm.$invalid " ng-click="checkCoupon(coupon);">Check Coupon</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </form>
+                <br>
+                <div ng-show="couponPoint != null">
+                    <form class="form-horizontal row-border" name="myFormCoupon" ng-repeat="couponCode in couponPoint" >
+                        <div class="form-group">
+                            <label  class="col-md-3 control-label">Reward Point</label>
+                            <div class="col-md-6">
+
+                                <div class="form-control">  {{couponCode.reward_points}}</div>
+
+                            </div>
+                        </div>
+           
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <div class="btn-toolbar">
+                                        <button class="btn-primary btn pull-right btn-sm" ng-disabled=" myFormCoupon.$invalid " ng-click="getCouponRewardPoint(couponCode);">Redeem Coupon</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </form>
+                </div>
+        </panel>
+    </div>
+

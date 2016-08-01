@@ -1,0 +1,360 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Settings</li>
+            <li class="active">Add Product</li>
+        </ul>
+
+        <h1>Add Product</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Product">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border"  enctype="multipart/form-data" name="add_product_form" ng-controller="addProductCtr">
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Product Name</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="product_name" ng-pattern="/[a-zA-Z ]/" ng-model="product_name" required/>
+                        <div ng-show="add_product_form.product_name.$touched" >
+                                    <span style="color:#B4270F" ng-show=" add_product_form.product_name.$error.required">this field is required.</span> 
+                                     <span style="color:#B4270F" ng-show=" add_product_form.product_name.$error.pattern">invalid name</span> 
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">Country</label>
+                    <div class="col-md-6">
+                        <select id="country" class="form-control" name="country" type="text" ng-model="country" >
+                            <option value="">Select Country</option>
+                            <option ng-selected="selected" value="US">USA</option>
+                            <option value="MEX">Mexico</option>
+                        </select>
+                        <div ng-show="add_product_form.country.$touched" >
+                            <span style="color:#B4270F" ng-show=" add_product_form.country.$error.required">This field is required.</span> 
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="country=='US'">
+                    <label for="fieldname" class="col-md-3 control-label">USA Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="us_product_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="us_product_price" placeholder="US Price" ng-required="country=='US'"/>
+                        <div ng-show="add_product_form.us_product_price.$touched" >
+                            <span style="color:#B4270F" ng-show=" add_product_form.us_product_price.$error.required">this field is required.</span> 
+                            <span style="color:#B4270F" ng-show=" add_product_form.us_product_price.$error.pattern">Price only</span> 
+                        </div> 
+                    </div>
+                </div>  
+                <div class="form-group" ng-show="country=='MEX'">
+                    <label for="fieldname" class="col-md-3 control-label">Mexican Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="mexico_product_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="mexico_product_price" placeholder="Mexico Price" ng-required="country=='MEX'"/>
+                        <div ng-show="add_product_form.mexico_product_price.$touched" >
+                            <span style="color:#B4270F" ng-show=" add_product_form.mexico_product_price.$error.required">this field is required.</span> 
+                            <span style="color:#B4270F" ng-show=" add_product_form.mexico_product_price.$error.pattern">Price only</span>
+                        </div>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Shipping price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="shipping_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="shipping_price" placeholder="Shipping price"/>
+                        <div ng-show="add_product_form.shipping_price.$touched" >
+                            <!-- <span style="color:#B4270F" ng-show="add_product_form.us_product_price.$error">this field is required.</span>  -->
+                            <span style="color:#B4270F" ng-show="add_product_form.shipping_price.$error.pattern">Price only</span> 
+                        </div> 
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label"></label>
+                    <div class="col-md-6">
+                        If you want to set Level Price? : Yes/No <input type="checkbox" ng-model="checked1" value="1">
+                    </div>
+                </div>
+                <div ng-show="checked1">
+
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Member Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="member_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="member_price"/>
+                        <div ng-show="add_product_form.member_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.member_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Representative Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="representative_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="representative_price"/>
+                        <div ng-show="add_product_form.representative_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.representative_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Partner Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="partner_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="partner_price"/>
+                        <div ng-show="add_product_form.partner_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.partner_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Brand Partner Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="brand_partner_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="brand_partner_price"/>
+                        <div ng-show="add_product_form.brand_partner_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.brand_partner_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Team Partner Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="team_partner_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="team_partner_price"/>
+                        <div ng-show="add_product_form.team_partner_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.team_partner_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Team Lead Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="team_lead_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="team_lead_price"/>
+                        <div ng-show="add_product_form.team_lead_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.team_lead_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Director Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="director_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="director_price"/>
+                        <div ng-show="add_product_form.director_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.director_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Regional Director Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="regional_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="regional_price"/>
+                        <div ng-show="add_product_form.regional_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.regional_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">National Director Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="national_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="national_price"/>
+                        <div ng-show="add_product_form.national_price.$touched" >
+                            
+                             <span style="color:#B4270F" ng-show=" add_product_form.national_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">International Director Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="international_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="international_price"/>
+                        <div ng-show="add_product_form.international_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.international_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">VP Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="VP_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="VP_price"/>
+                        <div ng-show="add_product_form.VP_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.VP_price.$error.pattern">decimal number only</span> 
+
+                        </div>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">President Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="p_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="p_price"/>
+                        <div ng-show="add_product_form.p_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.p_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Ambassador Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="ambassador_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="ambassador_price"/>
+                        <div ng-show="add_product_form.ambassador_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.ambassador_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Crown Ambassador Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="crown_ambassador_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="crown_ambassador_price"/>
+                        <div ng-show="add_product_form.crown_ambassador_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.crown_ambassador_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Store  Price</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="store_price" ng-pattern="/^\d+(\.\d{1,2})?$/" ng-model="store_price"/>
+                        <div ng-show="add_product_form.store_price.$touched" >
+                             <span style="color:#B4270F" ng-show=" add_product_form.store_price.$error.pattern">Price only</span> 
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                </div>
+
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Quantity</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="product_qty" ng-model="product_qty" ng-pattern="/[0-9]/" required/>
+                        <div ng-show="add_product_form.product_qty.$touched" >
+                                    <span style="color:#B4270F" ng-show=" add_product_form.product_qty.$error.required">this field is required.</span> 
+                                     <span style="color:#B4270F" ng-show=" add_product_form.product_qty.$error.pattern">number only</span> 
+                                </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Category</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="product_category" ng-model="product_category" required >
+                            <option value="">Select Category</option>
+                            <option ng-repeat="category in categoryList" value="{{category.category_id}}">{{category.category_name}}</option>
+                        </select>
+                        <div ng-show="add_product_form.product_category.$touched" >
+                                    <span style="color:#B4270F" ng-show=" add_product_form.product_category.$error.required">this field is required.</span> 
+                                </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">BV Point</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="product_binary_point" ng-pattern="/[0-9]/" ng-model="product_binary_point" placeholder="Enter BV Point" required/>
+                        <div ng-show="add_product_form.product_binary_point.$touched" >
+                                    <span style="color:#B4270F" ng-show=" add_product_form.product_binary_point.$error.required">this field is required.</span> 
+                                    <span style="color:#B4270F" ng-show=" add_product_form.product_binary_point.$error.pattern">number only</span> 
+                                </div>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">QV Point</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="product_qv_point" ng-pattern="/[0-9]/" ng-model="product_qv_point" placeholder="Enter QV Point" required/>
+                        <div ng-show="add_product_form.product_qv_point.$touched" >
+                            <span style="color:#B4270F" ng-show=" add_product_form.product_qv_point.$error.required">this field is required.</span> 
+                            <span style="color:#B4270F" ng-show=" add_product_form.product_qv_point.$error.pattern">number only</span> 
+                        </div>
+                    </div>
+                </div>
+
+
+                 <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Reward Point</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="reward_points" ng-pattern="/[0-9]/" ng-model="reward_points" placeholder="Enter QV Point" required/>
+                        <div ng-show="add_product_form.reward_points.$touched" >
+                            <span style="color:#B4270F" ng-show=" add_product_form.reward_points.$error.required">this field is required.</span> 
+                            <span style="color:#B4270F" ng-show=" add_product_form.reward_points.$error.pattern">number only</span> 
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Status</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="product_status" ng-model="product_status" required>
+                            <option value="">Select Status</option>
+                            <option value="active">In stock</option>
+                            <option value="inactive">Out of stock</option>
+                        </select>
+                        <div ng-show="add_product_form.product_status.$touched" >
+                                    <span style="color:#B4270F" ng-show=" add_product_form.product_status.$error.required">this field is required.</span> 
+                                </div>
+                    </div>
+                </div>
+               
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Description</label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" name="product_desc" ng-model="product_desc" /></textarea>
+                    </div>
+                </div> 
+
+              
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Upload Image</label>
+                    <div class="col-md-6">
+                     <input type="file" ngf-select=""  ng-model="picFile" required/>
+                    </div>
+                </div>
+
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button type="submit" class="btn-primary btn" ng-disabled=" add_product_form.$invalid" ng-click="uploadPic(picFile)">submit</button>
+                               <button class="btn btn-primary">Reset</button>
+                                <a href="#/view-product" class="btn btn-primary">View Product</a> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+    <script type="text/javascript">
+         $(document).ready(function () {
+            var date = new Date();
+            date.setDate(date.getDate() - 1);
+
+            $("#date-picker" ).datepicker({
+              changeMonth: true,
+              changeYear: true,
+              yearRange: "1950:2050",
+            });
+          }
+
+        );
+    </script>

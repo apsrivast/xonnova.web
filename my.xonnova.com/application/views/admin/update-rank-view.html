@@ -1,0 +1,52 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Member Management</li>
+            <li class="active">Update Rank</li>
+        </ul>
+
+        <h1>Update Rank</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Update Rank">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" enctype="multipart/form-data" name="updateUserRankForm">
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">User Name</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="user_name" ng-model="user.user_name" ng-unique2="user_master.user_name" placeholder="Enter User Name" required/>
+                        <div ng-show="updateUserRankForm.user_name.$touched">
+                            <span style="color:#B4270F" ng-show="updateUserRankForm.user_name.$error.unique2">This user in not Valid Active!</span>
+                        </div>
+                    </div>
+                </div>                
+                
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">Rank</label>
+                    <div class="col-md-6">                        
+                        <select class="form-control" ng-model="user.level" required>
+                            <option value="">Select Ranks</option>
+                            <option ng-repeat="data in levelList" value="{{data.l_conf_id}}">{{data.level_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button type="submit" class="btn-primary btn" ng-disabled=" updateUserRankForm.$invalid" ng-click="updateUserRank(user);">submit</button>
+                                <!-- <button class="btn btn-primary">Reset</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

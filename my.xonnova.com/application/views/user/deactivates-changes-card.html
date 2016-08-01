@@ -1,0 +1,138 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Account</li>
+            <li class="active"> Change Card Subscription</li>
+        </ul>
+
+        <h1> Change Card Subscription</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading=" Change Card Subscription">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+           <!--  <div>
+                Change Card ? : Yes/No <input type="checkbox" ng-model="checked" value="1">
+            </div> -->
+           <!--  <div class="form-group" id="message"></div> -->
+           <!--  <form class="form-horizontal row-border" ng-hide="checked" enctype="multipart/form-data" name="deavtivateForm" >
+              
+                <h1 align="center">Deactivate Subscription</h1>
+                 <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar" align="center">
+                                <button type="submit" class="btn-primary btn"  ng-click="deactivate();">submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form> -->
+           
+            <form class="form-horizontal row-border" enctype="multipart/form-data" name="changeCardForm" >
+                
+                       <!--  <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">User Name</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="user_name" ng-model="user.user_name" ng-activeuser="user_master.user_name" placeholder="Enter User Name"/>
+                                <div ng-show="activateSubscriptionForm.user_name.$touched">
+                                    <span style="color:#B4270F" ng-show="activateSubscriptionForm.user_name.$error.activeuser">This user Subscription Already Active!</span>
+                                </div>
+                            </div>
+                        </div>      -->           
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Name on Card</label>
+                            <div class="col-md-6"><input id="name-on-card" class="form-control"  type="text" ng-model="user.name_on_card" placeholder= "Enter name on card" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Card No.</label>
+                            <div class="col-md-6"><input id="card-no" class="form-control"  type="text" ng-model="user.card_no" ng-pattern="/[0-9]/" placeholder= "Enter card no." required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Expiry Date</label>
+                            <div class="col-md-6">
+                                <select ng-model="user.expiry_month" style="padding: 5px; border-color:none;" required>
+                                    <option value="">mm</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                
+                                <select ng-model="user.expiry_year" style="padding: 5px; border-color:none;" required>
+                                    <option value="">yyyy</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+                                    <option value="2028">2028</option>
+                                    <option value="2029">2029</option>
+                                    <option value="2030">2030</option>
+                                    <option value="2031">2031</option>
+                                    <option value="2032">2032</option>
+                                    <option value="2033">2033</option>
+                                    <option value="2034">2034</option>
+                                    <option value="2035">2035</option>
+                                    <option value="2036">2036</option>
+                                    <option value="2037">2037</option>
+                                    <option value="2038">2038</option>
+                                    <option value="2039">2039</option>
+                                    <option value="2040">2040</option>
+                                    <option value="2041">2041</option>
+                                    <option value="2042">2042</option>
+                                    <option value="2043">2043</option>
+                                    <option value="2044">2044</option>
+                                    <option value="2045">2045</option>
+                                    <option value="2046">2046</option>
+                                    <option value="2047">2047</option>
+                                    <option value="2048">2048</option>
+                                    <option value="2049">2049</option>
+                                    <option value="2050">2050</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">CVV No.</label>
+                            <div class="col-md-6"><input id="cvv-no" class="form-control"  type="text" ng-model="user.cvv_no" placeholder="Enter CVV No." ng-pattern="/[0-9]/" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Billing ZIP</label>
+                            <div class="col-md-6"><input id="billing_zip" class="form-control"  type="text"ng-model="user.billing_zip" placeholder= "Enter Billing ZIP Code" ng-pattern="/[0-9]/" minlength="2" required></div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <div class="btn-toolbar" align="center">
+                                        <button type="submit" class="btn-primary btn" ng-disabled="changeCardForm.$invalid" ng-click="changesCard(user);">submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

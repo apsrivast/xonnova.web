@@ -1,0 +1,63 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li class="active">Dashboard</li>
+    </ol>
+
+    <h1>Dashboard</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-xs-4">
+                    <a ng-href="#/new-product-order-summary" class="info-tiles tiles-danger" href="#/new-product-order-summary">
+                        <div class="tiles-heading">
+                            <div class="text-center ng-binding">New Orders</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{newOrderTabList}}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a ng-href="#/archive-report-view" class="info-tiles tiles-midnightblue" href="#/member-report">
+                        <div class="tiles-heading">
+                            <div class="text-center">New User Signups</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{archiveMemberTotal}}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a ng-href="#/archive-report-view" class="info-tiles tiles-indigo" href="#">
+                        <div class="tiles-heading">
+                            <div class="text-center">New Upgraded User</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{archiveUpgradeUserTotal}}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

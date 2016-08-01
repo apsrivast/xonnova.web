@@ -1,0 +1,90 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Deposit</li>
+	</ol>
+
+	<h1>Deposit</h1>
+	
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="user in List"><br/>
+					<img src="uploads/{{user.deposit_image}}" alt="" class="img-responsive user-avatar" height="400" width="400">
+					<a href="https://my.onlegacynetwork.com/uploads/{{user.deposit_image}}" target="__blank" class="btn btn-pirmary">View Image</a>
+					<div class="user-detail">
+						
+						<div class="table-responsive">
+					
+							<table  class="table table-condensed m0">
+								<tbody>
+									<tr>
+										<td >ID</td>
+										<td >{{user.deposit_id}}</td>
+									</tr>
+									
+									<tr>
+										<td >User Name</td>
+										<td ><span ng-show="{{user.user_id | limitTo: 5}} == '11111'"> Store_</span>{{user.user_name || user.reseller_name}}</td>
+									</tr>
+									
+									<tr>
+										<td>Amount</td>
+										<td>{{user.bank_amount}}</a></td>
+									</tr>
+									<tr>
+										<td>Transaction Id</td>
+										<td>{{user.transaction_id}}</a></td>
+									</tr>
+									<tr>
+										<td>Date of Deposit</td>
+										<td>{{user.date_of_deposit}}</td>
+									</tr>
+									<tr>
+										<td>Bank deposit</td>
+										<td>{{user.bank_deposit}}</td>
+									</tr>
+									<tr>
+										<td>Status</td>
+										<td>{{user.deposit_status}}</td>
+									</tr>
+									<tr>
+										<td>Date of Release</td>
+										<td>{{user.hold_date}}</td>
+									</tr>
+									<tr>
+										<td>Comment</td>
+										<td>{{user.reject_comment}}</td>
+									</tr>
+									<tr>
+										<td>Cheque Status</td>
+										<td>{{user.cheque_status}}</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+						<div class="row" >
+						<div align="center">
+							<button type="button" class="finish btn-primary btn-sm "  ng-click="release(user)">Release</button>
+							<button type="submit" class="finish btn-primary btn-sm "  ng-click="bounce(user)">Bounce</button>
+							<a href="#/hold-deposit-view"  class="btn btn-success btn-sm">Back</a>
+						</div></div>
+						<br>
+					
+						
+					</div>
+				</div>
+        	</div>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->
+
+
+
+
+

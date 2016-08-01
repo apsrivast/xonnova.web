@@ -1,0 +1,76 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li class="active">Voucher #</li>
+        </ul>
+
+        <h1>Voucher #</h1>
+    </div>
+
+    <div class="container-fluid">
+        <panel panel-class="panel-midnightblue" heading="Voucher #">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+
+           <form role="form" name="myForm"  class="form-horizontal" ng-repeat="user in List" >
+
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">User Type</label>
+                            <div class="col-md-6">
+                                <select  class="form-control"  type="text" ng-model="user.type" >
+                                    <option value="">Select Type</option>
+                                    <option  value="BO">Onlegacy Member</option>
+                                    <option  value="RS">Store</option>
+                                </select>
+                            </div>
+                        </div>
+
+                 <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">User Name</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control"  value="{{user.user_name}}" name="user_name" ng-model="user.user_name"  placeholder= "Enter User Name"  required />
+                       <!--  <div ng-show="myForm.user_name.$touched" >ng-unique2="user_master.user_name"
+                            <span style="color:#B4270F" ng-show="myForm.user_name.$error.unique2">This User not exist!</span> 
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Voucher #</label>
+                    <div class="col-md-6">
+                        <input 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="user.sim_no" 
+                        value="{{user.sim_no}}"
+                        placeholder= "Enter Voucher #" 
+                        required>
+                    </div>
+                </div>
+
+                <!-- <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Date</label>
+                    <div class="col-md-6">
+                      
+                        
+                        <input type="text" value="{{user.ship_date}}" placeholder="yyyy-mm-dd"  class="form-control" pickadate ng-model="user.ship_date" format="yyyy-mm-dd"/>
+                    </div>
+                </div>
+                 -->
+                
+                
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <button type="submit" class="finish btn-primary btn-sm pull-right" ng-disabled=" myForm.$invalid" ng-click="edit(user)">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div>
+
+
+   

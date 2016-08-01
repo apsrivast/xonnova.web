@@ -1,0 +1,97 @@
+    <style type="text/css">
+        .error{
+            color: red;
+        }
+    </style>
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Settings</li>
+            <li class="active">Edit Level Configuration</li>
+        </ul>
+
+        <h1>Configuration</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Level Configuration">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="EditLevelForm" novalidate  ng-repeat="level in levelData">
+                <div id="message"></div>
+                <input type="hidden" ng-model="level.package_id" value="{{level.l_conf_id}}">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Name</label>
+                    <div class="col-sm-6">
+                        <input name="level_name"
+                            type="text"
+                            value="{{level.level_name}}" 
+                            
+                            placeholder="Enter Level Name"
+                            required
+                            ng-model="level.level_name"
+                            class="form-control"/>
+                        <span id="error_level_level_name" class="error"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Coded Bonus</label>
+                    <div class="col-sm-6">
+                        <input name="level_bonus"
+                            type="text"
+                            value="{{level.level_bonus}}" 
+                            ng-pattern="/[0-9]/"
+                            placeholder="Enter Coded Bonus"
+                            required
+                            ng-model="level.level_bonus"
+                            class="form-control"/>
+                        <span id="error_level_bonus" class="error"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Level Rule(%)</label>
+                    <div class="col-sm-6">
+                        <input name="level_discount_percent"
+                            type="text"
+                            value="{{level.level_discount_percent}}" 
+                            ng-pattern="/[0-9]/"
+                            placeholder="Enter Discount(%)"
+                            required
+                            ng-model="level.level_discount_percent"
+                            class="form-control"/>
+                        <span id="error_level_discount_percent" class="error"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Level QV Point</label>
+                    <div class="col-sm-6">
+                        <input name="exit_qv"
+                            type="text"
+                            value="{{level.exit_qv}}" 
+                            ng-pattern="/[0-9]/"
+                            placeholder="Enter level QV point"
+                            required
+                            ng-model="level.exit_qv"
+                            class="form-control"/>
+                        <span id="error_exit_qv" class="error"></span>
+                    </div>
+                </div>                 
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled=" EditLevelForm.$invalid" ng-click="update(level);">Update</button>
+                                <button class="btn btn-danger" ng-click="delete(level)">Delete <span class="glyphicon glyphicon-trash"></span></button>
+                                <button class="btn btn-primary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid   -->

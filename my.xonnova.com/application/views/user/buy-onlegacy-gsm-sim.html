@@ -1,0 +1,260 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+    </ol>
+    <h1>GSM SIM</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12" align="center" style="float: none; margin: auto;">
+            <panel panel-class="panel-sky" heading="GSM SIM">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                  
+                </panel-controls>
+                
+                <br/>
+                <div  >
+                    <div>GSM SIM<br><br>
+                       
+
+
+                         <form role="form" name="myForm"  class="form-horizontal" >
+                           
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">Total: $20</div>
+                            </div> 
+
+                            <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">First Name</label>
+                    <div class="col-md-6">
+                        <input  class="form-control" ng-model="user.first_name"  type="text" placeholder= "Enter First Name" ng-pattern="/[a-zA-Z]/" minlength="2" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Last Name</label>
+                    <div class="col-md-6">
+                        <input class="form-control" ng-model="user.last_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Last Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Phone Number</label>
+                    <div class="col-md-6">
+                        <input  class="form-control" ng-model="user.user_phone"  type="text" placeholder= "Enter Phone Number" ng-pattern="/[0-9]/" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldemail" class="col-md-3 control-label">Email</label>
+                    <div class="col-md-6">
+                        <input  class="form-control" type="email"  ng-model="user.user_email" placeholder= "Enter Email-ID" minlength="5"  required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">Address 1</label>
+                    <div class="col-md-6">
+                        <input  class="form-control"  type="text"  ng-model="user.address1" placeholder= "Enter Address" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">Address 2</label>
+                    <div class="col-md-6">
+                        <input  class="form-control"  type="text" ng-model="user.address2" placeholder= "Enter Address" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">City</label>
+                    <div class="col-md-6">
+                        <input  class="form-control"  type="text" ng-model="user.city" placeholder= "Enter City" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">State</label>
+                    <div class="col-md-6">
+                        <select  class="form-control"  type="text" ng-model="user.state" required>
+                            <option value="">Select State</option>
+                            <option value="AL">AL - ALABAMA</option>
+                            <option value="AK">AK - ALASKA</option>
+                            <option value="AS">AS - AMERICAN SAMOA</option>
+                            <option value="AZ">AZ - ARIZONA</option>
+                            <option value="AR">AR - ARKANSAS</option>
+                            <option value="AA">AA - Armed Forces Americas (Except Canada)</option>
+                            <option value="AE">AE - Armed Forces Europe</option>
+                            <option value="AP">AP - Armed Forces Pacific</option>
+                            <option value="CA">CA - CALIFORNIA</option>
+                            <option value="CO">CO - COLORADO</option>
+                            <option value="CT">CT - CONNECTICUT</option>
+                            <option value="DE">DE - DELAWARE</option>
+                            <option value="DC">DC - DISTRICT OF COLUMBIA</option>
+                            <option value="FM">FM - FEDERATED STATES OF MICRONESIA</option>
+                            <option value="FL">FL - FLORIDA</option>
+                            <option value="GA">GA - GEORGIA</option>
+                            <option value="GU">GU - GUAM</option>
+                            <option value="HI">HI - HAWAII</option>
+                            <option value="ID">ID - IDAHO</option>
+                            <option value="IL">IL - ILLINOIS</option>
+                            <option value="IN">IN - INDIANA</option>
+                            <option value="IA">IA - IOWA</option>
+                            <option value="KS">KS - KANSAS</option>
+                            <option value="KY">KY - KENTUCKY</option>
+                            <option value="LA">LA - LOUISIANA</option>
+                            <option value="ME">ME - MAINE</option>
+                            <option value="MH">MH - MARSHALL ISLANDS</option>
+                            <option value="MD">MD - MARYLAND</option>
+                            <option value="MA">MA - MASSACHUSETTS</option>
+                            <option value="MI">MI - MICHIGAN</option>
+                            <option value="MN">MN - MINNESOTA</option>
+                            <option value="MS">MS - MISSISSIPPI</option>
+                            <option value="MO">MO - MISSOURI</option>
+                            <option value="MT">MT - MONTANA</option>
+                            <option value="NE">NE - NEBRASKA</option>
+                            <option value="NV">NV - NEVADA</option>
+                            <option value="NH">NH - NEW HAMPSHIRE</option>
+                            <option value="NJ">NJ - NEW JERSEY</option>
+                            <option value="NM">NM - NEW MEXICO</option>
+                            <option value="NY">NY - NEW YORK</option>
+                            <option value="NC">NC - NORTH CAROLINA</option>
+                            <option value="ND">ND - NORTH DAKOTA</option>
+                            <option value="MP">MP - NORTHERN MARIANA ISLANDS</option>
+                            <option value="OH">OH - OHIO</option>
+                            <option value="OK">OK - OKLAHOMA</option>
+                            <option value="OR">OR - OREGON</option>
+                            <option value="PW">PW - PALAU</option>
+                            <option value="PA">PA - PENNSYLVANIA</option>
+                            <option value="PR">PR - PUERTO RICO</option>
+                            <option value="RI">RI - RHODE ISLAND</option>
+                            <option value="SC">SC - SOUTH CAROLINA</option>
+                            <option value="SD">SD - SOUTH DAKOTA</option>
+                            <option value="TN">TN - TENNESSEE</option>
+                            <option value="TX">TX - TEXAS</option>
+                            <option value="UT">UT - UTAH</option>
+                            <option value="VT">VT - VERMONT</option>
+                            <option value="VA">VA - VIRGINIA</option>
+                            <option value="VI">VI - VIRGIN ISLANDS</option>
+                            <option value="WA">WA - WASHINGTON</option>
+                            <option value="WV">WV - WEST VIRGINIA</option>
+                            <option value="WI">WI - WISCONSIN</option>
+                            <option value="WY">WY - WYOMING</option>
+
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Country</label>
+                    <div class="col-sm-6">
+                            <select class="form-control" ng-model="user.country" required>
+                                <option value="">Select Country</option>
+                                <option value="US">USA</option>
+                                <!-- <option value="MEX">Mexico</option> -->
+                            </select>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label">Zip</label>
+                    <div class="col-md-6">
+                        <input  class="form-control"  type="text"ng-model="user.zip" placeholder= "Enter ZIP Code"  ng-pattern="/[0-9]/" required>
+                    </div>
+                </div>
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Name on Card</label>
+                                <div class="col-md-6"><input id="name-on-card" class="form-control"  type="text" ng-model="user.name_on_card" placeholder= "Enter name on card" required></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Card No.</label>
+                                <div class="col-md-6"><input id="card-no" class="form-control"  type="text" ng-model="user.card_no" ng-pattern="/[0-9]/" placeholder= "Enter card no." required></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Expiry Date</label>
+                                <div class="col-md-6">
+                                    <select ng-model="user.expiry_month" style="padding: 5px; border-color:none;" required>
+                                        <option value="">mm</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    
+                                    <select ng-model="user.expiry_year" style="padding: 5px; border-color:none;" required>
+                                        <option value="">yyyy</option>
+                                       
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                        <option value="2031">2031</option>
+                                        <option value="2032">2032</option>
+                                        <option value="2033">2033</option>
+                                        <option value="2034">2034</option>
+                                        <option value="2035">2035</option>
+                                        <option value="2036">2036</option>
+                                        <option value="2037">2037</option>
+                                        <option value="2038">2038</option>
+                                        <option value="2039">2039</option>
+                                        <option value="2040">2040</option>
+                                        <option value="2041">2041</option>
+                                        <option value="2042">2042</option>
+                                        <option value="2043">2043</option>
+                                        <option value="2044">2044</option>
+                                        <option value="2045">2045</option>
+                                        <option value="2046">2046</option>
+                                        <option value="2047">2047</option>
+                                        <option value="2048">2048</option>
+                                        <option value="2049">2049</option>
+                                        <option value="2050">2050</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">CVV No.</label>
+                                <div class="col-md-6"><input id="cvv-no" class="form-control"  type="text" ng-model="user.cvv_no" placeholder="Enter CVV No." ng-pattern="/[0-9]/" required></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Billing ZIP</label>
+                                <div class="col-md-6"><input id="billing_zip" class="form-control"  type="text" ng-model="user.billing_zip" placeholder="Enter Billing ZIP Code" minlength="2" ng-pattern="/[0-9]/" required></div>
+                            </div>
+                            <div class="form-group">
+                                <div  id="message"></div>
+                            </div>
+
+
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <button type="submit" class="finish btn-primary btn-sm " ng-disabled=" myForm.$invalid" ng-click="buy(user)">Buy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+ 
+                </div>
+               
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

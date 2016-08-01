@@ -1,0 +1,282 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">{{lng_dashboard}}</a></li>
+        <li>{{lng_team}}</li>
+        <li class="active">{{lng_add_new_member}}</li>
+    </ol>
+    <h1>{{lng_add_new_member}}</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="{{lng_user_registration_form}}">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+
+                <form role="form" name="myForm"  data-wizard="{finishButton: true, titleClick: true, block: true, validate: true}" class="form-horizontal">
+                    <fieldset title="Step 1">
+                        <legend>{{lng_contact_information}}</legend>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_country}}</label>
+                            <div class="col-md-6">
+                                <select id="country" class="form-control"  type="text" ng-model="user.country" >
+                                    <option value="">{{lng_select_country}}</option>
+                                    <option ng-selected="selected" value="US">{{lng_usa}}</option>
+                                    <option ng-selected="selected" value="US">Puerto Rico</option>
+                                    <option value="MEX">{{lng_mexico}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">{{lng_first_name}}</label>
+                            <div class="col-md-6">
+                                <input id="f-name" class="form-control"ng-model="user.first_name"  type="text" placeholder= "Enter First Name" ng-pattern="/[a-zA-Z]/" minlength="2" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">{{lng_middle_name}}</label>
+                            <div class="col-md-6">
+                                <input id="m-name" class="form-control" ng-model="user.middle_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Middle Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">{{lng_last_name}}</label>
+                            <div class="col-md-6">
+                                <input id="l-name" class="form-control" ng-model="user.last_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Last Name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">{{lng_ssn_itin_ein}}</label>
+                            <div class="col-md-6">
+                                <input id="ssn" class="form-control" ng-model="user.ssn" type="text" placeholder= "Enter SSN, Itin, Ein ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">{{lng_user_name}}</label>
+                            <div class="col-md-6">
+                                <input id="u-name" name="user_name" class="form-control" ng-model="user.user_name"  ng-pattern="/[a-zA-Z]/" minlength="2" type="text" placeholder= "Enter User Name" required ng-unique="user_master.user_name" ><div ng-show="myForm.user_name.$touched" >
+                                <span style="color:#B4270F" ng-show=" myForm.user_name.$error.unique">{{lng_username_is_already_taken}}</span> </div> <!--pk -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldemail" class="col-md-3 control-label">{{lng_email}}</label>
+                            <div class="col-md-6">
+                                <input id="fieldemail" name="user_email" class="form-control" type="email"  ng-model="user.user_email" placeholder= "Enter Email-ID" minlength="5"  required ng-unique1="user_master.user_email">
+                                <div ng-show="myForm.user_email.$touched" >
+                                    <span style="color:#B4270F" ng-show=" myForm.user_email.$error.unique1">{{lng_email_is_already_taken}}</span> 
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_password}}</label>
+                            <div class="col-md-6"><input id="password" class="form-control"  type="password" ng-model="user.user_password" placeholder= "Enter Password" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_confirm_password}}</label>
+                            <div class="col-md-6">
+                                <input id="cpassword" name="cpassword" class="form-control"  type="password" ng-model="user.cpassword" ng-pattern="user.user_password" placeholder= "Enter Confirm Password" required >
+                                <div ng-show="myForm.cpassword.$touched" >
+                                    <span style="color:#B4270F" ng-show=" myForm.cpassword.$error.pattern">{{lng_password_not_match}}</span> 
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_birth_date}}</label>
+                            <div class="col-md-6" ng-controller="dateCtr">
+								<div class="container" style="width: 100%; margin: 0px; padding: 0px;">
+                                   <input
+                                        id="input_01"
+                                        class="datepicker form-control"
+                                        name="dob"
+                                        ng-model="user.dob"
+                                        type="text"
+										placeholder="yyyy-mm-dd"
+                                        autofocuss required>
+                                </div>  
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset title="Step 2">
+                        <legend>{{lng_contact_information}}</legend>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_address_1}}</label>
+                            <div class="col-md-6"><input id="address1" class="form-control"  type="text" ng-model="user.address1" placeholder= "Enter Address" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_address_2}}</label>
+                            <div class="col-md-6"><input id="address2" class="form-control"  type="text" ng-model="user.address2"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_city}}</label>
+                            <div class="col-md-6"><input id="city" class="form-control"  type="text" ng-model="user.city" placeholder= "Enter City" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_state}}</label>
+                            <div class="col-md-6"><input id="state" class="form-control"  type="text" ng-model="user.state" placeholder= "Enter State" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_zip}}</label>
+                            <div class="col-md-6"><input id="zip" class="form-control"  type="text"ng-model="user.zip" placeholder= "Enter ZIP Code" minlength="2" ng-pattern="/[0-9]/" required></div>
+                        </div>
+						 <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_phone}}</label>
+                            <div class="col-md-6"><input  class="form-control"  type="text" ng-pattern="/[0-9]/" ng-model="user.phone" placeholder= "Enter Phone" required></div>
+                        </div>
+                    </fieldset>
+                    <fieldset title="Step 3">
+                        <legend>{{lng_payment}}</legend>
+						<div id="error-message"></div>
+                        <div class="form-group">
+							<label for="fieldpass" class="col-md-3 control-label"></label>
+                            <div class="col-md-6">
+								<div ng-show="myForm.user_name.$touched" >
+									<span style="color:#B4270F" ng-show=" myForm.user_name.$error.unique">{{lng_username_is_already_taken}}</span> 
+								</div>
+								<div ng-show="myForm.user_email.$touched" >
+										<span style="color:#B4270F" ng-show=" myForm.user_email.$error.unique1">{{lng_email_is_already_taken}}</span> 
+								</div>
+								<div ng-show="myForm.cpassword.$touched" >
+										<span style="color:#B4270F" ng-show=" myForm.cpassword.$error.pattern">{{lng_password_not_match}}</span> 
+								</div>
+							</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_sponsor}}</label>
+                            <div class="col-md-6">
+								<input id="sponsor-id" name="sponsor" class="form-control"  type="text" ng-model="user.sponsor_id" placeholder= "Enter Sponsor Name" required ng-unique2="user_master.user_name"/>
+                                <div ng-show="myForm.sponsor.$touched" >
+                                    <span style="color:#B4270F" ng-show=" myForm.sponsor.$error.unique2">{{lng_sponsor_not_exist}}</span> 
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">{{lng_package}}</label>
+                            <div class="col-md-6">
+                                <select name="package" ng-model="user.package" id="package" class="form-control" required>
+                                    <option value="">{{lng_select_package}}</option>
+                                    <option ng-repeat="data in packages" value="{{data.package_id}}" ng-selected="selected">{{data.package_name}} (${{data.entry_ammout}})</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label"></label>
+                            <div class="col-md-6">
+                                {{lng_if_you_have_voucher}} werwefsdfwer<input type="checkbox" name="checked" ng-model="user.checked">     
+                            </div>
+                        </div>
+                        <div ng-show="user.checked">
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">{{lng_voucher_code}}</label>
+                                <div class="col-md-6">
+                                   <input type="text" name="voucher_code" ng-model="user.voucher_code" class="form-control" ng-vouchercode ng-required="user.checked"> 
+                                        <div ng-show="myForm.voucher_code.$dirty">
+                                            <span style="color:#B4270F" ng-show=" myForm.voucher_code.$error.vouchercode">{{lng_voucher_code_not_exist}}</span> 
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-hide="user.checked">
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">{{lng_name_on_card}}</label>
+                                <div class="col-md-6"><input id="name-on-card" class="form-control"  type="text" ng-model="user.name_on_card" placeholder= "Enter name on card" ng-required="!user.checked"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">{{    lng_card_no}}</label>
+                                <div class="col-md-6"><input id="card-no" class="form-control"  type="text" ng-model="user.card_no" placeholder= "Enter card no." ng-pattern="/[0-9]/" ng-required="!user.checked"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">{{lng_expiry_date}}</label>
+                                <div class="col-md-6">
+                                    <select ng-model="user.expiry_month" ng-required="!user.checked">
+                                        <option value="">{{lng_mm}}</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    
+                                    <select ng-model="user.expiry_year" ng-required="!user.checked">
+                                        <option value="">{{lng_yyyy}}</option>
+                                        <option value="2015">2015</option>
+										<option value="2016">2016</option>
+										<option value="2017">2017</option>
+										<option value="2018">2018</option>
+										<option value="2019">2019</option>
+										<option value="2020">2020</option>
+										<option value="2021">2021</option>
+										<option value="2022">2022</option>
+										<option value="2023">2023</option>
+										<option value="2024">2024</option>
+										<option value="2025">2025</option>
+										<option value="2026">2026</option>
+										<option value="2027">2027</option>
+										<option value="2028">2028</option>
+										<option value="2029">2029</option>
+										<option value="2030">2030</option>
+										<option value="2031">2031</option>
+										<option value="2032">2032</option>
+										<option value="2033">2033</option>
+										<option value="2034">2034</option>
+										<option value="2035">2035</option>
+										<option value="2036">2036</option>
+										<option value="2037">2037</option>
+										<option value="2038">2038</option>
+										<option value="2039">2039</option>
+										<option value="2040">2040</option>
+										<option value="2041">2041</option>
+										<option value="2042">2042</option>
+										<option value="2043">2043</option>
+										<option value="2044">2044</option>
+										<option value="2045">2045</option>
+										<option value="2046">2046</option>
+										<option value="2047">2047</option>
+										<option value="2048">2048</option>
+										<option value="2049">2049</option>
+										<option value="2050">2050</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">{{lng_cvv_no}}</label>
+                                <div class="col-md-6"><input id="cvv-no" class="form-control"  type="text" ng-model="user.cvv_no" placeholder= "Enter CVV No." ng-pattern="/[0-9]/" ng-required="!user.checked"></div>
+                            </div>
+							<div class="form-group">
+								<label for="fieldpass" class="col-md-3 control-label">{{lng_billing_zip}}</label>
+								<div class="col-md-6"><input id="billing_zip" class="form-control"  type="text" ng-model="user.billing_zip" placeholder="Enter Billing ZIP Code" minlength="2" ng-pattern="/[0-9]/" ng-required="!user.checked"></div>
+							</div>
+                        </div>
+                    </fieldset>
+                    <input type="submit" class="finish btn-success btn" value="Submit" ng-disabled=" myForm.$invalid " ng-click="addUser(user);"/>
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>
+
+	<script type="text/ng-template" id="firstDialogId">
+        <div class="ngdialog-message">
+            <h3>Thank you !</h3>
+            <p><code>{{ngDialogData.foo}}</code></p>
+           
+         </div>
+    </script>
+	
+	<script type="text/ng-template" id="customTemplate.html">
+      <a>
+          <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+      </a>
+    </script>
+    

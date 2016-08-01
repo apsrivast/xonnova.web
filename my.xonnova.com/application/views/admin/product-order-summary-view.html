@@ -1,0 +1,160 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Order</li>
+	</ol>
+
+	<h1>Order</h1>
+	
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="user in list"><br/>
+					<img src="assets/uploads/{{user.product_image}}" alt="Product Image" class="img-responsive" height="400" width="400">
+					
+					<div class="user-detail">
+						
+						<div class="table-responsive">
+					
+							<table  class="table table-condensed m0">
+								<tbody>
+									<tr>
+										<th >Product Info</th>
+										<td ></td>
+									</tr>
+									
+									<tr>
+										<td >Product Name</td>
+										<td >{{user.product_name}}</td>
+									</tr>
+									
+									<tr>
+										<td>Quantity</td>
+										<td>{{user.p_qty}}</td>
+									</tr>
+									<tr>
+										<td>Purchase At</td>
+										<td>{{user.purchase_at}}</td>
+									</tr>
+									
+									
+									<tr>
+										<th >User Info</th>
+										<td ></td>
+									</tr>
+									<tr>
+										<td>First Name</td>
+										<td>{{user.first_name}}</td>
+									</tr>
+									<tr>
+										<td>Last Name</td>
+										<td>{{user.last_name}}</td>
+									</tr>
+									<tr>
+										<td>User Email</td>
+										<td>{{user.user_email}}</td>
+									</tr>
+									<tr>
+										<td>Address</td>
+										<td>{{user.address1}},{{user.address2}}</td>
+									</tr>
+									<tr>
+										<td>City</td>
+										<td>{{user.city}}</td>
+									</tr>
+									<tr>
+										<td>State</td>
+										<td>{{user.state}}</td>
+									</tr>
+									<tr>
+										<td>Country</td>
+										<td>{{user.country}}</td>
+									</tr>
+									
+									<tr>
+										<td>Zip</td>
+										<td>{{user.zip}}</td>
+									</tr>
+									<tr>
+										<td>Contact No.</td>
+										<td>{{user.contact_no}}</td>
+									</tr>
+									
+									<tr>
+										<th >Payment Info</th>
+										<td ></td>
+									</tr>
+									<tr>
+										<td>Total Payment</td>
+										<td>{{user.subtotal}}</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+						<!-- <div align="center"><a href="#/product-order-summary"  class="btn btn-success btn-sm">Back</a></div> -->
+						<form role="form" name="myForm"  class="form-horizontal" >
+							<div class="form-group">
+								<div id="message"></div>
+							</div>
+							<div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-6 col-sm-offset-3">
+			                                <button type="submit" class="finish btn-success btn-sm pull-right" ng-disabled=" myForm.$invalid" ng-click="orderStatus(user)">Update Status</button>
+			                        </div>
+			                    </div>
+			                </div>
+							<div class="form-group">
+			                   	<input type="hidden" name="id" ng-model="user.purchase_id" value="{{user.purchase_id}}"/>
+			                </div>
+			                <div class="form-group">
+	                            <label for="fieldpass" class="col-md-3 control-label">Status</label>
+	                            <div class="col-md-6">
+	                                <select class="form-control"  type="text" ng-model="user.delivery_status" required>
+	                                    <option value="">Select Status</option>
+	                                    <option value="Shipped">Shipped</option>
+										<option value="Processing">Not Shipped</option>
+	                                </select>
+	                            </div>
+	                        </div>
+
+	                        <div class="form-group">
+	                            <label for="fieldname" class="col-md-3 control-label">Shipped Via</label>
+	                            <div class="col-md-6">
+	                                <input  class="form-control" ng-model="user.shipped_via"  type="text" required>
+	                            </div>
+	                        </div>
+	                        
+	                        <div class="form-group">
+	                            <label for="fieldname" class="col-md-3 control-label">Tracking Id</label>
+	                            <div class="col-md-6">
+	                                <input  class="form-control" ng-model="user.tracking_id"  type="text" required>
+	                            </div>
+	                        </div>
+			                <div class="form-group">
+			                    <label for="fieldname" class="col-md-3 control-label">Shipping Date</label>
+			                    <div class="col-md-6" ng-controller="orderdateCtr">
+                                	<div id="container1" style="width: 100%; margin: 0px; padding: 0px;">
+		                                <input
+		                                        id="input_011"
+		                                        class="datepicker1 form-control"
+		                                        name="shipping_date"
+		                                        ng-model="user.shipping_date"
+		                                        type="text"
+												placeholder="yyyy-mm-dd"
+		                                        autofocuss required/>
+		                            </div>   
+		                        </div>
+			                </div>
+							<br/>			                 
+						</form>   
+					</div>
+				</div>
+        	</div>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->

@@ -1,0 +1,72 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Business</li>
+            <li class="active">Waiting Phone # List</li>
+        </ul>
+
+        <h1>Waiting Phone # List</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Waiting Phone # List">
+            <div class="row">
+                    <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Activation ID<a ng-click="sort_by('id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                               
+                               <!--  <th>User Name<a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                                <th>SIM #<a ng-click="sort_by('sim');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Status<a ng-click="sort_by('sim_status');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Request Date<a ng-click="sort_by('created');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                               <!--  <th></th> -->
+                               
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (getResellerWaitingPhoneList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.id}}</td>
+                                
+                                
+                               <!--  <td align="left">{{data.user_name}}</td> -->
+                                 <td align="left">{{data.sim}}</td>
+                                 <td align="left">{{data.sim_status}}</td>
+                               
+                                <td align="left">{{data.created}}</td>
+                               <!--  <td>
+                                    <a href="#/activation-report-by-user/{{data.id}}"  class="btn btn-primary btn-sm">View</a>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Waiting Phone # found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+        </panel>
+    </div> <!-- container-fluid -->

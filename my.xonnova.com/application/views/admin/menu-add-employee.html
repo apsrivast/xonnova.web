@@ -1,0 +1,140 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+           
+            <li class="active">Add Employee</li>
+        </ul>
+
+        <h1>Add Employee</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Add Employee">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+             
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="add_credit"  >
+                <div class="form-group">
+                   
+                    <div id="message">
+                       
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label"> Department </label>
+                    <div class="col-md-6">
+                        <select  class="form-control"  ng-model="user.department_id" required  >
+                            <option  value="">Select Department</option>
+                            <option ng-repeat="total in getDepartmentList" value="{{total.department_id}}">{{total.department_name}}</option>
+                        </select>
+                       
+                    </div>
+                   
+                </div>
+               <div class="form-group">
+                    <label  class="col-md-3 control-label">Employee User Name</label>
+                    <div class="col-md-6">
+                    	<input name="employee_name" 
+                    	class="form-control"  
+                    	type="text" 
+                    	ng-model="user.employee_name" 
+                    	placeholder= "Employee User Name" 
+                    	required
+                        ng-unique="user_master.user_name"
+                    	> 
+                            <div ng-show="add_credit.employee_name.$touched" >
+								<span style="color:#B4270F" ng-show=" add_credit.employee_name.$error.unique">Username is already taken.</span> 
+							</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Employee Password</label>
+                    <div class="col-md-6">
+                    	<input name="employee_pass" 
+                    	class="form-control"  
+                    	type="password" 
+                    	ng-model="user.employee_pass" 
+                    	placeholder= "Enter Employee Password " 
+                    	required>
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled=" add_credit.$invalid " ng-click="addEmployee(user);">Add</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Employee List">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                 
+                </panel-controls>
+
+                 <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr> 
+                               
+                                <th>Employee User Name<a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                 <th>Department Name<a ng-click="sort_by('department_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (getEmployeeList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                
+                                <td>{{data.user_name}}</td>
+                                 <td>{{data.department_name}}</td>
+                              
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Employee found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+
+

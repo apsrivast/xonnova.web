@@ -1,0 +1,57 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li> Settings</li>
+            <li class="active">View Category</li>
+        </ul>
+
+        <h1>Edit Category</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Edit Category">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="edit-product-form" ng-repeat="category in categoryData">
+                <input type="hidden" ng-model="category.v_c_id" value="{{category.v_c_id}}">
+                 <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Category Name</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="category_name" ng-model="category.category_name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Category Status</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="category_status" ng-model="category.category_status">
+                            <option value="">Select Category Status</option>
+                            <option value="active">Enable</option>
+                            <option value="inactive">Disable</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Description</label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" name="message" ng-model="category.message" /></textarea>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button type="submit" class="btn-primary btn" ng-click="update(category);">submit</button>
+                                <button class="btn btn-danger" ng-click="delete(category)">Delete <span class="glyphicon glyphicon-trash"></span></button>
+                                <button class="btn btn-primary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

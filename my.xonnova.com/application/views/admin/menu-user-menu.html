@@ -1,0 +1,103 @@
+<div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li class="active">Add Menu</li>
+        </ul>
+        <h1>Add Menu</h1>
+    </div>
+    <div class="container-fluid">
+        <panel panel-class="panel-midnightblue" heading="Add Menu">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+            <form class="form-horizontal row-border" name="add_credit"  >
+                <div class="form-group">
+                    <div id="message">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label"> Menu</label>
+                    <div class="col-md-6">
+                        <select  class="form-control"  ng-model="user.menu_id" required ng-change="onchangeMenu(user.menu_id)" >
+                          <option  value="">Select Menu</option>
+                            <option ng-repeat="total in getMenuList" value="{{total.menu_id}}">{{total.menu_label}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldpass" class="col-md-3 control-label"> Sub Menu</label>
+                    <div class="col-md-6">
+                        <select multiple class="form-control" required ng-model="user.sub_menu_id" style="height:100px" >
+                            <option ng-repeat="total in getSubMenuList" value="{{total.sub_menu_id}}">{{total.sub_menu_label}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled=" add_credit.$invalid " ng-click="addMenuUser(user);">Add</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Mapping List">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+                 <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr> 
+                                <th>Menu Name<a ng-click="sort_by('menu_label');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Sub Menu Name<a ng-click="sort_by('sub_menu_label');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (getUserMenuList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td>{{data.menu_label}}</td>
+                                <td>{{data.sub_menu_label}}</td>
+                                 <td>
+                                   <button type="submit" class="btn btn-danger btn-sm" ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Mapping found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

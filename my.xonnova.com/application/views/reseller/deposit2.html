@@ -1,0 +1,65 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">{{lng_dashboard}}</a></li>
+        <li>{{lng_money}} </li>
+        <li class="active">{{lng_upload_deposit}}</li>
+    </ol>
+    <h1>{{lng_upload_deposit}}</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="{{lng_upload_deposit}}">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+
+                <form name="deposit_form" enctype="multipart/form-data" class="form-horizontal row-border" ng-controller="MyCtrlDeposit">
+                	 <div id="message"></div>
+                	<div class="form-group">
+	                    <label for="fieldname" class="col-md-3 control-label">Transaction ID</label>
+	                    <div class="col-md-6">
+	                        <input id="transaction-id" class="form-control" ng-model="transaction_id"  type="text" placeholder= "Enter Transaction ID" minlength="2" required>
+	                    </div>
+	                </div>
+					<div class="form-group">
+	                    <label for="fieldname" class="col-md-3 control-label">Amount</label>
+	                    <div class="col-md-6">
+	                        <input id="bank-amount" name="bank_amount" class="form-control" ng-model="bank_amount"  type="text" placeholder= "Enter Amount Deposited"  required>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label for="fieldname" class="col-md-3 control-label">Date Deposited</label>
+	                    <div class="col-md-6">
+	                        <input id="date-deposit" class="form-control" pickadate ng-model="date_deposit"  type="text" placeholder="yyyy-MM-dd" min="1950-01-01" max="2099-12-31" required/>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label for="fieldname" class="col-md-3 control-label">Bank Deposited</label>
+	                    <div class="col-md-6">
+	                        <input id="bank-deposit" name="bank_deposit" class="form-control" ng-model="bank_deposit"  type="text" placeholder= "Enter Bank Deposited" ng-pattern="/[a-zA-Z]/" minlength="2" required>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label for="fieldname" class="col-md-3 control-label">Take a picture of the receipt</label>
+	                    <div class="col-md-6">
+	                    	<!-- <input type="file" file-model="deposit_image" ng-model="deposit_image"/> -->
+	                    	 <input type="file" name="picFile" ngf-select="" accept="*"  ng-model="picFile" required/>
+	                    </div>
+	                </div>
+                	<div class="panel-footer">
+	                    <div class="row">
+	                        <div class="col-sm-6 col-sm-offset-3">
+	                            <div class="btn-toolbar">
+	                                <button type="submit" class="btn-primary btn" ng-disabled=" deposit_form.$invalid " ng-click="uploadFilgfde(picFile)">submit</button>
+	                                <button class="btn btn-primary">Reset</button>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+                </form>                
+            </panel>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Business</li>
+        <li class="active">Refer A Store</li>
+    </ol>
+    <h1>Refer A Store</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Refer A Store">
+                <form role="form" name="myForm"   class="form-horizontal" enctype="multipart/form-data"  >
+					<div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Store User Name</label>
+                        <div class="col-md-6">
+                            <input  class="form-control" ng-model="user.user_name"  type="text" placeholder= "Enter User Name" ng-pattern="/^[a-zA-Z]+$/"  required>
+                        </div>
+                    </div>	
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Store User Password</label>
+                        <div class="col-md-6">
+                            <input  class="form-control" ng-model="user.password"  type="password" placeholder= "Enter Password "   required>
+                        </div>
+                    </div>  
+
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Address</label>
+                        <div class="col-md-6">
+                            <input class="form-control"  type="text" ng-model="user.address" placeholder= "Enter Address" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">State</label>
+                        <div class="col-md-6">
+                            <input class="form-control"  type="text" ng-model="user.state" placeholder= "Enter State" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">City</label>
+                        <div class="col-md-6">
+                            <input class="form-control"  type="text" ng-model="user.city" placeholder= "Enter City" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Zip</label>
+                        <div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.zip" ng-pattern="/^[0-9]+$/" placeholder= "Enter Zip Code"  required></div>
+                    </div>
+                              
+                               
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Name of Business</label>
+                        <div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.business_name" placeholder= "Enter Business Name"  required></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Owner Name</label>
+                        <div class="col-md-6">
+                            <input class="form-control"  type="text" ng-model="user.owner_name" placeholder= "Enter Address" required>
+                        </div>
+                    </div>
+
+                   
+					<div class="panel-footer">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+									<button type="submit" class="finish btn-success btn pull-right"  ng-disabled=" myForm.$invalid" ng-click="add(user);">Add</button>
+							</div>
+						</div>
+					</div>   
+
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>

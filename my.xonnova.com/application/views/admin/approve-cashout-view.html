@@ -1,0 +1,76 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Money</li>
+            <li class="active">Cashout</li>
+        </ul>
+
+        <h1>Cashout Details</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Cashout">
+		
+			 <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+            <form class="form-horizontal row-border" name="cashoutForm">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID<a ng-click="sort_by('user_id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>user Image<a ng-click="sort_by('image');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>User Name<a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th></th>
+                                <th>Payout Ammount<a ng-click="sort_by('cashout_ammount');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th> Status<a ng-click="sort_by('cashout_status');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th></th>
+                                <!-- <th></th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (cashoutList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_id}}</td>
+                                <td><img class="img-circle" alt="Dangerfield" src="uploads/{{data.image}}" style="height: 70px; width: 70px;"></td>
+                                
+                                
+                                <td>{{data.user_name}}</td>
+                                <td></td>
+                                <td>{{data.cashout_ammount}}</td>
+
+                                <td>{{data.cashout_status}}</td>
+                                <td></td>
+                                <td>
+                                    <a href="#/cashout-info-approve/{{data.user_id}}"  class="btn btn-default btn-sm">view</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Cashout found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

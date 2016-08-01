@@ -1,0 +1,1045 @@
+
+<style>
+    .circle { cursor: pointer;    }
+    text {  font-size: 13px; stroke-width: 1px; }
+
+    path.link { fill: none; stroke: #ccc; stroke-width: 1.5px;}
+</style>
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Team</li>
+        <li class="active">Binary View</li>
+    </ol>
+
+    <h1>Binary View</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="col-sm-6">
+            <button type="button" class="btn btn-default update-tree">Update Tree</button>
+          </div>
+          <div class="col-sm-6">
+            <form> 
+              <div class="form-group">
+                  <label for="fieldpass" class="col-md-3 control-label">User Name</label>
+                  <div class="col-md-6">
+                      <input type="text" class="form-control" placeholder="Enter User Name" name="boardlevel_user" ng-model="boardlevel.boardlevel_user">
+                  </div>
+                  <div class="col-md-3">
+                      <input type="submit" class="btn btn-primary" name="submit"  value="Search" ng-click="boardlevelSearch(boardlevel);"/>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-12"> 
+           <div class="chart">
+
+           </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+  $(document).ready(function (){
+	  $('.update-tree').click(function(){
+		location.reload();
+	  });
+      var max = 30, min = 10, dec = 0;
+
+    var w = $(window).width()*0.7,
+        h = $(window).height()*0.9,
+        i = 0,
+        duration = 600,
+        roo;
+
+    var tree = d3.layout.tree()
+        .size([h, w - 160]);
+
+    var diagonal = d3.svg.diagonal()
+        .projection(function(d) { return [d.y, d.x]; });
+
+    var vis = d3.select(".chart").append("svg:svg")
+        .attr("width", "100%")
+        .attr("height", $(window).height()*0.9)
+        .append("svg:g")
+        .attr("transform", "translate(40,0)");
+
+
+    root = treeData;
+
+    update(root);
+
+    $(window).resize(function(){
+      $(".chart").html("");
+      //.size([ $(window).width()*0.7*0.9 , $(window).height()*0.7/2 - 160 ]);
+      tree = d3.layout.tree()
+        .size([$(window).height()*0.9, $(window).width()*0.7*0.8]);
+      vis = d3.select(".chart").append("svg:svg")
+        .attr("width",  $(window).width()*0.7)
+        .attr("height", $(window).height()*0.9)
+        .append("svg:g")
+        .attr("transform", "translate(40,0)");
+      update(root);
+    });
+
+    function update(source) {
+
+      // Compute the new tree layout.
+      var nodes = tree.nodes(root).reverse();
+      //console.log(nodes)
+      // Update the nodes…
+      var node = vis.selectAll("g.node")
+          .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+      var nodeEnter = node.enter().append("svg:g")
+          .attr("class", "node")
+          .on("mouseover", function(d) {
+            var g = d3.select(this); // The node
+            // The class is used to remove the additional text later
+            var info = g.append('text')
+
+              .attr('stroke','black')
+
+              .classed('info', true)
+              .attr('x', 15)
+              .attr('y', function(d){
+                return  ( ( max - ( d.level * dec)) > min ) ? ( max - ( d.level * dec))/2 + 10 + "px" : "-5px";
+              })
+              .text(function(d) {
+                //return d.name;
+				var userName = d.name;
+                $.ajax({
+                     type: "post",
+                     url: BASE_URL+"admin/userChildBinaryDetails",
+                     data: {
+                        user_name:userName,
+                     },
+                     success: function(data){
+                        $('text').html(data);
+                     }
+                });
+              });
+          })
+          .on("mouseout", function() {
+            // Remove the info text on mouse out.
+            d3.select(this).select('text.info').remove();
+          })
+          .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+        .style("opacity", 0);
+
+      // Enter any new nodes at the parent's previous position.
+      node.append("svg:image")
+          .attr("class", "circle")
+          .attr("xlink:href", function(d){
+            if(d.image == 0){
+              //return "/images/users/avatars/circle_avatar_default.png"
+              return "assets/images/UserAdd.png"
+            }else{
+              return "assets/images/users/avatars/circle_"+ d.image
+            }
+          })
+          .attr("preserveAspectRatio","xMidYMid slice")
+          .attr("x", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ?  "-" + ( max - ( d.level * dec))/2 + "px" : "-5px";
+          })
+          .attr("y", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ?  "-" + ( max - ( d.level * dec))/2 + "px" : "-5px";
+          })
+          .attr("width", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ? max - ( d.level * dec) + "px" : "10px";
+          })
+          .attr("height", function(d){
+            return  ( ( max - ( d.level * dec)) > min ) ? max - ( d.level * dec) + "px" : "10px";
+          })
+          .on("click", click);
+
+      /*nodeEnter.append("svg:text")
+          .attr("x", function(d) { return d._children ? -15 : -15; })
+          .attr("y", 20)
+          .text(function(d) { return d.name; });*/
+
+      // Transition nodes to their new position.
+      nodeEnter.transition()
+          .duration(duration)
+          .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+          .style("opacity", 1)
+          .select("circle")
+          .style("fill", "lightsteelblue");
+
+      node.transition()
+          .duration(duration)
+          .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+          .style("opacity", 1);
+
+
+      node.exit().transition()
+          .duration(duration)
+          .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+          .style("opacity", 0)
+          .remove();
+
+      // Update the links…
+      var link = vis.selectAll("path.link")
+          .data(tree.links(nodes), function(d) { return d.target.id; });
+
+      // Enter any new links at the parent's previous position.
+      link.enter().insert("svg:path", "g")
+          .attr("class", "link")
+          .attr("d", function(d) {
+            var o = {x: source.x0, y: source.y0};
+            return diagonal({source: o, target: o});
+          })
+          .transition()
+          .duration(duration)
+          .attr("d", diagonal);
+
+      // Transition links to their new position.
+      link.transition()
+          .duration(duration)
+          .attr("d", diagonal);
+
+      // Transition exiting nodes to the parent's new position.
+      link.exit().transition()
+          .duration(duration)
+          .attr("d", function(d) {
+            var o = {x: source.x, y: source.y};
+            return diagonal({source: o, target: o});
+          })
+          .remove();
+
+      var maxLevel = 0;
+      // Stash the old positions for transition.
+      nodes.forEach(function(d) {
+        d.x0 = d.x;
+        d.y0 = d.y;
+        maxLevel++;
+      });
+      //alert(maxLevel);
+    }
+
+    // Toggle children on click.
+    function click(d) {
+
+      // Contrae
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+        // n.parent(d);
+      } //Expande
+      else {
+            if(d.image == 0){
+              $('#myModal1 .parent-id').val(d.parent_id);
+              $('#myModal1 .user-name').val(d.parent.name);
+              $('#myModal1 .user-child').val(d.position_tree);
+              $('#myModal1').modal();    
+             $('#holding-Tank-div #holding-parent-id').val(d.parent_id); 
+              $('#holding-Tank-div #holding-user-name').val(d.parent.name);
+              $('#holding-Tank-div #holding-user-child').val(d.position_tree);  
+              $('#holding-Tank-div #holding-user-name-label').html(d.parent.name);
+              //$('#holding-Tank-model').modal(); */
+            }else{
+              $.ajax({
+                'async': false,
+                'global': false,
+                'url': BASE_URL + "level/myLevel/" + d.id,
+                'dataType': "json",
+                'success': function (data) {
+                  for (var i in data) {
+                    data[i].level = d.level + 1;
+                  }
+                  d._children = data;
+                  d.children = d._children;
+                  d._children = null;
+                }
+              });
+            }
+      }
+      update(d);
+    }
+
+    d3.select(self.frameElement).style("height", "2000px");
+
+    //Collapse All nodes
+    function toggleAll(d) {
+      if (d.children) {
+        d.children.forEach(toggleAll);
+        toggle(d);
+      }
+    }
+
+  });
+</script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+      $('#add-holding').click(function(){
+          var parentUser = $('#holding-user-name').val();
+          var parentUserId = $('#holding-parent-id').val();       
+          var userchildP=$('#holding-user-child').val();  
+          var notPositionUser = $('#not-position-user').val();           
+          $.ajax({
+             type: "post",
+             url: BASE_URL+"user/addHolding",
+             dataType: "json",
+             data: {
+                parent_user_id:parentUserId,
+                user_position:parentUser,
+                child_position:userchildP,
+                user_name:notPositionUser,
+             },
+             success: function(data){ 
+              if(data.sucess != null){
+                var message = '<div class="alert alert-info fade in"><button onclick="reditect()" data-dismiss="alert" class="close" type="button">×</button><strong>'+data.sucess+'</strong></div>';
+                  $('#thankyou-message1').html(message);
+                  location.reload();
+              }else{
+                 var message = '<div class="alert alert-info fade in"><button onclick="reditect()" data-dismiss="alert" class="close" type="button">×</button><strong>'+data.error+'</strong></div>';
+                  $('#thankyou-message1').html(message);
+              }
+             },error: function() {
+                  alert('Error..... Page Not Found!');
+              }
+          });
+      }); 
+    });
+  </script>
+  
+
+	<div class="modal fade" id="myModal" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body" align="center">
+				  <strong> Thank you for Registering with Xonnova Network.</strong><br/><br/>
+				  <span id="thankyou-message"></span>
+				</div>
+				<div class="modal-footer">
+					<div class="col-sm-12" align="center">
+					  <button type="button" class="btn btn-default" id="reload-current-page" data-dismiss="modal">Close</button>       
+					</div>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+  <div class="modal fade" id="myModal1" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="holding-user-name-label">Add New Member : &nbsp;<input type="checkbox" ng-model="checked1" value="1"></h4>
+        </div>
+        <div class="modal-body">
+			<input type="hidden" value="" id="parent-id" class="form-control parent-id" name="parent_id" required="true"/>
+			<input type="hidden" value="" id="user-name" class="form-control user-name" name="user_name" required="true"/>
+			<input type="hidden" value="" id="user-child" class="form-control user-child" name="user_child" required="true"/>
+          <div ng-hide="checked1" class="sm-col-10 row" id="holding-Tank-div" style="margin:auto; float:none;">
+              <form name="holdingTankForm">
+                  <span id="thankyou-message1" class="col-sm-12"></span>
+                  <div class="form-group col-sm-12">
+                    <label for="fieldpass" class="col-md-3 control-label">Parent User</label>
+                    <div class="col-md-6">
+                      <input type="hidden" value="" id="holding-parent-id" class="form-control" name="parentId" required="true"/>
+                      <input type="text" class="form-control" id="holding-user-name" class="form-control" name="userName" required="true" readonly/>
+                      <input type="hidden" value="" id="holding-user-child" class="form-control" name="position" required="true"/>                       
+                    </div>                  
+                  </div>
+                  <div class="form-group col-sm-12">
+                    <label for="fieldpass" class="col-md-3 control-label">Child User</label>
+                    <div class="col-md-6">
+                      <select class="form-control" id="not-position-user" name="user_name" required>
+                            <option value="">Select user(child)</option>
+                            <option ng-repeat="userList in userList" value="{{userList.user_id}}">{{userList.user_name}}</option>
+                        </select>                      
+                    </div>                  
+                  </div>
+                  <div class="form-group col-sm-12">
+                    <div class="col-md-3" style="margin: auto; float: none;">
+                        <button type="submit" class="btn-primary btn" id="add-holding" style="width:100%;"><b>ADD</b></button>
+                    </div>                  
+                  </div>   
+              </form>            
+          </div>
+          <div ng-show="checked1" class="row">
+            <form role="form" name="myForm"  data-wizard="{finishButton: true, titleClick: true, block: true, validate: true}" class="form-horizontal">
+                      <div id="error-message"></div>
+					  <fieldset title="Step 1">
+                          <legend style="border: medium none;"></legend>
+                          <div class="form-group">
+                              <label for="fieldpass" class="col-md-3 control-label">Country</label>
+                              <div class="col-md-6">
+                                  <select id="country" class="form-control"  type="text" ng-model="user.country" >
+                                      <option value="">Select Country</option>
+                                      <!-- <option ng-selected="selected" value="US">USA</option>
+                                      <option ng-selected="selected" value="PRI">Puerto Rico</option>
+                                     
+                                    <option value="US">Mexico</option> -->
+                                      <option value="Afganistan">Afghanistan</option>
+                                    <option value="Albania">Albania</option>
+                                    <option value="Algeria">Algeria</option>
+                                    <option value="American Samoa">American Samoa</option>
+                                    <option value="Andorra">Andorra</option>
+                                    <option value="Angola">Angola</option>
+                                    <option value="Anguilla">Anguilla</option>
+                                    <option value="Antigua Barbuda">Antigua  Barbuda</option>
+                                    <option value="Argentina">Argentina</option>
+                                    <option value="Armenia">Armenia</option>
+                                    <option value="Aruba">Aruba</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Austria">Austria</option>
+                                    <option value="Azerbaijan">Azerbaijan</option>
+                                    <option value="Bahamas">Bahamas</option>
+                                    <option value="Bahrain">Bahrain</option>
+                                    <option value="Bangladesh">Bangladesh</option>
+                                    <option value="Barbados">Barbados</option>
+                                    <option value="Belarus">Belarus</option>
+                                    <option value="Belgium">Belgium</option>
+                                    <option value="Belize">Belize</option>
+                                    <option value="Benin">Benin</option>
+                                    <option value="Bermuda">Bermuda</option>
+                                    <option value="Bhutan">Bhutan</option>
+                                    <option value="Bolivia">Bolivia</option>
+                                    <option value="Bonaire">Bonaire</option>
+                                    <option value="Bosnia Herzegovina">Bosnia  Herzegovina</option>
+                                    <option value="Botswana">Botswana</option>
+                                    <option value="Brazil">Brazil</option>
+                                    <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+                                    <option value="Brunei">Brunei</option>
+                                    <option value="Bulgaria">Bulgaria</option>
+                                    <option value="Burkina Faso">Burkina Faso</option>
+                                    <option value="Burundi">Burundi</option>
+                                    <option value="Cambodia">Cambodia</option>
+                                    <option value="Cameroon">Cameroon</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Canary Islands">Canary Islands</option>
+                                    <option value="Cape Verde">Cape Verde</option>
+                                    <option value="Cayman Islands">Cayman Islands</option>
+                                    <option value="Central African Republic">Central African Republic</option>
+                                    <option value="Chad">Chad</option>
+                                    <option value="Channel Islands">Channel Islands</option>
+                                    <option value="Chile">Chile</option>
+                                    <option value="China">China</option>
+                                    <option value="Christmas Island">Christmas Island</option>
+                                    <option value="Cocos Island">Cocos Island</option>
+                                    <option value="Colombia">Colombia</option>
+                                    <option value="Comoros">Comoros</option>
+                                    <option value="Congo">Congo</option>
+                                    <option value="Cook Islands">Cook Islands</option>
+                                    <option value="Costa Rica">Costa Rica</option>
+                                    <option value="Cote DIvoire">Cote D'Ivoire</option>
+                                    <option value="Croatia">Croatia</option>
+                                    <option value="Cuba">Cuba</option>
+                                    <option value="Curaco">Curacao</option>
+                                    <option value="Cyprus">Cyprus</option>
+                                    <option value="Czech Republic">Czech Republic</option>
+                                    <option value="Denmark">Denmark</option>
+                                    <option value="Djibouti">Djibouti</option>
+                                    <option value="Dominica">Dominica</option>
+                                    <option value="Dominican Republic">Dominican Republic</option>
+                                    <option value="East Timor">East Timor</option>
+                                    <option value="Ecuador">Ecuador</option>
+                                    <option value="Egypt">Egypt</option>
+                                    <option value="El Salvador">El Salvador</option>
+                                    <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                    <option value="Eritrea">Eritrea</option>
+                                    <option value="Estonia">Estonia</option>
+                                    <option value="Ethiopia">Ethiopia</option>
+                                    <option value="Falkland Islands">Falkland Islands</option>
+                                    <option value="Faroe Islands">Faroe Islands</option>
+                                    <option value="Fiji">Fiji</option>
+                                    <option value="Finland">Finland</option>
+                                    <option value="France">France</option>
+                                    <option value="French Guiana">French Guiana</option>
+                                    <option value="French Polynesia">French Polynesia</option>
+                                    <option value="French Southern Ter">French Southern Ter</option>
+                                    <option value="Gabon">Gabon</option>
+                                    <option value="Gambia">Gambia</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="Ghana">Ghana</option>
+                                    <option value="Gibraltar">Gibraltar</option>
+                                    <option value="Great Britain">Great Britain</option>
+                                    <option value="Greece">Greece</option>
+                                    <option value="Greenland">Greenland</option>
+                                    <option value="Grenada">Grenada</option>
+                                    <option value="Guadeloupe">Guadeloupe</option>
+                                    <option value="Guam">Guam</option>
+                                    <option value="Guatemala">Guatemala</option>
+                                    <option value="Guinea">Guinea</option>
+                                    <option value="Guyana">Guyana</option>
+                                    <option value="Haiti">Haiti</option>
+                                    <option value="Hawaii">Hawaii</option>
+                                    <option value="Honduras">Honduras</option>
+                                    <option value="Hong Kong">Hong Kong</option>
+                                    <option value="Hungary">Hungary</option>
+                                    <option value="Iceland">Iceland</option>
+                                    <option value="India">India</option>
+                                    <option value="Indonesia">Indonesia</option>
+                                    <option value="Iran">Iran</option>
+                                    <option value="Iraq">Iraq</option>
+                                    <option value="Ireland">Ireland</option>
+                                    <option value="Isle of Man">Isle of Man</option>
+                                    <option value="Israel">Israel</option>
+                                    <option value="Italy">Italy</option>
+                                    <option value="Jamaica">Jamaica</option>
+                                    <option value="Japan">Japan</option>
+                                    <option value="Jordan">Jordan</option>
+                                    <option value="Kazakhstan">Kazakhstan</option>
+                                    <option value="Kenya">Kenya</option>
+                                    <option value="Kiribati">Kiribati</option>
+                                    <option value="Korea North">Korea North</option>
+                                    <option value="Korea Sout">Korea South</option>
+                                    <option value="Kuwait">Kuwait</option>
+                                    <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                    <option value="Laos">Laos</option>
+                                    <option value="Latvia">Latvia</option>
+                                    <option value="Lebanon">Lebanon</option>
+                                    <option value="Lesotho">Lesotho</option>
+                                    <option value="Liberia">Liberia</option>
+                                    <option value="Libya">Libya</option>
+                                    <option value="Liechtenstein">Liechtenstein</option>
+                                    <option value="Lithuania">Lithuania</option>
+                                    <option value="Luxembourg">Luxembourg</option>
+                                    <option value="Macau">Macau</option>
+                                    <option value="Macedonia">Macedonia</option>
+                                    <option value="Madagascar">Madagascar</option>
+                                    <option value="Malaysia">Malaysia</option>
+                                    <option value="Malawi">Malawi</option>
+                                    <option value="Maldives">Maldives</option>
+                                    <option value="Mali">Mali</option>
+                                    <option value="Malta">Malta</option>
+                                    <option value="Marshall Islands">Marshall Islands</option>
+                                    <option value="Martinique">Martinique</option>
+                                    <option value="Mauritania">Mauritania</option>
+                                    <option value="Mauritius">Mauritius</option>
+                                    <option value="Mayotte">Mayotte</option>
+                                    <option value="Mexico">Mexico</option>
+                                    <option value="Midway Islands">Midway Islands</option>
+                                    <option value="Moldova">Moldova</option>
+                                    <option value="Monaco">Monaco</option>
+                                    <option value="Mongolia">Mongolia</option>
+                                    <option value="Montserrat">Montserrat</option>
+                                    <option value="Morocco">Morocco</option>
+                                    <option value="Mozambique">Mozambique</option>
+                                    <option value="Myanmar">Myanmar</option>
+                                    <option value="Nambia">Nambia</option>
+                                    <option value="Nauru">Nauru</option>
+                                    <option value="Nepal">Nepal</option>
+                                    <option value="Netherland Antilles">Netherland Antilles</option>
+                                    <option value="Netherlands">Netherlands (Holland, Europe)</option>
+                                    <option value="Nevis">Nevis</option>
+                                    <option value="New Caledonia">New Caledonia</option>
+                                    <option value="New Zealand">New Zealand</option>
+                                    <option value="Nicaragua">Nicaragua</option>
+                                    <option value="Niger">Niger</option>
+                                    <option value="Nigeria">Nigeria</option>
+                                    <option value="Niue">Niue</option>
+                                    <option value="Norfolk Island">Norfolk Island</option>
+                                    <option value="Norway">Norway</option>
+                                    <option value="Oman">Oman</option>
+                                    <option value="Pakistan">Pakistan</option>
+                                    <option value="Palau Island">Palau Island</option>
+                                    <option value="Palestine">Palestine</option>
+                                    <option value="Panama">Panama</option>
+                                    <option value="Papua New Guinea">Papua New Guinea</option>
+                                    <option value="Paraguay">Paraguay</option>
+                                    <option value="Peru">Peru</option>
+                                    <option value="Phillipines">Philippines</option>
+                                    <option value="Pitcairn Island">Pitcairn Island</option>
+                                    <option value="Poland">Poland</option>
+                                    <option value="Portugal">Portugal</option>
+                                    <option value="Puerto Rico">Puerto Rico</option>
+                                    <option value="Qatar">Qatar</option>
+                                    <option value="Republic of Montenegro">Republic of Montenegro</option>
+                                    <option value="Republic of Serbia">Republic of Serbia</option>
+                                    <option value="Reunion">Reunion</option>
+                                    <option value="Romania">Romania</option>
+                                    <option value="Russia">Russia</option>
+                                    <option value="Rwanda">Rwanda</option>
+                                    <option value="St Barthelemy">St Barthelemy</option>
+                                    <option value="St Eustatius">St Eustatius</option>
+                                    <option value="St Helena">St Helena</option>
+                                    <option value="St Kitts-Nevis">St Kitts-Nevis</option>
+                                    <option value="St Lucia">St Lucia</option>
+                                    <option value="St Maarten">St Maarten</option>
+                                    <option value="St Pierre  Miquelon">St Pierre  Miquelon</option>
+                                    <option value="St Vincent  Grenadines">St Vincent  Grenadines</option>
+                                    <option value="Saipan">Saipan</option>
+                                    <option value="Samoa">Samoa</option>
+                                    <option value="Samoa American">Samoa American</option>
+                                    <option value="San Marino">San Marino</option>
+                                    <option value="Sao Tome  Principe">Sao Tome  Principe</option>
+                                    <option value="Saudi Arabia">Saudi Arabia</option>
+                                    <option value="Senegal">Senegal</option>
+                                    <option value="Serbia">Serbia</option>
+                                    <option value="Seychelles">Seychelles</option>
+                                    <option value="Sierra Leone">Sierra Leone</option>
+                                    <option value="Singapore">Singapore</option>
+                                    <option value="Slovakia">Slovakia</option>
+                                    <option value="Slovenia">Slovenia</option>
+                                    <option value="Solomon Islands">Solomon Islands</option>
+                                    <option value="Somalia">Somalia</option>
+                                    <option value="South Africa">South Africa</option>
+                                    <option value="Spain">Spain</option>
+                                    <option value="Sri Lanka">Sri Lanka</option>
+                                    <option value="Sudan">Sudan</option>
+                                    <option value="Suriname">Suriname</option>
+                                    <option value="Swaziland">Swaziland</option>
+                                    <option value="Sweden">Sweden</option>
+                                    <option value="Switzerland">Switzerland</option>
+                                    <option value="Syria">Syria</option>
+                                    <option value="Tahiti">Tahiti</option>
+                                    <option value="Taiwan">Taiwan</option>
+                                    <option value="Tajikistan">Tajikistan</option>
+                                    <option value="Tanzania">Tanzania</option>
+                                    <option value="Thailand">Thailand</option>
+                                    <option value="Togo">Togo</option>
+                                    <option value="Tokelau">Tokelau</option>
+                                    <option value="Tonga">Tonga</option>
+                                    <option value="Trinidad  Tobago">Trinidad  Tobago</option>
+                                    <option value="Tunisia">Tunisia</option>
+                                    <option value="Turkey">Turkey</option>
+                                    <option value="Turkmenistan">Turkmenistan</option>
+                                    <option value="Turks  Caicos Is">Turks  Caicos Is</option>
+                                    <option value="Tuvalu">Tuvalu</option>
+                                    <option value="Uganda">Uganda</option>
+                                    <option value="Ukraine">Ukraine</option>
+                                    <option value="United Arab Erimates">United Arab Emirates</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="US">United States of America</option>
+                                    <option value="Uraguay">Uruguay</option>
+                                    <option value="Uzbekistan">Uzbekistan</option>
+                                    <option value="Vanuatu">Vanuatu</option>
+                                    <option value="Vatican City State">Vatican City State</option>
+                                    <option value="Venezuela">Venezuela</option>
+                                    <option value="Vietnam">Vietnam</option>
+                                    <option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+                                    <option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+                                    <option value="Wake Island">Wake Island</option>
+                                    <option value="Wallis  Futana Is">Wallis  Futana Is</option>
+                                    <option value="Yemen">Yemen</option>
+                                    <option value="Zaire">Zaire</option>
+                                    <option value="Zambia">Zambia</option>
+                                    <option value="Zimbabwe">Zimbabwe</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldname" class="col-md-3 control-label">First Name</label>
+                              <div class="col-md-6">
+                                  <input id="f-name" class="form-control"ng-model="user.first_name"  type="text" placeholder= "Enter First Name" ng-pattern="/[a-zA-Z]/" minlength="2" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldname" class="col-md-3 control-label">Middle Name</label>
+                              <div class="col-md-6">
+                                  <input id="m-name" class="form-control" ng-model="user.middle_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Middle Name">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldname" class="col-md-3 control-label">Last Name</label>
+                              <div class="col-md-6">
+                                  <input id="l-name" class="form-control" ng-model="user.last_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Last Name" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldname" class="col-md-3 control-label">SSN, Itin, Ein</label>
+                              <div class="col-md-6">
+                                  <input id="ssn" class="form-control" ng-model="user.ssn" type="text" placeholder= "Enter SSN, Itin, Ein ">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldname" class="col-md-3 control-label">User Name</label>
+                              <div class="col-md-6">
+                                  <input id="u-name" name="user_name" class="form-control" ng-model="user.user_name"  ng-pattern="/^[a-zA-Z0-9]+$/" minlength="2" type="text" placeholder= "Enter User Name" required ng-unique="user_master.user_name" ><div ng-show="myForm.user_name.$touched" >
+                                  <span style="color:#B4270F" ng-show=" myForm.user_name.$error.unique">Username is already taken.</span>
+                                  <span style="color:#B4270F" ng-show=" myForm.user_name.$error.pattern">Username without Space.</span> </div> <!--pk -->
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldemail" class="col-md-3 control-label">Email</label>
+                              <div class="col-md-6">
+                                  <input id="fieldemail" name="user_email" class="form-control" type="email"  ng-model="user.user_email" placeholder= "Enter Email-ID" minlength="5"  required ng-unique1="user_master.user_email">
+                                  <div ng-show="myForm.user_email.$touched" >
+                                      <span style="color:#B4270F" ng-show=" myForm.user_email.$error.unique1">Email is already taken.</span> 
+                                  </div>
+                              
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldpass" class="col-md-3 control-label">Password</label>
+                              <div class="col-md-6"><input id="password" class="form-control"  type="password" ng-model="user.user_password" placeholder= "Enter Password" required></div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldpass" class="col-md-3 control-label">Confirm Password</label>
+                              <div class="col-md-6">
+                                  <input id="cpassword" name="cpassword" class="form-control"  type="password" ng-model="user.cpassword" ng-pattern="user.user_password" placeholder= "Enter Confirm Password" required >
+                                  <div ng-show="myForm.cpassword.$touched" >
+                                      <span style="color:#B4270F" ng-show=" myForm.cpassword.$error.pattern">Password not match.</span> 
+                                  </div>
+                              
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldpass" class="col-md-3 control-label">Birth Date</label>
+                              <div class="col-md-6" ng-controller="dateCtr">
+    						                  <div class="container" style="width: 100%; margin: 0px; padding: 0px;">
+                                     <input
+                                          id="dob"
+                                          class="datepicker form-control"
+                                          name="dob"
+                                          ng-model="user.dob"
+                                          type="text"
+    									                    placeholder="yyyy-mm-dd"
+                                          autofocuss required>
+                                  </div>  
+                              </div>
+                          </div>
+                      </fieldset>
+                      <fieldset title="Step 2">
+                          <legend style="border: medium none;"></legend>
+                          <div class="form-group">
+                              <label for="fieldpass" class="col-md-3 control-label">Address 1</label>
+                              <div class="col-md-6"><input id="address1" class="form-control"  type="text" ng-model="user.address1" placeholder= "Enter Address" required></div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldpass" class="col-md-3 control-label">Address 2</label>
+                              <div class="col-md-6"><input id="address2" class="form-control"  type="text" ng-model="user.address2"></div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldpass" class="col-md-3 control-label">City</label>
+                              <div class="col-md-6"><input id="city" class="form-control"  type="text" ng-model="user.city" placeholder= "Enter City" required></div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldpass" class="col-md-3 control-label">State</label>
+                              <div class="col-md-6"><input id="state" class="form-control"  type="text" ng-model="user.state" placeholder= "Enter State" required></div>
+                          </div>
+                          <div class="form-group">
+                              <label for="fieldpass" class="col-md-3 control-label">Zip</label>
+                              <div class="col-md-6"><input id="zip" class="form-control"  type="text"ng-model="user.zip" placeholder="Enter ZIP Code" minlength="2" ng-pattern="/[0-9]/" required></div>
+                          </div>
+    					
+					                <div class="form-group">
+                              <label for="fieldpass" class="col-md-3 control-label">Phone</label>
+                              <div class="col-md-6"><input id="phone" class="form-control"  type="text" ng-pattern="/[0-9]/" ng-model="user.phone" placeholder= "Enter Phone" required></div>
+                          </div>
+
+
+                          <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Phone Carrier</label>
+                            <div class="col-md-6">
+                                <select id="phonecarrier" class="form-control"  type="text" ng-model="user.phonecarrier" required>
+                                    <option value="">Select Phone Carrier </option>
+                                    <option value="ATT">AT&T</option>
+                                    <option value="AmazonWireless">AmazonWireless</option>
+                                    <option value="Boost Mobile">Boost Mobile</option>
+                                    <option value="Cricket">Cricket</option>
+                                    <option value="CREDO Mobile">CREDO Mobile</option>
+                                    <option value="Freedom Pop">Freedom Pop</option>
+                                    <option value="GIVmobile">GIVmobile</option>
+                                    <option value="GreatCall">GreatCall</option>
+                                    <option value="H2O Wireless">H2O Wireless</option>
+                                    <option value="MetroPCS">MetroPCS</option>
+                                    <option value="Net10">Net10</option>
+                                    <option value="Page Plus">Page Plus</option>
+                                    <option value="RingPlus Mobile">RingPlus Mobile</option>
+                                    <option value="Republic Wireless">Republic Wireless</option>
+                                    <option value="ROK Mobile">ROK Mobile</option>
+                                    <option value="Sprint">Sprint</option>
+                                    <option value="Simple Mobile">Simple Mobile</option>
+                                    <option value="Straight Talk">Straight Talk</option>
+                                    <option value="The People's Operator">The People's Operator</option>
+                                    <option value="T Mobile">T Mobile</option>
+                                    <option value="TextNow">TextNow</option>
+                                    <option value="Ting">Ting</option>
+                                    <option value="Total Wireless">Total Wireless</option>
+                                    <option value="TracFone">TracFone</option>
+                                    <option value="US Mobile">US Mobile</option>
+                                    <option value="U S Cellular">U S Cellular</option>
+                                    <option value="Virgin Mobile">Virgin Mobile</option>
+                                    <option value="Verizon Wireless">Verizon Wireless</option>
+                                </select>
+                            </div>
+                          </div>
+                    <!-- <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label"></label>
+                        <div class="col-md-6">
+                            Do you want to activate you platforms right away? YES NO : <input type="checkbox" ng-model="checked1">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="checked1">
+                        <label for="fieldpass" class="col-md-3 control-label"></label>
+                        <div class="col-md-6">
+                            Take a picture of your ID Front :<input type="file" file-model="user.id_front"/><br/>
+                            Take a picture of your ID Back :<input type="file" file-model="user.id_back"/><br/>
+                            Take a picture of your Credit/Debit Card Front :<input type="file" file-model="user.card_front"/><br/>
+                            Take a picture of your Credit/Debit Card Back :<input type="file" file-model="user.card_back"/><br/>
+                            Take a picture of your proof of address :<input type="file" file-model="user.address_proof"/>
+                        </div>
+                    </div> -->
+                </fieldset>
+                <fieldset title="Step 3">
+                    <legend  style="border: medium none;"></legend>
+                    
+                      <div class="form-group">
+                          <label for="fieldpass" class="col-md-3 control-label"></label>
+                          <div class="col-md-6">
+                              <div ng-show="myForm.user_name.$touched" >
+                                  <span style="color:#B4270F" ng-show=" myForm.user_name.$error.unique">Username is already taken.</span> 
+                              </div>
+                              <div ng-show="myForm.user_email.$touched" >
+                                      <span style="color:#B4270F" ng-show=" myForm.user_email.$error.unique1">Email is already taken.</span> 
+                              </div>
+                              <div ng-show="myForm.cpassword.$touched" >
+                                      <span style="color:#B4270F" ng-show=" myForm.cpassword.$error.pattern">Password not match.</span> 
+                              </div>
+                          </div>
+                      </div>
+                    
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Sponsor</label>
+                        <div class="col-md-6">
+                            <input id="sponsor-id" name="sponsor" class="form-control"  type="text" ng-model="user.sponsor_id" placeholder= "Enter Sponsor Name" required ng-unique2="user_master.user_name">
+                            <div ng-show="myForm.sponsor.$touched" >
+                                <span style="color:#B4270F" ng-show=" myForm.sponsor.$error.unique2">Sponsor not exist.</span> 
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Package</label>
+                        <div class="col-md-6">
+                            <select name="package" ng-model="user.package" id="packag" class="form-control" required ng-change="onchangepackage(user.package)">
+                                <option value="">Select Package</option>
+                                <option ng-repeat="data in packages" value="{{data.package_id}}" ng-selected="selected">{{data.package_name}} (${{data.entry_ammout}})</option>
+                            </select>
+                        </div>
+                    </div> --> 
+					<div class="form-group" ng-show="user.country =='MEX'">
+                        <label for="fieldpass" class="col-md-3 control-label">Package</label>
+                        <div class="col-md-6">
+                            <select name="package" ng-model="user.package" id="packag" class="form-control" required>
+                                <option value="">Select Package</option>
+                                <option ng-repeat="data in mxpackages" value="{{data.package_id}}" ng-selected="selected">{{data.mex_package_name}} (Mex$ {{data.mex_package_cost}})</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group" ng-hide="user.country =='MEX'">
+                        <label for="fieldpass" class="col-md-3 control-label">Package</label>
+                        <div class="col-md-6">
+                            <select name="package" ng-model="user.package" id="packag" class="form-control" required>
+                                <option value="">Select Package</option>
+                                <option ng-repeat="data in packages" value="{{data.package_id}}" ng-selected="selected">{{data.package_name}} (${{data.entry_ammout}})</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3" ng-repeat="discription in incriptionDiscription" style="color: red;">
+                                    {{discription.value}}
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label"></label>
+                        <div class="col-md-6">
+                            If You have Voucher.? Yes/No : <input id="check" type="checkbox" name="checked" ng-model="checked">     
+                        </div>
+                    </div>
+                    <div ng-show="checked">
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Voucher Code</label>
+                            <div class="col-md-6">
+                             <!--  <input type="text" id="voucher" name="voucher_code" ng-model="user.voucher_code" class="form-control"  ng-required="checked">  -->
+                                    
+                               <input type="text" id="voucher" name="voucher_code" ng-model="user.voucher_code" class="form-control" ng-vouchercode ng-required="checked"> 
+                                    <div ng-show="myForm.voucher_code.$dirty" >
+                                        <span style="color:#B4270F" ng-show=" myForm.voucher_code.$error.vouchercode">Voucher Code not exist.</span> 
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-hide="checked">
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Name on Card</label>
+                            <div class="col-md-6"><input id="name-on-card" class="form-control"  type="text" ng-model="user.name_on_card" placeholder= "Enter name on card" ng-required="!checked"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Card No.</label>
+                            <div class="col-md-6"><input id="card-no" class="form-control"  type="text" ng-model="user.card_no" placeholder= "Enter card no." ng-pattern="/[0-9]{13,16}/" ng-required="!checked"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Expiry Date</label>
+                            <div class="col-md-6">
+                                <select id="month" ng-model="user.expiry_month" ng-required="!checked">
+                                    <option value="">mm</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                
+                                <select id="year" ng-model="user.expiry_year" ng-required="!checked">
+                                    <option value="">yyyy</option>
+                                    <option value="2015">2015</option>
+                										<option value="2016">2016</option>
+                										<option value="2017">2017</option>
+                										<option value="2018">2018</option>
+                										<option value="2019">2019</option>
+                										<option value="2020">2020</option>
+                										<option value="2021">2021</option>
+                										<option value="2022">2022</option>
+                										<option value="2023">2023</option>
+                										<option value="2024">2024</option>
+                										<option value="2025">2025</option>
+                										<option value="2026">2026</option>
+                										<option value="2027">2027</option>
+                										<option value="2028">2028</option>
+                										<option value="2029">2029</option>
+                										<option value="2030">2030</option>
+                										<option value="2031">2031</option>
+                										<option value="2032">2032</option>
+                										<option value="2033">2033</option>
+                										<option value="2034">2034</option>
+                										<option value="2035">2035</option>
+                										<option value="2036">2036</option>
+                										<option value="2037">2037</option>
+                										<option value="2038">2038</option>
+                										<option value="2039">2039</option>
+                										<option value="2040">2040</option>
+                										<option value="2041">2041</option>
+                										<option value="2042">2042</option>
+                										<option value="2043">2043</option>
+                										<option value="2044">2044</option>
+                										<option value="2045">2045</option>
+                										<option value="2046">2046</option>
+                										<option value="2047">2047</option>
+                										<option value="2048">2048</option>
+                										<option value="2049">2049</option>
+                										<option value="2050">2050</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">CVV No.</label>
+                            <div class="col-md-6"><input id="cvv-no" class="form-control"  type="text" ng-model="user.cvv_no" placeholder= "Enter CVV No." ng-pattern="/[0-9]/" ng-required="!checked"></div>
+                        </div>
+          							<div class="form-group">
+          								<label for="fieldpass" class="col-md-3 control-label">Billing ZIP</label>
+          								<div class="col-md-6"><input id="billing-zip" class="form-control"  type="text"ng-model="user.billing_zip" placeholder= "Enter Billing ZIP Code" minlength="2" ng-pattern="/[0-9]/" ng-required="!checked"></div>
+          							</div>
+                    </div>
+                </fieldset>
+                <input type="submit" id="submit"class="finish btn-success btn" value="Submit" ng-disabled="myForm.$invalid" />
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+         
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#submit').click(function(){
+		      var parentUser = $('#user-name').val();
+          var parent = $('#parent-id').val();       
+          var userchild=$('#user-child').val();   
+          var country = $('#country').val();
+          var fname = $('#f-name').val();
+          var mname=$('#m-name').val();
+          var lname = $('#l-name').val();
+          var ssn = $('#ssn').val();
+          var uname=$('#u-name').val();
+          var fieldemail = $('#fieldemail').val();
+          var password = $('#password').val();
+          var cpassword = $('#cpassword').val();
+          var dob = $('#dob').val();
+          var address1 = $('#address1').val();
+          var address2 = $('#address2').val();
+          var city = $('#city').val();
+          var state = $('#state').val();
+          var zip = $('#zip').val();
+		      var phone = $('#phone').val();
+          var phonecarrier = $('#phonecarrier').val();
+          var sponsorid = $('#sponsor-id').val();
+          var packag = $('#packag').val();
+          var check = $('#check').val();
+          var voucher = $('#voucher').val();
+          var nameoncard = $('#name-on-card').val();
+          var cardno = $('#card-no').val();
+          var month = $('#month').val();
+          var year = $('#year').val();
+          var cvvno = $('#cvv-no').val();
+          var billingzip = $('#billing-zip').val();
+          
+            $.ajax({
+                 type: "post",
+                 url: BASE_URL+"admin/addAffiliate",
+                 dataType: "json",
+                 data: {
+					          parentUser:parentUser,
+                    parent:parent,
+                    userchild:userchild,
+                    country:country,
+                    fname:fname,
+                    mname:mname,
+                    lname:lname,
+                    ssn:ssn,
+                    uname:uname,
+                    fieldemail:fieldemail,
+                    password:password,
+                    cpassword:cpassword,
+                    dob:dob,
+                    address1:address1,
+                    address2:address2,
+                    city:city,
+                    state:state,
+                    zip:zip,
+					          phone:phone,
+                    phonecarrier:phonecarrier,
+                    sponsorid:sponsorid,
+                    packag:packag,
+                    check:check,
+                    voucher:voucher,
+                    nameoncard:nameoncard,
+                    cardno:cardno,
+                    month:month,
+                    year:year,
+                    cvvno:cvvno,
+                    billingzip:billingzip
+                  
+                 },
+                 success: function(data){
+                  if(data.sucess != null){
+                    $('#myModal1').css('display','none');
+          					$('#myModal').modal();  
+          					$('#thankyou-message').html(data.sucess);                    
+                  }else{
+                    var message = '<div class="alert alert-info fade in"><button onclick="reditect()" data-dismiss="alert" class="close" type="button">×</button><strong>'+data.error+'</strong></div>';
+                    $('#error-message').html(message);
+                  }
+                 }
+            });
+      });  
+
+		$('#reload-current-page').click(function(){
+			location.reload();
+		});
+    });
+  </script>

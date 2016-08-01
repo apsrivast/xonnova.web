@@ -1,0 +1,64 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Settings</li>
+            <li class="active">Holding Tank</li>
+        </ul>
+
+        <h1>Holding Tank</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Holding Tank">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="addpackage_form">
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Position User(parent)</label>
+                    <div class="col-md-6">
+                       
+                        <input  name="user_position" class="form-control"  type="text" ng-model="user.user_position" placeholder= "Select user Position (parent)"  required ng-uniqueparent>
+                                <div ng-show="addpackage_form.user_position.$touched" >
+                                    <span style="color:#B4270F" ng-show=" addpackage_form.user_position.$error.uniqueparent">Parent not exist.</span> 
+                                </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">User</label>
+                    <div class="col-md-6">
+                       
+                        <input  name="user_name" class="form-control"  type="text" ng-model="user.user_name"  placeholder= "Select user posintion (child)" required ng-uniquechild>
+                                <div ng-show="addpackage_form.user_name.$touched" >
+                                    <span style="color:#B4270F" ng-show=" addpackage_form.user_name.$error.uniquechild">Child not exist.</span> 
+                                   
+                                </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Position</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="child_position" ng-model="user.child_position" required>
+                            <option value="">Select posintion (Top/Bottom)</option>
+                            <option value="1">Top</option>
+                            <option value="2">Bottom</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button type="submit" class="btn-primary btn" ng-click="addHoldingTank(user);">submit</button>
+                                <button class="btn btn-primary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

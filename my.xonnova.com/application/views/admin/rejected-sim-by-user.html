@@ -1,0 +1,548 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		
+		<li class="active">Activation  Report</li>
+	</ol>
+
+	<h1>Activation  Report</h1>
+	<div class="options">
+            <div class="btn-toolbar">
+                <div class="btn-group hidden-xs" data-dropdown>
+                    <button class="btn btn-default dropdown-toggle" data-toggle='dropdown'><span class="hidden-sm"> Export as  </span><span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Text File (*.txt)</a></li>
+                        <li><a href="#">Excel File (*.xlsx)</a></li>
+                        <li><a href="#">PDF File (*.pdf)</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i></a>
+            </div>
+        </div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="data in walletReportListByUser"><br/>
+					
+					<div class="user-detail">
+						
+						<div class="table-responsive">
+							<h6 class="user-info">Activation  Report</h6>
+							<div ng-show="data.q1 == 'YES'">
+								<table  class="table table-condensed m0">
+									<tbody>
+										<tr>
+												<td style="border-top: 0">Member ID</td>
+												<td style="border-top: 0">{{data.user_id}}</td>
+											</tr>
+											<tr>
+												<td>Member Name</td>
+												<td><span ng-show="{{data.user_id | limitTo: 5}} == '11111'"> Store_</span>{{data.user_name}}</td>
+											</tr>
+											<tr style="color: red;">
+												<td>Dealer Code</td>
+												<td>{{data.dealer_code}}</td>
+											</tr>
+											
+											<tr>
+												<td>Member Phone</td>
+												<td>{{data.user_phone}}</td>
+											</tr>
+											<tr>
+												<td>Member Email</td>
+												<td>{{data.user_email}}</td>
+											</tr>
+										<tr>
+											<td >Question #1</td>
+											<td >{{data.q2}}</td>
+										</tr>
+										<tr>
+											<td >Question #2</td>
+											<td >{{data.q1}}</td>
+										</tr>
+										
+											<tr>
+												<td>Client Name</td>
+												<td>{{data.client_name}}</a></td>
+											</tr>
+											<tr>
+												<td>Current Company</td>
+												<td>{{data.current_company}}</td>
+											</tr>
+											<tr>
+												<td>Phone Number</td>
+												<td>{{data.phone_number}}</td>
+											</tr>
+											
+											<tr>
+												<td>Account #</td>
+												<td>{{data.account}}</td>
+											</tr>
+											<tr>
+												<td>Zip Code</td>
+												<td>{{data.zip_code}}</td>
+											</tr>
+											<tr>
+											<td>Comment</td>
+											<td>{{data.sim_comment}}</td>
+										</tr>
+										</tbody>
+								</table>
+							</div>
+							<div ng-show="data.q1 == 'NO'">
+								<table  class="table table-condensed m0">
+									<tbody>
+										<tr>
+												<td style="border-top: 0">Member ID</td>
+												<td style="border-top: 0">{{data.user_id}}</td>
+											</tr>
+											<tr>
+												<td>Member Name</td>
+												<td><span ng-show="{{data.user_id | limitTo: 5}} == '11111'"> Store_</span>{{data.user_name}}</td>
+											</tr>
+											<tr style="color: red;">
+												<td>Dealer Code</td>
+												<td>{{data.dealer_code}}</td>
+											</tr>
+											
+											<tr>
+												<td>Member Phone</td>
+												<td>{{data.user_phone}}</td>
+											</tr>
+											<tr>
+												<td>Member Email</td>
+												<td>{{data.user_email}}</td>
+											</tr>
+										<tr>
+											<td >Question #1</td>
+											<td >{{data.q2}}</td>
+										</tr>
+										<tr>
+											<td>Question #2</td>
+											<td>{{data.q1}}</td>
+										</tr>
+										<tr>
+											<td>Question #3</td>
+											<td>${{data.q3}}</td>
+										</tr>
+										<tr>
+											<td>Question #4</td>
+											<td>${{data.q4}}</td>
+										</tr>
+										<tr>
+											<td>SIM #</td>
+											<td>{{data.sim}}</td>
+										</tr>
+
+										<tr>
+											<td>By Admin User Name</td>
+											<td>{{data.sim_user_name}}</td>
+										</tr>
+										<tr>
+											<td>Area Code </td>
+											<td>{{data.area_code}}</td>
+										</tr>
+										
+										<tr>
+											<td>Name </td>
+											<td>{{data.first_name}} {{data.middle_name}} {{data.last_name}}</td>
+										</tr>
+										<tr>
+												<td>Phone Number</td>
+												<td>{{data.phone_number}}</td>
+										</tr>
+										<tr>
+												<td>Email </td>
+												<td>{{data.email}}</td>
+										</tr>
+										<tr>
+												<td>Date of Birth </td>
+												<td>{{data.dob}}</td>
+										</tr>
+										<tr>
+											<td>Address </td>
+											<td>{{data.address1}} {{data.address2}}</td>
+										</tr>
+										<tr>
+											<td>City</td>
+											<td>{{data.city}}</td>
+										</tr>
+										<tr>
+											<td>State</td>
+											<td>{{data.state}}</td>
+										</tr>
+										<tr>
+											<td>Zip</td>
+											<td>{{data.zip}}</td>
+										</tr>
+										<tr>
+											<td>Comment</td>
+											<td>{{data.sim_comment}}</td>
+										</tr>
+									
+									
+									</tbody>
+								</table>
+							</div>	
+							<div ng-show="data.q1 == null">
+								<table  class="table table-condensed m0">
+									<tbody>
+										<tr>
+												<td style="border-top: 0">Member ID</td>
+												<td style="border-top: 0">{{data.user_id}}</td>
+											</tr>
+											<tr>
+												<td>Member Name</td>
+												<td><span ng-show="{{data.user_id | limitTo: 5}} == '11111'"> Store_</span>{{data.user_name}}</td>
+											</tr>
+											<tr style="color: red;">
+												<td>Dealer Code</td>
+												<td>{{data.dealer_code}}</td>
+											</tr>
+											
+											<tr>
+												<td>Member Phone</td>
+												<td>{{data.user_phone}}</td>
+											</tr>
+											<tr>
+												<td>Member Email</td>
+												<td>{{data.user_email}}</td>
+											</tr>
+										<tr>
+											<td >Question #1</td>
+											<td >{{data.q2}}</td>
+										</tr>
+										
+										<tr>
+											<td>Question #2</td>
+											<td>${{data.q3}}</td>
+										</tr>
+										<tr>
+											<td>Question #3</td>
+											<td>${{data.q4}}</td>
+										</tr>
+										<tr>
+											<td>SIM #</td>
+											<td>{{data.sim}}</td>
+										</tr>
+
+
+										<tr>
+											<td>By Admin User Name</td>
+											<td>{{data.sim_user_name}}</td>
+										</tr>
+										<tr>
+											<td>Area Code </td>
+											<td>{{data.area_code}}</td>
+										</tr>
+										
+										<tr>
+											<td>Name </td>
+											<td>{{data.first_name}} {{data.middle_name}} {{data.last_name}}</td>
+										</tr>
+										<tr>
+												<td>Phone Number</td>
+												<td>{{data.phone_number}}</td>
+										</tr>
+										<tr>
+												<td>Email </td>
+												<td>{{data.email}}</td>
+										</tr>
+										<tr>
+												<td>Date of Birth </td>
+												<td>{{data.dob}}</td>
+										</tr>
+										<tr>
+											<td>Address </td>
+											<td>{{data.address1}} {{data.address2}}</td>
+										</tr>
+										<tr>
+											<td>City</td>
+											<td>{{data.city}}</td>
+										</tr>
+										<tr>
+											<td>State</td>
+											<td>{{data.state}}</td>
+										</tr>
+										<tr>
+											<td>Zip</td>
+											<td>{{data.zip}}</td>
+										</tr>
+
+										<tr>
+											<td>Race </td>
+											<td>{{data.race}}</td>
+										</tr>
+										<tr>
+											<td>Gender </td>
+											<td>{{data.gender}}</td>
+										</tr>
+										<tr>
+											<td>Preferred language? </td>
+											<td>{{data.pref_lang}}</td>
+										</tr>
+										<tr>
+											<td>Home owner?</td>
+											<td>{{data.home_owner}}</td>
+										</tr>
+										<tr>
+											<td>Business  owner?</td>
+											<td>{{data.bus_owner}}</td>
+										</tr>
+										<tr>
+											<td>Industry</td>
+											<td>{{data.industry}}</td>
+										</tr>
+
+										<tr>
+											<td>Phone Brand </td>
+											<td>{{data.phone_brand}}</td>
+										</tr>
+
+										<tr>
+											<td>Phone Model </td>
+											<td>{{data.phone_type}}</td>
+										</tr>
+										<tr>
+											<td>Phone IMEI </td>
+											<td>{{data.phone_imei}}</td>
+										</tr>
+										<tr>
+											<td>Annual Income</td>
+											<td>{{data.annual_income}}</td>
+										</tr>
+										<tr>
+											<td>Do you have health insurance?</td>
+											<td>{{data.health_insurance}}</td>
+										</tr>
+										<tr>
+											<td>Do you have dental insurance?</td>
+											<td>{{data.dental_insurance}}</td>
+										</tr>
+										<tr>
+											<td>Do you have life insurance?</td>
+											<td>{{data.life_insurance}}</td>
+										</tr>
+
+										<tr>
+											<td>Comment</td>
+											<td>{{data.sim_comment}}</td>
+										</tr>
+									
+									
+									</tbody>
+								</table>
+							</div>	
+						</div>
+
+
+						
+						
+					</div>
+				</div>
+				<!-- <div class="row" >
+							<div  class="col-sm-6">
+		                        <button type="button" class="btn btn-success btn-sm pull-right" ng-click="approve()">Approve </button>
+		                    </div>
+							<div  class="col-sm-6">
+		                        <button class="btn btn-success btn-sm pull-left" data-toggle="modal" data-target="#reject-model">Reject </button>
+		                    </div><br><br>
+	                    
+	                        
+	                    </div> -->
+        	</div>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->
+
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="reject-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Reject </h4>
+      </div>
+      <div class="modal-body" >
+      	<form role="form" name="myForm2"  class="form-horizontal" >
+			
+			<div class="form-group">
+                <label for="fieldname" class="col-md-3 control-label">Comment </label>
+                <div class="col-md-6">
+                	
+                    <textarea class="form-control" name="comment" ng-model="rejectuser.comment" required></textarea>
+                </div>
+            </div>
+		
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                        <button type="submit" class="finish btn-success btn-sm"  ng-disabled=" myForm2.$invalid" data-dismiss="modal" ng-click="reject(rejectuser)">Reject</button>
+                </div>
+            </div>
+            
+		</form> 
+		           
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Activate Platform Form">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+
+                <form role="form" name="myForm"   class="form-horizontal" enctype="multipart/form-data"  ng-repeat="user in walletReportListByUser" >
+						
+                      
+                        	<fieldset ng-hide="user.q1 == 'YES'" >
+
+                        		<div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Phone Brand</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.phone_brand"  type="text"  >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Phone Model</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.phone_type"  type="text"  >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Phone IMEI </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.phone_imei"  type="text"  >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">SIM # </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.sim"  type="text" placeholder= "Enter SIM #" ng-pattern="/[0-9]/" >
+                                    </div>
+                                </div>
+								
+								 <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">What area code would you like</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.area_code"  type="text" placeholder= "Enter area code .. only 3 digits" ng-pattern="/[0-9]/" minlength="3" maxlength="3" >
+                                    </div>
+                                </div>
+                          
+                                 <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">First Name</label>
+                                    <div class="col-md-6">
+                                        <input id="f-name" class="form-control"ng-model="user.first_name"  type="text" placeholder= "Enter First Name" ng-pattern="/[a-zA-Z]/" minlength="2" >
+                                    </div>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Last Name</label>
+                                    <div class="col-md-6">
+                                        <input id="l-name" class="form-control" ng-model="user.last_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Last Name" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Phone Number</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.phone_number"  type="text" placeholder= "Enter Phone Number" ng-pattern="/[0-9]/" >
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Email</label>
+                                    <div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.email"  ></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Birth Date</label>
+                                    <div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.dob" ></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Address </label>
+                                    <div class="col-md-6"><input id="address1" class="form-control"  type="text" ng-model="user.address1" placeholder= "Enter Address" ></div>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">City</label>
+                                    <div class="col-md-6"><input id="city" class="form-control"  type="text" ng-model="user.city" placeholder= "Enter City" ></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">State</label>
+                                    <div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.state"  ></div>
+                                </div>
+                              
+                              
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Zip</label>
+                                    <div class="col-md-6"><input id="zip" class="form-control"  type="text"ng-model="user.zip" placeholder= "Enter ZIP Code" minlength="2" ng-pattern="/[0-9]/"></div>
+                                </div>
+                               
+                                
+                                
+
+                                
+                             </fieldset>
+                   
+                            <fieldset ng-show="user.q1 == 'YES'" >
+                              
+                                
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Client Name</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.client_name"  type="text" placeholder= "Enter Client Name" ng-pattern="/[a-zA-Z]/" minlength="2" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Current Company</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.current_company "  type="text" placeholder= "Enter Current Company" ng-pattern="/[a-zA-Z]/" minlength="2" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Phone Number </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.phone_number"  type="text" placeholder= "Enter Phone Number" ng-pattern="/[0-9]/" minlength="2" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Account #</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.account  "  type="text" placeholder= "Enter Account #" ng-pattern="/[0-9]/" minlength="2" >
+                                    </div>
+                                </div>
+                              
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Zip Code  </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.zip_code "  type="text" placeholder= "Enter Zip Code" ng-pattern="/[0-9]/" minlength="2" >
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group">
+								<div class="col-sm-6 col-sm-offset-3">
+										<button type="submit" class="finish btn-success btn pull-right"   ng-click="submit(user);">Approve </button>
+								</div>
+							</div>
+
+                            </div>
+                        </div>
+       
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>

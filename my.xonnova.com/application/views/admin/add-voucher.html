@@ -1,0 +1,74 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Settings</li>
+            <li class="active">Add Voucher</li>
+        </ul>
+
+        <h1>Add Voucher</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Add Voucher">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="addpackage-form">
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Voucher Name</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="voucher_name" ng-model="voucher.voucher_name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Voucher Code</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="voucher_code" ng-model="voucher.voucher_code" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Date</label>
+                    <div class="col-md-6">
+                        <!-- <input type="date" class="form-control" id="date-picker" ng-model="voucher.voucher_validity" placeholder="yyyy-MM-dd" min="1950-01-01" max="2099-12-31"/> --> 
+						
+						<input type="text"  placeholder="yyyy-mm-dd"  class="form-control" pickadate ng-model="voucher.voucher_validity" format="yyyy-mm-dd"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Description</label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" name="voucher_desc" ng-model="voucher.voucher_desc" /></textarea>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button type="submit" class="btn-primary btn" ng-click="addVoucher(voucher);">submit</button>
+                                <button class="btn btn-primary">Reset</button>
+                                <a ng-href="#/view-voucher" class="btn btn-primary">View Voucher</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+    <script type="text/javascript">
+         $(document).ready(function () {
+            var date = new Date();
+            date.setDate(date.getDate() - 1);
+
+            $("#date-picker" ).datepicker({
+              changeMonth: true,
+              changeYear: true,
+              yearRange: "1950:2050",
+            });
+          }
+
+        );
+    </script>

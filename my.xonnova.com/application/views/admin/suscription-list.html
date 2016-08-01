@@ -1,0 +1,146 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Upgrade</li>
+        <li class="active">Suscription List</li>
+    </ol>
+
+    <h1>Suscription List</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Export as <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Active User's Suscription List">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+
+                 <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr> 
+                                <th>ID<a ng-click="sort_by('user_id');"><i class="glyphicon glyphicon-sort"></i></a></th> 
+                                <th>User Name<a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Rank<a ng-click="sort_by('level_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Status<a ng-click="sort_by('user_status');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (activeSusList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_id}}</td> 
+                                <td>{{data.user_name}}</td>
+                                <td>{{data.level_name}}</td>
+                                <td>{{data.user_status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Subscription  found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Not Suscribed User's List">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+
+                 <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit1" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search1" ng-change="filter1()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr> 
+                                <th>ID<a ng-click="sort_by1('user_id');"><i class="glyphicon glyphicon-sort"></i></a></th> 
+                                <th>User Name<a ng-click="sort_by1('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <!-- <th>Rank</th> -->
+                                <th>Status<a ng-click="sort_by1('user_status');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (notSusList | filter:search1 | orderBy : predicate1 :reverse1) | startFrom:(currentPage1-1)*entryLimit1 | limitTo:entryLimit1">
+                                <td align="left">{{data.user_id}}</td> 
+                                <td>{{data.user_name}}</td>
+                                <!-- <td>{{data.level_name}}</td> -->
+                                <td>{{data.user_status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems1 == 0">
+                    <div class="col-md-12">
+                        <h4>No Subscription  found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems1 > 0">    
+                    <div pagination="" page="currentPage1" on-select-page="setPage1(page)" boundary-links="true" total-items="filteredItems1" items-per-page="entryLimit1" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

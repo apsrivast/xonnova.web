@@ -1,0 +1,87 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		
+		<li class="active">Fail Member Report</li>
+	</ol>
+
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="user in users"><br/>
+					
+					<div class="user-detail">
+						<div class="table-responsive ">
+							<h6 class="user-info"> Member  Report</h6>
+							
+							<table  class="table table-condensed m0">
+								<tbody>
+									<tr>
+										<td style="border-top: 0">User Name</td>
+										<td style="border-top: 0">{{user.u_name}}</td>
+									</tr>
+									<tr>
+										<td>Sponsor Name</td>
+										<td>{{user.user_name}}</a></td>
+									</tr>
+									<tr>
+										<td>Package Name</td>
+										<td>{{user.package_name}}</a></td>
+									</tr>
+									<tr>
+										<td>First Name</td>
+										<td>{{user.f_name}}</a></td>
+									</tr>
+									<tr>
+										<td>Last Name</td>
+										<td>{{user.l_name}}</a></td>
+									</tr>
+									
+									<tr>
+										<td>Email</td>
+										<td>{{user.u_email}}</a></td>
+									</tr>
+									<tr>
+										<td>Birth Date</td>
+										<td>{{user.u_dob}}</td>
+									</tr>
+									<tr>
+										<td>Contact No.</td>
+										<td>{{user.u_contact}}</td>
+									</tr>
+									
+									<tr>
+										<td>Address</td>
+										<td>{{user.u_address}}</td>
+									</tr>
+									<tr>
+										<td>City</td>
+										<td>{{user.u_city}}</td>
+									</tr>
+									<tr>
+										<td>State</td>
+										<td>{{user.u_state}}</td>
+									</tr>
+									<tr>
+										<td>ZIP</td>
+										<td>{{user.u_zip}}</td>
+									</tr>
+									<tr>
+										<td>Country</td>
+										<td>{{user.u_country}}</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+						<!-- <div align="center"><a href="#/edit-profile"  class="btn btn-primary btn-sm">Update</a></div> -->
+					</div>
+				</div>
+        	</div>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->

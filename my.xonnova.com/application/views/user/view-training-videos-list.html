@@ -1,0 +1,55 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+    </ol>
+</div>
+
+
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-md-12">
+
+           
+                <div class="row">
+                    <div class="col-sm-6" align="center"  ng-repeat="TTVList in TrainingTutorialsVideoViewList">
+                        <div class="panel panel-default panel-profile">
+                            <h4 class="user-name">{{TTVList.message}}</h4>
+                            <!-- <a ng-href="{{TTVList.url }}"  target="__blank" >
+                              
+                                <video ng-src="{{TTVList.url }}" controls></video>
+                            </a> -->
+							<!-- <youtube-video video-url="TTVList.url" player-width="'70%'" player-height="'70%'"></youtube-video> -->
+                              <!--  <iframe width="100%" height="320" src="{{TTVList.url | trusted}}" frameborder="0" allowfullscreen ></iframe>  -->
+							  
+							   <!-- <div ng-show="{{TTVList.tutorial_type}} == '1'">
+                            <youtube-video video-url="TTVList.url" player-width="'70%'" player-height="'70%'"></youtube-video></div>
+                            
+                            <div ng-show="{{TTVList.tutorial_type }} != '1'">   <iframe width="100%" height="320" src="{{TTVList.url}}"  frameborder="0" allowfullscreen ></iframe>  </div> -->
+                           
+						   
+							 <div class="table-responsive">
+                               <!--  <ul> -->
+                                   <!--  <li> -->
+                                        <a class="fancybox-media" href="{{TTVList.url}}"><img src="./assets/img/videoicon.png" alt="" /></a>
+                                   <!--  </li> -->
+                                  <!--   <li><a class="fancybox-media" href="https://my.onlegacynetwork.com/tutorials/videos/151116082639.mp4">Vimeo</a></li>
+                                    <li><a class="fancybox-media" href="https://my.onlegacynetwork.com/tutorials/videos/151116082639.mp4">Metacafe</a></li>
+                                    <li><a class="fancybox-media" href="https://my.onlegacynetwork.com/tutorials/videos/151116082639">Dailymotion</a></li> -->
+                                <!-- </ul> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+          
+             <!--  src="{{TTVList.url}}"   style="float: none; margin: auto;"-->
+
+                <div class="col-md-6" ng-if="!TrainingTutorialsVideoViewList">
+                   <div class="panel panel-default panel-profile">
+                           
+                            <div class="text-center" >No Video         </div>              
+                    </div>
+                </div>
+        </div>
+    </div>
+</div> 

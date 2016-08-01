@@ -1,0 +1,59 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Settings</li>
+            <li class="active">Ether Conversion Rate Settings</li>
+        </ul>
+
+        <h1>Ether Conversion Rate Settings</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Ether Conversion Rate Settings" ng-repeat="data in etherConversionRateSttings">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="etherConversionRateSttings" novalidate >
+                <div id="message"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Ether Rate  : </label>
+                    <div class="col-sm-6">
+                        <input name="ether_rate"
+                            type="text"
+                            value="{{data.ether_rate}}" 
+                            required
+                            placeholder="Enter Ether Rate"
+                            required ng-pattern="/[0-9]/"
+                            ng-model="data.ether_rate"
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Conversion Charge :</label>
+                    <div class="col-sm-6">
+                        <input name="conversion_charge"
+                            type="text"
+                            value="{{data.conversion_charge}}" 
+                            ng-pattern="/[0-9]/"
+                            placeholder="Enter Conversion Charge "
+                            required
+                            ng-model="data.conversion_charge"
+                            class="form-control">
+                    </div>
+                </div>                 
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-click="update(data);">Update</button>
+                                <!-- <button class="btn btn-danger" ng-click="delete(cron)">Delete <span class="glyphicon glyphicon-trash"></span></button> -->
+                                <!-- <button class="btn btn-primary">Reset</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

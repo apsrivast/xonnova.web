@@ -1,0 +1,30 @@
+.info-tiles .tiles-body {
+    font-size: 32px;
+}
+@media screen and (max-width: 567px) {
+  .info-tiles .tiles-body {
+    font-size: 25px;
+}
+.info-tiles .tiles-body-alt i, .info-tiles .tiles-body i {
+    font-size: 22px;
+    transition: all 0.06s ease-in 0s;
+}
+}
+@media screen and (max-width: 320px) {
+  .info-tiles .tiles-body {
+    font-size: 20px;
+}
+.info-tiles .tiles-body-alt i, .info-tiles .tiles-body i {
+    font-size: 15px;
+    transition: all 0.06s ease-in 0s;
+}
+}
+@media screen and (max-width: 240px) {
+  .info-tiles .tiles-body {
+    font-size: 12px;
+}
+.info-tiles .tiles-body-alt i, .info-tiles .tiles-body i {
+    font-size: 12px;
+    transition: all 0.06s ease-in 0s;
+}
+}

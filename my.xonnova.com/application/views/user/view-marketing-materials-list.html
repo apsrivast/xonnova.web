@@ -1,0 +1,23 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+    </ol>
+</div>
+
+
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-md-12">
+                <div class="col-md-6" ng-repeat="MMTList in MarketingMaterialsViewList">
+                    <a ng-href="{{MMTList.url}}" class="info-tiles tiles-midnightblue" href="{{MMTList.url}}" target="__blank">
+                        <div class="tiles-heading">
+                            <div class="text-center"> Marketing Materials</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{MMTList.message}}</div>
+                        </div>
+                    </a>
+                </div>
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,27 @@
+
+
+
+
+
+
+
+    <div class="container-fluid " ng-repeat="news in newsList">
+    	<div class="row">
+    		<div class="col-sm-6"  style="float: none; margin: auto;">
+
+        <panel panel-class="panel-midnightblue "  heading="{{news.news_title}}">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+               
+            </panel-controls>
+
+            	
+					<p ng-bind-html="news.news_content"></p>
+			                  
+			   
+
+        
+        </panel>
+    </div>
+    </div>
+    </div> <!-- container-fluid -->

@@ -1,0 +1,51 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Money</li>
+            <li class="active">Cashout</li>
+        </ul>
+
+        <h1>Cashout Details</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Cashout">
+            <form class="form-horizontal row-border" name="cashoutForm">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User Name</th>
+                                <th>Balence Ammount</th>
+                                <th>Payout Ammount</th>
+                                <th>Payment Method</th>
+                                <th>Security no.</th>
+                                <th>Check</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (cashoutList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_id}}</td>
+                                <td>{{data.user_name}}</td>
+                                <td>{{data.total_balance}}</td>
+                                <td>{{data.cashout_ammount}}</td>
+                                <td></td>
+                                <td></td>
+                                <td>{{data.package_status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Cashout found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

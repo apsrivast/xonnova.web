@@ -1,0 +1,165 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Deposit</li>
+	</ol>
+
+	<h1>Deposit</h1>
+	
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="user in depositData"><br/>
+					<img src="uploads/{{user.deposit_image}}" alt="" class="img-responsive user-avatar" height="400" width="400">
+					<a href="http://my.xonnova.com/uploads/{{user.deposit_image}}" target="__blank" class="btn btn-pirmary">View Image</a>
+					<div class="user-detail">
+						
+						<div class="table-responsive">
+					
+							<table  class="table table-condensed m0">
+								<tbody>
+									<tr>
+										<td >ID</td>
+										<td >{{user.deposit_id}}</td>
+									</tr>
+									<!--<tr>
+										<td>Package Name</td>
+										
+										<td ng-show="user.package == 2">Beginner System</td>
+										<td ng-show="user.package == 3">Basic System</td>
+										<td ng-show="user.package == 4">Advanced System</td>
+										<td ng-show="user.package == 5">Total System</td>
+									</tr> -->
+									<tr>
+										<td>User Name</td>
+
+										<td><span ng-show="{{user.user_id | limitTo: 5}} == '11111'"> Store_</span>{{user.user_name || user.reseller_name}}</a></td>
+									</tr>
+									<tr>
+										<td>Amount</td>
+										<td>{{user.bank_amount}}</a></td>
+									</tr>
+									<tr>
+										<td>Transaction Id</td>
+										<td>{{user.transaction_id}}</a></td>
+									</tr>
+									<tr>
+										<td>Date of Deposit</td>
+										<td>{{user.date_of_deposit}}</td>
+									</tr>
+									<tr>
+										<td>Bank deposit</td>
+										<td>{{user.bank_deposit}}</td>
+									</tr>
+									<tr>
+										<td>Status</td>
+										<td>{{user.deposit_status}}</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+						<div class="row" >
+						<div align="center"><a href="#/deposit-view"  class="btn btn-success btn-sm">Back</a>
+						</div></div>
+						<br>
+					
+						<div class="row" >
+							<div  class="col-sm-6">
+		                        <button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#approve-model">Approve Deposit</button>
+		                    </div>
+							<div  class="col-sm-6">
+		                        <button class="btn btn-success btn-sm pull-left" data-toggle="modal" data-target="#reject-model">Reject Deposit</button>
+		                    </div>
+	                    
+	                        
+	                    </div>
+					</div>
+				</div>
+        	</div>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="reject-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Reject Deposit</h4>
+      </div>
+      <div class="modal-body" >
+      	<form role="form" name="myForm2"  class="form-horizontal" >
+			
+			<div class="form-group">
+                <label for="fieldname" class="col-md-3 control-label">Comment </label>
+                <div class="col-md-6">
+                	
+                    <textarea class="form-control" name="comment" ng-model="rejectuser.comment" required></textarea>
+                </div>
+            </div>
+		
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                        <button type="submit" class="finish btn-success btn-sm"  ng-disabled=" myForm2.$invalid" data-dismiss="modal" ng-click="reject(rejectuser)">Reject</button>
+                </div>
+            </div>
+            
+		</form> 
+		           
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="approve-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Approve Deposit</h4>
+      </div>
+      <div class="modal-body" >
+      	<form role="form" name="myForm"  class="form-horizontal" >
+			
+			<div class="form-group">
+                <label for="fieldname" class="col-md-3 control-label">Amount </label>
+                <div class="col-md-6">
+                	
+                    <input class="form-control" name="amount" ng-model="approveuser.amount" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fieldname" class="col-md-3 control-label">Comment </label>
+                <div class="col-md-6">
+                	
+                    <textarea class="form-control" name="comment" ng-model="approveuser.comment" required></textarea>
+                </div>
+            </div>
+		
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-3">
+                        <button type="submit" class="finish btn-success btn-sm pull-right"  ng-disabled=" myForm.$invalid" data-dismiss="modal" ng-click="approvehold(approveuser)">Hold</button>
+                </div>
+                 <div class="col-sm-3 ">
+                        <button type="submit" class="finish btn-success btn-sm"  ng-disabled=" myForm.$invalid" data-dismiss="modal" ng-click="approvereleas(approveuser)">Release</button>
+                </div>
+            </div>
+            
+		</form> 
+		           
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

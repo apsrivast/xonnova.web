@@ -1,0 +1,168 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li class="active">Leads Form</li>
+    </ol>
+    <h1>Leads Form</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Leads Form">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+
+                <form role="form" name="myForm"  class="form-horizontal" >
+                   <!--  <div id="message"></div>     -->
+                    <fieldset >
+                        <legend>Leads Form</legend>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">First Name</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.first_name"  required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Last Name</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.last_name"  required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fieldemail" class="col-md-3 control-label">Email</label>
+                                <div class="col-md-6">
+                                    <input   class="form-control" type="email"  ng-model="user.business_email"  required >
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Address 1 </label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.address1"  required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Address 2</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.address2"  >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">City</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.city"  required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">State</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.state"  required>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">ZIP Code</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.zip" ng-pattern="/[0-9]/" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Country</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.country"  required>
+                                </div>
+                            </div>
+
+    						<div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Phone #</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.phone_no"  ng-pattern="/[0-9]/" required>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Best Time to Reach You</label>
+                                <div class="col-md-2" >
+                                    <!-- <div class="btn btn-danger btn-sm" ng-click="user.call_time = 'Morning'"> -->
+                                      <input type="radio" ng-model="user.call_time"  value="Morning" >
+                                 <!--  </div> -->
+                                  Morning<!-- <br><br> -->
+                                </div>
+                                  <div class="col-md-2" >
+                                  <!--  <div class="btn btn-warning btn-sm" ng-click="user.call_time = 'Afternoon'"> -->
+                                      <input type="radio" ng-model="user.call_time"  value="Afternoon" >
+                                 <!--  </div> -->
+                                   Afternoon <!-- <br><br> -->
+                                    </div>
+                                  <div class="col-md-2" >
+                                    <!-- <div class="btn btn-success btn-sm" ng-click="user.call_time = 'Evening'"> -->
+                                      <input type="radio" ng-model="user.call_time"  value="Evening" >
+                                 <!--  </div> -->
+                                    Evening
+                                     </div>
+                                 
+                                </div>
+
+
+                                <br>
+
+
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Prefer Language</label>
+                                <div class="col-md-3" >
+                                      <input type="radio" ng-model="user.prefer_lang"  value="English" >
+                                  English
+                                </div>
+                                  <div class="col-md-3" >
+                                      <input type="radio" ng-model="user.prefer_lang"  value="Spanish" >
+                                   Spanish 
+                                    </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Are you owner house</label>
+                                <div class="col-md-3" >
+                                      <input type="radio" ng-model="user.owner_house"  value="Yes" >
+                                  Yes
+                                </div>
+                                  <div class="col-md-3" >
+                                      <input type="radio" ng-model="user.owner_house"  value="No" >
+                                   No 
+                                    </div>
+                            </div>
+                            </div>
+                            <!-- <div class="form-group" >
+                                <label for="fieldpass" class="col-md-3 control-label">Best Time to Reach You</label>
+                                <div class="col-md-6">
+                                    <select  class="form-control"  type="text" ng-model="user.call_time" required>
+                                        <option value="Morning">Morning</option>
+                                        <option value="Afternoon">Afternoon</option>
+                                        <option value="Evening">Evening</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                        </fieldset>
+                 
+                  
+                   <!--  <input type="submit" class="finish btn-success btn" value="Submit" ng-disabled=" myForm.$invalid " ng-click="submit(user);"/> -->
+						
+						       
+                  
+                        <div class="panel-footer">
+		                    <div class="row">
+		                        <div class="col-sm-6 col-sm-offset-3">
+		                                <button type="submit" class="finish btn-success btn pull-right"  ng-disabled=" myForm.$invalid" ng-click="submit(user)">Submit</button>
+		                        </div>
+		                    </div>
+		                </div>       
+                    
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>

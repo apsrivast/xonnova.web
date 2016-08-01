@@ -1,0 +1,121 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">{{lng_home}}</a></li>
+        <li class="active">{{lng_dashboard}}</li>
+    </ol>
+
+    <h1>{{lng_dashboard}}</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">{{lng_action}}</a></li>
+                  <li><a href="#">{{lng_another_action}}</a></li>
+                  <li><a href="#">{{lng_something_else_here}}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">{{lng_separated_link}}</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid" ng-controller="DashboardController">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-xs-6">
+                    <a ng-href="#/user-new-product-order-summary" class="info-tiles tiles-danger" href="#/user-new-product-order-summary">
+                        <div class="tiles-heading">
+                            <div class="text-center ng-binding">{{lng_new_orders}}</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" >{{usernewOrderTabList}}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-6">
+                    <a ng-href="#/personal-referrals" class="info-tiles tiles-midnightblue" href="#/personal-referrals">
+                        <div class="tiles-heading">
+                            <div class="text-center">{{lng_total_member}}</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center">{{totalMember}}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <a ng-href="#/earnings" class="info-tiles tiles-success" href="#/earnings">
+                        <div class="tiles-heading">
+                            <div class="text-center">{{lng_total_earning}}</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" ng-repeat="total in totalEarning">${{total.total}}</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-6">
+                    <a ng-href="#/reward-points" class="info-tiles tiles-indigo" href="#/reward-points">
+                        <div class="tiles-heading">
+                            <div class="text-center">{{lng_total_rewards}}</div>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="text-center" ng-repeat="total in totalEarning">NA</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+			<div class="row">
+                <div class="col-xs-6">
+
+                    <a ng-href="#/board-view" class="info-tiles tiles-indigo" href="#/board-view">
+
+                        <div class="tiles-heading">
+
+                            <div class="text-center">{{lng_holding_tank}}</div>
+
+                        </div>
+
+                        <div class="tiles-body">
+
+                            <div class="text-center" >{{totalHoldingTank}}</div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+               
+            </div>
+            <!-- <div class="row">
+                <div class="col-xs-6">
+                    <a class="info-tiles tiles-facebook" href>
+                        <div class="tiles-heading">
+                            <span class="text-center">Facebook</span>
+                        </div>
+                        <div class="tiles-body">
+                            <div class="pull-left">
+                                <i class="fa fa-thumbs-o-up"></i>
+                            </div>
+                            <div class="pull-right">NA</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-6">
+                    <a  class="info-tiles tiles-twitter">
+                        <div class="tiles-heading"><span class="text-center">Twitter</span></div>
+                        <div class="tiles-body">
+                            <div class="pull-left"><i class="fa fa-twitter"></i></div>
+                            <div class="pull-right">NA</div>
+                        </div>
+                    </a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div> <!-- container-fluid -->

@@ -1,0 +1,49 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Platforms</li>
+            <li class="active">Platforms List</li>
+        </ul>
+
+        <h1>Platforms List</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Platforms List">
+            <form class="form-horizontal row-border" name="cashoutForm">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                
+                                <th>Platforms Name</th>
+                                <th>Platforms Url</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (cashoutList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.id}}</td>
+                             
+                                <td>{{data.platforms_name}}</td>
+                                <td><a href="{{data.platforms_url}}">{{data.platforms_url}}</a></td>
+                                
+                              
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

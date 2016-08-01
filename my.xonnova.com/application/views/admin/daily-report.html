@@ -1,0 +1,117 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li class="active">Daily Report</li>
+    </ol>
+
+    <h1>Daily Report</h1>
+  
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Daily Report">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                </panel-controls>
+                <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                     <div class="col-sm-6">
+                        <form name="searchForm"><br/>
+                            <div class="col-sm-5">
+                               <input type="text"  placeholder="From Date"  class="form-control" pickadate ng-model="dateRangeSearch.from_date" readonly/> 
+                            </div>
+                            <div class="col-sm-5">
+                                <input type="text"  placeholder="To Date"  class="form-control" pickadate ng-model="dateRangeSearch.to_date" readonly />
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn-primary btn" ng-click="update(dateRangeSearch);">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-1">Export
+                        <button class="btn-info btn" ng-click="exportData()">Export</button>
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <div id="exportable">
+                        <table class="table" >
+                            <thead>
+                                <tr>
+                                    <th>Date <a ng-click="sort_by('date');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                    <th>Total income <a ng-click="sort_by('total_income');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                    <th>Fast Start <a ng-click="sort_by('fast_start');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                    <th>Binary <a ng-click="sort_by('bv');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                   <!--  <th>Coded <a ng-click="sort_by('coded');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                                    <th>Entrepreneurial <a ng-click="sort_by('entrepreneurial');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                   <!--  <th>Matching <a ng-click="sort_by('matching');"><i class="glyphicon glyphicon-sort"></i></a></th> -->
+                                    <th>Total Paid <a ng-click="sort_by('total_paid');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                    <th>Total Profit <a ng-click="sort_by('total_profit');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                    <th> </th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in filtered = (List | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                    <td align="left">{{data.date | limitTo: 10}}</td>
+                              
+                                    <td>${{data.total_income}}</td>
+                                    <td>${{data.fast_start}}</td>
+                                    <td>${{data.bv}}</td>
+                                   <!--  <td>${{data.coded}}</td> -->
+                                    <td>${{data.entrepreneurial}}</td>
+                                   <!--  <td>${{data.matching}}</td> -->
+                                    <td>${{data.total_paid}}</td>
+                                    <td>${{data.total_profit}}</td>
+                               
+                                    <td>
+                                        <a href="#/view-daily-report/{{data.date | limitTo: 10}}"  class="btn btn-primary btn-sm">View</a>
+                                    </td>
+                                   
+                                </tr>
+
+                                <tr>
+                                    <td><h4><strong> Total</strong></h4></td>
+
+                                    <td><h4><strong>${{TotalTotalIncome}}</strong></h4></td>
+                                    <td><h4><strong>${{TotalFastStart}}</strong></h4></td>
+                                    <td><h4><strong>${{TotalBinary}}</strong></h4></td>
+                                   <!--  <td><h4><strong>${{TotalCoded}}</strong></h4></td> -->
+                                    <td><h4><strong>${{TotalEntrepreneurial}}</strong></h4></td>
+                                   <!--  <td><h4><strong>${{TotalMatching}}</strong></h4></td> -->
+                                    <td><h4><strong>${{TotalTotalPaid}}</strong></h4></td>
+                                    <td><h4><strong>${{TotalTotalProfit}}</strong></h4></td>
+                                     <th> </th>
+                           
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No report found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

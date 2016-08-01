@@ -1,0 +1,145 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Settings</li>
+            <li class="active">Add package</li>
+        </ul>
+
+        <h1>Package Details</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Package Information">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form role="form" class="form-horizontal row-border" name="addpackageform" data-wizard="{finishButton: true, titleClick: true, block: true, validate: true}">
+                <div id="message"></div>
+                <fieldset title="Step 1">
+                    <legend>US Package Details</legend>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Package Name</label>
+                        <div class="col-md-6">
+                            <input id="f-name" class="form-control"ng-model="pkg.pckage_name"  type="text" placeholder= "Enter Package Name" ng-pattern="/[a-zA-Z]/" minlength="2" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Package Price</label>
+                        <div class="col-md-6">
+                            <input id="m-name" class="form-control" ng-model="pkg.pckage_price" ng-pattern="/[0-9]/" type="text" placeholder= "Enter Package Price" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Store Credit Package Price</label>
+                        <div class="col-md-6">
+                            <input  class="form-control" ng-model="pkg.st_package_amount" ng-pattern="/[0-9]/" type="text" placeholder= "Enter Package Price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Rule (%)</label>
+                        <div class="col-md-6">
+                            <input id="l-name" class="form-control" ng-model="pkg.discount" ng-pattern="/[0-9]/" minlength="2" type="text" ng-pattern="/[0-9]/" placeholder= "Enter Discount %" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Referral Amount</label>
+                        <div class="col-sm-6">
+                            <input  class="form-control" ng-model="pkg.referral_amount" ng-pattern="/[0-9]/" type="text" placeholder= "Enter Referral Amount" required>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="col-sm-3 control-label">QV Point</label>
+                        <div class="col-sm-6">
+                            <input id="l-name" class="form-control" ng-model="pkg.qv_point" ng-pattern="/[0-9]/" minlength="1" type="text" ng-pattern="/[0-9]/" placeholder= "Enter QV Point" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Binary Point</label>
+                        <div class="col-md-6">
+                            <input class="form-control" ng-model="pkg.bv"  ng-pattern="/[0-9]/" minlength="2" type="text" placeholder= "Enter Binary Point" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Status</label>
+                        <div class="col-md-6">
+                            <select class="form-control" ng-model="pkg.status" required>
+                                <option value="">Select Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>   
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset title="Step 2">
+                    <legend>MEX Package Details</legend>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Package Name</label>
+                        <div class="col-md-6">
+                            <input id="f-name" class="form-control"ng-model="pkg.mex_package_name"  type="text" placeholder= "Enter Package Name" ng-pattern="/[a-zA-Z]/" minlength="2" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Package Price</label>
+                        <div class="col-md-6">
+                            <input id="m-name" class="form-control" ng-model="pkg.mex_package_cost" ng-pattern="/[0-9]/" type="text" placeholder= "Enter Package Price" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">USD Price</label>
+                        <div class="col-md-6">
+                            <input id="m-name" class="form-control" ng-model="pkg.mex_entry_amount" ng-pattern="/[0-9]/" type="text" placeholder= "Enter Package Price" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Store Credit Package Price</label>
+                        <div class="col-md-6">
+                            <input  class="form-control" ng-model="pkg.mex_st_package_amount" ng-pattern="/[0-9]/" type="text" placeholder= "Enter Store Credit Price" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Referral Amount</label>
+                        <div class="col-sm-6">
+                            <input  class="form-control" ng-model="pkg.mex_referral_amount" ng-pattern="/[0-9]/" type="text" placeholder= "Enter Referral Amount" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">QV Point</label>
+                        <div class="col-sm-6">
+                            <input id="l-name" class="form-control" ng-model="pkg.mx_qv_point" ng-pattern="/[0-9]/" minlength="1" type="text" ng-pattern="/[0-9]/" placeholder= "Enter QV Point" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Binary Point</label>
+                        <div class="col-md-6">
+                            <input class="form-control" ng-model="pkg.mx_bv_point"  ng-pattern="/[0-9]/" minlength="2" type="text" placeholder= "Enter Binary Point" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Status</label>
+                        <div class="col-md-6">
+                            <select class="form-control" ng-model="pkg.mex_package_status" required>
+                                <option value="">Select Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>   
+                        </div>
+                    </div>
+                </fieldset>
+                <input type="submit" class="finish btn-success btn" value="Submit" ng-disabled=" addpackageform.$invalid " ng-click="addPackage(pkg);"/>
+                <!-- <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button type="submit" class="btn-primary btn" ng-click="addPackage(pkg);">submit</button>
+                                <button class="btn btn-primary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

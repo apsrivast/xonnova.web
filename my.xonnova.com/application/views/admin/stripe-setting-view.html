@@ -1,0 +1,53 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Settings</li>
+            <li class="active">Stripe Settings</li>
+        </ul>
+
+        <h1>Stripe Settings</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Stripe Settings">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="cronJobSettings" novalidate  ng-repeat="cron in cronData">
+                <div id="message"></div>
+                <input type="hidden" ng-model="cron.id" value="{{cron.id}}">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Payment Method</label>
+                    <div class="col-sm-6">
+                        <!-- <input name="binary_conversion_price"
+                            type="text"
+                            value="{{cron.binary_conversion_price}}" 
+                            required
+                            placeholder="Enter Level Name"
+                            required ng-pattern="/[0-9]/"
+                            ng-model="cron.binary_conversion_price"
+                            class="form-control"> -->
+                        <select class="form-control" name="value" ng-model="cron.value">
+                            <option value="2">Authorize.Net</option>
+                            <option value="1">Stripe</option>
+                            <option value="0">Save Card</option>
+                        </select>
+                    </div>
+                </div>
+                          
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-click="update(cron);">Update</button>
+                                <!-- <button class="btn btn-danger" ng-click="delete(cron)">Delete <span class="glyphicon glyphicon-trash"></span></button> -->
+                                <!-- <button class="btn btn-primary">Reset</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

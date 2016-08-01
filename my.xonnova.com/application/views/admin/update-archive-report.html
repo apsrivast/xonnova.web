@@ -1,0 +1,292 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>MemberManagement</li>
+            <li class="active">Shipping Info</li>
+        </ul>
+        <h1>Shipping Info</h1>
+    </div>
+
+    <div class="container-fluid">
+         <panel panel-class="panel-midnightblue" heading="Shipping Info">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+            <div class="table-responsive" align="center">
+                <table class="table"  ng-repeat="data in archiveReportViewByIDList" style="width:70%">
+                    <thead>
+                        <tr>
+                            <th>Label</th>
+                            <th>Content</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+						<tr>
+                            <td><strong>First Name :</strong></td>
+                            <td>{{data.first_name}}</td>                            
+                        </tr>
+						<tr>
+                            <td><strong>Last Name :</strong></td>
+                            <td>{{data.last_name}}</td>                            
+                        </tr>
+                        <tr>
+                            <td><strong>User Name :</strong></td>
+                            <td>{{data.user_name}}</td>                            
+                        </tr>
+						<tr>
+                            <td><strong>Email-ID :</strong></td>
+                            <td>{{data.user_email}}</td>                            
+                        </tr>
+                        <tr>
+                            <td><strong>Package :</strong></td>
+                            <td>{{data.package_name}}<button class="btn btn-primary btn-sm pull-right" type="button" style="font-size: 14px;" ng-click="showShippingStatus(data.user_id);">View Shipping History<!-- <i class="glyphicon glyphicon-hand-right"></i> --></button></td>                            
+                        </tr>
+						<tr ng-show="prevPkg == '1'" style="background-color: rgb(204, 204, 204);">
+                            <td><strong>Previous Package</strong></td>
+                            <td>
+                                <ol>
+                                    <li ng-repeat="pkg in prevPkgDetails">{{pkg.package_name}} : {{pkg.archive_member_status}}</li>
+                                </ol>
+                            </td>                            
+                        </tr>
+                        <tr>
+                            <td><strong>Address :</strong></td>                           
+                            <td>
+                                <div class="col-sm-12">{{data.address1}} , {{data.address2}}</div>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td><strong>Contact No :</strong></td>                           
+                            <td>
+                                <div>{{data.contact_no}}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zip Code :</strong></td>                           
+                            <td>{{data.zip}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Country :</strong></td>                           
+                            <td>{{data.country_name}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>State :</strong></td>                           
+                            <td>{{data.state}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>City :</strong></td>                           
+                            <td>{{data.city}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shipping Status :</strong></td>                           
+                            <td>{{data.archive_member_status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><hr><br/>
+            <form class="form-horizontal row-border" name="new_member_info" ng-repeat="user in archiveReportViewByIDList">
+                <input type="hidden" ng-model="user.id" value="{{user.id}}">
+                <input type="hidden" ng-model="user.user_id" value="{{user.user_id}}">
+                <input type="hidden" ng-model="user.type" value="{{user.type}}">
+                <div id="message"></div>
+                <div class="form-group">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <button type="button" class="finish btn-success btn-sm pull-left "  ng-click="uspsid(user)">Generate USPS  Label</button>      
+                    </div> 
+                </div>
+                <div ng-show="pdflavel == 'y'">
+                    <object data="data:application/pdf;base64,{{imageaa}}" type="application/pdf" width="100%" height="100%"></object>
+                </div>
+                                        
+                <div class="form-group" ng-show="errorrer != checkerror">
+                    <label for="fieldname" class="col-md-3 control-label">ERROR</label>
+                    <div class="col-md-6">
+                        {{errorrer | limitTo : 200}}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Total # of Vouchers</label>
+                    <div class="col-md-6">
+                        <input  class="form-control" ng-model="user.no_of_voucher"  ng-pattern="/^([0-9]*)$/" type="text" >
+                    </div>
+                </div>
+
+                <div class="form-group" ng-repeat="voucherlist in htmlVoucherFromActivationList">
+                    <label for="fieldname" class="col-md-3 control-label">Voucher #</label>
+                    <div class="col-md-6">
+                        <div class="form-control" style="color: red;">{{voucherlist.sim_no}}
+                        </div>
+                    </div>
+                </div>
+                            
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Shipping Status :</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="archive_member_status" ng-model="user.archive_member_status">
+                            <option value="">Select shipping status</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="not shipped">Not Shipped</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Shipping ID :</label>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Enter Shipping ID" class="form-control" name="shipping_code" ng-model="user.shipping_code" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Shipping By</label>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Enter Shipping By" class="form-control" name="shipe_via" ng-model="user.shipe_via" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Shipping Date</label>
+                    <div class="col-md-6">
+                        <!-- <input type="text"  placeholder="yyyy-mm-dd"  class="form-control" pickadate ng-model="user.updated_at" format="yyyy-mm-dd" required/>  -->
+                        <input type="text" name="shipp_date"  placeholder="yyyy-mm-dd"  class="form-control" pickadate ng-model="user.shipp_date" value="{{user.update_at}}" format="yyyy-mm-dd" required/>
+                    </div>
+                </div>
+
+
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Voucher #</label>
+                                <div class="col-md-6">
+                                    <div id="add-voucher">
+                                        <div class="alert alert-info fade in" ng-repeat="userV in getVoucherList" id="{{userV.sim_no}}"><button type="button" class="pull-right" ng-click="deletePrevVoucher(userV.sim_no);"><span class="glyphicon glyphicon-trash"></span></button><strong>{{userV.sim_no}}</strong></div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <input class="form-control" id="add-voucher-no" type="text" ng-change="voucherchange(user)" ng-model="user.si_no" maxlength="8">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-info" type="button" ng-click="addVoucher(user);"><i class="glyphicon glyphicon-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+				<div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Sim No.</label>
+                    <div class="col-md-6">
+                        <div id="add-sim">
+                            <div class="alert alert-info fade in" ng-repeat="user in getSimList" id="{{user.sim_no}}"><button type="button" class="pull-right" ng-click="deletePrevSim(user.sim_no);"><span class="glyphicon glyphicon-trash"></span></button><strong>{{user.sim_no}}</strong></div>
+                        </div>
+
+                        <div class="input-group">
+                            <input class="form-control" id="add-sim-no" type="text" ng-change="simchange(user)" ng-model="user.sim_no" maxlength="20" ng-pattern="/[0-9]/">
+                            <div class="input-group-btn">
+                                <button class="btn btn-info" type="button" ng-click="addSim(user);"><i class="glyphicon glyphicon-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Comments</label>
+                    <div class="col-md-6">
+                        <textarea name="comments" class="form-control" ng-model="user.comments">Message...</textarea> 
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled="new_member_info.$invalid" ng-click="update(user);">Submit</button>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+	<script type="text/javascript">
+        function deleteSim(simNo){
+			//alert("OK");
+            $.ajax({
+                 type: "post",
+                 url: BASE_URL+"archive/deleteSim",
+                 data: {
+                    sim_no:simNo,
+                 },
+                 success: function(data){
+                    //alert(data);
+                 }
+            });
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        function deleteVoucher(simNo){
+            //alert("OK");
+            $.ajax({
+                 type: "post",
+                 url: BASE_URL+"archive/deleteVoucher",
+                 data: {
+                    sim_no:simNo,
+                 },
+                 success: function(data){
+                    //alert(data);
+                 }
+            });
+        }
+    </script>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Edit">
+                <form role="form" name="addressForm"   class="form-horizontal" enctype="multipart/form-data"  ng-repeat="adduser in archiveReportViewByIDList" >
+                    <!-- <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">First Name</label>
+                        <div class="col-md-6">
+                            <input  class="form-control" ng-model="adduser.first_name"  type="text"  ng-pattern="/[a-zA-Z]/" minlength="2" >
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Last Name</label>
+                        <div class="col-md-6">
+                            <input  class="form-control" ng-model="adduser.last_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text"  >
+                        </div>
+                    </div> -->
+                               
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Address </label>
+                        <div class="col-md-6"><input  class="form-control"  type="text" ng-model="adduser.ship_address"  ></div>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Address 2 </label>
+                        <div class="col-md-6"><input  class="form-control"  type="text" ng-model="adduser.address2"  ></div>
+                    </div> -->
+                   
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">City</label>
+                        <div class="col-md-6"><input  class="form-control"  type="text" ng-model="adduser.city"  ></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">State</label>
+                        <div class="col-md-6"><input  class="form-control"  type="text" ng-model="adduser.state"  ></div>
+                    </div>
+                              
+                              
+                    <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Zip</label>
+                        <div class="col-md-6"><input  class="form-control"  type="text"ng-model="adduser.zip"  minlength="2" ng-pattern="/[0-9]/"></div>
+                    </div>
+
+                  
+                    <div class="form-group">
+                        <div class="col-sm-6 col-sm-offset-3">
+                                <button type="submit" class="finish btn-success btn pull-right"   ng-click="addsubmit(adduser);">Edit </button>
+                        </div>
+                    </div>
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>

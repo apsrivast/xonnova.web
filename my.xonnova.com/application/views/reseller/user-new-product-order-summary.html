@@ -1,0 +1,62 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">{{lng_dashboard}}</a></li>
+           
+            <li class="active">Product</li>
+        </ul>
+
+        <h1>Product Order</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Product Order">
+            <form class="form-horizontal row-border" name="ProductOrder">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Purchase ID</th>
+                                <th>Site {{     lng_user_name}}</th>
+                                <th>{{     lng_user_name}}</th>
+                                <th>Product Name</th>
+                                <th> Quantity</th>
+                                <th>Purchase At</th> 
+                                <th>Delivery {{     lng_status}}</th>
+                                <th>Shipping Date</th>
+                                <th>Shipped Via</th>
+                                <th>Tracking Id</th>
+                               
+                                  <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (newProductOrderList | filter:search | orderBy : data.purchase_at :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.purchase_id}}</td>
+                                <td>{{data.siteName}}</td>
+                                <td>{{data.u_name}}</td>
+                                <td>{{data.product_name}}</td>
+                                <td>{{data.p_qty}}</td>
+                                <td>{{data.purchase_at}}</td>
+                                <td>{{data.delivery_status}}</td>
+                                <th>{{data.shipping_date}}</th>
+                                <td>{{data.shipped_via}}</td>
+                                <th>{{data.tracking_id}}</th>
+                                 <td>
+                                    <a href="#/user-product-order-summary-view/{{data.purchase_id}}"  class="btn btn-primary btn-sm">View</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>{{lng_no_found}}</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->

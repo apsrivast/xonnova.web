@@ -1,0 +1,80 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+        <li class="active">NEW LEADS</li>
+    </ol>
+    <h1>NEW LEADS</h1>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="user in htmlRestaurantLeadsListById"><br/>
+					<div class="user-detail">
+						<div class="table-responsive">
+							<table  class="table table-condensed m0">
+								<tbody>
+									<tr>
+										<td >User Name</td>
+										<td >{{user.username}}</td>
+									</tr>
+									<tr>
+										<td >Business Name</td>
+										<td >{{user.business_name}}</td>
+									</tr>
+									<tr>
+										<td >First Name</td>
+										<td >{{user.first_name}}</td>
+									</tr>
+									<tr>
+										<td >Last Name</td>
+										<td >{{user.last_name}}</td>
+									</tr>
+									
+									<tr>
+										<td>Phone #</td>
+										<td>{{user.phone_no}}</td>
+									</tr>
+									<tr>
+										<td>Email</td>
+										<td>{{user.business_email}}</td>
+									</tr>
+									
+									<tr>
+										<td>DateTime to reach</td>
+										<td>{{user.call_time}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="row" >
+							<a href="#/new-printing-leads-view"  class="btn btn-success btn-sm">Back</a>
+							<button  ng-show="user.s_f_status == 'Pending'" class="btn btn-primary btn-sm "  ng-click="approve(user)">Approve </button>
+						</div>
+							
+			            <form ng-show="user.s_f_status == 'Pending'" role="form" name="myForm"  class="form-horizontal" >
+							<div class="form-group">
+								<div id="message"></div>
+							</div>
+	                        <div class="form-group">
+	                            <label for="fieldname" class="col-md-3 control-label">Reject Comment</label>
+	                            <div class="col-md-6">
+	                                <textarea class="form-control" name="comment" ng-model="user.reject_comment" ></textarea>
+	                            </div>
+	                        </div>
+	                        <div class="panel-footer">
+			                    <div class="row">
+			                        <div class="col-sm-6 col-sm-offset-3">
+			                                <button type="submit" class="finish btn-primary btn-sm pull-right"  ng-click="reject(user)">Reject</button>
+			                        </div>
+			                    </div>
+			                </div>
+
+							<br/>			                 
+						</form>  
+					</div>
+				</div>
+        	</div>
+		</div>
+	</div>
+</div> <!-- container-fluid -->

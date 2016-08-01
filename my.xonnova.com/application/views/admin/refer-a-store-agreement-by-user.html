@@ -1,0 +1,368 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		
+		<li class="active">Refer A Store</li>
+	</ol>
+
+	<h1>Refer A Store</h1>
+	<div class="options">
+            <div class="btn-toolbar">
+                <div class="btn-group hidden-xs" data-dropdown>
+                    <button class="btn btn-default dropdown-toggle" data-toggle='dropdown'><span class="hidden-sm"> Export as  </span><span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Text File (*.txt)</a></li>
+                        <li><a href="#">Excel File (*.xlsx)</a></li>
+                        <li><a href="#">PDF File (*.pdf)</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i></a>
+            </div>
+        </div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="data in htmlStoreAReferView"><br/>
+					
+					<div class="user-detail">
+						
+						<div class="table-responsive">
+							<h6 class="user-info">Refer A Store</h6>
+							
+								<table  class="table table-condensed m0">
+									<tbody>
+										<tr>
+												<td style="border-top: 0">User ID</td>
+												<td style="border-top: 0">{{data.user_id}}</td>
+											</tr>
+											<tr>
+												<td>User Name</td>
+												<td>{{data.user_name}}</td>
+											</tr>
+											<tr>
+												<td>First Name</td>
+												<td>{{data.first_name}}</td>
+											</tr>
+											<tr>
+												<td>Last  Name</td>
+												<td>{{data.last_name}}</td>
+											</tr>
+
+											<tr>
+												<td>Email</td>
+												<td>{{data.user_email}}</td>
+											</tr>
+											<tr>
+												<td>Phone #</td>
+												<td>{{data.contact_no}}</td>
+											</tr>
+											
+											<tr>
+												<td>Address</td>
+												<td>{{data.address}}</td>
+											</tr>
+											<tr>
+												<td>City</td>
+												<td>{{data.city}}</td>
+											</tr>
+											<tr>
+												<td >State</td>
+												<td >{{data.state}}</td>
+											</tr>
+											<tr>
+												<td >Zip</td>
+												<td >{{data.zip}}</td>
+											</tr>
+										
+											<tr>
+												<td>Name of Business</td>
+												<td>{{data.business_name}}</a></td>
+											</tr>
+											<tr>
+												<td>Owner Name</td>
+												<td>{{data.owner_name}}</td>
+											</tr>
+											<tr>
+												<td>Date </td>
+												<td>{{data.join_date}}</td>
+											</tr>
+											<!-- <tr>
+												<td>Status</td>
+												<td>{{data.status}}</td>
+											</tr>
+											<tr>
+												<td>Login Status</td>
+												<td>{{data.login_status}}</td>
+											</tr> -->
+											
+										</tbody>
+								</table>
+						
+						</div>
+
+
+						
+						
+					</div>
+				</div>
+				<div class="row" >
+					<div  id="message">
+                    </div>
+	            </div>
+				<div class="row" >
+                        <button type="button" class="btn btn-success btn-sm " ng-click="resendStoreUserApproved()">resend Store User Approved Mail</button>
+                 <br><br>
+	            </div>
+				
+        	</div>
+		</div>
+	</div>
+</div> <!-- container-fluid -->
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="data in referAStoreAgrByUserHtmlList"><br/>
+					<!-- <div ng-hide="data.esign_image  == null">
+								No Agreement<br><br>
+					</div>
+					<div ng-show="data.esign_image  == null"> -->
+						<div class="user-detail">
+							<div ng-show="{{data.esign_image | limitTo: 4}} != data">
+								
+									
+									<a href="https://my.onlegacynetwork.com/assets/uploads/{{data.esign_image}}" target="__blank" class="btn btn-pirmary">View</a><br>
+								
+							</div>
+							<br>
+							<div ng-show="{{data.esign_image | limitTo: 4}} == data">
+								<div id="content">
+								<div align="center"><img class="img-square" src="./assets/img/smartmark.png" alt="Olegacy Logo"></div>
+								
+					    		<h2 align="center"><b>
+						  											<span class="glyphicon glyphicon-list-alt"></span> SmartMark Inc. Installer Agreement<br></b>
+						  											<small >18 Elizabeth Dr. Suite 400, Conshohocken, PA 19428</small></h2>
+
+
+								<div style="margin:20px; font-size: 10px;" id="esignpdf">
+								  
+								  	<p style="text-align: justify">1. By enrolling as an authorized installation location for SmartMark Inc., you may perform installations for participating SmartMark survey participants wishing to participate. You may not sell SmartMark products or services for profit. Installation fee is to cover labor and operational costs at times of enrollment and may not exceed $149.00. </p>
+
+								  	<p style="text-align: justify">2. All survey participant information collected in the process of enrolling a new survey participant into the SmartMark program must be kept confidential. Any survey participant information on hardcopy must be stored and destroyed within 7 days. Failure to protect private survey participant information will terminate this agreement. </p>
+
+								
+
+								  	<p style="text-align: justify">3. All enrollments must be processed with your unique Installer ID for the enrollment to be tracked and considered valid per this agreement. Failure to include a valid dealer ID with any enrollment will delay the $5 recurring compensation per account. </p>
+
+								
+
+									<p style="text-align: justify">4. All accounts must be created with valid information, any Installer found to be falsifying any survey participant or account information will be fined, and their contract terminated.</p>
+
+							
+
+									<p style="text-align: justify">5. Advertising and promotional material will be sent to dealers based on needs and Installer performance.</p>
+
+								
+									<p style="text-align: justify">6. Installation packages will be purchased from SmartMark Inc. at $25.00 per and will include a sim card and material for the end user.</p>
+									<p style="text-align: justify">7. All pre authorized Installers must meet the minimum quality and signup requirements to continue participating in the SmartMark program.</p>
+
+									<p style="text-align: justify">8. Installer agreements with SmartMark are issued and maintained at the sole discretion and can be terminated or revoked at any time if we suspect abuse.</p>
+
+
+									<p style="text-align: justify">9. All promotional material, SIMS, customer information, and service are the express property of SmartMark Inc.</p>
+
+									<p style="text-align: justify">10. Agreement(s) subject to updates and changes without notice, the most up to date information can be requested from SmartMark, Inc.</p>
+
+									<p style="text-align: justify">11. Installer locations are NOTPERMITTED to do online sales.  Otherwise, Smartmark willpenalizedits location with $10,000. </p>
+
+								
+
+									<p style="text-align: justify">12. Installer locations are not allowed to use unauthorized marketing materials both online and offline.  Otherwise, Smartmark may penalize its location with $10,000. </p>
+
+									
+									<p align="left"><img src="{{data.esign_image}}" /></p>
+
+									<p style="text-align: justify">SIGNATURE </p>
+
+								
+									<!--   <p style="text-align: left">INSTALLER LOCATION NAME: {{data.location_name}} </p>
+									  <p style="text-align: left">ADDRESS: {{data.address}} </p>
+									  <p style="text-align: left">CITY, STATE, ZIP CODE {{data.city}}, {{data.state}}, {{data.zip}}, </p>
+									  <p style="text-align: left">CONTACT NAME [Full Name]: {{data.full_name}}</p>
+									  <p style="text-align: left">BUSINESS PHONE: {{data.business_phone}}</p> 
+									  <p style="text-align: left">CELLULAR PHONE: {{data.cellular_phone}}</p>
+									  <p style="text-align: left">DEALER NAME  {{data.dealer_name}}</p>
+									  <p style="text-align: left">E-mail: {{data.email}}</p>
+									  <p style="text-align: left">IP: {{data.sign_ip}} </p>
+									  <p style="text-align: left">DateTime: {{data.sign_date}}</p>  -->
+									  <div class="table-responsive">
+										<table  class="table table-condensed m0">
+											<tbody>
+												<tr>
+													<td>DEALER CODE:</td>
+													<td>Dealer{{maxdealerno}} </td>
+												</tr>
+												<tr>
+													<td>INSTALLER LOCATION NAME:</td>
+													<td>{{data.location_name}} </td>
+												</tr>
+												<tr>
+													<td>ADDRESS:</td>
+													<td>{{data.address}} </td>
+												</tr>
+												<tr>
+													<td>CITY, STATE, ZIP CODE:</td>
+													<td>{{data.city}}, {{data.state}}, {{data.zip}}</td>
+												</tr>
+												<tr>
+													<td>CONTACT NAME [Full Name]:</td>
+													<td>{{data.full_name}}</td>
+												</tr>
+												<tr>
+													<td>BUSINESS PHONE:</td>
+													<td>{{data.business_phone}}</td>
+												</tr>
+												<tr>
+													<td>CELLULAR PHONE:</td>
+													<td>{{data.cellular_phone}}</td>
+												</tr>
+												<tr>
+													<td>DEALER NAME :</td>
+													<td>{{data.dealer_name}}</td>
+												</tr>
+												<tr>
+													<td>E-mail:</td>
+													<td>{{data.email}}</td>
+												</tr>
+												<tr>
+													<td>IP:</td>
+													<td>{{data.sign_ip}}</td>
+												</tr>
+												<tr>
+													<td>DateTime:</td>
+													<td>{{data.sign_date}}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+							
+							
+						</div>
+						<div class="row" >
+							<div  class="col-sm-6">
+		                       <!--  <button type="button" class="btn btn-success btn-sm pull-right" ng-click="approve()">Approve </button> -->
+							   <input  class="form-control"  type="hidden" ng-model="user.agrmcontantpdf"  >
+								<!-- <button  class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#approve-model">Approve </button> -->
+								<button  class="btn btn-success btn-sm pull-right" ng-click="approve(user)">Approve </button>
+		                    </div>
+							
+							<div  class="col-sm-6">
+		                        <button class="btn btn-success btn-sm pull-left" data-toggle="modal" data-target="#reject-model">Reject </button>
+		                    </div> 
+							<br><br>
+	                    
+	                        
+	                    </div>
+	              <!--   </div>     -->
+				</div>
+				<div ng-if="!referAStoreAgrByUserHtmlList">
+					No Agreement
+				</div>
+        	</div>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->
+
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="reject-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Reject </h4>
+      </div>
+      <div class="modal-body" >
+      	<form role="form" name="myForm2"  class="form-horizontal" >
+			
+			<div class="form-group">
+                <label for="fieldname" class="col-md-3 control-label">Comment </label>
+                <div class="col-md-6">
+                	
+                    <textarea class="form-control" name="comment" ng-model="rejectuser.comment" required></textarea>
+                </div>
+            </div>
+		
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                        <button type="submit" class="finish btn-success btn-sm"  ng-disabled=" myForm2.$invalid" data-dismiss="modal" ng-click="reject(rejectuser)">Reject</button>
+                </div>
+            </div>
+            
+		</form> 
+		           
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="approve-model" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Approve </h4>
+      </div>
+      <div class="modal-body" >
+      	<form role="form" name="myForm"  class="form-horizontal" >
+			
+			<div class="form-group">
+                <label for="fieldname" class="col-md-3 control-label">Dealer Code </label>
+                <div class="col-md-6">
+                	
+                    <input class="form-control" name="amount" ng-model="approveuser.dealer_code" required>
+                </div>
+            </div>
+           <!--  <div class="form-group">
+                <label for="fieldname" class="col-md-3 control-label">Comment </label>
+                <div class="col-md-6">
+                	
+                    <textarea class="form-control" name="comment" ng-model="approveuser.comment" required></textarea>
+                </div>
+            </div> -->
+		
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-3">
+                        <button type="submit" class="finish btn-success btn-sm pull-right"  ng-disabled=" myForm.$invalid" data-dismiss="modal" ng-click="approve(approveuser)">Approve</button>
+                </div>
+              <!--    <div class="col-sm-3 ">
+                        <button type="submit" class="finish btn-success btn-sm"  ng-disabled=" myForm.$invalid" data-dismiss="modal" ng-click="approvereleas(approveuser)">Release</button>
+                </div> -->
+            </div>
+            
+		</form> 
+		           
+      </div>
+      <div class="modal-footer" align="center" style="border-top: medium none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

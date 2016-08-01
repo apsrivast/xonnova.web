@@ -1,0 +1,540 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li class="active">New Leads</li>
+    </ol>
+    <h1>New Leads</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="New Leads Form">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+
+                <form role="form" name="myForm"  data-wizard="{finishButton: true, titleClick: true, block: true, validate: true}" class="form-horizontal" >
+                    <div id="message"></div>    
+                    <fieldset title="Step 1">
+                        <legend>New Leads</legend>
+
+
+                        
+
+
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Industry</label>
+                            <div class="col-md-6">
+                                <select  class="form-control"  type="text" name="industry" ng-model="user.industry" required>
+                                    <option value="">Select</option>
+                                    <!--<option value="Merchant Services">Merchant Services</option>
+                                    <option value="Solar Panels">Solar Panels</option>
+                                    <option value="Electric/Gas">Electric/Gas</option>
+                                    <option value="Printing">Printing</option>
+                                    <option value="Other">Other (please specify)</option>-->
+									<option value="Solar Panels">Solar Panels</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Preferred Language</label>
+                            <div class="col-md-6">
+                                <select  class="form-control"  type="text" name="user_language" ng-model="user.user_language" required>
+                                    <option value="">Select</option>
+                                    <option value="English">English</option>
+                                    <option value="Spanish">Spanish </option>
+                                
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" ng-show="user.industry == 'Other'">
+                            <label for="fieldpass" class="col-md-3 control-label">Other Industry</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" ng-model="user.other_industry"  type="text" placeholder= "Enter Industry Name" ng-pattern="/[a-zA-Z]/" minlength="2" ng-required="user.industry == 'Other'">
+                                
+                            </div>
+                        </div>
+                        
+                    
+                        
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Business Name</label>
+                            <div class="col-md-6">
+                                <input  class="form-control"ng-model="user.business_name"  type="text" placeholder= "Enter Business Name" ng-pattern="/[a-zA-Z]/" minlength="2" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Owner  Name</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" ng-model="user.owner_name" ng-pattern="/[a-zA-Z]/" minlength="2" type="text" placeholder= "Enter Owner Name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Type of Business</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" ng-model="user.type_business" ng-pattern="/[a-zA-Z]/" minlength="2" type="text" placeholder= "Enter Type of Business" required>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                            <label for="fieldemail" class="col-md-3 control-label">Email</label>
+                            <div class="col-md-6">
+                                <input   class="form-control" type="email"  ng-model="user.business_email" placeholder= "Enter  Email-ID" minlength="5"  >
+                                
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Phone number</label>
+                            <div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.contect_no" placeholder= "Enter Phone" ng-pattern="/[0-9]/" required></div>
+                        </div>
+                        <div class="form-group" >
+                            <label for="fieldpass" class="col-md-3 control-label">Best time of contact</label>
+                            <div class="col-md-2">
+                                <!--  <select  class="form-control"  type="text" name="day" ng-model="user.day" required>
+                                    <option value="">Day</option>
+                                    <option value="Sun">Sun </option>
+                                    <option value="Mon">Mon </option>
+                                    <option value="Tue">Tue </option>
+                                    <option value="Wed">Wed </option>
+                                    <option value="Thu">Thu </option>
+                                    <option value="Fri">Fri </option>
+                                    <option value="Sat">Sat </option>
+                                 
+                                </select> -->
+                                 <input  class="form-control" name="day" pickadate ng-model="user.day"  type="text" placeholder="yyyy-MM-dd" min="1950-01-01" max="2099-12-31" required readonly/>
+                            </div>
+                            <div class="col-md-1">
+                                <select  class="form-control"  type="text" name="time" ng-model="user.time" required>
+                                    <option value=""> Hour</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                </select>
+                            </div>
+                            <div class="col-md-1">
+                                <select class="form-control"  type="text" name="time_m" ng-model="user.time_m" required>
+                                    <option value=""> Minute</option>
+                                    <option value="00">00</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select  class="form-control"  type="text" name="zone" ng-model="user.zone" required>
+                                    <option value="">Time Zone</option>
+                                    <option value="PST">PST </option>
+                                    <option value="CST">CST </option>
+                                  
+                                    <option value="EST">EST </option>
+            
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="user.industry == 'Merchant Services'">
+                            <label for="fieldpass" class="col-md-3 control-label">Type of equipment needed</label>
+                            <div class="col-md-6">
+                                <select  class="form-control"  type="text" name="equipment" ng-model="user.equipment" ng-required="user.industry == 'Merchant Services'">
+                                    <option value="">Select</option>
+                                    <option value="POS">POS </option>
+                                    <option value="Regular Terminal">Regular Terminal</option>
+                                    <option value="Tablet with swiper">Tablet with swiper</option>
+                                    <option value="Wireless Terminal">Wireless Terminal</option>
+                                    <option value="I don't know">I don't know</option>
+                                </select>
+                            </div>
+                        </div>
+                         <div class="form-group" ng-show="user.industry == 'Solar Panels'">
+                            <label for="fieldpass" class="col-md-3 control-label">Type of location </label>
+                            <div class="col-md-6">
+                                <select  class="form-control"  type="text" name="type_location" ng-model="user.type_location" ng-required="user.industry == 'Solar Panels'">
+                                    <option value="">Select</option>
+                                    <option value="Commercial">Commercial </option>
+                                    <option value="Residential">Residential </option>
+                                 
+                                </select>
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Location </label>
+                            <div class="col-md-6">
+                                <textarea class="form-control" placeholder= "Enter Address" ng-model="user.location" required></textarea>
+                            </div>
+                        </div>
+
+                    
+
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Type of lead  </label>
+                            <div class="col-md-6" >
+                                <div class="btn btn-danger btn-sm" ng-click="user.type_lead = 'Hot'">
+                                  <input type="radio" ng-model="user.type_lead"  value="Hot" >
+                              </div>
+                              The prospect already knows about the product/service and is ready to buy<br><br>
+                               <div class="btn btn-warning btn-sm" ng-click="user.type_lead = 'Warm'">
+                                  <input type="radio" ng-model="user.type_lead"  value="Warm" >
+                              </div>
+                               The prospect already knows about the product/service and is interested in getting more information  <br><br>
+                                <div class="btn btn-success btn-sm" ng-click="user.type_lead = 'Cold'">
+                                  <input type="radio" ng-model="user.type_lead"  value="Cold" >
+                              </div>
+                                The prospect does not know anything about the product/service 
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <label for="fieldpass" class="col-md-3 control-label">How did you get this prospect? </label>
+                            <div class="col-md-6">
+                                <select  class="form-control"  type="text" name="get_prospect" ng-model="user.get_prospect" required>
+                                    <option value="">Select</option>
+                                    <option value="Friend or family member"> Friend or family member</option>
+                                    <option value="Done business together in the past"> Done business together in the past</option>
+                                    <option value="Just met him/her"> Just met him/her</option>
+                                    <option value="I don't know the prospect"> I don't know the prospect</option>
+                                 
+                                </select>
+                            </div>
+                        </div>
+						
+                        <div class="form-group">
+		                    <label for="fieldname" class="col-md-3 control-label">Comments </label>
+		                    <div class="col-md-6">
+		                        <textarea class="form-control"  ng-model="user.comments" required></textarea>
+		                    </div>
+		                </div>
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label"></label>
+                            <div class="col-md-6">
+                                
+                            </div>
+                        </div>
+
+
+
+                       <!--  <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Questionnaire:  </label>
+                            <div class="col-md-6" >
+                                <div class="btn btn-default btn-sm" ng-click="user.questionnaireans = 'YES'">
+                                  <input type="radio" ng-model="user.questionnaireans"  value="YES" >Upload  
+                              </div>
+                              
+                               <div class="btn btn-default btn-sm" ng-click="user.questionnaireans = 'NO'">
+                                  <input type="radio" ng-model="user.questionnaireans"  value="NO"  >Fill Here 
+                              </div>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group" ng-show="user.questionnaireans == 'YES'">
+                            <label for="fieldpass" class="col-md-3 control-label"> Upload Questionnaire:</label>
+                            <div class="col-md-6">
+                             
+                               <input type="file" ngf-select ng-model="questionnaire" ngf-accept="'*'" ngf-change="uploadQuestionnaire($files)" ng-required="user.questionnaireans == 'YES'"/>
+                              
+                                <input  class="form-control" name="user_questionnaire"  type="hidden" ng-model="user.user_questionnaire"  ng-required="user.questionnaireans == 'YES'">
+                                 <span style="color:#B4270F" ng-show=" myForm.user_questionnaire.$error.required">this field required</span> 
+                                <span >Only For Solar Panels</span>
+                            </div>
+                        </div> -->
+                    </fieldset>
+                    <fieldset title="Step 2" >
+                            <legend>Prequalifying Questionnaire</legend>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">REFERRING AGENT:</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.q_agent"  required>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group" >
+                                <label for="fieldpass" class="col-md-3 control-label">INITIAL CONTACT DATE:</label>
+                                <div class="col-md-6">
+                                   
+                                    <input  class="form-control"  pickadate ng-model="user.q_date"  type="text" placeholder="yyyy-MM-dd" min="1950-01-01" max="2099-12-31" readonly required/>
+                                   <!--  <input  class="form-control"  type="text" ng-model="user.q_date"  required> -->
+                                </div>
+                            </div>    
+
+
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Do you own your home ?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_home = 'YES'">
+                                        <input type="radio" ng-model="user.q_home"  value="YES" >YES 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_home = 'NO'">
+                                        <input type="radio" ng-model="user.q_home"  value="NO"  >NO 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Is your electricity cost and average of over $100.00?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_electricity = 'YES'">
+                                        <input type="radio" ng-model="user.q_electricity"  value="YES" >YES 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_electricity = 'NO'">
+                                        <input type="radio" ng-model="user.q_electricity"  value="NO"  >NO 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Whats your average Electricity bill?</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.q_avg_electricity"  required>
+                                </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label for="fieldpass" class="col-md-3 control-label"> Upload Electricity Bill</label>
+                                <div class="col-md-6">
+                                    <input type="file" ngf-select ng-model="q_electr_bill" ngf-accept="'*'" ngf-change="uploadElectricity($files)" required/>
+                                    <input  class="form-control" name="q_electricity_bill"  type="hidden" ng-model="user.q_electricity_bill"  required>
+                                    <span style="color:#B4270F" ng-show=" myForm.q_electricity_bill.$error.required">this field required</span> 
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Have you done a mortgage modification in the last two years?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_mortgage = 'YES'">
+                                        <input type="radio" ng-model="user.q_mortgage"  value="YES" >YES 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_mortgage = 'NO'">
+                                        <input type="radio" ng-model="user.q_mortgage"  value="NO"  >NO 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="user.q_mortgage == 'YES'">
+                                <label for="fieldname" class="col-md-3 control-label">If yes, is it resolved?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_mortgage_resolved = 'YES'">
+                                        <input type="radio" ng-model="user.q_mortgage_resolved"  value="YES" >YES 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_mortgage_resolved = 'NO'">
+                                        <input type="radio" ng-model="user.q_mortgage_resolved"  value="NO"  >NO 
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Have you file for bankruptcy in the last 7 years?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_bankruptcy = 'YES'">
+                                        <input type="radio" ng-model="user.q_bankruptcy"  value="YES" >YES 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_bankruptcy = 'NO'">
+                                        <input type="radio" ng-model="user.q_bankruptcy"  value="NO"  >NO 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="user.q_bankruptcy == 'YES'">
+                                <label for="fieldname" class="col-md-3 control-label">If yes, is it resolved?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_bankruptcy_resolved = 'YES'">
+                                        <input type="radio" ng-model="user.q_bankruptcy_resolved"  value="YES" >YES 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_bankruptcy_resolved = 'NO'">
+                                        <input type="radio" ng-model="user.q_bankruptcy_resolved"  value="NO"  >NO 
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Have you made any late payments to your mortgage?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_late_payments = 'YES'">
+                                        <input type="radio" ng-model="user.q_late_payments"  value="YES" >YES 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_late_payments = 'NO'">
+                                        <input type="radio" ng-model="user.q_late_payments"  value="NO"  >NO 
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="user.q_late_payments == 'YES'">
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">If yes, How long ago?</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control"  type="text" ng-model="user.q_late_payments_long"  ng-required="user.q_late_payments == 'YES'">
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="form-group" >
+                                    <label for="fieldname" class="col-md-3 control-label">Are you up to date now?</label>
+                                    <div class="col-md-6" >
+                                        <div class="btn btn-default btn-sm" ng-click="user.q_late_payments_upto = 'YES'">
+                                            <input type="radio" ng-model="user.q_late_payments_upto"  value="YES" >YES 
+                                        </div>
+                                        <div class="btn btn-default btn-sm" ng-click="user.q_late_payments_upto = 'NO'">
+                                            <input type="radio" ng-model="user.q_late_payments_upto"  value="NO"  >NO 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label for="fieldname" class="col-md-3 control-label">Are you up to date on your property taxes?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_property_taxes = 'YES'">
+                                        <input type="radio" ng-model="user.q_property_taxes"  value="YES" >YES 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_property_taxes = 'NO'">
+                                        <input type="radio" ng-model="user.q_property_taxes"  value="NO"  >NO 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label for="fieldname" class="col-md-3 control-label">Have you ever fallen behind on your property taxes?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_property_taxes_fallen = 'YES'">
+                                        <input type="radio" ng-model="user.q_property_taxes_fallen"  value="YES" >YES 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_property_taxes_fallen = 'NO'">
+                                        <input type="radio" ng-model="user.q_property_taxes_fallen"  value="NO"  >NO 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" >
+                                <label for="fieldname" class="col-md-3 control-label">Are they included in your Mortgage payment?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_property_taxes_mortgage = 'YES'">
+                                        <input type="radio" ng-model="user.q_property_taxes_mortgage"  value="YES" >YES 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_property_taxes_mortgage = 'NO'">
+                                        <input type="radio" ng-model="user.q_property_taxes_mortgage"  value="NO"  >NO 
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group" >
+                                <label for="fieldname" class="col-md-3 control-label">Is your credit FICO score over 650?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_credit = 'YES'">
+                                        <input type="radio" ng-model="user.q_credit"  value="YES" >YES 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_credit = 'NO'">
+                                        <input type="radio" ng-model="user.q_credit"  value="NO"  >NO 
+                                    </div>
+                                </div>
+                            </div>
+
+                             <div class="form-group" >
+                                <label for="fieldname" class="col-md-3 control-label">What type of roof do you have?</label>
+                                <div class="col-md-6" >
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_roof = 'Comp Shingles'">
+                                        <input type="radio" ng-model="user.q_roof"  value="Comp Shingles" >Comp Shingles 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_roof = 'Tile'">
+                                        <input type="radio" ng-model="user.q_roof"  value="Tile"  >Tile 
+                                    </div>
+                                    <div class="btn btn-default btn-sm" ng-click="user.q_roof = 'Wood Shake'">
+                                        <input type="radio" ng-model="user.q_roof"  value="Wood Shake"  >Wood Shake 
+                                    </div>
+                                    (we can not install on wood shake)
+                                </div>
+                                
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Name:</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.q_name"  required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Home Phone #:</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.q_home_phone" ng-pattern="/[0-9]/" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Cell #:</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.q_cell" ng-pattern="/[0-9]/" required>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Address:</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.q_address"  required>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">City:</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.q_city"  required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">State:</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.q_state"  required>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">ZIP Code:</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control"  type="text" ng-model="user.q_zip" ng-pattern="/[0-9]/" required>
+                                </div>
+                            </div>
+                    </fieldset>
+                    <input type="submit" class="finish btn-success btn" value="Submit" ng-disabled=" myForm.$invalid " ng-click="newleadtwo(user);"/>
+						
+						       
+                  
+                         <!-- <div class="panel-footer">
+		                    <div class="row">
+		                        <div class="col-sm-6 col-sm-offset-3">
+		                                <button type="submit" class="finish btn-success btn"  ng-disabled=" myForm.$invalid" ng-click="newleadtwo(user)">Submit</button>
+		                        </div>
+		                    </div>
+		                </div>       -->        
+                    
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,661 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li class="active">Activate Platform</li>
+    </ol>
+    <h1>Activate Platform</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Activate Platform Form">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+
+                <form role="form" name="myForm"   class="form-horizontal" enctype="multipart/form-data"  >
+						<fieldset  ng-repeat="data in profileList">
+                            <legend>Member</legend>
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Member ID</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" ng-model="data.user_id"  type="text" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Member Name</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control" ng-model="data.user_name"  type="text" readonly>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Member Phone</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" ng-model="data.contact_no"  type="text" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldname" class="col-md-3 control-label">Member Email</label>
+                                <div class="col-md-6">
+                                    <input  class="form-control" ng-model="data.user_email"  type="text" readonly>
+                                </div>
+                            </div>
+                            
+                           
+                        </fieldset>
+                        <fieldset  >
+                            <legend>Question #1</legend>
+                            
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Select your company!</label>
+                                <div class="col-md-6">
+                                    <select id="q2" class="form-control"  type="text" name="q2" ng-model="user.q2" required>
+                                         <option value="">Select</option>
+                                        <option value="1">SmartMark</option>
+                                        <option value="2">Simple Mobile</option>
+                                    </select>
+                                    <span style="color:#B4270F" ng-show=" myForm.q2.$error.required">Required !</span> 
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div ng-show="user.q2 == '1'">
+                            <fieldset >
+                                <legend>Question #2</legend>
+                                
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">SmartMark Plan</label>
+                                    <div class="col-md-6">
+                                        <select id="attq3" class="form-control" name="attq3" type="text" ng-model="user.attq3" ng-required="user.q2 == '1'">
+                                            <option value="">Select</option>
+                                           <option value="100">subsidized plan $0/month</option>
+                                        </select> 
+                                        <span style="color:#B4270F" ng-show=" myForm.attq3.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset ng-show="user.attq3 == '100'" >
+                                <legend>Question #3</legend>
+                                
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Total due today</label>
+                                    <div class="col-md-6">
+                                        $ 10.00
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Race</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" name="race" type="text" ng-model="user.race" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">Select</option>
+                                           <option value="White">White</option>
+                                            <option value="African American">African American</option>
+                                             <option value="Hispanic">Hispanic</option>
+                                              <option value="Asian">Asian</option>
+                                               <option value="European">European</option>
+                                                <option value="Native American">Native American</option>
+                                                 <option value="Phillipine">Phillipine</option>
+
+                                        </select> 
+                                        <span style="color:#B4270F" ng-show=" myForm.race.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Gender</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" name="gender" type="text" ng-model="user.gender" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">Select</option>
+                                           <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                          
+                                                 
+                                        </select> 
+                                         <span style="color:#B4270F" ng-show=" myForm.gender.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Preferred language?</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" name="pref_lang" type="text" ng-model="user.pref_lang" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">Select</option>
+                                           <option value="English">English</option>
+                                            <option value="Spanish">Spanish</option>
+                                          
+                                                 
+                                        </select> 
+                                        <span style="color:#B4270F" ng-show=" myForm.pref_lang.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Home owner?</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" name="home_owner" type="text" ng-model="user.home_owner" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">Select</option>
+                                           <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                          
+                                                 
+                                        </select> 
+                                        <span style="color:#B4270F" ng-show=" myForm.home_owner.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Business  owner?</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" name="bus_owner" type="text" ng-model="user.bus_owner" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">Select</option>
+                                           <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                          
+                                                 
+                                        </select> 
+                                        <span style="color:#B4270F" ng-show=" myForm.bus_owner.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-show="user.bus_owner == 'Yes'">
+                                    <label for="fieldpass" class="col-md-3 control-label">Industry</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="industry" ng-model="user.industry"  type="text" placeholder= "Enter Industry" ng-pattern="/[a-zA-Z]/" minlength="2" ng-required="user.attq3 == '100' && user.q2 == '1' && user.bus_owner == 'Yes'">
+                                         <span style="color:#B4270F" ng-show=" myForm.industry.$error.required">Required !</span>
+                                       
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">SIM # </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="attpin" ng-model="user.attpin"  type="text" placeholder= "Enter SIM #" ng-pattern="/[0-9]/" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        <span style="color:#B4270F" ng-show=" myForm.attpin.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+                               <!--  <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">IMEI # </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" ng-model="user.imei"  type="text" placeholder= "Enter IMEI #"  ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                    </div>
+                                </div> -->
+								
+								 <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">What area code would you like</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="area_code" ng-model="user.area_code"  type="text" placeholder= "Enter area code .. only 3 digits" ng-pattern="/[0-9]/" minlength="3" maxlength="3" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        <span style="color:#B4270F" ng-show=" myForm.area_code.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                               
+                                 <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">First Name</label>
+                                    <div class="col-md-6">
+                                        <input id="f-name" class="form-control" name="first_name" ng-model="user.first_name"  type="text" placeholder= "Enter First Name" ng-pattern="/[a-zA-Z]/" minlength="2" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        <span style="color:#B4270F" ng-show=" myForm.first_name.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Middle Name</label>
+                                    <div class="col-md-6">
+                                        <input id="m-name" class="form-control" ng-model="user.middle_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Middle Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Last Name</label>
+                                    <div class="col-md-6">
+                                        <input id="l-name" class="form-control" name="last_name" ng-model="user.last_name" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Last Name" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        <span style="color:#B4270F" ng-show=" myForm.last_name.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Phone Number</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="attphone" ng-model="user.attphone"  type="text" placeholder= "Enter Phone Number" ng-pattern="/[0-9]/" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        <span style="color:#B4270F" ng-show=" myForm.attphone.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Phone Brand</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="phone_brand" ng-model="user.phone_brand"  type="text" placeholder= "Enter Phone Type"  ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        <span style="color:#B4270F" ng-show=" myForm.phone_brand.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Phone Model</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="phone_type" ng-model="user.phone_type"  type="text" placeholder= "Enter Phone Type"  ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        <span style="color:#B4270F" ng-show=" myForm.phone_type.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Phone IMEI</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="phone_imei" ng-model="user.phone_imei"  type="text" placeholder= "Enter Phone IMEI" ng-pattern="/^[0-9]+$/" minlength="15" maxlength="15" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        <span style="color:#B4270F" ng-show=" myForm.phone_imei.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Annual Income</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" name="annual_income" type="text" ng-model="user.annual_income" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">Select</option>
+                                            <option value="<$25,000"><$25,000</option>
+                                            <option value="$25,000 - $50,000">$25,000 - $50,000</option>
+                                            <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                                            <option value=">$100,000">>$100,000</option>
+                                        </select> 
+                                         <span style="color:#B4270F" ng-show=" myForm.annual_income.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Do you have health insurance?</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" name="health_insurance" type="text" ng-model="user.health_insurance" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">Select</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select> 
+                                        <span style="color:#B4270F" ng-show=" myForm.health_insurance.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Do you have dental insurance?</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" name="dental_insurance" type="text" ng-model="user.dental_insurance" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">Select</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select> 
+                                        <span style="color:#B4270F" ng-show=" myForm.dental_insurance.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Do you have life insurance?</label>
+                                    <div class="col-md-6">
+                                        <select  class="form-control" name="life_insurance" type="text" ng-model="user.life_insurance" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">Select</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select> 
+                                        <span style="color:#B4270F" ng-show=" myForm.life_insurance.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+
+                                
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Address 1</label>
+                                    <div class="col-md-6">
+                                        <input id="address1" class="form-control" name="address1" type="text" ng-model="user.address1" placeholder= "Enter Address" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        <span style="color:#B4270F" ng-show=" myForm.address1.$error.required">Required !</span>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Address 2</label>
+                                    <div class="col-md-6"><input id="address2" class="form-control"  type="text" ng-model="user.address2" placeholder= "Enter Address" ></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">City</label>
+                                    <div class="col-md-6">
+                                        <input id="city" class="form-control" name="city" type="text" ng-model="user.city" placeholder= "Enter City" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        <span style="color:#B4270F" ng-show=" myForm.city.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                
+                                 <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">State</label>
+                                    <div class="col-md-6">
+                                        <select id="state" class="form-control" name="state" type="text" ng-model="user.state" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                            <option value="">Select State</option>
+<option value="AL">AL - ALABAMA</option>
+<option value="AK">AK - ALASKA</option>
+<option value="AS">AS - AMERICAN SAMOA</option>
+<option value="AZ">AZ - ARIZONA</option>
+<option value="AR">AR - ARKANSAS</option>
+<option value="AA">AA - Armed Forces Americas (Except Canada)</option>
+<option value="AE">AE - Armed Forces Europe</option>
+<option value="AP">AP - Armed Forces Pacific</option>
+<option value="CA">CA - CALIFORNIA</option>
+<option value="CO">CO - COLORADO</option>
+<option value="CT">CT - CONNECTICUT</option>
+<option value="DE">DE - DELAWARE</option>
+<option value="DC">DC - DISTRICT OF COLUMBIA</option>
+<option value="FM">FM - FEDERATED STATES OF MICRONESIA</option>
+<option value="FL">FL - FLORIDA</option>
+<option value="GA">GA - GEORGIA</option>
+<option value="GU">GU - GUAM</option>
+<option value="HI">HI - HAWAII</option>
+<option value="ID">ID - IDAHO</option>
+<option value="IL">IL - ILLINOIS</option>
+<option value="IN">IN - INDIANA</option>
+<option value="IA">IA - IOWA</option>
+<option value="KS">KS - KANSAS</option>
+<option value="KY">KY - KENTUCKY</option>
+<option value="LA">LA - LOUISIANA</option>
+<option value="ME">ME - MAINE</option>
+<option value="MH">MH - MARSHALL ISLANDS</option>
+<option value="MD">MD - MARYLAND</option>
+<option value="MA">MA - MASSACHUSETTS</option>
+<option value="MI">MI - MICHIGAN</option>
+<option value="MN">MN - MINNESOTA</option>
+<option value="MS">MS - MISSISSIPPI</option>
+<option value="MO">MO - MISSOURI</option>
+<option value="MT">MT - MONTANA</option>
+<option value="NE">NE - NEBRASKA</option>
+<option value="NV">NV - NEVADA</option>
+<option value="NH">NH - NEW HAMPSHIRE</option>
+<option value="NJ">NJ - NEW JERSEY</option>
+<option value="NM">NM - NEW MEXICO</option>
+<option value="NY">NY - NEW YORK</option>
+<option value="NC">NC - NORTH CAROLINA</option>
+<option value="ND">ND - NORTH DAKOTA</option>
+<option value="MP">MP - NORTHERN MARIANA ISLANDS</option>
+<option value="OH">OH - OHIO</option>
+<option value="OK">OK - OKLAHOMA</option>
+<option value="OR">OR - OREGON</option>
+<option value="PW">PW - PALAU</option>
+<option value="PA">PA - PENNSYLVANIA</option>
+<option value="PR">PR - PUERTO RICO</option>
+<option value="RI">RI - RHODE ISLAND</option>
+<option value="SC">SC - SOUTH CAROLINA</option>
+<option value="SD">SD - SOUTH DAKOTA</option>
+<option value="TN">TN - TENNESSEE</option>
+<option value="TX">TX - TEXAS</option>
+<option value="UT">UT - UTAH</option>
+<option value="VT">VT - VERMONT</option>
+<option value="VA">VA - VIRGINIA</option>
+<option value="VI">VI - VIRGIN ISLANDS</option>
+<option value="WA">WA - WASHINGTON</option>
+<option value="WV">WV - WEST VIRGINIA</option>
+<option value="WI">WI - WISCONSIN</option>
+<option value="WY">WY - WYOMING</option>
+                                      </select>
+                                      <span style="color:#B4270F" ng-show=" myForm.state.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Country</label>
+                                    <div class="col-md-6">
+                                        USA
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Zip</label>
+                                    <div class="col-md-6">
+                                        <input id="zip" class="form-control" name="zip" type="text"ng-model="user.zip" placeholder= "Enter ZIP Code" minlength="2" ng-pattern="/[0-9]/" ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        <span style="color:#B4270F" ng-show=" myForm.zip.$error.required">Required !</span>
+
+                                    </div>
+                                </div>
+                               
+								<div class="form-group">
+                                    <label for="fieldemail" class="col-md-3 control-label">Email</label>
+                                    <div class="col-md-6">
+                                        <input id="fieldemail" name="user_emailATTSim" class="form-control" type="email"  ng-model="user.user_emailATTSim" placeholder= "Enter Email-ID" minlength="5"  ng-required="user.attq3 == '100' && user.q2 == '1'" >
+                                        <span style="color:#B4270F" ng-show=" myForm.user_emailATTSim.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                               
+                                 <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Birth Date</label>
+                                    <div class="col-md-6" ng-controller="dateATTSimCtr">
+                                        <div class="containerATTSim" style="width: 100%; margin: 0px; padding: 0px;">
+                                           <input
+                                                id="input_01ATTSim"
+                                                class="datepickerATTSim form-control"
+                                                name="dobATTSim"
+                                                ng-model="user.dobATTSim"
+                                                type="text"
+                                                placeholder="yyyy-mm-dd"
+                                                autofocuss ng-required="user.attq3 == '100' && user.q2 == '1'">
+                                        </div>  
+                                    </div>
+                                    <span style="color:#B4270F" ng-show=" myForm.dobATTSim.$error.required">Required !</span>
+                                </div>
+                            </fieldset>
+                        </div>  
+                        <div ng-show="user.q2 == '2'">
+                            <fieldset >
+                                <legend>Question #2</legend>
+                                <div class="form-group">
+                                    <label for="fieldpass" class="col-md-3 control-label">Is this a Port?</label>
+                                    <div class="col-md-6">
+                                        <select id="q1" class="form-control" name="q1" type="text" ng-model="user.q1" ng-required="user.q2 == '2'">
+                                            <option value="">Select</option>
+                                            <option value="NO">NO</option>
+                                            <option value="YES">YES</option>
+                                        </select>
+                                        <span style="color:#B4270F" ng-show=" myForm.q1.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset ng-show="user.q1 == 'YES'" >
+                                <legend>Port-in Service</legend>
+                                
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Client Name</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="client_name" ng-model="user.client_name"  type="text" placeholder= "Enter Client Name" ng-pattern="/[a-zA-Z]/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                        <span style="color:#B4270F" ng-show=" myForm.client_name.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Current Company</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="current_company" ng-model="user.current_company "  type="text" placeholder= "Enter Current Company" ng-pattern="/[a-zA-Z]/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                        <span style="color:#B4270F" ng-show=" myForm.current_company.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Phone Number </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="phone_number" ng-model="user.phone_number  "  type="text" placeholder= "Enter Phone Number" ng-pattern="/[0-9]/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                        <span style="color:#B4270F" ng-show=" myForm.phone_number.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Account #</label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="account" ng-model="user.account  "  type="text" placeholder= "Enter Account #" ng-pattern="/[0-9]/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                        <span style="color:#B4270F" ng-show=" myForm.account.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">PIN </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="pin" ng-model="user.pin"  type="text" placeholder= "Enter PIN" ng-pattern="/[0-9]/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                        <span style="color:#B4270F" ng-show=" myForm.pin.$error.required">Required !</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label">Zip Code  </label>
+                                    <div class="col-md-6">
+                                        <input  class="form-control" name="zip_code" ng-model="user.zip_code "  type="text" placeholder= "Enter Zip Code" ng-pattern="/[0-9]/" minlength="2" ng-required="user.q1 == 'YES' && user.q2 == '2'">
+                                        <span style="color:#B4270F" ng-show=" myForm.zip_code.$error.required">Required !</span>
+                                    </div>
+                                </div>
+
+                                 <div class="form-group">
+                                    <label for="fieldname" class="col-md-3 control-label"></label>
+                                    <div class="col-md-6">
+                                        * Note: If you input the wrong information, chances are high you will lose your number. Also you will be charged full price and when port is ready we will give you a rebate.
+                                    </div>
+                                </div>
+                                 
+                            </fieldset>
+                            <div ng-show="user.q1 == 'NO'">
+
+                                <fieldset >
+                                    <legend>Question #3</legend>
+                                    
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">Simple Mobile Plan</label>
+                                        <div class="col-md-6">
+                                            <select id="smq3" name="smq3" class="form-control"  type="text" ng-model="user.smq3" ng-required="user.q1 == 'NO' && user.q2 == '2'">
+                                                <option value="">Select</option>
+                                                <option value="40">$40</option>
+                                                <option value="55">$55</option>
+                                                <option value="65">$65</option>
+                                            </select>
+                                             <span style="color:#B4270F" ng-show=" myForm.smq3.$error.required">Required !</span>
+                                        </div>
+                                    </div>
+                                </fieldset>  
+                                <fieldset ng-show="user.smq3 != null" >
+                                    <legend>Question #4</legend>
+                                    
+                                    <div class="form-group" >
+                                        <label for="fieldpass" class="col-md-3 control-label">Total due today</label>
+                                        <div class="col-md-6">
+                                            <div ng-show="user.smq3 == '40'"> $ 10.00</div>
+                                            <div ng-show="user.smq3 == '55'"> $ 25.00</div>
+                                            <div ng-show="user.smq3 == '65'"> $ 35.00</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">SIM # </label>
+                                        <div class="col-md-6">
+                                            <input  class="form-control" name="smpin" ng-model="user.smpin"  type="text" placeholder= "Enter SIM #" ng-pattern="/[0-9]/" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                            <span style="color:#B4270F" ng-show=" myForm.smpin.$error.required">Required !</span>
+                                        </div>
+                                    </div>
+									 <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">What area code would you like</label>
+                                        <div class="col-md-6">
+                                            <input  class="form-control" name="area_code2" ng-model="user.area_code2"  type="text" placeholder= "Enter area code .. only 3 digits" ng-pattern="/[0-9]/" minlength="3" maxlength="3" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                            <span style="color:#B4270F" ng-show=" myForm.area_code2.$error.required">Required !</span>
+                                        </div>
+                                    </div>
+                                 
+                                    <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">First Name</label>
+                                        <div class="col-md-6">
+                                            <input id="f-name" class="form-control" name="first_name2" ng-model="user.first_name2"  type="text" placeholder= "Enter First Name" ng-pattern="/[a-zA-Z]/" minlength="2" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                            <span style="color:#B4270F" ng-show=" myForm.first_name2.$error.required">Required !</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">Middle Name</label>
+                                        <div class="col-md-6">
+                                            <input id="m-name" class="form-control" ng-model="user.middle_name2" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Middle Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">Last Name</label>
+                                        <div class="col-md-6">
+                                            <input id="l-name" class="form-control" name="last_name2" ng-model="user.last_name2" ng-pattern="/[a-zA-Z]/" minlength="1" type="text" placeholder= "Enter Last Name" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                            <span style="color:#B4270F" ng-show=" myForm.last_name2.$error.required">Required !</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">Phone Number</label>
+                                        <div class="col-md-6">
+                                            <input  class="form-control" name="smphone" ng-model="user.smphone"  type="text" placeholder= "Enter Phone Number" ng-pattern="/[0-9]/" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                            <span style="color:#B4270F" ng-show=" myForm.smphone.$error.required">Required !</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">Address 1</label>
+                                        <div class="col-md-6">
+                                            <input id="address1" class="form-control" name="address12" type="text" ng-model="user.address12" placeholder= "Enter Address" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                            <span style="color:#B4270F" ng-show=" myForm.address12.$error.required">Required !</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">Address 2</label>
+                                        <div class="col-md-6"><input id="address2" class="form-control"  type="text" ng-model="user.address22" placeholder= "Enter Address" ></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">City</label>
+                                        <div class="col-md-6">
+                                            <input id="city" class="form-control" name="city2" type="text" ng-model="user.city2" placeholder= "Enter City" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                            <span style="color:#B4270F" ng-show=" myForm.city2.$error.required">Required !</span>
+                                        </div>
+                                    </div>
+                                 
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">State</label>
+                                        <div class="col-md-6">
+                                            <select id="state" class="form-control" name="state2"  type="text" ng-model="user.state2" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                                <option value="">Select State</option>
+                                                <option value="CA">CA</option>
+                                          </select>
+                                          <span style="color:#B4270F" ng-show=" myForm.state2.$error.required">Required !</span>
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="fieldname" class="col-md-3 control-label">Country</label>
+                                        <div class="col-md-6">
+                                            USA
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">Zip</label>
+                                        <div class="col-md-6">
+                                            <input id="zip" class="form-control" name="zip2" type="text"ng-model="user.zip2" placeholder= "Enter ZIP Code" minlength="2" ng-pattern="/[0-9]/" ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                            <span style="color:#B4270F" ng-show=" myForm.zip2.$error.required">Required !</span>
+
+                                        </div>
+                                    </div>
+                                   
+									<div class="form-group">
+                                        <label for="fieldemail" class="col-md-3 control-label">Email</label>
+                                        <div class="col-md-6">
+                                            <input id="fieldemail" name="user_emailSmSim" class="form-control" type="email"  ng-model="user.user_emailSmSim" placeholder= "Enter Email-ID" minlength="5"  ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'" >
+                                            <span style="color:#B4270F" ng-show=" myForm.user_emailSmSim.$error.required">Required !</span>
+                                        </div>
+                                    </div>
+                                  
+                                     <div class="form-group">
+                                        <label for="fieldpass" class="col-md-3 control-label">Birth Date</label>
+                                        <div class="col-md-6" ng-controller="dateSmSimCtr">
+                                            <div class="containerSmSim" style="width: 100%; margin: 0px; padding: 0px;">
+                                               <input
+                                                    id="input_01SmSim"
+                                                    class="datepickerSmSim form-control"
+                                                    name="dobSmSim"
+                                                    ng-model="user.dobSmSim"
+                                                    type="text"
+                                                    placeholder="yyyy-mm-dd"
+                                                    autofocuss ng-required="user.smq3 != null && user.q1 == 'NO'&& user.q2 == '2'">
+                                            </div>  
+                                        </div>
+                                        <span style="color:#B4270F" ng-show=" myForm.dobSmSim.$error.required">Required !</span>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                   
+					<div class="panel-footer">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+									<button type="submit" class="finish btn-success btn pull-right"  ng-disabled=" myForm.$invalid" ng-click="submit(user);">Pay Now</button>
+							</div>
+						</div>
+					</div>                     
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>

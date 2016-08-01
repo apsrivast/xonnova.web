@@ -1,0 +1,65 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Platforms</li>
+            <li class="active">Platforms List</li>
+        </ul>
+
+        <h1>Platforms List</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Platforms List">
+            
+                    
+                    <div align="center">
+                            <div class="row">
+                                <div class="col-md-2">
+                                           ID
+                                </div>
+                                <div class="col-md-3">
+                                         Platforms Name
+                                </div>
+                                <div class="col-md-3">
+                                          Platforms Link
+                                </div>
+                                <div class="col-md-4">
+                                           Platforms Comment
+                                </div>  
+                            </div>
+                              <br>
+                       
+                            <div class="row" ng-repeat="data in filtered = (cashoutList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <hr>
+                                   <br>
+                                <div class="col-md-2">
+                                         {{data.id}}
+                                </div>
+                                <div class="col-md-3">
+                                      {{data.platforms_name}}
+                                </div>
+                                <div class="col-md-3">
+                                        <a href="{{data.platforms_url}}" target="_blank"><img src="uploads/{{data.platforms_image}}" alt="" class="img-responsive user-avatar" height="400" width="400"></a>
+                                </div>
+                                <div class="col-md-4">
+                                           <p>{{data.platforms_comment}}</p>
+                                </div>  
+                                <br>
+                                  
+                            </div>
+                       
+                    </div>
+               
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;">
+                    </div> 
+                </div> 
+             
+        </panel>
+    </div> <!-- container-fluid -->

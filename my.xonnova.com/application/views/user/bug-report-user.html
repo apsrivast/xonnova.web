@@ -1,0 +1,58 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li class="active"> Bug</li>
+    </ol>
+    <h1>Bug </h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Bug  ">
+                <form role="form" name="myForm"  class="form-horizontal" >
+                    <legend>Report a Bug and Earn Reward Points</legend>
+
+                        <div class="form-group" >
+                            <label for="fieldpass" class="col-md-3 control-label"> Upload  Image</label>
+                            <div class="col-md-6">
+                                <input type="file" ngf-select ng-model="bug_image_file" ngf-accept="'*'" ngf-change="uploadBug($files)" />
+                                <input  class="form-control" name="bug_image"  type="hidden" ng-model="user.bug_image"  >
+                                <!-- <span style="color:#B4270F" ng-show=" myForm.q_electricity_bill.$error.required">this field required</span>  -->
+                            </div>
+                        </div>
+                   
+                        <div class="form-group" >
+                            <label for="fieldpass" class="col-md-3 control-label">Title</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" ng-model="user.bug_title"  type="text"  required>
+                            </div>
+                        </div>
+ 
+						<div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Description </label>
+                            <div class="col-md-6">
+                                <textarea class="form-control"  ng-model="user.bug_description" required></textarea>
+                            </div>
+                        </div>
+
+                        
+
+
+        
+                  <!--   <input type="submit" class="finish btn-success btn" value="Submit" ng-disabled=" myForm.$invalid " ng-click="submit(user);"/> -->
+						
+						       
+                  
+                         <div class="panel-footer">
+		                    <div class="row">
+		                        <div class="col-sm-6 col-sm-offset-3">
+		                                <button type="submit" class="finish btn-success btn"  ng-disabled=" myForm.$invalid" ng-click="submit(user)">Submit</button>
+		                        </div>
+		                    </div>
+		                </div>              
+                    
+                </form>
+            </panel>
+        </div>
+    </div>
+</div>

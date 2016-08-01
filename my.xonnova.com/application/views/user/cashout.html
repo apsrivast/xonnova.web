@@ -1,0 +1,260 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Money</li>
+        <li class="active">Cashout</li>
+    </ol>
+    <h1>Cashout</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-sky" heading="Cashout">
+                <panel-controls>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+<div ng-hide="hold">
+<h4>On Hold</h4>
+</div>
+<div ng-show="hold">
+                <div ng-show="exist">
+                <form role="form" name="myForm"   class="form-horizontal">
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Image</th>
+                                    <th>User Name</th>
+                                    <th>Total Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in list">
+                                    <td align="left">{{data.user_id}}</td>
+                                    <td><img class="img-circle" alt="Dangerfield" src="uploads/{{data.image}}" style="height: 50px; width: 50px;"></td>
+                                    <td>{{data.user_name}}</td>
+                                    <td>${{data.total_balance}}</td>
+                                                            
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  
+                        <legend>Information</legend>
+                        
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">First Name</label>
+                            <div class="col-md-6">
+                                <input  class="form-control"ng-model="user.first_name"  type="text" placeholder= "Enter First Name" ng-pattern="/[a-zA-Z]/" minlength="2" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Last Name</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" ng-model="user.last_name" ng-pattern="/[a-zA-Z]/" minlength="2" type="text" placeholder= "Enter Last Name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Amount</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" name="amount" ng-model="user.amount" ng-existamount ng-pattern="/^\d+(\.\d{1,2})?$/"  type="text" placeholder= "Enter Amount" required>
+                                <div ng-show="myForm.amount.$touched" >
+                                    <span style="color:#B4270F" ng-show=" myForm.amount.$error.existamount">Amount Not Exceed Total Balance</span> 
+                                </div>
+                            </div>
+                        </div>
+
+                          
+                                
+                        
+                    
+                   
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Address</label>
+                            <div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.address" placeholder= "Enter Address" required></div>
+                        </div>
+                      
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">City</label>
+                            <div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.city" placeholder= "Enter City" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">State</label>
+                            <div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.state" placeholder= "Enter State" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Zip</label>
+                            <div class="col-md-6"><input  class="form-control"  type="text"ng-model="user.zip" placeholder="Enter ZIP Code" minlength="2" ng-pattern="/[0-9]/" required></div>
+                        </div>
+                         <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Phone</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" ng-model="user.phone" ng-pattern="/[0-9]/" minlength="2" type="text" placeholder= "Enter Phone No." required>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">SSN, ITIN, EIN</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" ng-model="user.ssn" ng-pattern="/^[0-9]{9}$/" type="text" placeholder= "Enter SSN, ITIN, EIN " required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Preferred cashout method</label>
+                            <div class="col-md-6">
+                                <input type="radio" name="cashout_method"  ng-model="user.cashout_method" value="Wire" />Wire
+                                <input type="radio" name="cashout_method"  ng-model="user.cashout_method" value="Check" />Check 
+                            </div>
+                        </div>
+						<div ng-show="user.cashout_method=='Wire'">
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Bank Name</label>
+                            <div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.bank_name" placeholder= "Enter Bank Name" ng-required="user.cashout_method=='Wire'"></div>
+                        </div> 
+                        <div class="form-group">
+                            <label for="fieldpass" class="col-md-3 control-label">Bank Routing</label>
+                            <div class="col-md-6"><input  class="form-control"  type="text" ng-model="user.bank_routing" placeholder= "Enter Bank Routing" ng-required="user.cashout_method=='Wire'"></div>
+                        </div> </div>
+                        <div ng-show="user.cashout_method=='Wire'">
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Bank Account</label>
+                                <div class="col-md-6"><input  class="form-control"  type="text"ng-model="user.bank_account" placeholder="Enter Bank Account"  ng-pattern="/[0-9]/" ng-required="user.cashout_method=='Wire'"></div>
+                            </div>
+                       
+                         <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Bank Address</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" ng-model="user.bank_address"  minlength="2" type="text" placeholder= "Enter Bank Address" ng-required="user.cashout_method=='Wire'">
+                            </div>
+                        </div>
+						 </div>
+                        <div class="form-group" >
+                            <label for="fieldpass" class="col-md-3 control-label"> Upload ID Proof :</label>
+                            <div class="col-md-6">
+                              <!--  <input type="file" ngf-select ng-model="user.id_proof" ngf-accept="'image/*'" ngf-change="uploadIdProof($files)" required/> -->
+                               <input type="file" ngf-select ng-model="id_proofa" ngf-accept="'*'" ngf-change="uploadIdProof($files)" required/>
+                               <!-- <input  class="form-control"  type="hidden" ng-model="user.id_proof" > -->
+							    <input  class="form-control" name="id_proof"  type="hidden" ng-model="user.id_proof" required>
+                               <span style="color:#B4270F" ng-show=" myForm.id_proof.$error.required">this field required</span>
+                            </div>
+                        </div>
+                       
+
+
+                        <div class="form-group" >
+                            <label for="fieldpass" class="col-md-3 control-label">  W 9 Form :</label>
+                            <div class="col-md-6">
+                              <!-- <input type="file" ngf-select ng-model="user.w_form" ngf-accept="'image/*'" ngf-change="uploadWForm($files)" required/> -->
+                              <input type="file" ngf-select ng-model="w_proofa" ngf-accept="'*'" ngf-change="uploadWProof($files)" required/>
+                               <!-- <input  class="form-control"  type="hidden" ng-model="user.w_form" > -->
+							   <input  class="form-control" name="w_form" type="hidden" ng-model="user.w_form" required>
+                               <span style="color:#B4270F" ng-show=" myForm.w_form.$error.required">this field required</span> 
+                           
+                            </div>
+                        </div>
+                        <div ng-show="user.cashout_method=='Wire'">
+                            <!-- <div class="form-group"> -->
+                                <!-- <label for="fieldname" class="col-md-3 control-label">Subject</label> -->
+                                <!-- <div class="col-md-6"> -->
+                                    <input ng-model="user.subject"  type="hidden">
+                                    <!-- <input  class="form-control" ng-model="user.subject"  type="hidden" placeholder= "Enter Subject" ng-required="user.cashout_method=='Wire'"> -->
+                                <!-- </div> -->
+                            <!-- </div> -->
+                        </div>
+                        <div ng-show="user.cashout_method=='Wire'">               
+                            <!-- <div class="form-group"> -->
+                                <!-- <label for="fieldname" class="col-md-3 control-label">Message</label> -->
+                                <!-- <div class="col-md-6"> -->
+                                    <input type="hidden"  ng-model="user.message">
+                                    <!-- <textarea class="form-control"  ng-model="user.message" ng-required="user.cashout_method=='Wire'"/></textarea> -->
+                                <!-- </div> -->
+                            <!-- </div>  -->
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                               <input type="submit" class="finish btn-success btn pull-right" value="Submit" ng-disabled=" myForm.$invalid" ng-click="userCashoutInfo(user);"/>
+                            </div>
+                        </div> 
+
+                        
+                   
+                    
+                </form>
+                </div>
+
+                <div ng-hide="exist">
+                <form role="form" name="myFormNext"   class="form-horizontal">
+
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Image</th>
+                                    <th>User Name</th>
+                                    <th>Total Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in list">
+                                    <td align="left">{{data.user_id}}</td>
+                                    <td><img class="img-circle" alt="Dangerfield" src="uploads/{{data.image}}" style="height: 50px; width: 50px;"></td>
+                                    <td>{{data.user_name}}</td>
+                                    <td>${{data.total_balance}}</td>
+                                                            
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                
+                  
+                        <legend>Cashout</legend>
+                        
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Amount</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" name="amount" ng-model="next.amount" ng-existamount ng-pattern="/^\d+(\.\d{1,2})?$/"  type="text" placeholder= "Enter Amount" required>
+                                <div ng-show="myFormNext.amount.$touched" >
+                                    <span style="color:#B4270F" ng-show=" myFormNext.amount.$error.existamount">Amount Not Exceed Total Balance</span> 
+                                </div>
+                            </div>
+                        </div>
+        
+                        <!-- <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Subject</label>
+                            <div class="col-md-6">
+                                <input  class="form-control" ng-model="next.subject"  type="text" placeholder= "Enter Subject" required>
+                            </div>
+                        </div>
+                                         
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Message</label>
+                            <div class="col-md-6">
+                                <textarea class="form-control"  ng-model="next.message" required/></textarea>
+                            </div>
+                        </div> --> 
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                               <input type="submit" class="finish btn-success btn pull-right" value="Submit" ng-disabled=" myFormNext.$invalid" ng-click="userCashoutNext(next);"/>
+                            </div>
+                        </div> 
+          
+                </form>
+                </div>
+ </div>   
+
+            </panel>
+        </div>
+    </div>
+</div>

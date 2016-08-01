@@ -1,0 +1,162 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Product </li>
+        <li class="active">View Product</li>
+    </ol>
+
+    <h1>View Product</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Export as <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-5" align="center" style="float: none; margin: auto;">
+            <panel panel-class="panel-sky" heading="View Product">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                  
+                </panel-controls>
+                
+                <br/>
+                <div ng-repeat="user in buyASimResellerHtml" >
+                    <div>Product Name: {{user.product_name}}<br><br>
+                        <img alt="NoImage" src="assets/uploads/{{user.product_image}}" style="height: 200px;">
+                        <br><br>
+                        Price: ${{levelprice}}<br><br>
+
+                        <div class="form-group">
+                            <label for="fieldname" class="col-md-3 control-label">Shipping Method :</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="shipping_method" ng-model="user.shipping_method" required ng-change="onchangeqty(user.qty, user.shipping_method)">
+                                    <option value="">Select shipping method</option>
+                                    <option value="PRIORITY">PRIORITY</option>
+                                    <option value="FIRST CLASS">FIRST CLASS</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <!-- Shipping Price: ${{user.shipping_price}} for one <br><br> -->
+                        Shipping Price: FIRST CLASS $3.97 for one and $1 for each extra QTY<br>
+                        PRIORITY $9.97 Flat<br><br>
+                         {{user.product_desc}}<br><br>
+
+
+                         <form role="form" name="myForm"  class="form-horizontal" >
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Qty:</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" ng-model="user.qty" required ng-change="onchangeqty(user.qty, user.shipping_method)"> 
+                                  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">Total: <div ng-show="totalprice != 2.97 && totalprice != 9.97 ">{{totalprice}}</div></div>
+                            </div> 
+
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Card No.</label>
+                                <div class="col-md-6"><input id="card-no" class="form-control"  type="text" ng-model="user.card_no" ng-pattern="/[0-9]/" placeholder= "Enter card no." required></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">Expiry Date</label>
+                                <div class="col-md-6">
+                                    <select ng-model="user.expiry_month" style="padding: 5px; border-color:none;" required>
+                                        <option value="">mm</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    
+                                    <select ng-model="user.expiry_year" style="padding: 5px; border-color:none;" required>
+                                        <option value="">yyyy</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                        <option value="2031">2031</option>
+                                        <option value="2032">2032</option>
+                                        <option value="2033">2033</option>
+                                        <option value="2034">2034</option>
+                                        <option value="2035">2035</option>
+                                        <option value="2036">2036</option>
+                                        <option value="2037">2037</option>
+                                        <option value="2038">2038</option>
+                                        <option value="2039">2039</option>
+                                        <option value="2040">2040</option>
+                                        <option value="2041">2041</option>
+                                        <option value="2042">2042</option>
+                                        <option value="2043">2043</option>
+                                        <option value="2044">2044</option>
+                                        <option value="2045">2045</option>
+                                        <option value="2046">2046</option>
+                                        <option value="2047">2047</option>
+                                        <option value="2048">2048</option>
+                                        <option value="2049">2049</option>
+                                        <option value="2050">2050</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fieldpass" class="col-md-3 control-label">CVV No.</label>
+                                <div class="col-md-6"><input id="cvv-no" class="form-control"  type="text" ng-model="user.cvv_no" placeholder="Enter CVV No." ng-pattern="/[0-9]/" required></div>
+                            </div>
+                            <div class="form-group">
+                                <div  id="message"></div>
+                            </div>
+
+
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <button type="submit" class="finish btn-primary btn-sm " ng-disabled=" myForm.$invalid" ng-click="buy(user)">Buy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+ 
+                </div>
+               
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

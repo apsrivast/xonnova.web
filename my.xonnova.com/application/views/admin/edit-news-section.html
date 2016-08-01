@@ -1,0 +1,65 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+                 <li class="active">News</li>
+        </ul>
+
+        <h1>News</h1>
+    </div>
+
+    <div class="container-fluid">
+        <panel panel-class="panel-midnightblue" heading="News">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+            </panel-controls>
+
+           <form role="form" name="myForm"  class="form-horizontal"  ng-repeat="user in List">
+
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Title</label>
+                    <div class="col-md-6">
+                        <input name="news_title" 
+                        class="form-control"  
+                        type="text" 
+                        value="{{user.news_title}}"
+                        ng-model="user.news_title" 
+                        placeholder= "Enter Title" 
+                        required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Priority</label>
+                    <div class="col-md-6">
+                        <input name="news_priority" 
+                        class="form-control"  
+                        type="text" 
+                        ng-pattern="/[0-9]/"
+                        value="{{user.news_priority}}"
+                        ng-model="user.news_priority" 
+                        placeholder= "Enter Priority" 
+                        required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Content</label>
+                   
+                    <div class="composer col-md-6" text-angular value="{{user.news_content}}" ng-model="user.news_content"
+                                    ta-toolbar="[['p','h3'],['bold','italics', 'underline'], ['justifyLeft', 'justifyCenter', 'justifyRight'], ['indent', 'outdent'], ['insertImage', 'insertLink', 'insertVideo']]">
+                                   
+                                </div>
+                </div>
+                
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <button type="submit" class="finish btn-primary btn-sm pull-right" ng-disabled=" myForm.$invalid" ng-click="edit(user)">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </panel>
+    </div>
+

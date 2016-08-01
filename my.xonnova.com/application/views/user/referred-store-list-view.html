@@ -1,0 +1,100 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Store List</li>
+	</ol>
+
+	<h1>Referred Store List </h1>
+	
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<div class="panel-body user-profile" ng-repeat="data in referredListView"><br/>
+					
+				
+					<div class="user-detail">
+						
+						<div class="table-responsive">
+					
+							<table  class="table table-condensed m0">
+								<h1>Referred store</h1>
+								<tbody>
+									<tr>
+										<td >User ID</td>
+										<td >{{data.user_id}}</td>
+									</tr>
+									
+									<tr>
+										<td>User Name</td>
+										<td>{{data.user_name}}</a></td>
+									</tr>
+									<tr>
+										<td>First Name</td>
+										<td>{{data.first_name}}</a></td>
+									</tr>
+									<tr>
+										<td>Last Name</td>
+										<td>{{data.last_name}}</a></td>
+									</tr>
+									<tr>
+										<td> Email</td>
+										<td>{{data.user_email}}</td>
+									</tr>
+									
+								<tr>
+										<td>City</td>
+										<td>{{data.city}}</td>
+									</tr>
+									<tr>
+										<td>State</td>
+										<td>{{data.state}}</td>
+									</tr>
+									<tr>
+										<td>Zip</td>
+										<td>{{data.zip}}</td>
+									</tr>
+
+									<tr>
+										<td>Business name</td>
+										<td>{{data.business_name}}</td>
+									</tr>
+									<tr>
+										<td>Owner Name</td>
+										<td>{{data.owner_name}}</td>
+									</tr>
+																		
+									<tr>
+										<td>Address</td>
+										<td>{{data.address}}</td>
+									</tr>
+																		
+									<tr>
+										<td>join date</td>
+										<td>{{data.join_date}}</td>
+									</tr>
+
+									<tr>
+										<td>Status</td>
+										<td>{{data.login_status}}</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+						<div class="row" >
+							<div align="center"><a href="#/referred-store-list"  class="btn btn-success btn-sm">Back</a>
+							</div>
+						</div>
+						<br>
+					
+						
+					</div>
+				</div>
+        	</div>
+		</div>
+	</div>
+
+
+</div> <!-- container-fluid -->

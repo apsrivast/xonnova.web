@@ -1,0 +1,110 @@
+<div id="page-heading">
+    <ol class="breadcrumb">
+        <li><a href="#/">Dashboard</a></li>
+        <li>Account</li>
+        <li class="active">Member Report</li>
+    </ol>
+
+    <h1>Member Report</h1>
+    <div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Export as <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Member Information">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                    <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+                </panel-controls>
+				 <div class="row">
+					<div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID<a ng-click="sort_by('user_id');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Image<a ng-click="sort_by('image');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>User Name<a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+								<th>Sponsor Name<a ng-click="sort_by('sponsor_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Email ID<a ng-click="sort_by('user_email');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Contact No.<a ng-click="sort_by('contact_no');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Join Date<a ng-click="sort_by('created_at');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th></th>
+                                <th>SM</th>
+                                <th>PP</th>
+                                <th>TC</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (memberReportList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_id}}</td>
+                                <td><img class="img-circle" alt="Dangerfield" src="uploads/{{data.image}}" style="height: 70px; width: 70px;"></td>
+                                <td>{{data.user_name}}</td>
+								<td>{{data.sponsor_name}}</td>
+                                <td>{{data.user_email}}</td>
+                                <td>{{data.contact_no}}</td>
+                                <td>{{data.created_at}}</td>
+                                <td>
+                                    <a href="#/edit-member-report/{{data.user_id}}"  class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </td>
+                                 <td>
+                                    <a href="https://my.onlegacynetwork.com/reseller_ctr/userPdfByIDSmart_Mark/{{data.user_id}}"  target="__blank" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf-o"></i></a>
+                                </td>
+                                <td>
+                                    <a href="https://my.onlegacynetwork.com/reseller_ctr/userPdfByIDPRIVACY_POLICY/{{data.user_id}}" target="__blank" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf-o"></i></a>
+                                </td>
+                                <td>
+                                    <a href="https://my.onlegacynetwork.com/reseller_ctr/userPdfByIDTERMS_N_CONDITIONS/{{data.user_id}}" target="__blank" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf-o"></i></a>
+                                </td>
+                            </tr>
+
+                           
+                        </tbody>
+                        <!-- <caption>List of countries by distribution wealth</caption> -->
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Member found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->

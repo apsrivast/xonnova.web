@@ -1,0 +1,96 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Event Registration</li>
+            <li class="active">Event Registration</li>
+        </ul>
+        <h1>Event Registration</h1>
+    </div>
+    <div class="container-fluid">
+        <panel panel-class="panel-midnightblue" heading="Event Registration">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+            <form class="form-horizontal row-border" name="event_form" ng-repeat="event in getUserList">
+                <div class="form-group">
+                    <div id="message"></div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-md-3 control-label"><h4>Date :</h4></label>
+                    <div class="col-md-6">
+                    	<label  class="col-md-6"><h4 style="color:#0000FF; margin-top: 16px;">11/10/2015 4:00 PM</h4></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-md-3 control-label"><h4>Venue :</h4></label>
+                    <div class="col-md-6">
+                    	<label  class="col-md-7"><h4 style="color:#0000FF; margin-top: 16px;">Hotel MGM Grand, Las Vegas,
+                                3799 S Las Vegas Blvd, Las Vegas, NV 89109, United States, Phone:+1 702-891-1111</h4></label>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label  class="col-md-3 control-label"><h4>Participation Fee :</h4></label>
+                    <div class="col-md-6">
+                        <label class="col-md-2"><h4 style="margin-top: 16px;">$100</h4></label>
+                    </div>
+                </div>
+                <input type="hidden" ng-model="event.event_id" value="1"/>
+                <input type="hidden" ng-model="event.user_id" value="{{event.user_id}}"/>
+                <!-- <input type="Hidden" ng-model="event.event_date" value="2015-11-10 10:00:00"/> -->
+                <div class="form-group">
+                    <label  class="col-md-3 control-label"><h4>User Name :</h4></label>
+                    <div class="col-md-6">
+                        <input name="user_name" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="event.user_name" 
+                        placeholder= "User Name" 
+                        required
+                        ng-managementpassword readonly > 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-md-3 control-label"><h4>Email-ID :</h4></label>
+                    <div class="col-md-6">
+                        <input name="user_email" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="event.user_email" 
+                        placeholder= "Ener User Email" 
+                        required> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-md-3 control-label"><h4>Contact No :</h4></label>
+                    <div class="col-md-6">
+                        <input name="contact_no" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="event.contact_no" 
+                        placeholder= "Enter Contact No." 
+                        required> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-md-3 control-label"><h4>Note :</h4></label>
+                    <div class="col-md-9">
+                            <label class="col-md-6" style="font-size: 14px; color:#FF0000;">* The 100$ fee will be refunded to your account after you attend the event. In case of non participation, the fee will not be refunded.</label>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled="event_form.$invalid" ng-click="confirmEvent(event);">Confirm</button>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div>
+
+
+

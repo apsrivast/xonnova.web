@@ -1,0 +1,64 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li class="active">Buy phone credit</li>
+	</ol>
+
+	<h1>Buy phone credit</h1>
+	
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-6" align="center" style="float: none; margin: auto;">
+			<div class="panel panel-default panel-profile">
+				<form role="form" name="myForm"  class="form-horizontal">
+					
+					<h5>Please fill next info</h5>
+				
+					<div class="form-group">
+                         <label for="fieldname" class="col-md-3 control-label">Phone number</label>
+                         <div class="col-md-6">
+                             <input ng-disabled="disab" class="form-control" ng-model="phone.number"  type="number" required>
+                         </div>
+					</div>
+                     
+	                <div class="form-group">
+                        <label for="fieldpass" class="col-md-3 control-label">Phone company</label>
+                        <div class="col-md-6">
+                            <select ng-disabled="disab" ng-change="setOperatorOptions()" class="form-control"  
+                            		type="text" ng-model="phone.operator" required 
+                            		ng-options="operator.value as operator.name for operator in operators"></select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                         <label for="fieldname" class="col-md-3 control-label">How many? $</label>
+                         <div class="col-md-6">
+                         	<select ng-disabled="disab" class="form-control" type="text" ng-model="phone.tobuy" 
+                         			required 
+                         			ng-options="operator_option.value as operator_option.name for operator_option in opoptions"></select>
+                         </div>
+                     </div>
+	
+					<div class="form-group">
+						<label>&nbsp;</label>
+                         <div class="col-md-6" id="msg" style="min-height: 50px;">
+                           {{msg}}
+                         </div>
+                     </div>	
+			
+	                <div class="panel-footer">
+	                    <div class="row">
+	                        <div class="col-sm-6 col-sm-offset-3">
+	                        	<input type="hidden" id="ID" ng-model="phone.ID" />
+								<button type="submit" class="finish btn-success btn-sm pull-right" ng-disabled=" myForm.$invalid" ng-click="buyPhoneCredit()">Buy</button>
+								<br/><br/>
+	                        </div>
+	                    </div>
+	                </div>
+	                 
+				</form>						
+			</div>
+		</div>
+	</div>
+</div>			

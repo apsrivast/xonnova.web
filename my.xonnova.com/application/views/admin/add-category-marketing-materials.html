@@ -1,0 +1,150 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Tools </li>
+            <li class="active">Add Marketing Materials</li>
+        </ul>
+
+        <h1>Add Marketing Materials</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Add Marketing Materials">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="videosForm"  >
+               <div class="form-group" id="message"></div>
+               <div class="form-group">
+                    <label for="fieldname" class="col-md-3 control-label">Category Type</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="c_type" ng-model="videos.c_type" required>
+                            <option value="">Select Category</option>
+                            <option value="1">Root-Category</option>
+                            <option value="2">Sub-Category</option>
+                        </select>
+                    </div>
+                </div>
+                <div ng-show="videos.c_type == 2">
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Root Category</label>
+                        <div class="col-md-6">
+                            <select class="form-control" name="p_id" ng-model="videos.p_id" ng-required="videos.c_type == 2">
+                                <option value="">Select Category Type</option>
+                                <option ng-repeat="list in htmlTVCategoryParentID" value="{{list.v_c_id}}">{{list.category_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+			   <div class="form-group">
+                    <label  class="col-md-3 control-label">Category Name</label>
+                    <div class="col-md-6">
+                    	<input name="category_name" 
+                    	class="form-control"  
+                    	type="text" 
+                    	ng-model="videos.category_name" 
+                    	placeholder= "Enter Category Name" 
+                    	required
+                    	ng-existcategory > 
+                            <div ng-show="videosForm.category_name.$touched" >
+								<span style="color:#B4270F" ng-show="videosForm.category_name.$error.existcategory">Categore allready exist!</span> 
+							</div>
+                    </div>
+                </div>
+
+				<div class="form-group">
+                    <label  class="col-md-3 control-label">Message</label>
+                    <div class="col-md-6">
+                        <textarea name="message" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="videos.message" 
+                        placeholder= "Enter Messages"></textarea> 
+                    </div>
+                </div>
+				
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled=" videosForm.$invalid " ng-click="addCategory(videos);">Save</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+
+
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Marketing Materials Category List">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                   <!--  <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button>  -->
+                </panel-controls>
+
+                 <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr> 
+                                <th>ID<a ng-click="sort_by('v_c_id');"><i class="glyphicon glyphicon-sort"></i></a></th> 
+                                <th>Category Name<a ng-click="sort_by('category_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Message<a ng-click="sort_by('message');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Status<a ng-click="sort_by('category_status');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Date<a ng-click="sort_by('v_c_created_at');"><i class="glyphicon glyphicon-sort"></i></a></th>
+								<th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (vediosCategoryList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.v_c_id}}</td> 
+                                <td>{{data.category_name}}</td>
+                                <td>{{data.message}}</td>
+                                <td>${{data.category_status}}</td>
+                                <td>{{data.v_c_created_at}}</td>
+								 <td>
+                                    <a href="#/edit-category-marketing-materials/{{data.v_c_id}}"  class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>Not found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+

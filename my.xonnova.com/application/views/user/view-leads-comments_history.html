@@ -1,0 +1,84 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Leads</li>
+            <li class="active">Leads History</li>
+        </ul>
+
+        <h1>Leads History</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Leads History">
+            <form class="form-horizontal row-border" name="cashoutForm">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                              
+                                <th>Updated At</th>
+                                <th>Admin Comment</th>
+                              
+                               
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (leadCommentHistory | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.leads_id}}</td>
+								
+                                <td>{{data.commented_at}}</td>
+                                <td>{{data.comment}}</td>
+                                
+                                
+                               
+                                
+                              
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+           </form>
+        </panel>
+    </div> <!-- container-fluid -->
+
+
+     <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Update Status">
+            <form class="form-horizontal row-border" name="cashoutForm">
+               
+
+                  <input  class="form-control"  type="hidden" ng-model="leads.id" >
+                 
+
+                    <div class="form-group">
+                        <label for="fieldname" class="col-md-3 control-label">Update Status</label>
+                        <div class="col-md-6">
+                            <textarea class="form-control"  ng-model="leads.comments"></textarea>
+                        </div>
+                    </div>
+
+
+                        
+                     <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                    <button type="submit" class="finish btn-success btn"  ng-click="update(leads)">Update</button>
+                            </div>
+                        </div>
+                    </div>            
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+

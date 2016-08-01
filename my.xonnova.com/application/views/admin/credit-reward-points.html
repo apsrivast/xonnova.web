@@ -1,0 +1,140 @@
+    <div id="page-heading">
+        <ul class="breadcrumb">
+            <li><a href="#/">Dashboard</a></li>
+            <li>Reward Points</li>
+            <li class="active">Credit Reward Points</li>
+        </ul>
+
+        <h1>Credit Reward Points</h1>
+    </div>
+
+    <div class="container-fluid">
+
+        <panel panel-class="panel-midnightblue" heading="Credit Reward Points">
+            <panel-controls>
+                <panel-control-collapse></panel-control-collapse>
+                <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button> 
+            </panel-controls>
+
+            <form class="form-horizontal row-border" name="add_credit"  >
+               <div class="form-group" id="message">
+			   
+			   </div>
+			   <div class="form-group">
+                    <label  class="col-md-3 control-label">User Name</label>
+                    <div class="col-md-6">
+                    	<input name="user_name" 
+                    	class="form-control"  
+                    	type="text" 
+                    	ng-model="user.user_name" 
+                    	placeholder= "User Name" 
+                    	required
+                    	ng-managementpassword > 
+                            <div ng-show="add_credit.user_name.$touched" >
+								<span style="color:#B4270F" ng-show=" add_credit.user_name.$error.managementpassword">Username Not Exist.</span> 
+							</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-md-3 control-label">Credit Amount</label>
+                    <div class="col-md-6">
+                    	<input name="credit" 
+                    	class="form-control"  
+                    	type="text" 
+                    	ng-model="user.credit" 
+                    	placeholder= "Enter Credit Amount" 
+                    	required>
+                    </div>
+                </div>
+                
+				<div class="form-group">
+                    <label  class="col-md-3 control-label">Message</label>
+                    <div class="col-md-6">
+                        <textarea name="message" 
+                        class="form-control"  
+                        type="text" 
+                        ng-model="user.message" 
+                        placeholder= "Enter Messages" 
+                        required></textarea> 
+                    </div>
+                </div>
+				
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="btn-toolbar">
+                                <button class="btn-primary btn" ng-disabled=" add_credit.$invalid " ng-click="creditChange(user);">Credit</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </panel>
+    </div> <!-- container-fluid -->
+
+
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <panel panel-class="panel-sky" heading="Credit  List">
+                <panel-controls>
+                    <panel-control-collapse></panel-control-collapse>
+                   <!--  <button class="button-icon"><i class="glyphicon glyphicon-cog"></i></button>
+                    <button class="button-icon"><i class="glyphicon glyphicon-wrench"></i></button>  -->
+                </panel-controls>
+
+                 <div class="row">
+                     <div class="col-md-2">PageSize:
+                        <select ng-model="entryLimit" class="form-control">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-3">Filter:
+                        <input type="text" ng-model="search" ng-change="filter()" placeholder="Filter" class="form-control" />
+                    </div>
+                   
+                </div>
+                <br/>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr> 
+                                <th>ID<a ng-click="sort_by('user_id');"><i class="glyphicon glyphicon-sort"></i></a></th> 
+                                <th>User Name<a ng-click="sort_by('user_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Rank<a ng-click="sort_by('level_name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Credit Amount<a ng-click="sort_by('credit');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                                <th>Date<a ng-click="sort_by('wallet_credited_at');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in filtered = (getCreditList | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <td align="left">{{data.user_id}}</td> 
+                                <td>{{data.user_name}}</td>
+                                <td>{{data.level_name}}</td>
+                                <td>${{data.credit}}</td>
+                                <td>{{data.wallet_credited_at}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems == 0">
+                    <div class="col-md-12">
+                        <h4>No Credit found</h4>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-show="filteredItems > 0">    
+                    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;"></div>  
+                </div>
+            </panel>
+        </div>
+    </div>
+</div> <!-- container-fluid -->
+
